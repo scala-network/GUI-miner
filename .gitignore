@@ -1,0 +1,9 @@
+/.project
+.DS_Store
+Thumbs.db
+.idea/
+src/bind*
+bin
+vendor*
+src/vendor*
+windows.syso
