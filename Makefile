@@ -18,6 +18,9 @@ run: build
 run_debug: build
 	./bin/linux-amd64/'${APP_NAME}' -d
 
+webdev:
+	./scripts/run_browsersync.sh
+
 # http://golang.org/cmd/go/#hdr-Run_gofmt_on_package_sources
 fmt:
 	go fmt ./...
