@@ -72,6 +72,14 @@ a.button {
   &:active {
     background-color: @color-stellite-purple-dark;
   }
+
+  &.back {
+    background-color: @color-purple-grey;
+    .opacity(0.8);
+    &:hover {
+      .opacity(1.0);
+    }
+  }
 }
 
 .info-block {
@@ -97,6 +105,75 @@ a.button {
     max-width: 100px;
   }
 }
+
+body.miner {
+  height: 100%;
+  div.grid {
+    height: 100%;
+    display: grid;
+    @media @desktop {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    div {
+      border: 1px solid @color-yellow;
+    }
+  }
+
+  div.info {
+    @media @desktop {
+      grid-column: span 2;
+      grid-row: span 7;
+    }
+
+    div.logo {
+      margin-top: 10px;
+      max-width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      img {
+        width: 100%;
+      }
+    }
+
+    h3 {
+      width: 100%;
+      background-color: #ff0000;
+      text-align: center;
+    }
+
+    div.spec {
+
+    }
+  }
+
+  div.mining {
+    @media @desktop {
+      grid-column: span 6;
+      grid-row: span 5;
+    }
+  }
+
+  div.chart {
+    @media @desktop {
+      grid-column: span 6;
+      grid-row: span 2;
+    }
+  }
+
+  div.footer {
+    @media @desktop {
+      grid-column: span 8;
+      grid-row: span 1;
+    }
+
+    text-align: center;
+  }
+
+
+
+} // body.miner
+
 
 body.firstrun {
   div.centered {
