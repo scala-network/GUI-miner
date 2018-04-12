@@ -91,6 +91,8 @@ a.button {
     display: inline-block;
     font-size: 10px;
     padding: 2px;
+    position: absolute;
+    top: 4px;
     text-align: center;
     max-width: 100px;
   }
@@ -109,7 +111,7 @@ body.firstrun {
 
     margin: auto;
 
-    border: 1px solid #ff0000;
+    //border: 1px solid #ff0000;
   }
 
   div.chat-box {
@@ -182,55 +184,89 @@ body.firstrun {
     }
   }
 
-  div.pool-selection {
-    div.pool {
-      margin-bottom: 20px;
-      position: relative;
-      cursor: pointer;
-      border: 1px solid @color-stellite-purple-dark;
-      .border-radius(4px);
-      padding: 5px;
-      max-width: 75%;
-      margin-left: auto;
-      margin-right: auto;
-      background-color: @color-blue-darker;
-      &:hover {
-        background-color: @color-blue-dark-lighter;
-      }
-
-      &.selected {
-        border-color: @color-yellow;
-      }
-
-      div.stats {
-        .border-radius(0px 4px 4px 0px);
-        right: 0px;
-        top: 0px;
-        position: absolute;
-        float: right;
-        display: block;
-        height: 100%;
-        width: 60%;
-
-        table {
-          margin-top: 5px;
-          width: 100%;
-
-          td {
-            text-align: center;
-          }
+  div.setup-mining {
+    div.chat-box {
+      &.address {
+        margin: 20px;
+        h3 {
+          font-size:22px;
+          font-weight: normal;
+        }
+        p {
+          font-size: 14px;
+        }
+        span {
+          font-family: monospace;
+          color: @color-turquoise-light;
+          display: inline;
+        }
+        input {
+          width: 800px;
         }
       }
-
-      a.address {
-        color: @color-turquoise-light;
-        font-size: 12px;
-        .opacity(0.6);
-
+    }
+    div.pool-selection {
+      div.chat-box {
+        margin: 20px;
+        h3 {
+          font-size:22px;
+          font-weight: normal;
+        }
+        p {
+          font-size: 14px;
+          margin-bottom: 20px;
+        }
+      }
+      div.pool {
+        margin-bottom: 20px;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid @color-stellite-purple-dark;
+        .border-radius(4px);
+        padding: 10px;
+        max-width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: @color-blue-darker;
         &:hover {
-          .opacity(1.0);
+          background-color: @color-blue-dark-lighter;
+        }
+
+        &.selected {
+          border-color: @color-yellow;
+        }
+
+        div.stats {
+          .border-radius(0px 4px 4px 0px);
+          right: 0px;
+          top: 0px;
+          position: absolute;
+          float: right;
+          display: block;
+          height: 100%;
+          width: 60%;
+
+          table {
+            margin-top: 10px;
+            width: 100%;
+
+            td {
+              text-align: center;
+            }
+          }
+        }
+
+        a.address {
+          color: @color-turquoise-light;
+          font-size: 12px;
+          .opacity(0.6);
+
+          &:hover {
+            .opacity(1.0);
+          }
         }
       }
     }
   }
+
 }

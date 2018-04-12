@@ -36,7 +36,7 @@ let app = {
         console.log('clicked', option);
 
         $('.welcome').fadeOut(function(){
-          $('.setup-wallet').fadeIn();
+          $('.setup-wallet').fadeIn(); 
         })
       });
 
@@ -58,7 +58,7 @@ let app = {
 
                 $('.three').remove();
                 $('.four').animateCss('fadeInDown', function() {
-                  $('.setup-selection').animateCss('fadeInUp');
+                  $('.selection').animateCss('fadeInUp');
                 });
               });
             });
