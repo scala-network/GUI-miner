@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="app.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
+    <link href="animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+<body class="firstrun">
+  <div class="centered">
+    <div class="welcome dn">
+      <div class="chat-box step one">
+        Hey there donovans!
+      </div>
+      <div class="chat-box step two dn">
+        We're really happy you chose to mine
+      </div>
+      <div class="chat-box step three dn">
+        <img src="i/stellite-logo-white.png" />
+      </div>
+      <div class="step four dn">
+        Let's get you set up
+      </div>
+
+      <div class="chat-box step selection dn">
+        <div class="option wallet-select" data-option="no-wallet">
+          <h3>
+            I don't have a wallet
+          </h3>
+          <p>
+            If you've never mined Stellite or don't have an address
+          </p>
+        </div>
+        <div class="option wallet-select" data-option="has-wallet">
+          <h3>
+            I have a wallet
+          </h3>
+          <p>
+            If you've mined Stellite before or have an address already
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="setup-wallet dn">
+      <div class="chat-box">
+        Select your wallet
+      </div>
+      <div class="chat-box step selection">
+        <div class="option wallet" data-option="no-wallet">
+          <h3>
+            Paper Wallet
+          </h3>
+          <p>
+            A paper wallet is a method of storing your Stellite coins 'offline'.
+            Once you've generated a paper wallet you need to store the information
+            securely to later import into the GUI wallet for your Stellite to
+            be usable.
+          </p>
+          <div class="info-block none">
+            &nbsp;
+          </div>
+        </div>
+        <div class="option wallet" data-option="has-wallet">
+          <h3>
+            GUI Wallet
+          </h3>
+          <p>
+            The GUI wallet is a graphical wallet you'll install on your
+            computer. You can use the GUI wallet to send and receive
+            Stellite coins to other people or exchanges. You can create a new
+            one or import an existing one.
+          </p>
+          <div class="info-block recommended">
+            recommended
+          </div>
+        </div>
+      </div>
+      <div class="chat-box small">
+        <p class="spaced">
+          Once you have your wallet set up, continue
+        </p>
+        <br/>
+        <a class="button ok" href="#">
+          Continue
+        </a>
+      </div>
+    </div>
+
+    <div class="setup-mining">
+      <div class="chat-box">
+        Set up your mining
+      </div>
+      <div class="address">
+        Stellite address to mine to
+      </div>
+      <div class="pool-selection">
+        <div class="pool selected">
+          <h3>Community Pool <div class="info-block recommended small">recommended</div></h3>
+          <a href="https://communitypool.stellite.cash" target="_blank" class="address">https://communitypool.stellite.cash</a>
+          <div class="stats">
+            <table>
+              <tr>
+                <th>
+                  Hash Rate
+                </th>
+                <th>
+                  Miners
+                </th>
+                <th>
+                  Last Block Found
+                </th>
+                <th>
+                  Last Payment
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  13.32 MH/s
+                </td>
+                <td>
+                  1 203
+                </td>
+                <td>
+                  3 hours ago
+                </td>
+                <td>
+                  10 seconds ago
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="pool">
+          <h3>CryptoKnight</h3>
+          <a href="https://cryptoknight.cc/stellite" target="_blank" class="address">https://cryptoknight.cc/stellite</a>
+          <div class="stats">
+            <table>
+              <tr>
+                <th>
+                  Hash Rate
+                </th>
+                <th>
+                  Miners
+                </th>
+                <th>
+                  Last Block Found
+                </th>
+                <th>
+                  Last Payment
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  6 MH/s
+                </td>
+                <td>
+                  538
+                </td>
+                <td>
+                  1 minute ago
+                </td>
+                <td>
+                  5 minutes ago
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <script src="jquery.min.js"></script>
+  <script src="jquery.animatecss.js"></script>
+  <script src="app.js"></script>
+  <script type="text/javascript">
+    app.firstrun();
+  </script>
+</body>
+</html>
