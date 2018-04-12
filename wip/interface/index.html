@@ -6,6 +6,9 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
     <link href="animate.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="jquery.animatecss.js"></script>
+    <script src="chart.bundle.min.js"></script>
 </head>
 <body class="miner">
   <div class="grid">
@@ -13,10 +16,10 @@
       <div class="logo">
         <img src="i/live-logo-large.png"/>
       </div>
-      <div class="spec">
-        <table>
+      <div class="section spec">
+        <table class="stats">
           <tr>
-            <td>
+            <td class="title">
               Ticker
             </td>
             <td>
@@ -24,7 +27,7 @@
             </td>
           </tr>
           <tr>
-            <td>
+            <td class="title">
               Supply
             </td>
             <td>
@@ -32,7 +35,7 @@
             </td>
           </tr>
           <tr>
-            <td>
+            <td class="title">
               Circulation
             </td>
             <td>
@@ -40,7 +43,7 @@
             </td>
           </tr>
           <tr>
-            <td>
+            <td class="title">
               Market cap
             </td>
             <td>
@@ -48,7 +51,7 @@
             </td>
           </tr>
           <tr>
-            <td>
+            <td class="title">
               Price
             </td>
             <td>
@@ -57,46 +60,179 @@
           </tr>
         </table>
       </div>
-      <div class="network">
+      <div class="section network">
         <h3>Network</h3>
-        Hashrate 20 MH/s
-        Difficulty 1 234 912 392
-        Height 108 000
+        <table class="stats">
+          <tr>
+            <td class="title">
+              Hashrate
+            </td>
+            <td>
+              20 MH/s
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Difficulty
+            </td>
+            <td>
+              1 234 912 392
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Height
+            </td>
+            <td>
+              108 000
+            </td>
+          </tr>
+        </table>
       </div>
-      <div class="exchanges">
+      <div class="section exchanges">
         <h3>Exchanges</h3>
-        24hour volume combined
-        TradeOgre 0.00000020 BTC
-                  3.7 BTC
-        Crex24    0.00000020 BTC
-                  0.9 BTC
+        <table class="stats">
+          <tr>
+            <td class="title">
+              Volume today
+            </td>
+            <td>
+              30.3264 BTC
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              TradeOgre
+            </td>
+            <td>
+              3.4222 BTC
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Crex24
+            </td>
+            <td>
+              1.8239 BTC
+            </td>
+          </tr>
+        </table>
       </div>
-      <div class="records">
+      <div class="section records">
         <h3>Records</h3>
-        Peak 24 hour trading volume 36 BTC
-        Highest price 0.00000023 BTC
+        <table class="stats">
+          <tr>
+            <td class="title">
+              Peak volume
+            </td>
+            <td>
+              30.3264 BTC
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Highest price
+            </td>
+            <td>
+              0.000000023 BTC
+            </td>
+          </tr>
+        </table>
       </div>
-      <div class="contact">
+      <div class="section contact">
         <h3>Contact</h3>
         Official website
-        Discord, Telegram, Facebook, Twitter, GitHub
+        Discord, Telegram, Facebook, Twitter, GitHub, Bitcoin ANN
       </div>
     </div>
     <div class="mining">
-      mining
+      <div class="miner">
+        <img src="i/mining-background.png"/>
+      </div>
+
+      <div class="payout-estimator">
+        <span id="payout">10</span> XTL per day
+      </div>
+      <div class="pool-info">
+        Pool info <a href="#">change pool</a>
+      </div>
     </div>
-    <div class="chart">
-      chart
+    <div class="chart" style="position:relative">
+      <canvas id="hashrate_chart" width="400" height="400"></canvas>
     </div>
     <div class="footer">
       made with <i class="fa fa-heart"/></i> across the globe
     </div>
   </div>
-  <script src="jquery.min.js"></script>
-  <script src="jquery.animatecss.js"></script>
+
   <script src="app.js"></script>
   <script type="text/javascript">
     //app.init();
+
+    var chart = $("#hashrate_chart");
+    chart.attr('width', $('.chart').width());
+    chart.attr('height', $('.chart').height());
+
+    var myChart = new Chart(chart, {
+    type: 'line',
+          data: {
+              labels: ["15 minutes ago", "10 minutes ago", "5 minutes ago", "Now"],
+              datasets: [{
+                  label: 'H/s',
+                  data: [10,15,25,11],
+                  backgroundColor: [
+                      'rgba(13, 17, 45, 1.0)'
+                  ],
+                  borderColor: [
+                      'rgba(232,212,0,9)'
+                  ],
+                  borderWidth: 1,
+              }]
+          },
+          options: {
+            responsive: true,
+            tooltips: {
+					         mode: 'index',
+					              intersect: false,
+				    },
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+            legend: {
+              display: false,
+            },
+            elements: {
+                line: {
+                    tension: 0, // disables bezier curves
+                },
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                }
+            },
+            scales:
+            {
+                yAxes: [{
+                    //display: false
+                }]
+            }
+          }
+      });
+
+      calcEstimateProfit();
+      function calcEstimateProfit(){
+        try {
+            var hashRate = 300.00;
+            var xtlPerDay = (hashRate * 86400 / 885739812) * 17876.56;
+            $('#payout').html(xtlPerDay);
+        }
+        catch(e){ }
+    }
   </script>
 </body>
 </html>
