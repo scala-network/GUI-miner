@@ -60,6 +60,16 @@ input::-moz-focus-inner {
   text-align: right;
 }
 
+p.description {
+  font-size: 14px;
+  margin-bottom: 20px;
+
+  &.tip {
+    font-style: italic;
+    .opacity(0.8);
+  }
+}
+
 a.button {
   display: inline-block;
   background-color: @color-stellite-purple-dark;
@@ -77,12 +87,33 @@ a.button {
     background-color: @color-stellite-purple-dark;
   }
 
+  &.start {
+    background-color: #1D870C;
+    &:hover {
+      background-color: #229B0F;
+    }
+  }
+  &.stop {
+    background-color: #87330C;
+    &:hover {
+      background-color: #9B310F;
+    }
+  }
+  &.small {
+    font-size: 12px;
+    padding: 5px;
+  }
+
   &.back {
     background-color: @color-purple-grey;
     .opacity(0.8);
     &:hover {
       .opacity(1.0);
     }
+  }
+
+  &.dn {
+    display: none;
   }
 }
 
@@ -95,6 +126,22 @@ a.button {
   &.recommended {
     border: 1px solid @color-turquoise-light;
     color: @color-turquoise-light;
+
+  }
+  &.dull {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px;
+    position: absolute;
+    top: 4px;
+    text-align: center;
+    max-width: 100px;
+    //border: 1px solid #D59D0E;
+    color: #D59D0E;
+    .opacity(0.6);
+    &:hover {
+      .opacity(0.8);
+    }
   }
   &.none {
     border: 1px solid transparent;
@@ -164,13 +211,35 @@ body.miner {
     div.spec {
 
     }
+
+    div.contact {
+      div.links {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      a {
+        display: inline-block;
+        border: 1px solid #44CFCF;
+        .opacity(0.5);
+        font-size: 12px;
+        padding: 4px;
+        .border-radius(4px);
+        margin: 3px;
+        color: #44CFCF;
+
+        &:hover {
+          .opacity(0.9);
+        }
+      }
+    }
   }
 
   div.mining {
     @media @desktop {
       grid-column: span 6;
-      grid-row: span 5;
+      grid-row: span 4;
     }
+    position: relative;
     width: 100%;
     div.miner {
       max-width: 80%;
@@ -178,15 +247,108 @@ body.miner {
       margin-right: auto;
       text-align: center;
       img {
-        max-width: 200px;
+        max-width: 300px;
+      }
+      div.mining-stats{
+        margin-top: 20px;
+        div.detail {
+          text-transform: uppercase;
+          color: #999;
+          position: relative;
+          top: -10px;
+        }
+        div.hashrate {
+          color: #fff;
+          font-size: 48px;
+        }
+        div.xmrstak {
+          margin-top: 10px;
+          font-size: 12px;
+          width: 80%;
+          margin-left: auto;
+          margin-right: auto;
+          table {
+            width: 100%;
+          }
+        }
+        div.payment {
+          margin-top: 20px;
+          div.estimate {
+            padding: 5px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+
+            div.detail {
+              top: 0px;
+              font-size: 12px;
+            }
+            #payout {
+              font-size: 24px;
+            }
+          }
+          div.address {
+            margin-top: 20px;
+            div.detail {
+              font-size: 12px;
+              top: -15px;
+            }
+          }
+        }
+      }
+    }
+    div.pool {
+      margin-bottom: 20px;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      padding: 10px;
+      width: 95%;
+      margin-left: auto;
+      margin-right: auto;
+      div.stats {
+        .border-radius(0px 4px 4px 0px);
+        right: 0px;
+        top: 0px;
+        position: absolute;
+        float: right;
+        display: block;
+        height: 100%;
+        width: 60%;
+
+        table {
+          margin-top: 10px;
+          width: 100%;
+          font-size: 14px;
+          th {
+            font-weight: normal;
+            color: #eee;
+          }
+          td {
+            color: #999;
+            text-align: center;
+
+          }
+        }
+      }
+
+      a.address {
+        color: @color-turquoise-light;
+        font-size: 12px;
+        .opacity(0.6);
+
+        &:hover {
+          .opacity(1.0);
+        }
       }
     }
   }
 
+
   div.chart {
     @media @desktop {
       grid-column: span 6;
-      grid-row: span 2;
+      grid-row: span 3;
     }
     max-height: 100%;
     overflow: hidden;
@@ -249,25 +411,39 @@ body.firstrun {
     position:relative;
     div.step {
       text-align: center;
-
-      //position: absolute;
-      //top: 0px;
-
-      &.three {
-        img {
-          max-width: 250px;
-        }
-      }
     }
   }
 
   div.setup-wallet {
     div.selection {
       margin-top: 20px;
-      div.wallet {
+      a.wallet {
         margin: 15px;
         height: 155px;
         width: 400px;
+        color: #fafafa;
+        border: 1px solid @color-stellite-purple-dark;
+        .border-radius(4px);
+        display: inline-block;
+        max-width: 300px;
+        font-size: 18px;
+        padding: 10px;
+        h3 {
+          color: @color-stellite-purple;
+          padding-bottom: 10px;
+        }
+        p {
+          font-size: 14px;
+        }
+        p.note {
+          padding-top: 5px;
+          font-size: 11px;
+          font-style: italic;
+        }
+
+        &:hover {
+          border: 1px solid @color-stellite-purple;
+        }
       }
     }
   }
@@ -323,6 +499,8 @@ body.firstrun {
         }
       }
     }
+  }
+  div.setup-pool {
     div.pool-selection {
       div.chat-box {
         margin: 20px;
@@ -367,9 +545,15 @@ body.firstrun {
           table {
             margin-top: 10px;
             width: 100%;
-
+            font-size: 14px;
+            th {
+              font-weight: normal;
+              color: #eee;
+            }
             td {
+              color: #999;
               text-align: center;
+
             }
           }
         }

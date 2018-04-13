@@ -14,7 +14,7 @@
   <div class="grid">
     <div class="info">
       <div class="logo">
-        <img src="i/live-logo-large.png"/>
+        <img src="i/stellite-miner-logo.png"/>
       </div>
       <div class="section spec">
         <table class="stats">
@@ -141,20 +141,110 @@
       </div>
       <div class="section contact">
         <h3>Contact</h3>
-        Official website
-        Discord, Telegram, Facebook, Twitter, GitHub, Bitcoin ANN
+        <div class="links">
+          <a target="_blank" href="https://www.stellite.cash">Official Website</a>
+          <a target="_blank" href="https://bitcointalk.org/index.php?topic=2813261.0">ANN</a>
+          <a target="_blank" href="https://discord.gg/8PhF342">Discord</a>
+          <a target="_blank" href="https://www.reddit.com/r/stellite/">Reddit</a>
+          <a target="_blank" href="https://github.com/stellitecoin">GitHub</a>
+          <a target="_blank" href="https://www.facebook.com/stellitecash">Facebook</a>
+          <a target="_blank" href="https://twitter.com/stellitecash">Twitter</a>
+        </div>
       </div>
     </div>
     <div class="mining">
       <div class="miner">
-        <img src="i/mining-background.png"/>
-      </div>
+        <div class="mining-stats">
+          <div class="hashrate">
+            <span id="hashsec">0</span> H/s
+          </div>
+          <div class="detail">Hashrate</div>
+          <a href="#" class="button stop small">Stop Mining</a>
+          <div class="xmrstak">
+            <table>
+              <tr>
+                <th>
+                  Mining Time
+                </th>
+                <th>
+                  Difficulty
+                </th>
+                <th>
+                  Total Shares
+                </th>
+                <th>
+                  Bad Shares
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <span id="xmr_uptime"></span>
+                </td>
+                <td>
+                  <span id="diff_current"></span>
+                </td>
+                <td>
+                  <span id="shares_total"></span>
+                </td>
+                <td>
+                  <span id="shares_bad"></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="payment">
+            <div class="estimate">
+              <div class="detail">you are mining an estimated</div>
+              <div id="payout">10.00 XTL</div>
+              <div class="detail">per day</div>
+            </div>
+            <div class="address">
+              <pre>
+Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeqeNw4aMqR2tXWA3574
+              </pre>
+              <div class="detail">Stellite Wallet Address</div>
+            </div>
+          </div>
+        </div>
+        <!-- <a href="#" class="button start">Start Mining</a>
+        <a href="#" class="button stop">Stop Mining</a> -->
 
-      <div class="payout-estimator">
-        <span id="payout">10</span> XTL per day
       </div>
-      <div class="pool-info">
-        Pool info <a href="#">change pool</a>
+      <div class="pool">
+        <h3>Community Pool <a href="#" class="info-block dull">Change</a></h3>
+        <a href="https://communitypool.stellite.cash" target="_blank" class="address">https://communitypool.stellite.cash</a>
+        <div class="stats">
+          <table>
+            <tr>
+              <th>
+                Hash Rate
+              </th>
+              <th>
+                Miners
+              </th>
+              <th>
+                Last Block Found
+              </th>
+              <th>
+                Last Payment
+              </th>
+            </tr>
+            <tr>
+              <td>
+                13.32 MH/s
+              </td>
+              <td>
+                1 203
+              </td>
+              <td>
+                3 hours ago
+              </td>
+              <td>
+                10 seconds ago
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
     <div class="chart" style="position:relative">
@@ -224,15 +314,32 @@
           }
       });
 
-      calcEstimateProfit();
-      function calcEstimateProfit(){
+
+    function calcEstimateProfit(hashrate){
         try {
-            var hashRate = 300.00;
-            var xtlPerDay = (hashRate * 86400 / 885739812) * 17876.56;
-            $('#payout').html(xtlPerDay);
+            var xtlPerDay = (hashrate * 86400 / 1205230299) * 17878.36;
+            $('#payout').html(xtlPerDay.toFixed(2) + ' XTL');
         }
         catch(e){ }
     }
+
+    window.setInterval(function(){
+      console.log("GetStats");
+
+      $.get("http://stellite.live.local/site/xmr", function( data ) {
+        var hashrate = data.hashrate.total[0];
+        var difficulty = data.results.diff_current;
+        var shares_total = data.results.shares_total;
+        var shares_bad = shares_total - data.results.shares_good;
+        var uptime = data.connection.uptime;
+        $('#xmr_uptime').html(uptime + ' sec');
+        $('#diff_current').html(difficulty);
+        $('#shares_total').html(shares_total);
+        $('#shares_bad').html(shares_bad);
+        $('#hashsec').html(hashrate);
+        calcEstimateProfit(hashrate);
+      });
+    }, 2000);
   </script>
 </body>
 </html>

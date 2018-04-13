@@ -9,21 +9,29 @@
 </head>
 <body class="firstrun">
   <div class="centered">
-    <div class="welcome dn">
-      <div class="chat-box step one">
+    <div class="welcome main-section">
+      <div class="chat-box step dn" id="intro_anim_a">
         Hey there donovans!
       </div>
-      <div class="chat-box step two dn">
-        We're really happy you chose to mine
+      <div class="chat-box step dn" id="intro_anim_b">
+        We're really happy you<br/>
+        chose to mine with us
       </div>
-      <div class="chat-box step three dn">
-        <img src="i/stellite-logo-white.png" />
-      </div>
-      <div class="step four dn">
+      <div class="step dn" id="intro_anim_c">
         Let's get you set up
       </div>
+      <div class="step dn" id="intro_anim_d">
+        Your wallet
+      </div>
 
-      <div class="chat-box step selection dn">
+      <div class="chat-box step selection dn" id="initial-wallet">
+        <p class="description">
+          A cryptocurrency wallet is a secure application you'll use to transact with.<br/> Your wallet address
+          is used to receive Stellite coins with. You can think of this as your bank account number, just more secure.
+        </p>
+        <p class="description">
+          Your Stellite wallet address is <b>safe</b> to share
+        </p>
         <div class="option wallet-select" data-option="no-wallet">
           <h3>
             I don't have a wallet
@@ -42,12 +50,12 @@
         </div>
       </div>
     </div>
-    <div class="setup-wallet dn">
+    <div class="setup-wallet dn main-section">
       <div class="chat-box">
         Select your wallet
       </div>
       <div class="chat-box step selection">
-        <div class="option wallet" data-option="no-wallet">
+        <a href="https://stellite.cash/paperwallet.html" target="_blank" class="option wallet" data-option="no-wallet">
           <h3>
             Paper Wallet
           </h3>
@@ -60,8 +68,8 @@
           <div class="info-block none">
             &nbsp;
           </div>
-        </div>
-        <div class="option wallet" data-option="has-wallet">
+        </a>
+        <a href="https://github.com/stellitecoin/StelliteGUI/releases" target="_blank" class="option wallet" data-option="has-wallet">
           <h3>
             GUI Wallet
           </h3>
@@ -74,20 +82,27 @@
           <div class="info-block recommended">
             recommended
           </div>
-        </div>
+        </a>
       </div>
       <div class="chat-box small">
+        <p class="description tip">
+          Tip: The fastest way to get started is with the paper wallet.<br />
+          Once you are up and running you can import your paper wallet into the GUI wallet
+        </p>
         <p class="spaced">
           Once you have your wallet set up, continue
         </p>
         <br/>
-        <a class="button ok" href="#">
+        <a class="button back" data-target="initial-wallet" href="#">
+          Back
+        </a>
+        <a class="button ok" data-target="setup-mining" href="#">
           Continue
         </a>
       </div>
     </div>
 
-    <div class="setup-mining">
+    <div class="setup-mining main-section dn" id="setup-mining">
       <div class="chat-box">
         Set up your mining
       </div>
@@ -99,23 +114,34 @@
           This is the address you received when you created your wallet. It will start with the characters <span>Se</span>
         </p>
         <div>
-          <input type="text" placeholder="Your Stellite address"/>
+          <input id="mining_address" type="text" placeholder="Your Stellite address"/>
         </div>
       </div>
+      <div class="chat-box small">
+        <a class="button back" data-target="initial-wallet" href="#">
+          Back
+        </a>
+        <a class="button ok" data-target="setup-pool" href="#">
+          Continue
+        </a>
+      </div>
+    </div>
+
+    <div class="setup-pool main-section dn" id="setup-pool">
+      <div class="chat-box">
+        Select a mining pool
+        <p class="description">
+          A mining pool is where many different miners work together to find a block and share the reward. If you were<br/>
+          to mine on your own (solo mining) it could take weeks before you find a block, <b>if</b> you find a block.
+        </p>
+        <p class="description">
+          The community has set up a bunch of pools, some of the most popular ones are listed below. We recommend picking<br/>
+          a pool that has some miners and a healthy hash rate. Picking a busy pool results in smaller, more frequent payouts while a smaller<br/>
+          pool results in larger, less frequent payouts.
+        </p>
+      </div>
       <div class="pool-selection">
-        <div class="chat-box">
-          <h3>Select a mining pool</h3>
-          <p>
-            A mining pool is where many different miners work together to find a block and share the reward. If you were<br/>
-            to mine on your own (solo mining) it could take weeks before you find a block, <b>if</b> you find a block.
-          </p>
-          <p>
-            The community has set up a bunch of pools, some of the most popular ones are listed below. We recommend picking<br/>
-            a pool that has some miners and a healthy hash rate. Picking a busy pool results in smaller, more frequent payouts while a smaller<br/>
-            pool results in larger, less frequent payouts.
-          </p>
-        </div>
-        <div class="pool selected">
+        <div class="pool">
           <h3>Community Pool <div class="info-block recommended small">recommended</div></h3>
           <a href="https://communitypool.stellite.cash" target="_blank" class="address">https://communitypool.stellite.cash</a>
           <div class="stats">
@@ -190,15 +216,25 @@
         </div>
 
         <div class="chat-box small">
-
-          <a class="button back" href="#">
+          <a class="button back" data-target="setup-mining" href="#">
             Back
           </a>
-          <a class="button ok" href="#">
+          <a class="button ok dn" id="start_mining" data-target="configure_miner" href="#">
             Continue
           </a>
         </div>
 
+      </div>
+    </div>
+    <div class="setup-pool main-section dn" id="configure_miner">
+      <div class="chat-box">
+        Configuring your miner
+        <p class="description">
+          We'll be quick, we promise
+        </p>
+        <p>
+          <img src="i/configuring.gif" />
+        </p>
       </div>
     </div>
   </div>

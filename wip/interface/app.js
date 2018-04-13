@@ -31,39 +31,83 @@ let app = {
       console.log("firstrun");
 
       // TODO: Setup handlers somewhere
-      $('.option.wallet').bind('click', function() {
+      $('.option.wallet-select').bind('click', function() {
         var option = $(this).data('option');
         console.log('clicked', option);
-
-        $('.welcome').fadeOut(function(){
-          $('.setup-wallet').fadeIn(); 
-        })
+        if (option == 'no-wallet') {
+          $('.welcome').fadeOut(function(){
+            $('.setup-wallet').fadeIn();
+          });
+        } else {
+          $('.welcome').fadeOut(function(){
+            $('.setup-mining').fadeIn();
+          });
+        }
       });
 
+      $('.button').bind('click', function() {
+        var target = $(this).data('target');
+
+        // A bit of validation
+        if (target == 'setup-pool') {
+          var address = $('#mining_address').val();
+          if (address == '') {
+            alert("You must enter your address");
+            return false;
+          }
+          // Just make sure they're not using integrated addresses
+          if (address.substring(0, 2) != 'Se') {
+            alert("Please enter a valid Stellite address starting with 'Se'");
+            return false;
+          }
+        }
+        if (target == 'configure_miner') {
+          window.setTimeout(function(){
+            window.location = '/';
+          }, 5000);
+        }
+
+        console.log('button', target);
+        $(this).closest('.main-section').fadeOut(function(){
+          $('#' + target).closest('.main-section').show();
+          $('#' + target).fadeIn(1500);
+        });
+      });
+
+      $('.pool').bind('click', function(){
+        $('.pool').removeClass('selected');
+        $(this).addClass('selected');
+        $('#start_mining').show();
+      });
+
+      // TODO: Move to own function
       // A couple of steps to get you set up
-
-      $('.one').animateCss('fadeInDown', function() {
-        // Do somthing after animation
-        console.log("Done");
-        $('.one').animateCss('fadeOutDown', function(){
-
-          $('.one').remove();
-          //$('.two').show();
-          $('.two').animateCss('fadeInDown', function(){
-            $('.three').animateCss('fadeInDown', function() {
-              $('.two').animateCss('fadeOutDown', function(){
-                $('.two').remove();
-              });
-              $('.three').animateCss('fadeOutDown', function(){
-
-                $('.three').remove();
-                $('.four').animateCss('fadeInDown', function() {
-                  $('.selection').animateCss('fadeInUp');
-                });
+      $('#intro_anim_a').fadeIn(2500, function(){
+        $('#intro_anim_a').fadeOut(1000, function(){
+          $('#intro_anim_b').fadeIn(2000, function(){
+            $('#intro_anim_b').fadeOut(1000, function(){
+              $('#intro_anim_c').fadeIn(1500, function(){
+                $('#initial-wallet').animateCss('fadeInUp');
               });
             });
           });
         });
       });
+      // $('#intro_anim_a').fadeIn(500, function(){
+      //   $('#intro_anim_a').fadeOut(500, function(){
+      //     $('#intro_anim_b').fadeIn(500, function(){
+      //       $('#intro_anim_b').fadeOut(500, function(){
+      //         $('#intro_anim_c').fadeIn(500, function(){
+      //           $('#intro_anim_c').fadeOut(500, function(){
+      //             $('#intro_anim_d').fadeIn(500, function(){
+      //               $('#initial-wallet').animateCss('fadeInUp');
+      //             });
+      //           });
+      //         });
+      //       });
+      //     });
+      //   });
+      // });
+
     }
 };
