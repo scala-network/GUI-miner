@@ -47,6 +47,46 @@ func (h *Helper) GetPoolTemplate() (*template.Template, error) {
 	return temp, nil
 }
 
+func (h *Helper) GetPoolLiveTemplate() (*template.Template, error) {
+
+	temp, err := template.New("pool").Parse(`
+    <div class="pool" data-id="{{ .ID }}">
+      <h3>{{ .Name }} <a href="#" class="info-block dull">Change</a></h3>
+      <a href="{{ .URL }}" target="_blank" class="address">{{ .URL }}</a>
+      <div class="stats">
+        <table>
+          <tr>
+            <th>
+              Hash Rate
+            </th>
+            <th>
+              Miners
+            </th>
+            <th>
+              Last Block Found
+            </th>
+          </tr>
+          <tr>
+            <td>
+              {{ .Hashrate }}
+            </td>
+            <td>
+              {{ .Miners }}
+            </td>
+            <td>
+              {{ .LastBlock }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+`)
+	if err != nil {
+		return nil, err
+	}
+	return temp, nil
+}
+
 // GetXmrStakConfig returns the xmr-stak config
 func (h *Helper) GetXmrStakConfig() string {
 	return `

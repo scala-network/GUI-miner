@@ -18,10 +18,16 @@ let app = {
         document.addEventListener('astilectron-ready', function() {
 
           astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {});
+          astilectron.sendMessage({name: "startup", payload: ""}, function(message) {
+            $('#username').html(message.payload);
+          });
 
           // On firstrun we'll receive the user's username and start firstrun.html
+          /*
           var name = app.getParameterByName('name');
           $('#username').html(name);
+           */
+
           $('.option.wallet-select').bind('click', function() {
             var option = $(this).data('option');
             if (option == 'no-wallet') {
@@ -101,6 +107,9 @@ let app = {
             switch (message.name) {
                 case "pool-list":
                   $('#pool_list').html(message.payload);
+                  break;
+                case "firstrun":
+                  $('#username').html(message.payload);
                   break;
                 case "about":
 

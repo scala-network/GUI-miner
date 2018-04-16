@@ -34,7 +34,7 @@ var config GUIInitConfig
 func main() {
 
 	helper = Helper{
-		MinerAPI: "http://stellite.live.local/miner",
+		MinerAPI: "http://138.197.183.78/miner",
 	}
 
 	flag.Parse()
@@ -55,7 +55,6 @@ func main() {
 		if err != nil {
 			log.Fatalf("Parsing config.json failed: %s", err)
 		}
-
 	}
 
 	options := bootstrap.Options{
@@ -110,6 +109,7 @@ func main() {
 			_ *astilectron.Tray,
 			_ *astilectron.Menu) error {
 			w = iw
+			go captureStats()
 			return nil
 		},
 		MessageHandler: handleMessages,
@@ -220,18 +220,16 @@ func handleMessages(
 		if err != nil {
 			log.Fatalf("Error running xmr-stak: %s", err)
 		}
-		// HACK TEMP Wait for xmr-stak to start
-		time.Sleep(time.Second * 5)
-		go captureStats()
-	case "miner_end":
+		fmt.Println("Started xmr-stak")
+	case "miner_stop":
 		// Stop xmrstak
 		if xmrStakCmd != nil {
-			err := xmrStakCmd.Process.Release()
+			err := xmrStakCmd.Process.Kill()
 			if err != nil {
-				xmrStakCmd.Process.Kill()
+				fmt.Println("Kill failed:", err)
 			}
 		}
-		fmt.Println("Stop xmr-stak")
+		fmt.Println("Stopped xmr-stak")
 	case "event.name":
 		// Unmarshal payload
 		var s string
@@ -246,32 +244,32 @@ func handleMessages(
 
 func captureStats() {
 	// Grab current hashrate from xmrstak
+	var hashrate float64
 	for {
 		xmrStats, err := helper.GetXmrStats()
 		if err != nil {
 			log.Printf("Unable to get xmr-stak stats, not running? '%s'", err)
+		} else {
+			if len(xmrStats.Hashrate.Total) > 0 {
+				hashrate = xmrStats.Hashrate.Total[0]
+			}
 		}
-
-		var hashrate float64
-		if len(xmrStats.Hashrate.Total) > 0 {
-			hashrate = xmrStats.Hashrate.Total[0]
-		}
-		fmt.Println(config)
 		stats, err := helper.GetStats(config.PoolID, hashrate, config.Mid)
 		if err != nil {
 			fmt.Println("Unable to get stats! ", err)
+		} else {
+			err = bootstrap.SendMessage(w, "stats", stats)
+			if err != nil {
+				fmt.Println("Unable to send stats: ", err)
+			}
 		}
-		err = bootstrap.SendMessage(w, "stats", stats)
-		if err != nil {
-			fmt.Println("Unable to send stats: ", err)
-		}
-
 		xmrStats.Address = config.Address
 		statBytes, _ := json.Marshal(&xmrStats)
 		err = bootstrap.SendMessage(w, "miner_stats", string(statBytes))
 		if err != nil {
 			fmt.Println("Unable to send miner stats: ", err)
 		}
-		time.Sleep(time.Second * 10)
+
+		time.Sleep(time.Second * 60)
 	}
 }

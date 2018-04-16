@@ -1,11 +1,15 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 // PoolData contains the parsed JSON data from the pool list
@@ -33,7 +37,7 @@ type Stats struct {
 		Name           string `json:"name"`
 		URL            string `json:"url"`
 		Endpoint       string `json:"endpoint"`
-		Hashrate       int    `json:"hashrate"`
+		Hashrate       string `json:"hashrate"`
 		Miners         int    `json:"miners"`
 		LastBlock      string `json:"last_block"`
 		Config         string `json:"config"`
@@ -59,8 +63,9 @@ type Stats struct {
 		Price  string `json:"price"`
 		Volume string `json:"volume"`
 	} `json:"records"`
-	XtlPerDay string  `json:"xtl_per_day"`
-	Hashrate  float64 `json:"hashrate"`
+	XtlPerDay string `json:"xtl_per_day"`
+	Hashrate  string `json:"hashrate"`
+	PoolHtml  string `json:"pool_html"`
 }
 
 // GUIInitConfig holds the config entered in the GUI
@@ -170,7 +175,6 @@ func (h *Helper) SaveConfig(config GUIInitConfig) error {
 
 // GetXmrStats returns the local xmr-stak hashrate
 func (h *Helper) GetXmrStats() (XmrStakResponse, error) {
-	fmt.Println("Getting xmr stats")
 	var xmrResponse XmrStakResponse
 	resp, err := http.Get("http://127.0.0.1:16000/api.json")
 	if err != nil {
@@ -186,13 +190,50 @@ func (h *Helper) GetXmrStats() (XmrStakResponse, error) {
 
 // GetStats returns stats for the interface
 func (h *Helper) GetStats(poolID int, hashrate float64, mid string) (string, error) {
-	fmt.Println("Getting stats")
 	// http://stellite.live.local/miner/stats?pool=1&hr=300&mid=minerXXX
+	if mid == "" || poolID == 0 {
+		return "", errors.New("No data yet")
+	}
 	resp, err := http.Get(fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s", h.MinerAPI, poolID, hashrate, mid))
 	if err != nil {
 		return "", err
 	}
 	statBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	var stats Stats
+	err = json.Unmarshal(statBytes, &stats)
+	if err != nil {
+		return "", err
+	}
+
+	poolTemplate, err := helper.GetPoolLiveTemplate()
+	if err != nil {
+		log.Fatalf("Unable to load pool template: '%s'", err)
+	}
+	poolData := PoolData{
+		ID:        stats.Pool.ID,
+		Hashrate:  stats.Pool.Hashrate,
+		LastBlock: stats.Pool.LastBlock,
+		Miners:    stats.Pool.Miners,
+		URL:       stats.Pool.URL,
+		Name:      stats.Pool.Name,
+	}
+	var templateHTML bytes.Buffer
+	// Get the string time in the correct format
+	t, _ := time.Parse("2006-01-02 15:04",
+		poolData.LastBlock[:len(stats.Pool.LastBlock)-3])
+	since := time.Since(t)
+	poolData.LastBlock = fmt.Sprintf("%d minutes ago", int(since.Minutes()))
+	poolData.Hashrate = h.HumanizeHashrate(poolData.Hashrate)
+	err = poolTemplate.Execute(&templateHTML, poolData)
+	if err != nil {
+		log.Fatalf("Unable to load pool template: '%s'", err)
+	}
+	stats.PoolHtml = templateHTML.String()
+
+	statBytes, err = json.Marshal(&stats)
 	if err != nil {
 		return "", err
 	}

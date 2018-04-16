@@ -171,7 +171,7 @@
             <span id="miner_hashrate">0</span> H/s
           </div>
           <div class="detail">Hashrate</div>
-          <a href="#" class="button stop small">Stop Mining</a>
+          <a href="#" class="button stop small" id="start_stop">Stop Mining</a>
           <div class="xmrstak">
             <table>
               <tr>
@@ -212,7 +212,7 @@
             </div>
             <div class="address">
               <pre id="miner_address">
-Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeqeNw4aMqR2tXWA3574
+Updating
               </pre>
               <div class="detail">Stellite Wallet Address</div>
             </div>
@@ -266,65 +266,72 @@ Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeq
   <script src="static/lib/astiloader/astiloader.js"></script>
   <script src="static/lib/astimodaler/astimodaler.js"></script>
   <script src="static/lib/astinotifier/astinotifier.js"></script>
-  <script src="static/lib/chart/chart.min.js"></script>
+  <!-- <script src="static/lib/chart/chart.min.js"></script> -->
+  <script src="static/lib/chart.bundle.min.js"></script>
   <script src="static/js/app.js"></script>
   <script type="text/javascript">
-    app.init();
+
+      app.init();
 
     var chart = $("#hashrate_chart");
     chart.attr('width', $('.chart').width());
     chart.attr('height', $('.chart').height());
 
-    var myChart = new Chart(chart, {
-    type: 'line',
-          data: {
-              labels: ["15 minutes ago", "10 minutes ago", "5 minutes ago", "Now"],
-              datasets: [{
-                  label: 'H/s',
-                  data: [10,15,25,11],
-                  backgroundColor: [
-                      'rgba(13, 17, 45, 1.0)'
-                  ],
-                  borderColor: [
-                      'rgba(232,212,0,9)'
-                  ],
-                  borderWidth: 1,
-              }]
+    var hashrateChart = new Chart(chart, {
+      type: 'line',
+      data: {
+        labels: ["5 minutes ago", "4 minutes ago", "3 minutes ago", "2 minutes ago", "1 minute ago", "Now"],
+        //labels: [],
+        datasets: [{
+          label: 'H/s',
+          data: [0,0,0,0,0,0],
+          backgroundColor: [
+            'rgba(13, 17, 45, 1.0)'
+          ],
+          borderColor: [
+            'rgba(232,212,0,9)'
+          ],
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        //responsive: true,
+        //Tooltips doesn't seem to play nicely with electron
+        tooltips: {
+        mode: 'index',
+        intersect: false,
+        },
+        /*
+        hover: {
+        mode: 'nearest',
+        intersect: true
+        },
+        */
+        legend: {
+          display: false,
+        },
+        elements: {
+          line: {
+            tension: 0, // disables bezier curves
           },
-          options: {
-            responsive: true,
-            tooltips: {
-					         mode: 'index',
-					              intersect: false,
-				    },
-				hover: {
-					mode: 'nearest',
-					intersect: true
-				},
-            legend: {
-              display: false,
-            },
-            elements: {
-                line: {
-                    tension: 0, // disables bezier curves
-                },
-            },
-            layout: {
-                padding: {
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 0
-                }
-            },
-            scales:
-            {
-                yAxes: [{
-                    //display: false
-                }]
-            }
+        },
+        layout: {
+          padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
           }
-      });
+        },
+        scales:
+        {
+          yAxes: [{
+            //display: false
+          }]
+        }
+      }
+    });
+
   </script>
 </body>
 </html>
