@@ -2,23 +2,329 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="static/css/temp.css"/>
+    <link rel="stylesheet" href="static/css/main.css"/>
     <link rel="stylesheet" href="static/lib/astiloader/astiloader.css">
     <link rel="stylesheet" href="static/lib/astimodaler/astimodaler.css">
     <link rel="stylesheet" href="static/lib/astinotifier/astinotifier.css">
     <link rel="stylesheet" href="static/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/lib/animate.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
+    <script>window.$ = window.jQuery = require('./static/lib/jquery.min.js');</script>
 </head>
-<body>
-  <p>
-    Here we go!
-  </p>
-    <script src="static/lib/astiloader/astiloader.js"></script>
-    <script src="static/lib/astimodaler/astimodaler.js"></script>
-    <script src="static/lib/astinotifier/astinotifier.js"></script>
-    <script src="static/lib/chart/chart.min.js"></script>
-    <script src="static/js/app.js"></script>
-    <script type="text/javascript">
-        app.init();
-    </script>
+<body class="miner">
+  <div class="grid">
+    <div class="info">
+      <div class="logo">
+        <img src="static/i/stellite-miner-logo.png"/>
+      </div>
+      <div class="section spec">
+        <table class="stats">
+          <tr>
+            <td class="title">
+              Ticker
+            </td>
+            <td>
+              XTL
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Supply
+            </td>
+            <td>
+              21 billion
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Circulation
+            </td>
+            <td>
+              <!-- 2.1 billion (~10%) -->
+              <span id="circulation">Updating</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Market cap
+            </td>
+            <td>
+              <!-- USD 3 million -->
+              <span id="market_cap">Updating</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Price
+            </td>
+            <td>
+              <!-- 0.00000020 BTC -->
+              <span id="price">Updating</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="section network">
+        <h3>Network</h3>
+        <table class="stats">
+          <tr>
+            <td class="title">
+              Hashrate
+            </td>
+            <td>
+              <!-- 20 MH/s -->
+              <span id="network_hashrate">Updating</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Difficulty
+            </td>
+            <td>
+              <!-- 1 234 912 392 -->
+              <span id="network_difficulty">Updating</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Height
+            </td>
+            <td>
+              <!-- 108 000 -->
+              <span id="network_height">Updating</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="section exchanges">
+        <h3>Exchanges</h3>
+        <table class="stats">
+          <tr>
+            <td class="title">
+              Volume today
+            </td>
+            <td>
+              <!-- 30.3264 BTC -->
+              <span id="trading_volume">Updating</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              TradeOgre
+            </td>
+            <td>
+              <!-- 3.4222 BTC -->
+              <span id="trading_tradeogre_volume">Updating</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Crex24
+            </td>
+            <td>
+              <!-- 1.8239 BTC -->
+              <span id="trading_crex_volume">Updating</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="section records">
+        <h3>Records</h3>
+        <table class="stats">
+          <tr>
+            <td class="title">
+              Peak volume
+            </td>
+            <td>
+              <!-- 30.3264 BTC -->
+              <span id="record_volume">Updating</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              Highest price
+            </td>
+            <td>
+              <!-- 0.000000023 BTC -->
+              <span id="record_price">Updating</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="section contact">
+        <h3>Contact</h3>
+        <div class="links">
+          <a target="_blank" href="https://www.stellite.cash">Official Website</a>
+          <a target="_blank" href="https://bitcointalk.org/index.php?topic=2813261.0">ANN</a>
+          <a target="_blank" href="https://discord.gg/8PhF342">Discord</a>
+          <a target="_blank" href="https://www.reddit.com/r/stellite/">Reddit</a>
+          <a target="_blank" href="https://github.com/stellitecoin">GitHub</a>
+          <a target="_blank" href="https://www.facebook.com/stellitecash">Facebook</a>
+          <a target="_blank" href="https://twitter.com/stellitecash">Twitter</a>
+        </div>
+      </div>
+    </div>
+    <div class="mining">
+      <div class="miner">
+        <div class="mining-stats">
+          <div class="hashrate">
+            <span id="miner_hashrate">0</span> H/s
+          </div>
+          <div class="detail">Hashrate</div>
+          <a href="#" class="button stop small">Stop Mining</a>
+          <div class="xmrstak">
+            <table>
+              <tr>
+                <th>
+                  Mining Time
+                </th>
+                <th>
+                  Difficulty
+                </th>
+                <th>
+                  Total Shares
+                </th>
+                <th>
+                  Bad Shares
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <span id="miner_uptime">Updating</span>
+                </td>
+                <td>
+                  <span id="miner_difficulty">Updating</span>
+                </td>
+                <td>
+                  <span id="miner_shares">Updating</span>
+                </td>
+                <td>
+                  <span id="miner_shares_bad">Updating</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="payment">
+            <div class="estimate">
+              <div class="detail">you are mining an estimated</div>
+              <div id="miner_payout">0.00 XTL</div>
+              <div class="detail">per day</div>
+            </div>
+            <div class="address">
+              <pre id="miner_address">
+Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeqeNw4aMqR2tXWA3574
+              </pre>
+              <div class="detail">Stellite Wallet Address</div>
+            </div>
+          </div>
+        </div>
+        <!-- <a href="#" class="button start">Start Mining</a>
+        <a href="#" class="button stop">Stop Mining</a> -->
+
+      </div>
+      <div id="pool">
+        <div class="pool">
+          <h3>Community Pool <a href="#" class="info-block dull">Change</a></h3>
+          <a href="https://communitypool.stellite.cash" target="_blank" class="address">https://communitypool.stellite.cash</a>
+          <div class="stats">
+            <table>
+              <tr>
+                <th>
+                  Hash Rate
+                </th>
+                <th>
+                  Miners
+                </th>
+                <th>
+                  Last Block Found
+                </th>
+              </tr>
+              <tr>
+                <td id="pool_hashrate">
+                  13.32 MH/s
+                </td>
+                <td id="pool_miners">
+                  1 203
+                </td>
+                <td id="pool_last_block">
+                  3 hours ago
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chart" style="position:relative">
+      <canvas id="hashrate_chart" width="400" height="400"></canvas>
+    </div>
+    <div class="footer">
+      made with <i class="fa fa-heart"/></i> across the globe
+    </div>
+  </div>
+
+  <script src="static/lib/astiloader/astiloader.js"></script>
+  <script src="static/lib/astimodaler/astimodaler.js"></script>
+  <script src="static/lib/astinotifier/astinotifier.js"></script>
+  <script src="static/lib/chart/chart.min.js"></script>
+  <script src="static/js/app.js"></script>
+  <script type="text/javascript">
+    app.init();
+
+    var chart = $("#hashrate_chart");
+    chart.attr('width', $('.chart').width());
+    chart.attr('height', $('.chart').height());
+
+    var myChart = new Chart(chart, {
+    type: 'line',
+          data: {
+              labels: ["15 minutes ago", "10 minutes ago", "5 minutes ago", "Now"],
+              datasets: [{
+                  label: 'H/s',
+                  data: [10,15,25,11],
+                  backgroundColor: [
+                      'rgba(13, 17, 45, 1.0)'
+                  ],
+                  borderColor: [
+                      'rgba(232,212,0,9)'
+                  ],
+                  borderWidth: 1,
+              }]
+          },
+          options: {
+            responsive: true,
+            tooltips: {
+					         mode: 'index',
+					              intersect: false,
+				    },
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+            legend: {
+              display: false,
+            },
+            elements: {
+                line: {
+                    tension: 0, // disables bezier curves
+                },
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                }
+            },
+            scales:
+            {
+                yAxes: [{
+                    //display: false
+                }]
+            }
+          }
+      });
+  </script>
 </body>
 </html>
