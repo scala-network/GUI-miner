@@ -221,6 +221,10 @@ func handleMessages(
 			log.Fatalf("Error running xmr-stak: %s", err)
 		}
 		fmt.Println("Started xmr-stak")
+		//fmt.Println("Fetching stats")
+		// HACK, check if the connection comes soon
+		time.Sleep(time.Second * 15)
+		captureStats()
 	case "miner_stop":
 		// Stop xmrstak
 		if xmrStakCmd != nil {
