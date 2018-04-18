@@ -2,6 +2,8 @@
 /*
     GUI Miner stylesheet
     Interface size is by default 1050px x 700px
+
+    'outs: ../src/resources/app/static/css/main.css, sourcemap: false, compress: true'
 */
 
 @desktop:  ~"only screen and (min-width: 600px)"; /* Mobile view / not a grid anymore */
@@ -167,6 +169,21 @@ a.button {
 
 body.miner {
   height: 100%;
+
+  a.settings-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #D59D0E;
+    z-index: 999;
+    font-size: 24px;
+    .opacity(0.6);
+
+    &:hover {
+      .opacity(0.8);
+    }
+  }
+
   div.grid {
     height: 100%;
     display: grid;
@@ -381,8 +398,106 @@ body.miner {
     }
   }
 
+  div.settings {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    .opacity(0.95);
+    position: absolute;
+    background-color: @color-blue-darker;
 
+    h2 {
+      padding: 20px;
+      font-size: 36px;
+      text-transform: uppercase;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
 
+    div.section {
+      text-align: center;
+      padding-bottom: 50px;
+
+      p {
+        padding: 10px;
+      }
+      &.address {
+        #settings_mining_address {
+          padding: 5px;
+          width: 60%;
+        }
+      }
+
+      &.action {
+        margin-top: 20px;
+
+        a.button {
+          margin: 10px;
+        }
+      }
+
+      div.pool-selection {
+        text-align: left;
+        div.pool {
+          margin-bottom: 20px;
+          position: relative;
+          cursor: pointer;
+          border: 1px solid @color-stellite-purple-dark;
+          .border-radius(4px);
+          padding: 10px;
+          max-width: 75%;
+          margin-left: auto;
+          margin-right: auto;
+          background-color: @color-blue-darker;
+          &:hover {
+            background-color: @color-blue-dark-lighter;
+          }
+
+          &.selected {
+            border-color: @color-yellow;
+          }
+
+          div.stats {
+            .border-radius(0px 4px 4px 0px);
+            right: 0px;
+            top: 0px;
+            position: absolute;
+            float: right;
+            display: block;
+            height: 100%;
+            width: 60%;
+
+            table {
+              margin-top: 10px;
+              width: 100%;
+              font-size: 14px;
+              th {
+                font-weight: normal;
+                color: #eee;
+                text-align: center;
+              }
+              td {
+                color: #999;
+                text-align: center;
+              }
+            }
+          }
+          a.address {
+            color: @color-turquoise-light;
+            font-size: 12px;
+            .opacity(0.6);
+
+            &:hover {
+              .opacity(1.0);
+            }
+          }
+        }
+      }
+    }
+  }
 } // body.miner
 
 
@@ -503,6 +618,7 @@ body.firstrun {
           display: inline;
         }
         input {
+          padding: 5px;
           width: 800px;
         }
       }

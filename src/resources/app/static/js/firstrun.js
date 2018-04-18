@@ -17,19 +17,13 @@ let firstrun = {
         // Wait for the ready signal
         document.addEventListener('astilectron-ready', function() {
 
-
           astilectron.sendMessage({name: "firstrun", payload: ""}, function(message) {
-            console.log("GOT RESPONSE");
-            console.log(message);
             $('#username').html(message.payload);
           });
           // The pool-list command returns the pool list for the GUI miner
           astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
-            console.log("GOT RESPONSE");
-            console.log(message);
             $('#pool_list').html(message.payload);
           });
-
 
           firstrun.bindEvents();
           firstrun.listen();
@@ -38,15 +32,6 @@ let firstrun = {
     },
     listen: function() {
       astilectron.onMessage(function(message) {
-          console.log("Got message", message.name);
-            switch (message.name) {
-                case "pool-list":
-                  //$('#pool_list').html(message.payload);
-                  break;
-                case "firstrun":
-                  //$('#username').html(message.payload);
-                  break;
-            }
         });
     },
     // Bind to UI events using jQuery

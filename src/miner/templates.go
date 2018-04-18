@@ -11,7 +11,7 @@ import "html/template"
 func (m *Miner) GetPoolTemplate(withChangeOption bool) (*template.Template, error) {
 	var changeOption string
 	if withChangeOption == true {
-		changeOption = `<a href="#" class="info-block dull">Change</a>`
+		changeOption = `<a href="#" id="change_pool" class="info-block dull">Change</a>`
 	}
 	temp, err := template.New("pool").Parse(`
     <div class="pool" data-id="{{ .ID }}">

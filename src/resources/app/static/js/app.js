@@ -58,6 +58,7 @@ let app = {
             $('#miner_shares').html(parsed.results.shares_total);
             $('#miner_shares_bad').html(parsed.results.shares_total - parsed.results.shares_good);
             $('#miner_address').html(parsed.address);
+            $('#settings_mining_address').val(parsed.address);
             // Move the graph, we only refresh it once a minute
             if (parsed.update_graph == true) {
               hashrateChart.data.datasets.forEach((dataset) => {
@@ -117,6 +118,35 @@ let app = {
         }
         e.stopPropogation();
         return false;
+      });
+
+      $('.settings-button').bind('click', function(){
+        // The pool-list command returns the pool list for the GUI miner
+        astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
+          $('#pool_list').html(message.payload);
+          $('#settings').toggleClass('dn');
+        });
+      });
+
+      $(document).on('click', '#change_pool', function(){
+        // The pool-list command returns the pool list for the GUI miner
+        astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
+          $('#pool_list').html(message.payload);
+          $('#settings').toggleClass('dn');
+        });
+      });
+
+      $('.back').bind('click', function(){
+        $('#settings').toggleClass('dn');
+      });
+
+      $(document).on('click', '.pool', function(){
+        $('.pool').removeClass('selected');
+        $(this).addClass('selected');
+      });
+
+      $('#update').bind('click', function(){
+        alert('Update config');
       });
     },
     // secondsHumanize turns seconds into hours + minutes
