@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="static/css/main.css"/>
     <link rel="stylesheet" href="static/lib/astiloader/astiloader.css">
     <link rel="stylesheet" href="static/lib/astimodaler/astimodaler.css">
     <link rel="stylesheet" href="static/lib/astinotifier/astinotifier.css">
     <link rel="stylesheet" href="static/lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="static/lib/animate.css">
+    <link rel="stylesheet" href="static/css/main.css"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
     <script>window.$ = window.jQuery = require('./static/lib/jquery.min.js');</script>
 </head>
@@ -161,6 +161,8 @@
           <a target="_blank" href="https://github.com/stellitecoin">GitHub</a>
           <a target="_blank" href="https://www.facebook.com/stellitecash">Facebook</a>
           <a target="_blank" href="https://twitter.com/stellitecash">Twitter</a>
+          <a target="_blank" href="https://coinmarketcap.com/currencies/stellite">Coin Market Cap</a>
+          <a target="_blank" href="https://coinlib.io/coin/XTL/Stellite">CoinLib</a>
         </div>
       </div>
     </div>
@@ -187,6 +189,9 @@
                 <th>
                   Bad Shares
                 </th>
+                <th>
+                  Errors
+                </th>
               </tr>
               <tr>
                 <td>
@@ -200,6 +205,9 @@
                 </td>
                 <td>
                   <span id="miner_shares_bad">Updating</span>
+                </td>
+                <td>
+                  <span id="miner_errors">0</span>
                 </td>
               </tr>
             </table>
@@ -224,8 +232,8 @@ Updating
       </div>
       <div id="pool">
         <div class="pool">
-          <h3>Community Pool <a href="#" class="info-block dull">Change</a></h3>
-          <a href="https://communitypool.stellite.cash" target="_blank" class="address">https://communitypool.stellite.cash</a>
+          <h3>Updating <a href="#" class="info-block dull">Change</a></h3>
+          <a href="https://communitypool.stellite.cash" target="_blank" class="address">Updating</a>
           <div class="stats">
             <table>
               <tr>
@@ -241,13 +249,13 @@ Updating
               </tr>
               <tr>
                 <td id="pool_hashrate">
-                  13.32 MH/s
+                  0 MH/s
                 </td>
                 <td id="pool_miners">
-                  1 203
+                  0
                 </td>
                 <td id="pool_last_block">
-                  3 hours ago
+                  0 hours ago
                 </td>
               </tr>
             </table>
@@ -266,12 +274,10 @@ Updating
   <script src="static/lib/astiloader/astiloader.js"></script>
   <script src="static/lib/astimodaler/astimodaler.js"></script>
   <script src="static/lib/astinotifier/astinotifier.js"></script>
-  <!-- <script src="static/lib/chart/chart.min.js"></script> -->
   <script src="static/lib/chart.bundle.min.js"></script>
   <script src="static/js/app.js"></script>
   <script type="text/javascript">
-
-      app.init();
+    app.init();
 
     var chart = $("#hashrate_chart");
     chart.attr('width', $('.chart').width());
@@ -281,7 +287,6 @@ Updating
       type: 'line',
       data: {
         labels: ["5 minutes ago", "4 minutes ago", "3 minutes ago", "2 minutes ago", "1 minute ago", "Now"],
-        //labels: [],
         datasets: [{
           label: 'H/s',
           data: [0,0,0,0,0,0],
@@ -295,18 +300,10 @@ Updating
         }]
       },
       options: {
-        //responsive: true,
-        //Tooltips doesn't seem to play nicely with electron
         tooltips: {
-        mode: 'index',
-        intersect: false,
+          mode: 'index',
+          intersect: false,
         },
-        /*
-        hover: {
-        mode: 'nearest',
-        intersect: true
-        },
-        */
         legend: {
           display: false,
         },
@@ -331,7 +328,6 @@ Updating
         }
       }
     });
-
   </script>
 </body>
 </html>

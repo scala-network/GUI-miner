@@ -1,4 +1,4 @@
-package main
+package miner
 
 import "html/template"
 
@@ -7,11 +7,15 @@ import "html/template"
   a bit easier
 */
 
-func (h *Helper) GetPoolTemplate() (*template.Template, error) {
-
+// GetPoolTemplate returns the template for rendering a pool block
+func (m *Miner) GetPoolTemplate(withChangeOption bool) (*template.Template, error) {
+	var changeOption string
+	if withChangeOption == true {
+		changeOption = `<a href="#" class="info-block dull">Change</a>`
+	}
 	temp, err := template.New("pool").Parse(`
     <div class="pool" data-id="{{ .ID }}">
-      <h3>{{ .Name }}</h3>
+      <h3>{{ .Name }} ` + changeOption + `</h3>
       <a href="{{ .URL }}" target="_blank" class="address">{{ .URL }}</a>
       <div class="stats">
         <table>
@@ -47,48 +51,8 @@ func (h *Helper) GetPoolTemplate() (*template.Template, error) {
 	return temp, nil
 }
 
-func (h *Helper) GetPoolLiveTemplate() (*template.Template, error) {
-
-	temp, err := template.New("pool").Parse(`
-    <div class="pool" data-id="{{ .ID }}">
-      <h3>{{ .Name }} <a href="#" class="info-block dull">Change</a></h3>
-      <a href="{{ .URL }}" target="_blank" class="address">{{ .URL }}</a>
-      <div class="stats">
-        <table>
-          <tr>
-            <th>
-              Hash Rate
-            </th>
-            <th>
-              Miners
-            </th>
-            <th>
-              Last Block Found
-            </th>
-          </tr>
-          <tr>
-            <td>
-              {{ .Hashrate }}
-            </td>
-            <td>
-              {{ .Miners }}
-            </td>
-            <td>
-              {{ .LastBlock }}
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-`)
-	if err != nil {
-		return nil, err
-	}
-	return temp, nil
-}
-
-// GetXmrStakConfig returns the xmr-stak config
-func (h *Helper) GetXmrStakConfig() string {
+// GetXmrStakConfig returns the base xmr-stak config
+func (m *Miner) GetXmrStakConfig() string {
 	return `
 
 	/*
@@ -252,8 +216,8 @@ func (h *Helper) GetXmrStakConfig() string {
 	`
 }
 
-// GetXmrStakPoolConfig returns the XmrStak pool config
-func (h *Helper) GetXmrStakPoolConfig(
+// GetXmrStakPoolConfig returns the XmrStak pool config to be written to file
+func (m *Miner) GetXmrStakPoolConfig(
 	poolAddress string,
 	walletAddress string) string {
 
@@ -264,5 +228,4 @@ func (h *Helper) GetXmrStakPoolConfig(
 ],
 "currency" : "stellite",
 		`
-
 }
