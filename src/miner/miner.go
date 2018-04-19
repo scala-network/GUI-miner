@@ -10,7 +10,9 @@ import (
 	"os"
 	"os/exec"
 	"os/user"
+	"runtime"
 	"sync/atomic"
+	"syscall"
 	"time"
 
 	astilectron "github.com/asticode/go-astilectron"
@@ -76,7 +78,7 @@ func New(
 		WindowOptions: &astilectron.WindowOptions{
 			BackgroundColor: astilectron.PtrStr("#0B0C22"),
 			Center:          astilectron.PtrBool(true),
-			Height:          astilectron.PtrInt(685),
+			Height:          astilectron.PtrInt(700),
 			Width:           astilectron.PtrInt(1175),
 		},
 		MenuOptions: []*astilectron.MenuItemOptions{{
@@ -328,8 +330,17 @@ func (m *Miner) configureMiner(command bootstrap.MessageIn, isReconfigure bool) 
 // startMiner starts the xmr-stak miner
 func (m *Miner) startMiner() {
 	params := []string{}
-	m.minerCmd = exec.Command("./xmr-stak", params...)
-	m.minerCmd.Dir = "./xmr-stak"
+	commandName := "./xmr-stak"
+	commandDir := "./xmr-stak"
+	if runtime.GOOS == "windows" {
+		commandName = ".\\xmr-stak.exe"
+		commandDir = ".\\xmr-stak"
+		m.minerCmd.SysProcAttr = &syscall.SysProcAttr{
+			HideWindow: true,
+		}
+	}
+	m.minerCmd = exec.Command(commandName, params...)
+	m.minerCmd.Dir = commandDir
 	err := m.minerCmd.Start()
 	if err != nil {
 		_ = bootstrap.SendMessage(
