@@ -18,6 +18,7 @@ let app = {
             name: "miner_start",
             payload: ""
           }, function(message) {
+
           });
 
           app.bindEvents();
@@ -30,11 +31,11 @@ let app = {
         var parsed = $.parseJSON(message.payload)
         switch (message.name) {
           case "fatal_error":
-          let errDiv = document.createElement("div");
-          errDiv.innerHTML = parsed.message;
-          $('.astimodaler-body').addClass('error');
-          asticode.modaler.setContent(errDiv);
-          asticode.modaler.show();
+            let errDiv = document.createElement("div");
+            errDiv.innerHTML = parsed.message;
+            $('.astimodaler-body').addClass('error');
+            asticode.modaler.setContent(errDiv);
+            asticode.modaler.show();
             break;
           case "network_stats":
             $('#circulation').html(parsed.circulation);
@@ -121,23 +122,22 @@ let app = {
       });
 
       $('.settings-button').bind('click', function(){
-        // The pool-list command returns the pool list for the GUI miner
-        astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
-          $('#pool_list').html(message.payload);
-          $('#settings').toggleClass('dn');
-        });
+        app.loadSettings();
+      });
+      $('.help-button').bind('click', function(){
+        $('#help').toggleClass('dn');
       });
 
       $(document).on('click', '#change_pool', function(){
-        // The pool-list command returns the pool list for the GUI miner
-        astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
-          $('#pool_list').html(message.payload);
-          $('#settings').toggleClass('dn');
-        });
+        app.loadSettings();
       });
 
-      $('.back').bind('click', function(){
+      $('.close-settings').bind('click', function(){
         $('#settings').toggleClass('dn');
+      });
+
+      $('.close-help').bind('click', function(){
+        $('#help').toggleClass('dn');
       });
 
       $(document).on('click', '.pool', function(){
@@ -146,7 +146,36 @@ let app = {
       });
 
       $('#update').bind('click', function(){
-        alert('Update config');
+        var configData = {
+          address: $('#settings_mining_address').val(),
+          pool: $('#pool_list').find('.selected').data('id')
+        };
+        if (configData.address == '') {
+          alert("You must enter your address");
+          return false;
+        }
+        // Just make sure they're not using integrated addresses
+        if (configData.address.substring(0, 2) != 'Se') {
+          alert("Please enter a valid Stellite address starting with 'Se'");
+          return false;
+        }
+        $('#update').html('Updating...');
+        astilectron.sendMessage({name: "reconfigure", payload: configData}, function(message){
+          $('.current .pool h3').html('Updating...');
+          $('#settings').toggleClass('dn');
+          $('#update').html('Update');
+          asticode.notifier.info('Miner reconfigured');
+        });
+
+      });
+    },
+    loadSettings: function() {
+      // The pool-list command returns the pool list for the GUI miner
+      astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
+        $('#pool_list').html(message.payload);
+        var currentPool = $('.current .pool').data('id');
+        $('.pool[data-id="' + currentPool + '"]').addClass('selected');
+        $('#settings').toggleClass('dn');
       });
     },
     // secondsHumanize turns seconds into hours + minutes

@@ -74,7 +74,6 @@ let firstrun = {
           };
           astilectron.sendMessage({name: "configure", payload: configData}, function(message){
             document.location = 'index.html';
-
           });
         }
 

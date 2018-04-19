@@ -108,8 +108,7 @@ func New(
 		MessageHandler: miner.handleElectronCommands,
 	}
 
-	// Setup the logging, by default we log to stdout. If a filepath is specified
-	// we log to that file
+	// Setup the logging, by default we log to stdout
 	logrus.SetFormatter(&logrus.TextFormatter{
 		FullTimestamp:   true,
 		TimestampFormat: "Jan 02 15:04:05",
@@ -215,115 +214,154 @@ func (m *Miner) handleElectronCommands(
 		// HACK: Adding a slight delay before switching to the mining dashboard
 		// after initial setup to have the user at least see the 'configure' message
 		time.Sleep(time.Second * 5)
-		err := json.Unmarshal(command.Payload, &m.config)
-		if err != nil {
-			_ = bootstrap.SendMessage(
-				m.window,
-				"fatal_error",
-				fmt.Sprintf("{\"message\": \"Unable to configure miner."+
-					"Please check that you are connected to the internet."+
-					"<br/>The error was '%s'\"}", err))
-			// Give the UI some time to display the message
-			time.Sleep(time.Second * 15)
-			m.logger.Fatalf("Unable to configure miner: '%s'", err)
-		}
-		m.config.Mid = uuid.New().String()
-		err = m.SaveConfig(*m.config)
-		if err != nil {
-			_ = bootstrap.SendMessage(
-				m.window,
-				"fatal_error",
-				fmt.Sprintf("{\"message\": \"Unable to configure miner."+
-					"Please check that you are connected to the internet."+
-					"<br/>The error was '%s'\"}", err))
-			// Give the UI some time to display the message
-			time.Sleep(time.Second * 15)
-			m.logger.Fatalf("Unable to configure miner: '%s'", err)
-		}
-
-		err = ioutil.WriteFile("./xmr-stak/config.txt",
-			[]byte(m.GetXmrStakConfig()),
-			0644)
-		if err != nil {
-			_ = bootstrap.SendMessage(
-				m.window,
-				"fatal_error",
-				fmt.Sprintf("{\"message\": \"Unable to configure miner."+
-					"Please check that you are connected to the internet."+
-					"<br/>The error was '%s'\"}", err))
-			// Give the UI some time to display the message
-			time.Sleep(time.Second * 15)
-			m.logger.Fatalf("Unable to configure miner: '%s'", err)
-		}
-
-		var poolInfo PoolData
-		poolInfo, err = m.GetPool(m.config.PoolID)
-		if err != nil {
-			_ = bootstrap.SendMessage(
-				m.window,
-				"fatal_error",
-				fmt.Sprintf("{\"message\": \"Unable to configure miner."+
-					"Please check that you are connected to the internet."+
-					"<br/>The error was '%s'\"}", err))
-			// Give the UI some time to display the message
-			time.Sleep(time.Second * 15)
-			m.logger.Fatalf("Unable to configure miner: '%s'", err)
-		}
-
-		err = ioutil.WriteFile("./xmr-stak/pools.txt",
-			[]byte(m.GetXmrStakPoolConfig(poolInfo.Config, m.config.Address)),
-			0644)
-		if err != nil {
-			_ = bootstrap.SendMessage(
-				m.window,
-				"fatal_error",
-				fmt.Sprintf("{\"message\": \"Unable to configure miner."+
-					"Please check that you are connected to the internet."+
-					"<br/>The error was '%s'\"}", err))
-			// Give the UI some time to display the message
-			time.Sleep(time.Second * 15)
-			m.logger.Fatalf("Unable to configure miner: '%s'", err)
-		}
+		m.configureMiner(command, false)
 		return "Ok", nil
+
+	// reconfigure is sent after settings are changes by the user
+	case "reconfigure":
+		m.logger.Info("Reconfiguring miner")
+		err := m.stopMiner()
+		if err != nil {
+			_ = bootstrap.SendMessage(
+				m.window,
+				"fatal_error",
+				fmt.Sprintf("{\"message\": \"Unable to stop miner for reconfigure."+
+					"Please close the miner and open it again"+
+					"<br/>The error was '%s'\"}", err))
+			// Give the UI some time to display the message
+			time.Sleep(time.Second * 15)
+			m.logger.Fatalf("Unable to reconfigure miner: '%s'", err)
+		}
+		// Wait for the mining stats loop to exit
+		time.Sleep(time.Second * 10)
+		m.configureMiner(command, true)
+		m.startMiner()
+		m.logger.Info("Miner reconfigured")
 
 	// miner_start is sent after configuration or when the user
 	// clicks 'start mining'
 	case "miner_start":
-		params := []string{}
-		m.minerCmd = exec.Command("./xmr-stak", params...)
-		m.minerCmd.Dir = "./xmr-stak"
-		err := m.minerCmd.Start()
-		if err != nil {
-			_ = bootstrap.SendMessage(
-				m.window,
-				"fatal_error",
-				fmt.Sprintf("{\"message\": \"Unable to start xmr-stak miner, please check that you "+
-					"can run 'xmr-stak' from the installation folder."+
-					"<br/>The error was '%s'\"}", err))
-			// Give the UI some time to display the message
-			time.Sleep(time.Second * 15)
-			m.logger.Fatalf("Error running xmr-stak: %s", err)
-		}
-		m.logger.Info("Started xmr-stak")
-		go m.updateMiningStatsLoop()
+		m.startMiner()
 
 	// miner_stop is sent whenever the user clicks 'stop mining'
 	case "miner_stop":
-		if m.minerCmd != nil {
-			err := m.minerCmd.Process.Kill()
-			if err != nil {
-				m.logger.Errorf("Unable to stop xmr-stak: %s", err)
-				return nil, err
-			}
-			m.logger.Info("xmr-stak stopped")
-			m.lastHashrate = 0.00
-			// Stop the stats loop as well
-			atomic.StoreUint32(&m.captureMiningStats, 0)
-			return nil, nil
-		}
-		m.logger.Info("xmr-stak wasn't running")
+		return nil, m.stopMiner()
 	}
 	return nil, fmt.Errorf("'%s' is an unknown command", command.Name)
+}
+
+// configureMiner creates the xmr-stak configuration to use
+func (m *Miner) configureMiner(command bootstrap.MessageIn, isReconfigure bool) {
+	err := json.Unmarshal(command.Payload, &m.config)
+	if err != nil {
+		_ = bootstrap.SendMessage(
+			m.window,
+			"fatal_error",
+			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
+				"Please check that you are connected to the internet."+
+				"<br/>The error was '%s'\"}", err))
+		// Give the UI some time to display the message
+		time.Sleep(time.Second * 15)
+		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+	}
+	if isReconfigure == false {
+		m.config.Mid = uuid.New().String()
+	}
+	err = m.SaveConfig(*m.config)
+	if err != nil {
+		_ = bootstrap.SendMessage(
+			m.window,
+			"fatal_error",
+			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
+				"Please check that you are connected to the internet."+
+				"<br/>The error was '%s'\"}", err))
+		// Give the UI some time to display the message
+		time.Sleep(time.Second * 15)
+		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+	}
+
+	err = ioutil.WriteFile("./xmr-stak/config.txt",
+		[]byte(m.GetXmrStakConfig()),
+		0644)
+	if err != nil {
+		_ = bootstrap.SendMessage(
+			m.window,
+			"fatal_error",
+			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
+				"Please check that you are connected to the internet."+
+				"<br/>The error was '%s'\"}", err))
+		// Give the UI some time to display the message
+		time.Sleep(time.Second * 15)
+		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+	}
+
+	var poolInfo PoolData
+	poolInfo, err = m.GetPool(m.config.PoolID)
+	if err != nil {
+		_ = bootstrap.SendMessage(
+			m.window,
+			"fatal_error",
+			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
+				"Please check that you are connected to the internet."+
+				"<br/>The error was '%s'\"}", err))
+		// Give the UI some time to display the message
+		time.Sleep(time.Second * 15)
+		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+	}
+
+	err = ioutil.WriteFile("./xmr-stak/pools.txt",
+		[]byte(m.GetXmrStakPoolConfig(poolInfo.Config, m.config.Address)),
+		0644)
+	if err != nil {
+		_ = bootstrap.SendMessage(
+			m.window,
+			"fatal_error",
+			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
+				"Please check that you are connected to the internet."+
+				"<br/>The error was '%s'\"}", err))
+		// Give the UI some time to display the message
+		time.Sleep(time.Second * 15)
+		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+	}
+}
+
+// startMiner starts the xmr-stak miner
+func (m *Miner) startMiner() {
+	params := []string{}
+	m.minerCmd = exec.Command("./xmr-stak", params...)
+	m.minerCmd.Dir = "./xmr-stak"
+	err := m.minerCmd.Start()
+	if err != nil {
+		_ = bootstrap.SendMessage(
+			m.window,
+			"fatal_error",
+			fmt.Sprintf("{\"message\": \"Unable to start xmr-stak miner, please check that you "+
+				"can run 'xmr-stak' from the installation folder."+
+				"<br/>The error was '%s'\"}", err))
+		// Give the UI some time to display the message
+		time.Sleep(time.Second * 15)
+		m.logger.Fatalf("Error running xmr-stak: %s", err)
+	}
+	m.logger.Info("Started xmr-stak")
+	go m.updateMiningStatsLoop()
+}
+
+// stopMiner stops the xmr-stak miner
+func (m *Miner) stopMiner() error {
+	if m.minerCmd != nil {
+		err := m.minerCmd.Process.Kill()
+		if err != nil {
+			m.logger.Errorf("Unable to stop xmr-stak: %s", err)
+			return err
+		}
+		m.logger.Info("xmr-stak stopped")
+		m.lastHashrate = 0.00
+		// Stop the stats loop as well
+		atomic.StoreUint32(&m.captureMiningStats, 0)
+		return nil
+	}
+	m.logger.Info("xmr-stak wasn't running")
+	return nil
 }
 
 // updateNetworkStats is a single stat update for network and payment info

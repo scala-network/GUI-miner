@@ -61,6 +61,10 @@ input::-moz-focus-inner {
   text-align: right;
 }
 
+.ac {
+  text-align: center;
+}
+
 .error {
   border: 1px solid #E81600;
   background-color: #FFD0CA;
@@ -174,6 +178,20 @@ body.miner {
     position: absolute;
     top: 10px;
     right: 15px;
+    color: #D59D0E;
+    z-index: 999;
+    font-size: 24px;
+    .opacity(0.6);
+
+    &:hover {
+      .opacity(0.8);
+    }
+  }
+
+  a.help-button {
+    position: absolute;
+    top: 10px;
+    right: 45px;
     color: #D59D0E;
     z-index: 999;
     font-size: 24px;
@@ -432,8 +450,6 @@ body.miner {
       }
 
       &.action {
-        margin-top: 20px;
-
         a.button {
           margin: 10px;
         }
@@ -495,6 +511,65 @@ body.miner {
             }
           }
         }
+      }
+    }
+  }
+
+  div.help {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    .opacity(0.95);
+    position: absolute;
+    background-color: @color-blue-darker;
+
+    h2 {
+      padding: 20px;
+      font-size: 36px;
+      text-transform: uppercase;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    div.section {
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      padding-bottom: 25px;
+
+      p {
+        padding: 10px;
+      }
+      &.action {
+        text-align: center;
+        a.button {
+          margin: 10px;
+        }
+      }
+
+      ol {
+        list-style-type: decimal;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+
+        li {
+          //display: inline-block;
+          padding-bottom: 10px;
+        }
+      }
+    }
+
+    a.link {
+      color: @color-turquoise-light;
+      .opacity(0.6);
+
+      &:hover {
+        .opacity(1.0);
       }
     }
   }
