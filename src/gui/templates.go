@@ -1,4 +1,4 @@
-package miner
+package gui
 
 import "html/template"
 
@@ -8,7 +8,7 @@ import "html/template"
 */
 
 // GetPoolTemplate returns the template for rendering a pool block
-func (m *Miner) GetPoolTemplate(withChangeOption bool) (*template.Template, error) {
+func (gui *GUI) GetPoolTemplate(withChangeOption bool) (*template.Template, error) {
 	var changeOption string
 	if withChangeOption == true {
 		changeOption = `<a href="#" id="change_pool" class="info-block dull">Change</a>`
@@ -52,7 +52,7 @@ func (m *Miner) GetPoolTemplate(withChangeOption bool) (*template.Template, erro
 }
 
 // GetXmrStakConfig returns the base xmr-stak config
-func (m *Miner) GetXmrStakConfig() string {
+func (gui *GUI) GetXmrStakConfig() string {
 	return `
 
 	/*
@@ -217,7 +217,7 @@ func (m *Miner) GetXmrStakConfig() string {
 }
 
 // GetXmrStakPoolConfig returns the XmrStak pool config to be written to file
-func (m *Miner) GetXmrStakPoolConfig(
+func (gui *GUI) GetXmrStakPoolConfig(
 	poolAddress string,
 	walletAddress string) string {
 

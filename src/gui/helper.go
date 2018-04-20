@@ -1,4 +1,4 @@
-package miner
+package gui
 
 import (
 	"bytes"
@@ -13,9 +13,9 @@ import (
 )
 
 // GetPoolList returns the list of pools available to the GUI miner
-func (m *Miner) GetPoolList() ([]PoolData, error) {
+func (gui *GUI) GetPoolList() ([]PoolData, error) {
 	var pools []PoolData
-	resp, err := http.Get(fmt.Sprintf("%s/pool-list", m.apiEndpoint))
+	resp, err := http.Get(fmt.Sprintf("%s/pool-list", gui.apiEndpoint))
 	if err != nil {
 		return pools, err
 	}
@@ -28,9 +28,9 @@ func (m *Miner) GetPoolList() ([]PoolData, error) {
 }
 
 // GetPool returns a single pool's information
-func (m *Miner) GetPool(id int) (PoolData, error) {
+func (gui *GUI) GetPool(id int) (PoolData, error) {
 	var pool PoolData
-	resp, err := http.Get(fmt.Sprintf("%s/pool/%d", m.apiEndpoint, id))
+	resp, err := http.Get(fmt.Sprintf("%s/pool/%d", gui.apiEndpoint, id))
 	if err != nil {
 		return pool, err
 	}
@@ -42,7 +42,7 @@ func (m *Miner) GetPool(id int) (PoolData, error) {
 }
 
 // HumanizeHashrate turns 1000 into 1 KH/s
-func (m *Miner) HumanizeHashrate(hashrate string) string {
+func (gui *GUI) HumanizeHashrate(hashrate string) string {
 	hashval, err := strconv.ParseFloat(hashrate, 64)
 	if err != nil {
 		return "0 H/s"
@@ -58,7 +58,7 @@ func (m *Miner) HumanizeHashrate(hashrate string) string {
 
 // SaveConfig saves the configuration to disk
 // TODO: Specify path here
-func (m *Miner) SaveConfig(config GUIConfig) error {
+func (gui *GUI) SaveConfig(config Config) error {
 	configBytes, err := json.Marshal(&config)
 	if err != nil {
 		return err
@@ -71,7 +71,7 @@ func (m *Miner) SaveConfig(config GUIConfig) error {
 }
 
 // GetXmrStats returns the local xmr-stak hashrate and stats
-func (m *Miner) GetXmrStats() (XmrStakResponse, error) {
+func (gui *GUI) GetXmrStats() (XmrStakResponse, error) {
 	var xmrResponse XmrStakResponse
 	resp, err := http.Get("http://127.0.0.1:16000/api.json")
 	if err != nil {
@@ -87,7 +87,7 @@ func (m *Miner) GetXmrStats() (XmrStakResponse, error) {
 
 // GetStats returns stats for the interface. It requires the miner's
 // hashrate to calculate XTL per dat
-func (m *Miner) GetStats(
+func (gui *GUI) GetStats(
 	poolID int,
 	hashrate float64,
 	mid string) (string, error) {
@@ -97,7 +97,7 @@ func (m *Miner) GetStats(
 	}
 	resp, err := http.Get(
 		fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s",
-			m.apiEndpoint,
+			gui.apiEndpoint,
 			poolID,
 			hashrate,
 			mid))
@@ -114,7 +114,7 @@ func (m *Miner) GetStats(
 		return "", err
 	}
 
-	poolTemplate, err := m.GetPoolTemplate(true)
+	poolTemplate, err := gui.GetPoolTemplate(true)
 	if err != nil {
 		log.Fatalf("Unable to load pool template: '%s'", err)
 	}
@@ -132,7 +132,7 @@ func (m *Miner) GetStats(
 		poolData.LastBlock[:len(stats.Pool.LastBlock)-3])
 	since := time.Since(t)
 	poolData.LastBlock = fmt.Sprintf("%d minutes ago", int(since.Minutes()))
-	poolData.Hashrate = m.HumanizeHashrate(poolData.Hashrate)
+	poolData.Hashrate = gui.HumanizeHashrate(poolData.Hashrate)
 	err = poolTemplate.Execute(&templateHTML, poolData)
 	if err != nil {
 		log.Fatalf("Unable to load pool template: '%s'", err)

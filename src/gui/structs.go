@@ -1,7 +1,7 @@
-package miner
+package gui
 
-// GUIConfig contains the basic configuration for a miner
-type GUIConfig struct {
+// Config contains the basic configuration for a miner
+type Config struct {
 	// APIEndpoint is the web endpoint where stats and pools are retrieved from
 	APIEndpoint string `json:"api_endpoint"`
 	// Address to mine to

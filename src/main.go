@@ -9,7 +9,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/donovansolms/stellite-gui-miner/src/miner"
+	"github.com/donovansolms/stellite-gui-miner/src/gui"
 )
 
 // AppName is injected by the Astilectron packager
@@ -24,7 +24,7 @@ func main() {
 	debug := flag.Bool("d", false, "Enabled debug mode")
 	flag.Parse()
 
-	var config *miner.GUIConfig
+	var config *gui.Config
 	fileBytes, err := ioutil.ReadFile("./config.json")
 	if err == nil {
 		err = json.Unmarshal(fileBytes, &config)
@@ -38,7 +38,7 @@ func main() {
 
 	// Create the miner
 	// AppName, Asset and RestoreAssets are injected by the bundler
-	miner, err := miner.New(
+	gui, err := gui.New(
 		AppName,
 		config,
 		Asset,
@@ -52,7 +52,7 @@ func main() {
 		log.Fatalf("Unable to set up miner: %s", err)
 	}
 
-	err = miner.Run()
+	err = gui.Run()
 	if err != nil {
 		// Setting the output to stdout so the user can see the error
 		log.SetOutput(os.Stdout)

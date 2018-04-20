@@ -1,4 +1,4 @@
-package miner
+package gui
 
 import (
 	"bytes"
@@ -10,9 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"os/user"
-	"runtime"
 	"sync/atomic"
-	"syscall"
 	"time"
 
 	astilectron "github.com/asticode/go-astilectron"
@@ -21,8 +19,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// Miner implements the core control for the GUI miner
-type Miner struct {
+// GUI implements the core control for the GUI miner
+type GUI struct {
 	// window is the main Astilectron window
 	window *astilectron.Window
 	// minerCmd is a reference to the xmr-stak miner process
@@ -30,7 +28,7 @@ type Miner struct {
 	// astilectronOptions holds the Astilectron options
 	astilectronOptions bootstrap.Options
 	// config for the miner
-	config *GUIConfig
+	config *Config
 	// apiEndpoint is the web endpoint where stats and pools are retrieved from
 	apiEndpoint string
 	// logger is the logger for the application
@@ -45,11 +43,11 @@ type Miner struct {
 // New creates a new instance of the miner application
 func New(
 	appName string,
-	config *GUIConfig,
+	config *Config,
 	asset bootstrap.Asset,
 	restoreAssets bootstrap.RestoreAssets,
 	apiEndpoint string,
-	isDebug bool) (*Miner, error) {
+	isDebug bool) (*GUI, error) {
 
 	if apiEndpoint == "" {
 		return nil, errors.New("The API Endpoint must be specified")
@@ -60,12 +58,12 @@ func New(
 		startPage = "firstrun.html"
 	}
 
-	miner := Miner{
+	gui := GUI{
 		apiEndpoint: apiEndpoint,
 		config:      config,
 	}
 
-	miner.astilectronOptions = bootstrap.Options{
+	gui.astilectronOptions = bootstrap.Options{
 		Debug:         isDebug,
 		Asset:         asset,
 		RestoreAssets: restoreAssets,
@@ -96,18 +94,18 @@ func New(
 			_ *astilectron.Menu,
 			_ *astilectron.Tray,
 			_ *astilectron.Menu) error {
-			miner.window = window
+			gui.window = window
 			go func() {
-				miner.logger.Info("Start capturing stats")
+				gui.logger.Info("Start capturing stats")
 				// Run forever!
 				for {
-					miner.updateNetworkStats()
+					gui.updateNetworkStats()
 					time.Sleep(time.Second * 30)
 				}
 			}()
 			return nil
 		},
-		MessageHandler: miner.handleElectronCommands,
+		MessageHandler: gui.handleElectronCommands,
 	}
 
 	// Setup the logging, by default we log to stdout
@@ -122,37 +120,37 @@ func New(
 	}
 	// Setting the WithFields now will ensure all log entries from this point
 	// includes the fields
-	miner.logger = logrus.WithFields(logrus.Fields{
+	gui.logger = logrus.WithFields(logrus.Fields{
 		"service": "stellite-gui-miner",
 	})
 
-	miner.logger.Info("Setup complete")
-	return &miner, nil
+	gui.logger.Info("Setup complete")
+	return &gui, nil
 }
 
 // Run the miner!
-func (m *Miner) Run() error {
-	m.logger.Info("Starting miner")
-	err := bootstrap.Run(m.astilectronOptions)
+func (gui *GUI) Run() error {
+	gui.logger.Info("Starting miner")
+	err := bootstrap.Run(gui.astilectronOptions)
 	if err != nil {
 		return err
 	}
 	// If xmr-stak is running, kill it
-	if m.minerCmd != nil {
-		err = m.minerCmd.Process.Kill()
+	if gui.minerCmd != nil {
+		err = gui.minerCmd.Process.Kill()
 		if err != nil {
-			m.logger.Fatalf("Unable to stop xmr-stak: %s", err)
+			gui.logger.Fatalf("Unable to stop xmr-stak: %s", err)
 		}
 	}
 	return nil
 }
 
 // handleElectronCommands handles the messages sent by the Electron front-end
-func (m *Miner) handleElectronCommands(
+func (gui *GUI) handleElectronCommands(
 	_ *astilectron.Window,
 	command bootstrap.MessageIn) (interface{}, error) {
 
-	m.logger.WithField(
+	gui.logger.WithField(
 		"command", command.Name,
 	).Debug("Received command from Electron")
 
@@ -178,19 +176,19 @@ func (m *Miner) handleElectronCommands(
 	// and returns the rendered HTML
 	case "pool-list":
 		// Grab the pool list and send that to the GUI as well
-		poolJSONs, err := m.GetPoolList()
+		poolJSONs, err := gui.GetPoolList()
 		if err != nil {
 			_ = bootstrap.SendMessage(
-				m.window,
+				gui.window,
 				"fatal_error",
 				fmt.Sprintf("{\"message\": \"Unable to fetch pool list from API."+
 					"Please check that you are connected to the internet."+
 					"<br/>The error was '%s'\"}", err))
 			// Give the UI some time to display the message
 			time.Sleep(time.Second * 15)
-			m.logger.Fatalf("Unable to fetch pool list: '%s'", err)
+			gui.logger.Fatalf("Unable to fetch pool list: '%s'", err)
 		}
-		poolTemplate, err := m.GetPoolTemplate(false)
+		poolTemplate, err := gui.GetPoolTemplate(false)
 		if err != nil {
 			log.Fatalf("Unable to load pool template: '%s'", err)
 		}
@@ -202,7 +200,7 @@ func (m *Miner) handleElectronCommands(
 				poolData.LastBlock[:len(poolData.LastBlock)-3])
 			since := time.Since(t)
 			poolData.LastBlock = fmt.Sprintf("%d minutes ago", int(since.Minutes()))
-			poolData.Hashrate = m.HumanizeHashrate(poolData.Hashrate)
+			poolData.Hashrate = gui.HumanizeHashrate(poolData.Hashrate)
 			err = poolTemplate.Execute(&templateHTML, poolData)
 			if err != nil {
 				log.Fatalf("Unable to load pool template: '%s'", err)
@@ -216,216 +214,213 @@ func (m *Miner) handleElectronCommands(
 		// HACK: Adding a slight delay before switching to the mining dashboard
 		// after initial setup to have the user at least see the 'configure' message
 		time.Sleep(time.Second * 5)
-		m.configureMiner(command, false)
+		gui.configureMiner(command, false)
 		return "Ok", nil
 
 	// reconfigure is sent after settings are changes by the user
 	case "reconfigure":
-		m.logger.Info("Reconfiguring miner")
-		err := m.stopMiner()
+		gui.logger.Info("Reconfiguring miner")
+		err := gui.stopMiner()
 		if err != nil {
 			_ = bootstrap.SendMessage(
-				m.window,
+				gui.window,
 				"fatal_error",
 				fmt.Sprintf("{\"message\": \"Unable to stop miner for reconfigure."+
 					"Please close the miner and open it again"+
 					"<br/>The error was '%s'\"}", err))
 			// Give the UI some time to display the message
 			time.Sleep(time.Second * 15)
-			m.logger.Fatalf("Unable to reconfigure miner: '%s'", err)
+			gui.logger.Fatalf("Unable to reconfigure miner: '%s'", err)
 		}
 		// Wait for the mining stats loop to exit
 		time.Sleep(time.Second * 10)
-		m.configureMiner(command, true)
-		m.startMiner()
-		m.logger.Info("Miner reconfigured")
+		gui.configureMiner(command, true)
+		gui.startMiner()
+		gui.logger.Info("Miner reconfigured")
 
 	// miner_start is sent after configuration or when the user
 	// clicks 'start mining'
 	case "miner_start":
-		m.startMiner()
+		gui.startMiner()
 
 	// miner_stop is sent whenever the user clicks 'stop mining'
 	case "miner_stop":
-		return nil, m.stopMiner()
+		return nil, gui.stopMiner()
 	}
 	return nil, fmt.Errorf("'%s' is an unknown command", command.Name)
 }
 
 // configureMiner creates the xmr-stak configuration to use
-func (m *Miner) configureMiner(command bootstrap.MessageIn, isReconfigure bool) {
-	err := json.Unmarshal(command.Payload, &m.config)
+func (gui *GUI) configureMiner(command bootstrap.MessageIn, isReconfigure bool) {
+	err := json.Unmarshal(command.Payload, &gui.config)
 	if err != nil {
 		_ = bootstrap.SendMessage(
-			m.window,
+			gui.window,
 			"fatal_error",
 			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
 				"Please check that you are connected to the internet."+
 				"<br/>The error was '%s'\"}", err))
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
-		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 	if isReconfigure == false {
-		m.config.Mid = uuid.New().String()
+		gui.config.Mid = uuid.New().String()
 	}
-	err = m.SaveConfig(*m.config)
+	err = gui.SaveConfig(*gui.config)
 	if err != nil {
 		_ = bootstrap.SendMessage(
-			m.window,
+			gui.window,
 			"fatal_error",
 			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
 				"Please check that you are connected to the internet."+
 				"<br/>The error was '%s'\"}", err))
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
-		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 
 	err = ioutil.WriteFile("./xmr-stak/config.txt",
-		[]byte(m.GetXmrStakConfig()),
+		[]byte(gui.GetXmrStakConfig()),
 		0644)
 	if err != nil {
 		_ = bootstrap.SendMessage(
-			m.window,
+			gui.window,
 			"fatal_error",
 			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
 				"Please check that you are connected to the internet."+
 				"<br/>The error was '%s'\"}", err))
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
-		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 
 	var poolInfo PoolData
-	poolInfo, err = m.GetPool(m.config.PoolID)
+	poolInfo, err = gui.GetPool(gui.config.PoolID)
 	if err != nil {
 		_ = bootstrap.SendMessage(
-			m.window,
+			gui.window,
 			"fatal_error",
 			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
 				"Please check that you are connected to the internet."+
 				"<br/>The error was '%s'\"}", err))
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
-		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 
 	err = ioutil.WriteFile("./xmr-stak/pools.txt",
-		[]byte(m.GetXmrStakPoolConfig(poolInfo.Config, m.config.Address)),
+		[]byte(gui.GetXmrStakPoolConfig(poolInfo.Config, gui.config.Address)),
 		0644)
 	if err != nil {
 		_ = bootstrap.SendMessage(
-			m.window,
+			gui.window,
 			"fatal_error",
 			fmt.Sprintf("{\"message\": \"Unable to configure miner."+
 				"Please check that you are connected to the internet."+
 				"<br/>The error was '%s'\"}", err))
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
-		m.logger.Fatalf("Unable to configure miner: '%s'", err)
+		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 }
 
 // startMiner starts the xmr-stak miner
-func (m *Miner) startMiner() {
+func (gui *GUI) startMiner() {
 	params := []string{}
 	commandName := "./xmr-stak"
 	commandDir := "./xmr-stak"
-	if runtime.GOOS == "windows" {
+	/*if runtime.GOOS == "windows" {
 		commandName = ".\\xmr-stak.exe"
 		commandDir = ".\\xmr-stak"
-		m.minerCmd.SysProcAttr = &syscall.SysProcAttr{
-			HideWindow: true,
-		}
-	}
-	m.minerCmd = exec.Command(commandName, params...)
-	m.minerCmd.Dir = commandDir
-	err := m.minerCmd.Start()
+	}*/
+	gui.minerCmd = exec.Command(commandName, params...)
+	gui.minerCmd.Dir = commandDir
+	err := gui.minerCmd.Start()
 	if err != nil {
 		_ = bootstrap.SendMessage(
-			m.window,
+			gui.window,
 			"fatal_error",
 			fmt.Sprintf("{\"message\": \"Unable to start xmr-stak miner, please check that you "+
 				"can run 'xmr-stak' from the installation folder."+
 				"<br/>The error was '%s'\"}", err))
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
-		m.logger.Fatalf("Error running xmr-stak: %s", err)
+		gui.logger.Fatalf("Error running xmr-stak: %s", err)
 	}
-	m.logger.Info("Started xmr-stak")
-	go m.updateMiningStatsLoop()
+	gui.logger.Info("Started xmr-stak")
+	go gui.updateMiningStatsLoop()
 }
 
 // stopMiner stops the xmr-stak miner
-func (m *Miner) stopMiner() error {
-	if m.minerCmd != nil {
-		err := m.minerCmd.Process.Kill()
+func (gui *GUI) stopMiner() error {
+	if gui.minerCmd != nil {
+		err := gui.minerCmd.Process.Kill()
 		if err != nil {
-			m.logger.Errorf("Unable to stop xmr-stak: %s", err)
+			gui.logger.Errorf("Unable to stop xmr-stak: %s", err)
 			return err
 		}
-		m.logger.Info("xmr-stak stopped")
-		m.lastHashrate = 0.00
+		gui.logger.Info("xmr-stak stopped")
+		gui.lastHashrate = 0.00
 		// Stop the stats loop as well
-		atomic.StoreUint32(&m.captureMiningStats, 0)
+		atomic.StoreUint32(&gui.captureMiningStats, 0)
 		return nil
 	}
-	m.logger.Info("xmr-stak wasn't running")
+	gui.logger.Info("xmr-stak wasn't running")
 	return nil
 }
 
 // updateNetworkStats is a single stat update for network and payment info
-func (m *Miner) updateNetworkStats() {
-	m.logger.WithField(
-		"hashrate", m.lastHashrate,
+func (gui *GUI) updateNetworkStats() {
+	gui.logger.WithField(
+		"hashrate", gui.lastHashrate,
 	).Debug("Fetching network stats")
 	// On firstrun we fon't have a config yet
-	if m.config == nil {
-		m.logger.Warning("No config set yet")
+	if gui.config == nil {
+		gui.logger.Warning("No config set yet")
 		return
 	}
-	stats, err := m.GetStats(m.config.PoolID, m.lastHashrate, m.config.Mid)
+	stats, err := gui.GetStats(gui.config.PoolID, gui.lastHashrate, gui.config.Mid)
 	if err != nil {
-		m.logger.Warningf("Unable to get network stats: %s", err)
+		gui.logger.Warningf("Unable to get network stats: %s", err)
 	} else {
-		err := bootstrap.SendMessage(m.window, "network_stats", stats)
+		err := bootstrap.SendMessage(gui.window, "network_stats", stats)
 		if err != nil {
-			m.logger.Errorf("Unable to send stats to front-end: %s", err)
+			gui.logger.Errorf("Unable to send stats to front-end: %s", err)
 		}
 	}
 }
 
 // updateMiningStats retrieves the miner's stats from xmr-stak and updates
 // the front-end
-func (m *Miner) updateMiningStatsLoop() {
-	atomic.StoreUint32(&m.captureMiningStats, 1)
+func (gui *GUI) updateMiningStatsLoop() {
+	atomic.StoreUint32(&gui.captureMiningStats, 1)
 	lastGraphUpdate := time.Now()
-	for atomic.LoadUint32(&m.captureMiningStats) == 1 {
-		m.logger.Debug("Fetching mining stats")
-		xmrStats, err := m.GetXmrStats()
+	for atomic.LoadUint32(&gui.captureMiningStats) == 1 {
+		gui.logger.Debug("Fetching mining stats")
+		xmrStats, err := gui.GetXmrStats()
 		if err != nil {
-			m.logger.Warningf("Unable to get mining stats, xmr-stak not available yet?: %s", err)
+			gui.logger.Warningf("Unable to get mining stats, xmr-stak not available yet?: %s", err)
 		} else {
 			if len(xmrStats.Hashrate.Total) > 0 {
-				m.lastHashrate = xmrStats.Hashrate.Total[0]
+				gui.lastHashrate = xmrStats.Hashrate.Total[0]
 				// The first time we get a hashrate, update the XTL amount so that the
 				// user doesn't think it doesn't work
-				m.updateNetworkStats()
+				gui.updateNetworkStats()
 			}
-			xmrStats.Address = m.config.Address
+			xmrStats.Address = gui.config.Address
 
 			if time.Since(lastGraphUpdate).Minutes() >= 1 {
 				lastGraphUpdate = time.Now()
 				xmrStats.UpdateGraph = true
 			}
 			statBytes, _ := json.Marshal(&xmrStats)
-			err = bootstrap.SendMessage(m.window, "miner_stats", string(statBytes))
+			err = bootstrap.SendMessage(gui.window, "miner_stats", string(statBytes))
 			if err != nil {
-				m.logger.Errorf("Unable to send miner stats to front-end: %s", err)
+				gui.logger.Errorf("Unable to send miner stats to front-end: %s", err)
 			}
 		}
 		time.Sleep(time.Second * 10)
 	}
-	m.logger.Debug("Stopped fetching mining stats")
+	gui.logger.Debug("Stopped fetching mining stats")
 }
