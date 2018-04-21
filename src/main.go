@@ -34,7 +34,8 @@ func main() {
 	} else {
 		config = nil
 	}
-	apiEndpoint := "http://138.197.183.78/miner"
+	//apiEndpoint := "https://www.stellite.live/miner"
+	apiEndpoint := "http://stellite.live.local/miner"
 
 	// Create the miner
 	// AppName, Asset and RestoreAssets are injected by the bundler

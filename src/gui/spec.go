@@ -1,5 +1,7 @@
 package gui
 
+import "github.com/donovansolms/stellite-gui-miner/src/gui/miner"
+
 // Config contains the basic configuration for a miner
 type Config struct {
 	// APIEndpoint is the web endpoint where stats and pools are retrieved from
@@ -10,6 +12,13 @@ type Config struct {
 	PoolID int `json:"pool"`
 	// Mid is the miner identifier
 	Mid string `json:"mid"`
+	// Miner is the config for the miner
+	Miner miner.Config `json:"miner"`
+}
+
+// ElectronMessage is marshalled and sent to the UI
+type ElectronMessage struct {
+	Data string `json:"data"`
 }
 
 // PoolData contains the parsed JSON data from the pool list
@@ -29,8 +38,9 @@ type PoolData struct {
 	LastUpdate     string `json:"last_update"`
 }
 
-// Stats contains the current stats for the network, trading and selected pool
-type Stats struct {
+// GlobalStats contains the current stats for the network,
+// trading and selected mining pool
+type GlobalStats struct {
 	Pool        PoolData `json:"pool"`
 	Circulation string   `json:"circulation"`
 	LastBlock   struct {
@@ -53,40 +63,6 @@ type Stats struct {
 	XtlPerDay string `json:"xtl_per_day"`
 	Hashrate  string `json:"hashrate"`
 	// PoolHTML is injected before sending the update to the front-end. Avoids
-	// having to send to packets
+	// having to send extra packets
 	PoolHTML string `json:"pool_html"`
-}
-
-// XmrStakResponse contains the data from xmr-stak API
-type XmrStakResponse struct {
-	Version  string `json:"version"`
-	Hashrate struct {
-		Threads [][]interface{} `json:"threads"`
-		Total   []float64       `json:"total"`
-		Highest float64         `json:"highest"`
-	} `json:"hashrate"`
-	Results struct {
-		DiffCurrent int     `json:"diff_current"`
-		SharesGood  int     `json:"shares_good"`
-		SharesTotal int     `json:"shares_total"`
-		AvgTime     float64 `json:"avg_time"`
-		HashesTotal int     `json:"hashes_total"`
-		Best        []int   `json:"best"`
-		ErrorLog    []struct {
-			Count    int    `json:"count"`
-			LastSeen int    `json:"last_seen"`
-			Text     string `json:"text"`
-		} `json:"error_log"`
-	} `json:"results"`
-	Connection struct {
-		Pool     string `json:"pool"`
-		Uptime   int    `json:"uptime"`
-		Ping     int    `json:"ping"`
-		ErrorLog []struct {
-			LastSeen int    `json:"last_seen"`
-			Text     string `json:"text"`
-		} `json:"error_log"`
-	} `json:"connection"`
-	Address     string `json:"address"`
-	UpdateGraph bool   `json:"update_graph"`
 }

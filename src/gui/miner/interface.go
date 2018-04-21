@@ -7,4 +7,10 @@ type Miner interface {
 	Start() error
 	// Stop the miner
 	Stop() error
+	// GetName returns the name of the miner
+	GetName() string
+	// GetLastHashrate returns the last reported hashrate
+	GetLastHashrate() float64
+	// GetStats returns the current miner stats
+	GetStats() (Stats, error)
 }

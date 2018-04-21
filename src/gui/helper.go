@@ -8,8 +8,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
-	"time"
 )
 
 // GetPoolList returns the list of pools available to the GUI miner
@@ -41,21 +39,6 @@ func (gui *GUI) GetPool(id int) (PoolData, error) {
 	return pool, nil
 }
 
-// HumanizeHashrate turns 1000 into 1 KH/s
-func (gui *GUI) HumanizeHashrate(hashrate string) string {
-	hashval, err := strconv.ParseFloat(hashrate, 64)
-	if err != nil {
-		return "0 H/s"
-	}
-	if hashval > 1000000.00 {
-		return fmt.Sprintf("%.2f MH/s", (hashval / 1000000))
-	}
-	if hashval > 1000.00 {
-		return fmt.Sprintf("%.2f KH/s", (hashval / 1000))
-	}
-	return fmt.Sprintf("%.2f H/s", hashval)
-}
-
 // SaveConfig saves the configuration to disk
 // TODO: Specify path here
 func (gui *GUI) SaveConfig(config Config) error {
@@ -68,21 +51,6 @@ func (gui *GUI) SaveConfig(config Config) error {
 		return err
 	}
 	return nil
-}
-
-// GetXmrStats returns the local xmr-stak hashrate and stats
-func (gui *GUI) GetXmrStats() (XmrStakResponse, error) {
-	var xmrResponse XmrStakResponse
-	resp, err := http.Get("http://127.0.0.1:16000/api.json")
-	if err != nil {
-		return xmrResponse, err
-	}
-	err = json.NewDecoder(resp.Body).Decode(&xmrResponse)
-	if err != nil {
-		return xmrResponse, err
-	}
-
-	return xmrResponse, nil
 }
 
 // GetStats returns stats for the interface. It requires the miner's
@@ -108,7 +76,7 @@ func (gui *GUI) GetStats(
 	if err != nil {
 		return "", err
 	}
-	var stats Stats
+	var stats GlobalStats
 	err = json.Unmarshal(statBytes, &stats)
 	if err != nil {
 		return "", err
@@ -127,12 +95,6 @@ func (gui *GUI) GetStats(
 		Name:      stats.Pool.Name,
 	}
 	var templateHTML bytes.Buffer
-	// Get the string time in the correct format
-	t, _ := time.Parse("2006-01-02 15:04",
-		poolData.LastBlock[:len(stats.Pool.LastBlock)-3])
-	since := time.Since(t)
-	poolData.LastBlock = fmt.Sprintf("%d minutes ago", int(since.Minutes()))
-	poolData.Hashrate = gui.HumanizeHashrate(poolData.Hashrate)
 	err = poolTemplate.Execute(&templateHTML, poolData)
 	if err != nil {
 		log.Fatalf("Unable to load pool template: '%s'", err)
