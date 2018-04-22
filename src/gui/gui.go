@@ -5,10 +5,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/user"
+	"path"
+	"path/filepath"
 	"time"
 
 	astilectron "github.com/asticode/go-astilectron"
@@ -28,17 +29,20 @@ type GUI struct {
 	astilectronOptions bootstrap.Options
 	// config for the miner
 	config *Config
-	// apiEndpoint is the web endpoint where stats and pools are retrieved from
-	apiEndpoint string
 	// miner is the selected miner backend as chosen by the user
 	miner miner.Miner
 	// logger logs to stdout
 	logger *logrus.Entry
+	// workingDir holds the current working directory
+	workingDir string
 	// currentHashrate of the user if mining
 	lastHashrate float64
-	// captureMiningStats determines if the mining stats loop should be running
-	// or not
-	// captureMiningStats uint32
+	// miningStatsTicker controls the interval for fetching mining stats from
+	// the selected miner
+	miningStatsTicker *time.Ticker
+	// networkStatsTicker controls the interval for fetching network, trading
+	// and other stats
+	networkStatsTicker *time.Ticker
 }
 
 // New creates a new instance of the miner application
@@ -54,9 +58,18 @@ func New(
 		return nil, errors.New("The API Endpoint must be specified")
 	}
 
+	workingDir, err := os.Getwd()
+	if err != nil {
+		return nil, fmt.Errorf("Can't read current directory: %s", err)
+	}
+	workingDir, err = filepath.Abs(workingDir)
+	if err != nil {
+		return nil, fmt.Errorf("Can't read current directory: %s", err)
+	}
+
 	gui := GUI{
-		apiEndpoint: apiEndpoint,
-		config:      config,
+		config:     config,
+		workingDir: workingDir,
 	}
 
 	// If no config is specified then this is the first run
@@ -69,6 +82,12 @@ func New(
 		if err != nil {
 			return nil,
 				fmt.Errorf("Unable to use '%s' as miner: %s", gui.config.Miner.Type, err)
+		}
+	} else {
+		// Nothing has been configured yet, set some defaults
+		gui.config = &Config{
+			APIEndpoint: apiEndpoint,
+			Mid:         uuid.New().String(),
 		}
 	}
 
@@ -104,12 +123,15 @@ func New(
 			_ *astilectron.Tray,
 			_ *astilectron.Menu) error {
 			gui.window = window
+			gui.miningStatsTicker = time.NewTicker(time.Second)
+			gui.logger.Info("Start capturing mining stats")
+			go gui.updateMiningStatsLoop()
+			gui.networkStatsTicker = time.NewTicker(time.Second * 2)
+			// TODO: Network stats should not be a ticker since it needs to fetch remotely, could take time
 			go func() {
-				gui.logger.Info("Start capturing stats")
-				// Run forever!
-				for {
-					gui.updateNetworkStats()
-					time.Sleep(time.Second * 30)
+				for _ = range gui.miningStatsTicker.C {
+					gui.logger.Debug("Updating network stats")
+					//gui.updateNetworkStats()
 				}
 			}()
 			return nil
@@ -144,13 +166,12 @@ func (gui *GUI) Run() error {
 	if err != nil {
 		return err
 	}
-	// If xmr-stak is running, kill it
-	/*if gui.minerCmd != nil {
-		err = gui.minerCmd.Process.Kill()
-		if err != nil {
-			gui.logger.Fatalf("Unable to stop xmr-stak: %s", err)
-		}
-	}*/
+	err = gui.stopMiner()
+	if err != nil {
+		return err
+	}
+	gui.miningStatsTicker.Stop()
+	gui.networkStatsTicker.Stop()
 	return nil
 }
 
@@ -203,11 +224,6 @@ func (gui *GUI) handleElectronCommands(
 		var poolsList string
 		for _, poolData := range poolJSONs {
 			var templateHTML bytes.Buffer
-			// Get the string time in the correct format
-			//t, _ := time.Parse("2006-01-02 15:04",
-			//	poolData.LastBlock[:len(poolData.LastBlock)-3])
-			//since := time.Since(t)
-			//poolData.LastBlock = fmt.Sprintf("%d minutes ago", int(since.Minutes()))
 			err = poolTemplate.Execute(&templateHTML, poolData)
 			if err != nil {
 				log.Fatalf("Unable to load pool template: '%s'", err)
@@ -220,7 +236,7 @@ func (gui *GUI) handleElectronCommands(
 	case "configure":
 		// HACK: Adding a slight delay before switching to the mining dashboard
 		// after initial setup to have the user at least see the 'configure' message
-		time.Sleep(time.Second * 5)
+		time.Sleep(time.Second * 3)
 		gui.configureMiner(command, false)
 		return "Ok", nil
 
@@ -256,38 +272,15 @@ func (gui *GUI) handleElectronCommands(
 	return nil, fmt.Errorf("'%s' is an unknown command", command.Name)
 }
 
-// sendElectronCommand sends the given data to Electron under the command name
-func (gui *GUI) sendElectronCommand(
-	name string,
-	data ElectronMessage) error {
-	dataBytes, err := json.Marshal(&data)
-	if err != nil {
-		return err
-	}
-	return bootstrap.SendMessage(gui.window, name, string(dataBytes))
-}
-
 // configureMiner creates the xmr-stak configuration to use
 func (gui *GUI) configureMiner(command bootstrap.MessageIn, isReconfigure bool) {
+	gui.logger.Info("Configuring miner")
+
 	err := json.Unmarshal(command.Payload, &gui.config)
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
-				"Please check your configuration is value."+
-				"<br/>The error was '%s'\"}", err),
-		})
-		// Give the UI some time to display the message
-		time.Sleep(time.Second * 15)
-		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
-	}
-	if isReconfigure == false {
-		gui.config.Mid = uuid.New().String()
-	}
-	err = gui.SaveConfig(*gui.config)
-	if err != nil {
-		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
-			Data: fmt.Sprintf("Unable to configure miner."+
-				"Please check that you can write to the miner's installation path."+
+				"Please check your configuration is valid."+
 				"<br/>The error was '%s'\"}", err),
 		})
 		// Give the UI some time to display the message
@@ -295,13 +288,20 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn, isReconfigure bool) 
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 
-	err = ioutil.WriteFile("./xmr-stak/config.txt",
-		[]byte(gui.GetXmrStakConfig()),
-		0644)
+	scanPath := filepath.Join(gui.workingDir, "miner")
+	if gui.config.Miner.Path != "" {
+		scanPath = path.Base(gui.config.Miner.Path)
+	}
+	gui.logger.WithField(
+		"scan_path", scanPath,
+	).Debug("Determining miner type")
+
+	// Determine the type of miner bundled
+	minerType, minerPath, err := miner.DetermineMinerType(scanPath)
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
-				"Please check that you can write to the miner's installation path."+
+				"Could not determine the miner type."+
 				"<br/>The error was '%s'\"}", err),
 		})
 		// Give the UI some time to display the message
@@ -309,8 +309,29 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn, isReconfigure bool) 
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 
-	var poolInfo PoolData
-	poolInfo, err = gui.GetPool(gui.config.PoolID)
+	// Write config for this miner
+	gui.config.Miner = miner.Config{
+		Type: minerType,
+		Path: minerPath,
+	}
+	gui.logger.WithFields(logrus.Fields{
+		"path": minerPath,
+		"type": minerType,
+	}).Debug("Creating miner")
+	gui.miner, err = miner.CreateMiner(gui.config.Miner)
+	if err != nil {
+		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
+			Data: fmt.Sprintf("Unable to configure miner."+
+				"<br/>The error was '%s'\"}", err),
+		})
+		// Give the UI some time to display the message
+		time.Sleep(time.Second * 15)
+		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
+	}
+
+	// The pool API returns the low-end hardware host:port for config
+	gui.logger.Debug("Getting pool information")
+	poolInfo, err := gui.GetPool(gui.config.PoolID)
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
@@ -322,9 +343,23 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn, isReconfigure bool) 
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 
-	err = ioutil.WriteFile("./xmr-stak/pools.txt",
-		[]byte(gui.GetXmrStakPoolConfig(poolInfo.Config, gui.config.Address)),
-		0644)
+	// Write the config for the specified miner
+	gui.logger.Debug("Writing miner config")
+	err = gui.miner.WriteConfig(poolInfo.Config, gui.config.Address)
+	if err != nil {
+		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
+			Data: fmt.Sprintf("Unable to configure miner."+
+				"Please check that you are connected to the internet."+
+				"<br/>The error was '%s'\"}", err),
+		})
+		// Give the UI some time to display the message
+		time.Sleep(time.Second * 15)
+		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
+	}
+
+	// Save the core miner config
+	gui.logger.Debug("Writing GUI config")
+	err = gui.SaveConfig(*gui.config)
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
@@ -335,6 +370,9 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn, isReconfigure bool) 
 		time.Sleep(time.Second * 15)
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
+	gui.logger.WithFields(logrus.Fields{
+		"type": minerType,
+	}).Info("Miner configured")
 }
 
 // startMiner starts the xmr-stak miner
@@ -350,12 +388,12 @@ func (gui *GUI) startMiner() {
 		time.Sleep(time.Second * 15)
 		gui.logger.Fatalf("Error starting '%s': %s", gui.miner.GetName(), err)
 	}
-	gui.logger.Info("Started '%s' miner", gui.miner.GetName())
-	// TODO go gui.updateMiningStatsLoop()
+	gui.logger.Infof("Started '%s' miner", gui.miner.GetName())
 }
 
 // stopMiner stops the xmr-stak miner
 func (gui *GUI) stopMiner() error {
+	fmt.Println("Ticker stopped")
 	err := gui.miner.Stop()
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
@@ -366,7 +404,7 @@ func (gui *GUI) stopMiner() error {
 		gui.logger.Errorf("Unable to stop miner '%s': %s", gui.miner.GetName(), err)
 		return err
 	}
-	gui.logger.Info("Stopped '%s' miner", gui.miner.GetName())
+	gui.logger.Infof("Stopped '%s' miner", gui.miner.GetName())
 	return nil
 }
 
@@ -375,7 +413,7 @@ func (gui *GUI) updateNetworkStats() {
 	gui.logger.WithField(
 		"hashrate", gui.lastHashrate,
 	).Debug("Fetching network stats")
-	// On firstrun we fon't have a config yet
+	// On firstrun we won't have a config yet
 	if gui.config == nil {
 		gui.logger.Warning("No config set yet")
 		return
@@ -384,6 +422,7 @@ func (gui *GUI) updateNetworkStats() {
 	if err != nil {
 		gui.logger.Warningf("Unable to get network stats: %s", err)
 	} else {
+		fmt.Println(stats)
 		err := bootstrap.SendMessage(gui.window, "network_stats", stats)
 		if err != nil {
 			gui.logger.Errorf("Unable to send stats to front-end: %s", err)
@@ -394,33 +433,43 @@ func (gui *GUI) updateNetworkStats() {
 // updateMiningStats retrieves the miner's stats from xmr-stak and updates
 // the front-end
 func (gui *GUI) updateMiningStatsLoop() {
-	/*atomic.StoreUint32(&gui.captureMiningStats, 1)
-	lastGraphUpdate := time.Now()
-	for atomic.LoadUint32(&gui.captureMiningStats) == 1 {
+	//lastGraphUpdate := time.Now()
+	for _ = range gui.miningStatsTicker.C {
 		gui.logger.Debug("Fetching mining stats")
-		xmrStats, err := gui.GetXmrStats()
+		stats, err := gui.miner.GetStats()
 		if err != nil {
-			gui.logger.Warningf("Unable to get mining stats, xmr-stak not available yet?: %s", err)
+			gui.logger.Debugf("Unable to get mining stats, miner not available yet?: %s", err)
 		} else {
-			if len(xmrStats.Hashrate.Total) > 0 {
-				gui.lastHashrate = xmrStats.Hashrate.Total[0]
+			_ = stats
+			fmt.Println("Yeeeah stats!")
+			/*if len(stats.Hashrate) > 0 {
+				gui.lastHashrate = stats.Hashrate
 				// The first time we get a hashrate, update the XTL amount so that the
 				// user doesn't think it doesn't work
 				gui.updateNetworkStats()
 			}
-			xmrStats.Address = gui.config.Address
+			stats.Address = gui.config.Address
 
 			if time.Since(lastGraphUpdate).Minutes() >= 1 {
 				lastGraphUpdate = time.Now()
-				xmrStats.UpdateGraph = true
+				stats.UpdateGraph = true
 			}
-			statBytes, _ := json.Marshal(&xmrStats)
+			statBytes, _ := json.Marshal(&stats)
 			err = bootstrap.SendMessage(gui.window, "miner_stats", string(statBytes))
 			if err != nil {
 				gui.logger.Errorf("Unable to send miner stats to front-end: %s", err)
-			}
+			}*/
 		}
-		time.Sleep(time.Second * 10)
-	}*/
-	gui.logger.Debug("Stopped fetching mining stats")
+	}
+}
+
+// sendElectronCommand sends the given data to Electron under the command name
+func (gui *GUI) sendElectronCommand(
+	name string,
+	data ElectronMessage) error {
+	dataBytes, err := json.Marshal(&data)
+	if err != nil {
+		return err
+	}
+	return bootstrap.SendMessage(gui.window, name, string(dataBytes))
 }

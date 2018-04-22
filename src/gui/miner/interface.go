@@ -7,6 +7,9 @@ type Miner interface {
 	Start() error
 	// Stop the miner
 	Stop() error
+	// WriteConfig writes the miner's configuration to the file format as
+	// specified by the miner
+	WriteConfig(poolEndpoint string, walletAddress string) error
 	// GetName returns the name of the miner
 	GetName() string
 	// GetLastHashrate returns the last reported hashrate

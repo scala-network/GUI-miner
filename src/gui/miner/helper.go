@@ -2,6 +2,8 @@ package miner
 
 import (
 	"fmt"
+	"io/ioutil"
+	"path/filepath"
 	"strings"
 )
 
@@ -56,4 +58,30 @@ func HumanizeTime(seconds int) string {
 		humanTime += "s"
 	}
 	return humanTime
+}
+
+// DetermineMinerType checks the given path for supported miners
+// and returns the type of miner and path to the executable
+func DetermineMinerType(dir string) (string, string, error) {
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		return "", "", nil
+	}
+
+	for _, file := range files {
+		if file.IsDir() {
+			continue
+		}
+		if strings.Contains(file.Mode().Perm().String(), "x") == false {
+			continue
+		}
+
+		fileName := strings.ToLower(file.Name())
+		for _, supportedMiner := range SupportedMiners {
+			if strings.Contains(fileName, supportedMiner) {
+				return supportedMiner, filepath.Join(dir, fileName), nil
+			}
+		}
+	}
+	return "", "", fmt.Errorf("No supported miner was found in '%s'", dir)
 }

@@ -30,7 +30,7 @@ type PoolData struct {
 	URL            string `json:"url"`
 	Endpoint       string `json:"endpoint"`
 	Hashrate       string `json:"hashrate"`
-	Miners         int    `json:"miners"`
+	Miners         string `json:"miners"`
 	LastBlock      string `json:"last_block"`
 	Config         string `json:"config"`
 	IsEnabled      int    `json:"is_enabled"`

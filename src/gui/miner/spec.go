@@ -1,14 +1,14 @@
 package miner
 
 // SupportedMiners contains a list of the currently supported miners
-var SupportedMiners = []string{"xmr-stak"}
+var SupportedMiners = []string{"xmr-stak", "xmrig"}
 
 // Config holds miner specific configuration information
 type Config struct {
 	// Type of miner
 	Type string `json:"type"`
 	// Path to the selected miner's executable
-	Path string `json:"miner_path"`
+	Path string `json:"path"`
 	// Endpoint of the miner's JSON API
 	Endpoint string `json:"endpoint"`
 }

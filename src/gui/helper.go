@@ -13,7 +13,7 @@ import (
 // GetPoolList returns the list of pools available to the GUI miner
 func (gui *GUI) GetPoolList() ([]PoolData, error) {
 	var pools []PoolData
-	resp, err := http.Get(fmt.Sprintf("%s/pool-list", gui.apiEndpoint))
+	resp, err := http.Get(fmt.Sprintf("%s/pool-list", gui.config.APIEndpoint))
 	if err != nil {
 		return pools, err
 	}
@@ -28,7 +28,7 @@ func (gui *GUI) GetPoolList() ([]PoolData, error) {
 // GetPool returns a single pool's information
 func (gui *GUI) GetPool(id int) (PoolData, error) {
 	var pool PoolData
-	resp, err := http.Get(fmt.Sprintf("%s/pool/%d", gui.apiEndpoint, id))
+	resp, err := http.Get(fmt.Sprintf("%s/pool/%d", gui.config.APIEndpoint, id))
 	if err != nil {
 		return pool, err
 	}
@@ -65,7 +65,7 @@ func (gui *GUI) GetStats(
 	}
 	resp, err := http.Get(
 		fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s",
-			gui.apiEndpoint,
+			gui.config.APIEndpoint,
 			poolID,
 			hashrate,
 			mid))

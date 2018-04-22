@@ -25,17 +25,19 @@ func main() {
 	flag.Parse()
 
 	var config *gui.Config
+	var apiEndpoint string
 	fileBytes, err := ioutil.ReadFile("./config.json")
 	if err == nil {
 		err = json.Unmarshal(fileBytes, &config)
 		if err != nil {
 			panic(err)
 		}
+		apiEndpoint = config.APIEndpoint
 	} else {
 		config = nil
+		// Not set yet, set to default
+		apiEndpoint = "http://stellite.live.local/miner"
 	}
-	//apiEndpoint := "https://www.stellite.live/miner"
-	apiEndpoint := "http://stellite.live.local/miner"
 
 	// Create the miner
 	// AppName, Asset and RestoreAssets are injected by the bundler
