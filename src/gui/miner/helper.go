@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
+	"runtime"
 	"strings"
 )
 
@@ -74,8 +75,14 @@ func DetermineMinerType(dir string) (string, string, error) {
 		if file.IsDir() {
 			continue
 		}
-		if strings.Contains(file.Mode().Perm().String(), "x") == false {
-			continue
+		if runtime.GOOS == "windows" {
+			if strings.Contains(strings.ToLower(file.Name()), "exe") == false {
+				continue
+			}
+		} else {
+			if strings.Contains(file.Mode().Perm().String(), "x") == false {
+				continue
+			}
 		}
 
 		fileName := strings.ToLower(file.Name())

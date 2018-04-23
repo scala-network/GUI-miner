@@ -21,7 +21,7 @@ var BuiltAt string
 // main implements the main runnable of the application
 func main() {
 	// Grab the command-line flags
-	debug := flag.Bool("d", false, "Enabled debug mode")
+	debug := flag.Bool("d", false, "Enable debug mode")
 	flag.Parse()
 
 	var config *gui.Config
@@ -36,7 +36,8 @@ func main() {
 	} else {
 		config = nil
 		// Not set yet, set to default
-		apiEndpoint = "http://stellite.live.local/miner"
+		//apiEndpoint = "http://stellite.live.local/miner"
+		apiEndpoint = "https://www.stellite.live/miner"
 	}
 
 	// Create the miner

@@ -145,9 +145,19 @@ func New(
 		TimestampFormat: "Jan 02 15:04:05",
 	})
 	logrus.SetLevel(logrus.InfoLevel)
+
 	logrus.SetOutput(os.Stdout)
 	if isDebug {
 		logrus.SetLevel(logrus.DebugLevel)
+		// TODO: Handle this debug log better
+		debugLog, err := os.OpenFile(
+			fmt.Sprintf(".%c%s", os.PathSeparator, "debug.log"),
+			os.O_CREATE|os.O_TRUNC|os.O_WRONLY,
+			0644)
+		if err != nil {
+			panic(err)
+		}
+		logrus.SetOutput(debugLog)
 	}
 	// Setting the WithFields now will ensure all log entries from this point
 	// includes the fields
