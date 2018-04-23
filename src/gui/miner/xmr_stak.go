@@ -125,16 +125,14 @@ func (miner *XmrStak) GetStats() (Stats, error) {
 	var errors []string
 	if len(xmrStats.Connection.ErrorLog) > 0 {
 		for _, err := range xmrStats.Connection.ErrorLog {
-			errors = append(errors, fmt.Sprintf("%s: %s",
-				HumanizeTime(err.LastSeen),
+			errors = append(errors, fmt.Sprintf("%s",
 				err.Text,
 			))
 		}
 	}
 	if len(xmrStats.Results.ErrorLog) > 0 {
 		for _, err := range xmrStats.Results.ErrorLog {
-			errors = append(errors, fmt.Sprintf("%s: (%d) %s",
-				HumanizeTime(err.LastSeen),
+			errors = append(errors, fmt.Sprintf("(%d) %s",
 				err.Count,
 				err.Text,
 			))
@@ -325,13 +323,13 @@ func (miner *XmrStak) defaultConfig() string {
 // xmr-stak uses an abomination of JSON that doesn't have a compatible Go
 // parser which is why I'm doing this as text or templates
 func (miner *XmrStak) buildPoolConfig(
-	poolAddress string,
+	poolEndpoint string,
 	walletAddress string) string {
 
 	return `
 "pool_list" :
 [
-	{"pool_address" : "` + poolAddress + `", "wallet_address" : "` + walletAddress + `", "rig_id" : "", "pool_password" : "GUI Miner", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
+	{"pool_address" : "` + poolEndpoint + `", "wallet_address" : "` + walletAddress + `", "rig_id" : "", "pool_password" : "Stellite GUI Miner", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
 ],
 "currency" : "stellite",
 		`

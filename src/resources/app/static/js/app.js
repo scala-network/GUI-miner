@@ -59,7 +59,6 @@ let app = {
             $('#miner_shares').html(parsed.shares_good + parsed.shares_bad);
             $('#miner_shares_bad').html(parsed.shares_bad);
             $('#miner_address').html(parsed.address);
-            $('#settings_mining_address').val(parsed.address);
             // Move the graph, we only refresh it once a minute
             if (parsed.update_graph == true) {
               hashrateChart.data.datasets.forEach((dataset) => {
@@ -71,7 +70,7 @@ let app = {
 
             if (parsed.errors !== null && parsed.errors.length > 0) {
               let errDiv = document.createElement("div");
-              errDiv.innerHTML = parsed.errors[0].text;
+              errDiv.innerHTML = parsed.errors[0];
               $('.astimodaler-body').addClass('error');
               asticode.modaler.setContent(errDiv);
               asticode.modaler.show();
@@ -79,7 +78,7 @@ let app = {
               $('#miner_errors').html(errorCount);
               window.setTimeout(function(){
                 asticode.modaler.hide();
-              }, 5000);
+              }, 4000);
             }
             break;
           }
@@ -167,6 +166,7 @@ let app = {
       });
     },
     loadSettings: function() {
+      $('#settings_mining_address').val($('#miner_address').html());
       // The pool-list command returns the pool list for the GUI miner
       astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
         $('#pool_list').html(message.payload);

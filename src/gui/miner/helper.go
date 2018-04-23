@@ -12,6 +12,8 @@ func CreateMiner(config Config) (Miner, error) {
 	switch strings.ToLower(config.Type) {
 	case "xmr-stak":
 		return NewXmrStak(config)
+	case "xmrig":
+		return NewXmrig(config)
 	}
 
 	return nil,

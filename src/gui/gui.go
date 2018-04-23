@@ -254,8 +254,9 @@ func (gui *GUI) handleElectronCommands(
 			time.Sleep(time.Second * 15)
 			gui.logger.Fatalf("Unable to reconfigure miner: '%s'", err)
 		}
-		fmt.Println("Command REceived")
-		fmt.Println(string(command.Payload))
+		gui.logger.WithField(
+			"name", command.Name,
+		).Debug("Received command from Electrom")
 		gui.configureMiner(command)
 		// Fake some time to have GUI at least display the message
 		time.Sleep(time.Second * 3)
@@ -273,7 +274,17 @@ func (gui *GUI) handleElectronCommands(
 
 	// miner_stop is sent whenever the user clicks 'stop mining'
 	case "miner_stop":
-		_ = gui.stopMiner()
+		err := gui.stopMiner()
+		if err != nil {
+			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
+				Data: fmt.Sprintf("Unable to stop miner backend."+
+					"Please close the miner and open it again."+
+					"<br/>The error was '%s'\"}", err),
+			})
+			// Give the UI some time to display the message
+			time.Sleep(time.Second * 15)
+			gui.logger.Fatalf("Unable to reconfigure miner: '%s'", err)
+		}
 	}
 	return nil, fmt.Errorf("'%s' is an unknown command", command.Name)
 }
@@ -293,7 +304,6 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 		time.Sleep(time.Second * 15)
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
-	fmt.Println(gui.config)
 	scanPath := filepath.Join(gui.workingDir, "miner")
 	if gui.config.Miner.Path != "" {
 		// TODO: Fix own miner paths option
@@ -400,7 +410,6 @@ func (gui *GUI) startMiner() {
 
 // stopMiner stops the xmr-stak miner
 func (gui *GUI) stopMiner() error {
-	fmt.Println("Ticker stopped")
 	err := gui.miner.Stop()
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
@@ -451,8 +460,6 @@ func (gui *GUI) updateMiningStatsLoop() {
 		if err != nil {
 			gui.logger.Debugf("Unable to get mining stats, miner not available yet?: %s", err)
 		} else {
-			fmt.Println(stats)
-			fmt.Println("Yeeeah stats!")
 			if gui.lastHashrate == 0 && stats.Hashrate > 0 {
 				gui.lastHashrate = stats.Hashrate
 				// The first time we get a hashrate, update the XTL amount so that the
