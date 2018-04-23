@@ -8,7 +8,6 @@ import (
 	"log"
 	"os"
 	"os/user"
-	"path"
 	"path/filepath"
 	"time"
 
@@ -102,6 +101,7 @@ func New(
 			AppIconDefaultPath: "resources/icon.png",
 		},
 		WindowOptions: &astilectron.WindowOptions{
+			Title:           astilectron.PtrStr("Stellite GUI Miner"),
 			BackgroundColor: astilectron.PtrStr("#0B0C22"),
 			Center:          astilectron.PtrBool(true),
 			Height:          astilectron.PtrInt(700),
@@ -123,17 +123,17 @@ func New(
 			_ *astilectron.Tray,
 			_ *astilectron.Menu) error {
 			gui.window = window
-			gui.miningStatsTicker = time.NewTicker(time.Second)
+			gui.miningStatsTicker = time.NewTicker(time.Second * 5)
 			gui.logger.Info("Start capturing mining stats")
 			go gui.updateMiningStatsLoop()
-			gui.networkStatsTicker = time.NewTicker(time.Second * 2)
-			// TODO: Network stats should not be a ticker since it needs to fetch remotely, could take time
+			gui.networkStatsTicker = time.NewTicker(time.Minute * 1)
 			go func() {
-				for _ = range gui.miningStatsTicker.C {
-					gui.logger.Debug("Updating network stats")
-					//gui.updateNetworkStats()
+				for _ = range gui.networkStatsTicker.C {
+					gui.updateNetworkStats()
 				}
 			}()
+			// Trigger a network stats update as soon as we start
+			gui.updateNetworkStats()
 			return nil
 		},
 		MessageHandler: gui.handleElectronCommands,
@@ -237,7 +237,7 @@ func (gui *GUI) handleElectronCommands(
 		// HACK: Adding a slight delay before switching to the mining dashboard
 		// after initial setup to have the user at least see the 'configure' message
 		time.Sleep(time.Second * 3)
-		gui.configureMiner(command, false)
+		gui.configureMiner(command)
 		return "Ok", nil
 
 	// reconfigure is sent after settings are changes by the user
@@ -254,12 +254,18 @@ func (gui *GUI) handleElectronCommands(
 			time.Sleep(time.Second * 15)
 			gui.logger.Fatalf("Unable to reconfigure miner: '%s'", err)
 		}
-		// TODO HACK Wait for the mining stats loop to exit
-		time.Sleep(time.Second * 10)
-		gui.configureMiner(command, true)
+		fmt.Println("Command REceived")
+		fmt.Println(string(command.Payload))
+		gui.configureMiner(command)
+		// Fake some time to have GUI at least display the message
+		time.Sleep(time.Second * 3)
 		gui.startMiner()
 		gui.logger.Info("Miner reconfigured")
 
+		// Trigger pool update
+		go gui.updateNetworkStats()
+
+		return "Ok", nil
 	// miner_start is sent after configuration or when the user
 	// clicks 'start mining'
 	case "miner_start":
@@ -273,7 +279,7 @@ func (gui *GUI) handleElectronCommands(
 }
 
 // configureMiner creates the xmr-stak configuration to use
-func (gui *GUI) configureMiner(command bootstrap.MessageIn, isReconfigure bool) {
+func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	gui.logger.Info("Configuring miner")
 
 	err := json.Unmarshal(command.Payload, &gui.config)
@@ -287,10 +293,11 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn, isReconfigure bool) 
 		time.Sleep(time.Second * 15)
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
-
+	fmt.Println(gui.config)
 	scanPath := filepath.Join(gui.workingDir, "miner")
 	if gui.config.Miner.Path != "" {
-		scanPath = path.Base(gui.config.Miner.Path)
+		// TODO: Fix own miner paths option
+		//scanPath = path.Base(gui.config.Miner.Path)
 	}
 	gui.logger.WithField(
 		"scan_path", scanPath,
@@ -422,7 +429,6 @@ func (gui *GUI) updateNetworkStats() {
 	if err != nil {
 		gui.logger.Warningf("Unable to get network stats: %s", err)
 	} else {
-		fmt.Println(stats)
 		err := bootstrap.SendMessage(gui.window, "network_stats", stats)
 		if err != nil {
 			gui.logger.Errorf("Unable to send stats to front-end: %s", err)
@@ -433,16 +439,21 @@ func (gui *GUI) updateNetworkStats() {
 // updateMiningStats retrieves the miner's stats from xmr-stak and updates
 // the front-end
 func (gui *GUI) updateMiningStatsLoop() {
-	//lastGraphUpdate := time.Now()
+	lastGraphUpdate := time.Now()
 	for _ = range gui.miningStatsTicker.C {
+		if gui.miner == nil {
+			// No miner set up yet.. wait more
+			gui.logger.Debug("Miner not set up yet, try again later")
+			continue
+		}
 		gui.logger.Debug("Fetching mining stats")
 		stats, err := gui.miner.GetStats()
 		if err != nil {
 			gui.logger.Debugf("Unable to get mining stats, miner not available yet?: %s", err)
 		} else {
-			_ = stats
+			fmt.Println(stats)
 			fmt.Println("Yeeeah stats!")
-			/*if len(stats.Hashrate) > 0 {
+			if gui.lastHashrate == 0 && stats.Hashrate > 0 {
 				gui.lastHashrate = stats.Hashrate
 				// The first time we get a hashrate, update the XTL amount so that the
 				// user doesn't think it doesn't work
@@ -458,7 +469,7 @@ func (gui *GUI) updateMiningStatsLoop() {
 			err = bootstrap.SendMessage(gui.window, "miner_stats", string(statBytes))
 			if err != nil {
 				gui.logger.Errorf("Unable to send miner stats to front-end: %s", err)
-			}*/
+			}
 		}
 	}
 }

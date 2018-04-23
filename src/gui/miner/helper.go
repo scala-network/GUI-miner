@@ -29,7 +29,7 @@ func HumanizeHashrate(hashrate float64) string {
 	if hashrate >= 1000 {
 		return fmt.Sprintf("%.2f KH/s", hashrate/1000)
 	}
-	return fmt.Sprintf("%.0f H/s", hashrate)
+	return fmt.Sprintf("%.2f H/s", hashrate)
 }
 
 // HumanizeTime turns seconds into minutes, hours, etc

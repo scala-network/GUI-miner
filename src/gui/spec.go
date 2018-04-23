@@ -45,12 +45,14 @@ type GlobalStats struct {
 	Circulation string   `json:"circulation"`
 	LastBlock   struct {
 		ID         int    `json:"id"`
-		Height     string `json:"height"`
-		Difficulty string `json:"difficulty"`
+		Height     int    `json:"height"`
+		Difficulty int    `json:"difficulty"`
 		TxCount    int    `json:"tx_count"`
 		Reward     string `json:"reward"`
 		Timestamp  string `json:"timestamp"`
 	} `json:"last_block"`
+	Difficulty      string `json:"difficulty"`
+	Height          string `json:"height"`
 	VolumeCrex      string `json:"volume_crex"`
 	VolumeTradeogre string `json:"volume_tradeogre"`
 	Volume          string `json:"volume"`

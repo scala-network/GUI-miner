@@ -1,6 +1,8 @@
 package miner
 
 import (
+	"fmt"
+	"os"
 	"os/exec"
 )
 
@@ -14,8 +16,10 @@ type Base struct {
 // Start the miner
 func (b *Base) Start() error {
 	params := []string{}
-	commandName := b.executableName
+	commandName := fmt.Sprintf(".%c%s", os.PathSeparator, b.executableName)
+	fmt.Println("CommandName:", commandName)
 	commandDir := b.executablePath
+	fmt.Println("CommandPath:", commandDir)
 	b.command = exec.Command(commandName, params...)
 	b.command.Dir = commandDir
 	return b.command.Start()

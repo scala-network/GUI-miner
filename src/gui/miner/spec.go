@@ -16,19 +16,24 @@ type Config struct {
 // Stats contains the miner statistics required by the front-end
 type Stats struct {
 	// Hashrate is the current miner hashrate
-	Hashrate float64
+	Hashrate float64 `json:"hashrate"`
 	// HashrateHuman is the H/s, KH/s or MH/s representation of hashrate
-	HashrateHuman string
+	HashrateHuman string `json:"hashrate_human"`
 	// CurrentDifficulty as set by the pool
-	CurrentDifficulty int
+	CurrentDifficulty int `json:"current_difficulty"`
 	// SharesGood is the good shares counter
-	SharesGood int
+	SharesGood int `json:"shares_good"`
 	// SharesGood is the bad shares counter
-	SharesBad int
+	SharesBad int `json:"shares_bad"`
 	// Uptime for the miner in seconds
-	Uptime int
+	Uptime int `json:"uptime"`
 	// UptimeHuman is the human readable version of uptime, ex. 10 minutes
-	UptimeHuman string
+	UptimeHuman string `json:"uptime_human"`
 	// Errors is a list of errors that have occurred
-	Errors []string
+	Errors []string `json:"errors"`
+	// UpdateGraph is set to true if the stats graph should be updated
+	UpdateGraph bool `json:"update_graph"`
+	// Address contains the Stellite address we are mining to
+	// TODO: This should be somewhere else, it's not stats!
+	Address string `json:"address"`
 }

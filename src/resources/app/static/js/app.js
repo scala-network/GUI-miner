@@ -42,8 +42,8 @@ let app = {
             $('#market_cap').html(parsed.market_cap);
             $('#price').html(parsed.price + ' BTC');
             $('#network_hashrate').html(parsed.hashrate);
-            $('#network_difficulty').html(parsed.last_block.difficulty);
-            $('#network_height').html(parsed.last_block.height);
+            $('#network_difficulty').html(parsed.difficulty);
+            $('#network_height').html(parsed.height);
             $('#trading_volume').html(parsed.volume + ' BTC');
             $('#trading_tradeogre_volume').html(parsed.volume_tradeogre + ' BTC');
             $('#trading_crex_volume').html(parsed.volume_crex + ' BTC');
@@ -53,25 +53,25 @@ let app = {
             $('#pool').html(parsed.pool_html);
             break;
           case "miner_stats":
-            $('#miner_hashrate').html(parsed.hashrate.total[0]);
-            $('#miner_uptime').html(app.secondsHumanize(parsed.connection.uptime));
-            $('#miner_difficulty').html(parsed.results.diff_current);
-            $('#miner_shares').html(parsed.results.shares_total);
-            $('#miner_shares_bad').html(parsed.results.shares_total - parsed.results.shares_good);
+            $('#miner_hashrate').html(parsed.hashrate_human);
+            $('#miner_uptime').html(parsed.uptime_human);
+            $('#miner_difficulty').html(parsed.current_difficulty);
+            $('#miner_shares').html(parsed.shares_good + parsed.shares_bad);
+            $('#miner_shares_bad').html(parsed.shares_bad);
             $('#miner_address').html(parsed.address);
             $('#settings_mining_address').val(parsed.address);
             // Move the graph, we only refresh it once a minute
             if (parsed.update_graph == true) {
               hashrateChart.data.datasets.forEach((dataset) => {
                 dataset.data.shift();
-                dataset.data.push(parsed.hashrate.total[0]);
+                dataset.data.push(parsed.hashrate);
               });
               hashrateChart.update();
             }
 
-            if (parsed.connection.error_log.length > 0) {
+            if (parsed.errors !== null && parsed.errors.length > 0) {
               let errDiv = document.createElement("div");
-              errDiv.innerHTML = parsed.connection.error_log[0].text;
+              errDiv.innerHTML = parsed.errors[0].text;
               $('.astimodaler-body').addClass('error');
               asticode.modaler.setContent(errDiv);
               asticode.modaler.show();
@@ -99,12 +99,7 @@ let app = {
             $('#start_stop').removeClass('stop');
             $('#start_stop').html('Start mining');
 
-            $('#miner_hashrate').html('0');
-            $('#miner_uptime').html('0');
-            $('#miner_difficulty').html('0');
-            $('#miner_shares').html('0');
-            $('#miner_shares_bad').html('0');
-            $('#miner_payout').html('0.00 XTL');
+            app.resetMinerStats();
           });
         } else {
           // Start the miner
@@ -164,6 +159,8 @@ let app = {
           $('.current .pool h3').html('Updating...');
           $('#settings').toggleClass('dn');
           $('#update').html('Update');
+          $('#miner_address').html("Updating")
+          app.resetMinerStats();
           asticode.notifier.info('Miner reconfigured');
         });
 
@@ -178,19 +175,12 @@ let app = {
         $('#settings').toggleClass('dn');
       });
     },
-    // secondsHumanize turns seconds into hours + minutes
-    secondsHumanize: function(d) {
-        d = Number(d);
-        var h = Math.floor(d / 3600);
-        var m = Math.floor(d % 3600 / 60);
-        var s = Math.floor(d % 3600 % 60);
-
-        var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-        var mDisplay = m > 0 ? m + (m == 1 ? " minute" : " minutes") : "";
-        var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
-        if (m > 0) {
-          return hDisplay + mDisplay;
-        }
-        return hDisplay + mDisplay + sDisplay;
-    }
+    resetMinerStats: function() {
+      $('#miner_hashrate').html('0 H/s');
+      $('#miner_uptime').html('0');
+      $('#miner_difficulty').html('0');
+      $('#miner_shares').html('0');
+      $('#miner_shares_bad').html('0');
+      $('#miner_payout').html('0.00 XTL');
+    },
 };
