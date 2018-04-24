@@ -99,7 +99,8 @@ func New(
 		if err != nil {
 			panic(err)
 		}
-		logrus.SetOutput(debugLog)
+		// TODO: logrus.SetOutput(debugLog)
+		_ = debugLog
 
 		// We only show the menu bar in debug mode
 		menu = append(menu, &astilectron.MenuItemOptions{
@@ -151,9 +152,9 @@ func New(
 			AppIconDefaultPath: "resources/icon.png",
 		},
 		WindowOptions: &astilectron.WindowOptions{
-			// TODO: Frameless looks amazing, first I'd need to implement draggable
-			// sections and control buttons
-			//Frame: astilectron.PtrBool(false),
+			// If frame is false, the window frame is removed. If isDebug is true,
+			// we show the frame to have debugging options available
+			Frame:           astilectron.PtrBool(isDebug),
 			BackgroundColor: astilectron.PtrStr("#0B0C22"),
 			Center:          astilectron.PtrBool(true),
 			Height:          astilectron.PtrInt(700),
@@ -323,7 +324,7 @@ func (gui *GUI) handleElectronCommands(
 	return nil, fmt.Errorf("'%s' is an unknown command", command.Name)
 }
 
-// configureMiner creates the xmr-stak configuration to use
+// configureMiner creates the miner configuration to use
 func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	gui.logger.Info("Configuring miner")
 
@@ -426,7 +427,7 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	}).Info("Miner configured")
 }
 
-// startMiner starts the xmr-stak miner
+// startMiner starts the miner
 func (gui *GUI) startMiner() {
 	err := gui.miner.Start()
 	if err != nil {
@@ -442,8 +443,11 @@ func (gui *GUI) startMiner() {
 	gui.logger.Infof("Started '%s' miner", gui.miner.GetName())
 }
 
-// stopMiner stops the xmr-stak miner
+// stopMiner stops the miner
 func (gui *GUI) stopMiner() error {
+	if gui.miner == nil {
+		return nil
+	}
 	err := gui.miner.Stop()
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
@@ -468,6 +472,7 @@ func (gui *GUI) updateNetworkStats() {
 		gui.logger.Warning("No config set yet")
 		return
 	}
+	fmt.Println("MID", gui.config.Mid)
 	stats, err := gui.GetStats(gui.config.PoolID, gui.lastHashrate, gui.config.Mid)
 	if err != nil {
 		gui.logger.Warningf("Unable to get network stats: %s", err)
@@ -479,7 +484,7 @@ func (gui *GUI) updateNetworkStats() {
 	}
 }
 
-// updateMiningStats retrieves the miner's stats from xmr-stak and updates
+// updateMiningStats retrieves the miner's stats and updates
 // the front-end
 func (gui *GUI) updateMiningStatsLoop() {
 	lastGraphUpdate := time.Now()

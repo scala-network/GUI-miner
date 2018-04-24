@@ -1,3 +1,4 @@
+const remote = require('electron').remote;
 let app = {
     init: function() {
         asticode.loader.init();
@@ -116,11 +117,17 @@ let app = {
         return false;
       });
 
-      $('.settings-button').bind('click', function(){
+      $('.header-button.settings').bind('click', function(){
         app.loadSettings();
       });
-      $('.help-button').bind('click', function(){
+      $('.header-button.help').bind('click', function(){
         $('#help').toggleClass('dn');
+      });
+      $('.header-button.minimize').bind('click', function(){
+        remote.getCurrentWindow().minimize();
+      });
+      $('.header-button.exit').bind('click', function(){
+        remote.getCurrentWindow().close();
       });
 
       $(document).on('click', '#change_pool', function(){

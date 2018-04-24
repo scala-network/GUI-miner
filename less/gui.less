@@ -74,6 +74,16 @@ input::-moz-focus-inner {
 
 }
 
+div.draggable {
+  -webkit-app-region: drag;
+  position: absolute;
+  z-index: 1000;
+  left: 0px;
+  top: 0px;
+  height: 50px;
+  width: 100%;
+}
+
 p.description {
   font-size: 14px;
   margin-bottom: 20px;
@@ -174,31 +184,37 @@ a.button {
 body.miner {
   height: 100%;
 
-  a.settings-button {
+  a.header-button {
     position: absolute;
-    top: 10px;
-    right: 15px;
     color: #D59D0E;
-    z-index: 999;
+    z-index: 1001;
     font-size: 24px;
     .opacity(0.6);
+    -webkit-app-region: no-drag;
 
     &:hover {
       .opacity(0.8);
     }
-  }
 
-  a.help-button {
-    position: absolute;
-    top: 10px;
-    right: 45px;
-    color: #D59D0E;
-    z-index: 999;
-    font-size: 24px;
-    .opacity(0.6);
+    &.help {
+      top: 10px;
+      right: 125px;
+    }
 
-    &:hover {
-      .opacity(0.8);
+    &.settings {
+      top: 10px;
+      right: 95px;
+    }
+
+    &.minimize {
+      top: 13px;
+      right: 45px;
+      font-size: 18px;
+    }
+
+    &.exit {
+      top: 10px;
+      right: 15px;
     }
   }
 
