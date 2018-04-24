@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
+	"runtime"
 )
 
 // Xmrig implements the miner interface for the xmrig miner, including
@@ -210,10 +211,17 @@ func (miner *Xmrig) defaultConfig(
 	poolEndpoint string,
 	walletAddress string) XmrigConfig {
 
+	runInBackground := true
+	// On Mac OSX xmrig doesn't run is we fork the process to the background and
+	// xmrig forks to the background again
+	if runtime.GOOS == "darwin" {
+		runInBackground = false
+	}
+
 	return XmrigConfig{
 		Algo:        "cryptonight",
 		Av:          0,
-		Background:  true,
+		Background:  runInBackground,
 		Colors:      true,
 		CPUAffinity: nil,
 		CPUPriority: nil,

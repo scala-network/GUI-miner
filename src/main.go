@@ -8,6 +8,8 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
+	"runtime"
 
 	"github.com/donovansolms/stellite-gui-miner/src/gui"
 )
@@ -24,9 +26,28 @@ func main() {
 	debug := flag.Bool("d", false, "Enable debug mode")
 	flag.Parse()
 
+	// We need to get the acutal working directory to ensure proper operation
+	// on all platforms
+	workingDir, err := os.Executable()
+	if err != nil {
+		log.Fatalf("Can't read current directory: %s", err)
+	}
+	workingDir = filepath.Dir(workingDir)
+	if err != nil {
+		log.Fatalf("Can't format current directory: %s", err)
+	}
+	if runtime.GOOS == "darwin" {
+		// Mac executes from within the .app/Content/MacOS folder, this moves
+		// the folder back to the actual app
+		workingDir, err = filepath.Abs(workingDir + "/../../..")
+		if err != nil {
+			log.Fatalf("Can't update current directory: %s", err)
+		}
+	}
+
 	var config *gui.Config
 	var apiEndpoint string
-	fileBytes, err := ioutil.ReadFile("./config.json")
+	fileBytes, err := ioutil.ReadFile(filepath.Join(workingDir, "config.json"))
 	if err == nil {
 		err = json.Unmarshal(fileBytes, &config)
 		if err != nil {
@@ -48,6 +69,7 @@ func main() {
 		Asset,
 		RestoreAssets,
 		apiEndpoint,
+		workingDir,
 		*debug,
 	)
 	if err != nil {

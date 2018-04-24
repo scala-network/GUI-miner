@@ -13,6 +13,11 @@ let firstrun = {
             event.preventDefault();
             shell.openExternal(this.href);
         });
+        // This stops electron from updating the window title when a link
+        // is clicked
+        $(document).on('click', 'a[href^="#"]', function(event) {
+            event.preventDefault();
+        });
 
         // Wait for the ready signal
         document.addEventListener('astilectron-ready', function() {
@@ -27,7 +32,11 @@ let firstrun = {
 
           firstrun.bindEvents();
           firstrun.listen();
-          firstrun.animateIntro();
+
+          // Just wait a second for the window to show and the user to focus
+          window.setTimeout(function(){
+            firstrun.animateIntro();
+          }, 2000);
         })
     },
     listen: function() {

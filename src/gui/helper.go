@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"path/filepath"
 )
 
 // GetPoolList returns the list of pools available to the GUI miner
@@ -40,13 +41,15 @@ func (gui *GUI) GetPool(id int) (PoolData, error) {
 }
 
 // SaveConfig saves the configuration to disk
-// TODO: Specify path here
 func (gui *GUI) SaveConfig(config Config) error {
 	configBytes, err := json.Marshal(&config)
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile("config.json", configBytes, 0644)
+	err = ioutil.WriteFile(
+		filepath.Join(gui.workingDir, "config.json"),
+		configBytes,
+		0644)
 	if err != nil {
 		return err
 	}

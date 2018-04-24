@@ -18,6 +18,9 @@ run: build
 run_debug: build
 	./bin/linux-amd64/'${APP_NAME}' -d
 
+run_only_debug:
+	./bin/linux-amd64/'${APP_NAME}' -d
+
 webdev:
 	./scripts/run_browsersync.sh
 
@@ -27,3 +30,5 @@ fmt:
 
 clean:
 	rm -Rf bin/
+	rm src/windows.syso
+	rm src/bind*

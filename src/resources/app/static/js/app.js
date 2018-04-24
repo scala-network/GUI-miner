@@ -10,6 +10,11 @@ let app = {
             event.preventDefault();
             shell.openExternal(this.href);
         });
+        // This stops electron from updating the window title when a link
+        // is clicked
+        $(document).on('click', 'a[href^="#"]', function(event) {
+            event.preventDefault();
+        });
 
         // Wait for the ready signal
         document.addEventListener('astilectron-ready', function() {

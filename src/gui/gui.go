@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+	"runtime"
 	"time"
 
 	astilectron "github.com/asticode/go-astilectron"
@@ -22,8 +23,6 @@ import (
 type GUI struct {
 	// window is the main Astilectron window
 	window *astilectron.Window
-	// // minerCmd is a reference to the xmr-stak miner process
-	// minerCmd *exec.Cmd
 	// astilectronOptions holds the Astilectron options
 	astilectronOptions bootstrap.Options
 	// config for the miner
@@ -51,19 +50,11 @@ func New(
 	asset bootstrap.Asset,
 	restoreAssets bootstrap.RestoreAssets,
 	apiEndpoint string,
+	workingDir string,
 	isDebug bool) (*GUI, error) {
 
 	if apiEndpoint == "" {
 		return nil, errors.New("The API Endpoint must be specified")
-	}
-
-	workingDir, err := os.Getwd()
-	if err != nil {
-		return nil, fmt.Errorf("Can't read current directory: %s", err)
-	}
-	workingDir, err = filepath.Abs(workingDir)
-	if err != nil {
-		return nil, fmt.Errorf("Can't read current directory: %s", err)
 	}
 
 	gui := GUI{
@@ -89,6 +80,65 @@ func New(
 			Mid:         uuid.New().String(),
 		}
 	}
+	var menu []*astilectron.MenuItemOptions
+
+	// Setup the logging, by default we log to stdout
+	logrus.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp:   true,
+		TimestampFormat: "Jan 02 15:04:05",
+	})
+	logrus.SetLevel(logrus.InfoLevel)
+
+	logrus.SetOutput(os.Stdout)
+	if isDebug {
+		logrus.SetLevel(logrus.DebugLevel)
+		debugLog, err := os.OpenFile(
+			filepath.Join(gui.workingDir, "debug.log"),
+			os.O_CREATE|os.O_TRUNC|os.O_WRONLY,
+			0644)
+		if err != nil {
+			panic(err)
+		}
+		logrus.SetOutput(debugLog)
+
+		// We only show the menu bar in debug mode
+		menu = append(menu, &astilectron.MenuItemOptions{
+			Label: astilectron.PtrStr("File"),
+			SubMenu: []*astilectron.MenuItemOptions{
+				{
+					Role: astilectron.MenuItemRoleClose,
+				},
+			},
+		})
+	}
+	// To make copy and paste work on Mac, the copy and paste entries need to
+	// be defined, the alternative is to implement the clipboard API
+	// https://github.com/electron/electron/blob/master/docs/api/clipboard.md
+	if runtime.GOOS == "darwin" {
+		menu = append(menu, &astilectron.MenuItemOptions{
+			Label: astilectron.PtrStr("Edit"),
+			SubMenu: []*astilectron.MenuItemOptions{
+				{
+					Role: astilectron.MenuItemRoleCut,
+				},
+				{
+					Role: astilectron.MenuItemRoleCopy,
+				},
+				{
+					Role: astilectron.MenuItemRolePaste,
+				},
+				{
+					Role: astilectron.MenuItemRoleSelectAll,
+				},
+			},
+		})
+	}
+
+	// Setting the WithFields now will ensure all log entries from this point
+	// includes the fields
+	gui.logger = logrus.WithFields(logrus.Fields{
+		"service": "stellite-gui-miner",
+	})
 
 	gui.astilectronOptions = bootstrap.Options{
 		Debug:         isDebug,
@@ -101,20 +151,20 @@ func New(
 			AppIconDefaultPath: "resources/icon.png",
 		},
 		WindowOptions: &astilectron.WindowOptions{
-			Title:           astilectron.PtrStr("Stellite GUI Miner"),
+			// TODO: Frameless looks amazing, first I'd need to implement draggable
+			// sections and control buttons
+			//Frame: astilectron.PtrBool(false),
 			BackgroundColor: astilectron.PtrStr("#0B0C22"),
 			Center:          astilectron.PtrBool(true),
 			Height:          astilectron.PtrInt(700),
 			Width:           astilectron.PtrInt(1175),
 		},
-		MenuOptions: []*astilectron.MenuItemOptions{{
-			Label: astilectron.PtrStr("File"),
-			SubMenu: []*astilectron.MenuItemOptions{
-				{
-					Role: astilectron.MenuItemRoleClose,
-				},
-			},
-		}},
+		// TODO: Fix this tray to display nicely
+		/*TrayOptions: &astilectron.TrayOptions{
+			Image:   astilectron.PtrStr("/static/i/miner-logo.png"),
+			Tooltip: astilectron.PtrStr(appName),
+		},*/
+		MenuOptions: menu,
 		// OnWait is triggered as soon as the electron window is ready and running
 		OnWait: func(
 			_ *astilectron.Astilectron,
@@ -138,32 +188,6 @@ func New(
 		},
 		MessageHandler: gui.handleElectronCommands,
 	}
-
-	// Setup the logging, by default we log to stdout
-	logrus.SetFormatter(&logrus.TextFormatter{
-		FullTimestamp:   true,
-		TimestampFormat: "Jan 02 15:04:05",
-	})
-	logrus.SetLevel(logrus.InfoLevel)
-
-	logrus.SetOutput(os.Stdout)
-	if isDebug {
-		logrus.SetLevel(logrus.DebugLevel)
-		// TODO: Handle this debug log better
-		debugLog, err := os.OpenFile(
-			fmt.Sprintf(".%c%s", os.PathSeparator, "debug.log"),
-			os.O_CREATE|os.O_TRUNC|os.O_WRONLY,
-			0644)
-		if err != nil {
-			panic(err)
-		}
-		logrus.SetOutput(debugLog)
-	}
-	// Setting the WithFields now will ensure all log entries from this point
-	// includes the fields
-	gui.logger = logrus.WithFields(logrus.Fields{
-		"service": "stellite-gui-miner",
-	})
 
 	gui.logger.Info("Setup complete")
 	return &gui, nil
@@ -315,10 +339,10 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 	scanPath := filepath.Join(gui.workingDir, "miner")
-	if gui.config.Miner.Path != "" {
-		// TODO: Fix own miner paths option
+	// TODO: Fix own miner paths option
+	/*if gui.config.Miner.Path != "" {
 		//scanPath = path.Base(gui.config.Miner.Path)
-	}
+	}*/
 	gui.logger.WithField(
 		"scan_path", scanPath,
 	).Debug("Determining miner type")
