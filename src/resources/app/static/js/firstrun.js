@@ -41,7 +41,12 @@ let firstrun = {
     },
     listen: function() {
       astilectron.onMessage(function(message) {
-        });
+        var parsed = $.parseJSON(message.payload)
+        switch (message.name) {
+          case "fatal_error":
+            showError(parsed.Data);
+        }
+      });
     },
     // Bind to UI events using jQuery
     bindEvents: function() {
@@ -68,8 +73,10 @@ let firstrun = {
             alert("You must enter your address");
             return false;
           }
-          // Just make sure they're not using integrated addresses
-          if (address.substring(0, 2) != 'Se') {
+          // Just make sure they're not using integrated addresses or
+          // invalid ones
+          if (validateWalletAddress(address) == false)
+          {
             alert("Please enter a valid Stellite address starting with 'Se'");
             return false;
           }
@@ -101,11 +108,22 @@ let firstrun = {
     },
     animateIntro: function() {
       // A couple of steps to get you set up
-      $('#intro_anim_a').fadeIn(2500, function(){
+      /*$('#intro_anim_a').fadeIn(2500, function(){
         $('#intro_anim_a').fadeOut(1000, function(){
           $('#intro_anim_b').fadeIn(2000, function(){
             $('#intro_anim_b').fadeOut(1000, function(){
               $('#intro_anim_c').fadeIn(1500, function(){
+                $('#initial-wallet').animateCss('fadeInUp');
+              });
+            });
+          });
+        });
+      });*/
+      $('#intro_anim_a').fadeIn(250, function(){
+        $('#intro_anim_a').fadeOut(100, function(){
+          $('#intro_anim_b').fadeIn(200, function(){
+            $('#intro_anim_b').fadeOut(100, function(){
+              $('#intro_anim_c').fadeIn(150, function(){
                 $('#initial-wallet').animateCss('fadeInUp');
               });
             });

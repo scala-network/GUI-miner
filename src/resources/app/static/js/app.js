@@ -36,11 +36,7 @@ let app = {
         var parsed = $.parseJSON(message.payload)
         switch (message.name) {
           case "fatal_error":
-            let errDiv = document.createElement("div");
-            errDiv.innerHTML = parsed.message;
-            $('.astimodaler-body').addClass('error');
-            asticode.modaler.setContent(errDiv);
-            asticode.modaler.show();
+            showError(parsed.Data);
             break;
           case "network_stats":
             $('#circulation').html(parsed.circulation);
@@ -153,11 +149,14 @@ let app = {
           alert("You must enter your address");
           return false;
         }
-        // Just make sure they're not using integrated addresses
-        if (configData.address.substring(0, 2) != 'Se') {
+        // Just make sure they're not using integrated addresses or
+        // invalid ones
+        if (validateWalletAddress(configData.address) == false)
+        {
           alert("Please enter a valid Stellite address starting with 'Se'");
           return false;
         }
+
         $('#update').html('Updating...');
         astilectron.sendMessage({name: "reconfigure", payload: configData}, function(message){
           $('.current .pool h3').html('Updating...');
