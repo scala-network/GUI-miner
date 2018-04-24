@@ -68,7 +68,7 @@ func HumanizeTime(seconds int) string {
 func DetermineMinerType(dir string) (string, string, error) {
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
-		return "", "", nil
+		return "", "", err
 	}
 
 	for _, file := range files {
