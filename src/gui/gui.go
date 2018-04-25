@@ -246,7 +246,7 @@ func (gui *GUI) handleElectronCommands(
 			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 				Data: fmt.Sprintf("Unable to fetch pool list from API."+
 					"Please check that you are connected to the internet and try again."+
-					"<br/>The error was '%s'\"}", err),
+					"<br/>The error was '%s'", err),
 			})
 			// Give the UI some time to display the message
 			time.Sleep(time.Second * 15)
@@ -267,6 +267,29 @@ func (gui *GUI) handleElectronCommands(
 		}
 		return poolsList, nil
 
+	// get-processing-config returns the current miner's processing config
+	case "get-processing-config":
+		if gui.miner == nil {
+			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
+				Data: fmt.Sprintf("Unable to fetch miner config." +
+					"Please check that your miner is working and running."),
+			})
+			return "", nil
+		}
+		// Call the stats method to get processing info first, this causes the
+		// stats to be cached by the miner
+		_, _ = gui.miner.GetStats()
+		processingConfig := gui.miner.GetProcessingConfig()
+		configBytes, err := json.Marshal(processingConfig)
+		if err != nil {
+			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
+				Data: fmt.Sprintf("Unable to fetch miner config."+
+					"Please check that your miner is working and running."+
+					"<br/>The error was '%s'", err),
+			})
+		}
+		return string(configBytes), nil
+
 	// configure is sent after the firstrun setup has been completed
 	case "configure":
 		// HACK: Adding a slight delay before switching to the mining dashboard
@@ -283,7 +306,7 @@ func (gui *GUI) handleElectronCommands(
 			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 				Data: fmt.Sprintf("Unable to stop miner for reconfigure."+
 					"Please close the miner and open it again."+
-					"<br/>The error was '%s'\"}", err),
+					"<br/>The error was '%s'", err),
 			})
 			// Give the UI some time to display the message
 			time.Sleep(time.Second * 15)
@@ -314,7 +337,7 @@ func (gui *GUI) handleElectronCommands(
 			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 				Data: fmt.Sprintf("Unable to stop miner backend."+
 					"Please close the miner and open it again."+
-					"<br/>The error was '%s'\"}", err),
+					"<br/>The error was '%s'", err),
 			})
 			// Give the UI some time to display the message
 			time.Sleep(time.Second * 15)
@@ -328,17 +351,21 @@ func (gui *GUI) handleElectronCommands(
 func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	gui.logger.Info("Configuring miner")
 
-	err := json.Unmarshal(command.Payload, &gui.config)
+	var newConfig frontendConfig
+	err := json.Unmarshal(command.Payload, &newConfig)
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
 				"Please check your configuration is valid."+
-				"<br/>The error was '%s'\"}", err),
+				"<br/>The error was '%s'", err),
 		})
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
+	gui.config.Address = newConfig.Address
+	gui.config.PoolID = newConfig.Pool
+
 	scanPath := filepath.Join(gui.workingDir, "miner")
 	// TODO: Fix own miner paths option
 	/*if gui.config.Miner.Path != "" {
@@ -354,7 +381,7 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
 				"Could not determine the miner type."+
-				"<br/>The error was '%s'\"}", err),
+				"<br/>The error was '%s'", err),
 		})
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
@@ -374,21 +401,21 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
-				"<br/>The error was '%s'\"}", err),
+				"<br/>The error was '%s'", err),
 		})
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
 
-	// The pool API returns the low-end hardware host:port for config
+	// The pool API returns the low-end hardware host:port config for pool
 	gui.logger.Debug("Getting pool information")
 	poolInfo, err := gui.GetPool(gui.config.PoolID)
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
 				"Please check that you are connected to the internet."+
-				"<br/>The error was '%s'\"}", err),
+				"<br/>The error was '%s'", err),
 		})
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
@@ -397,12 +424,19 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 
 	// Write the config for the specified miner
 	gui.logger.Debug("Writing miner config")
-	err = gui.miner.WriteConfig(poolInfo.Config, gui.config.Address)
+
+	err = gui.miner.WriteConfig(
+		poolInfo.Config,
+		gui.config.Address,
+		miner.ProcessingConfig{
+			Threads:  newConfig.Threads,
+			MaxUsage: newConfig.MaxCPU,
+		})
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
 				"Please check that you are connected to the internet."+
-				"<br/>The error was '%s'\"}", err),
+				"<br/>The error was '%s'", err),
 		})
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
@@ -416,7 +450,7 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
 				"Please check that you can write to the miner's installation path."+
-				"<br/>The error was '%s'\"}", err),
+				"<br/>The error was '%s'", err),
 		})
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
@@ -434,7 +468,7 @@ func (gui *GUI) startMiner() {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to start '%s' miner, please check that you "+
 				"can run the miner from your installation directory."+
-				"<br/>The error was '%s'\"}", gui.miner.GetName(), err),
+				"<br/>The error was '%s'", gui.miner.GetName(), err),
 		})
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
@@ -453,7 +487,7 @@ func (gui *GUI) stopMiner() error {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to stop miner.."+
 				"Please close the GUI miner and open it again."+
-				"<br/>The error was '%s'\"}", err),
+				"<br/>The error was '%s'", err),
 		})
 		gui.logger.Errorf("Unable to stop miner '%s': %s", gui.miner.GetName(), err)
 		return err

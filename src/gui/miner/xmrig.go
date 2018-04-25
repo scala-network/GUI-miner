@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"path/filepath"
 	"runtime"
+	"strings"
 )
 
 // Xmrig implements the miner interface for the xmrig miner, including
@@ -15,9 +16,11 @@ import (
 // https://github.com/xmrig/xmrig-nvidia
 type Xmrig struct {
 	Base
-	name         string
-	endpoint     string
-	lastHashrate float64
+	name             string
+	endpoint         string
+	lastHashrate     float64
+	resultStatsCache XmrigResponse
+	isGPU            bool
 }
 
 // XmrigConfig is the config.json structure for Xmrig
@@ -31,13 +34,35 @@ type XmrigConfig struct {
 	CPUPriority interface{}       `json:"cpu-priority"`
 	DonateLevel int               `json:"donate-level"`
 	LogFile     interface{}       `json:"log-file"`
-	MaxCPUUsage int               `json:"max-cpu-usage"`
+	MaxCPUUsage uint8             `json:"max-cpu-usage"`
 	PrintTime   int               `json:"print-time"`
 	Retries     int               `json:"retries"`
 	RetryPause  int               `json:"retry-pause"`
 	Safe        bool              `json:"safe"`
 	Syslog      bool              `json:"syslog"`
-	Threads     int               `json:"threads"`
+	Threads     uint16            `json:"threads"`
+	Pools       []XmrigPoolConfig `json:"pools"`
+	API         XmrigAPIConfig    `json:"api"`
+}
+
+// XmrigGPUConfig is the config.json structure for Xmrig's GPU
+// Generated with https://mholt.github.io/json-to-go/
+type XmrigGPUConfig struct {
+	Algo        string            `json:"algo"`
+	Av          int               `json:"av"`
+	Background  bool              `json:"background"`
+	Colors      bool              `json:"colors"`
+	CPUAffinity interface{}       `json:"cpu-affinity"`
+	CPUPriority interface{}       `json:"cpu-priority"`
+	DonateLevel int               `json:"donate-level"`
+	LogFile     interface{}       `json:"log-file"`
+	MaxCPUUsage uint8             `json:"max-cpu-usage"`
+	PrintTime   int               `json:"print-time"`
+	Retries     int               `json:"retries"`
+	RetryPause  int               `json:"retry-pause"`
+	Safe        bool              `json:"safe"`
+	Syslog      bool              `json:"syslog"`
+	Threads     []struct{}        `json:"threads"`
 	Pools       []XmrigPoolConfig `json:"pools"`
 	API         XmrigAPIConfig    `json:"api"`
 }
@@ -111,6 +136,11 @@ func NewXmrig(config Config) (*Xmrig, error) {
 		name:     "xmrig",
 		endpoint: endpoint,
 	}
+	// mxrig appends either nvidia or amd to the miner if it's GPU only
+	if strings.Contains(config.Path, "nvidia") || strings.Contains(config.Path, "amd") {
+		miner.isGPU = true
+		miner.name += "-gpu"
+	}
 	miner.Base.executableName = filepath.Base(config.Path)
 	miner.Base.executablePath = filepath.Dir(config.Path)
 
@@ -120,12 +150,28 @@ func NewXmrig(config Config) (*Xmrig, error) {
 // WriteConfig writes the miner's configuration in the xmrig format
 func (miner *Xmrig) WriteConfig(
 	poolEndpoint string,
-	walletAddress string) error {
+	walletAddress string,
+	processingConfig ProcessingConfig) error {
 
-	defaultConfig := miner.defaultConfig(poolEndpoint, walletAddress)
-	configBytes, err := json.Marshal(defaultConfig)
-	if err != nil {
-		return err
+	var err error
+	var configBytes []byte
+	if miner.isGPU {
+		defaultConfig := miner.createGPUConfig(
+			poolEndpoint,
+			walletAddress)
+		configBytes, err = json.Marshal(defaultConfig)
+		if err != nil {
+			return err
+		}
+	} else {
+		defaultConfig := miner.createConfig(
+			poolEndpoint,
+			walletAddress,
+			processingConfig)
+		configBytes, err = json.Marshal(defaultConfig)
+		if err != nil {
+			return err
+		}
 	}
 
 	err = ioutil.WriteFile(
@@ -137,6 +183,46 @@ func (miner *Xmrig) WriteConfig(
 	}
 
 	return nil
+}
+
+// GetProcessingConfig returns the current miner processing config
+// TODO: Currently only CPU threads, extend this to full CPU/GPU config
+func (miner *Xmrig) GetProcessingConfig() ProcessingConfig {
+
+	// Get max CPU usage from the config file
+	configBytes, err := ioutil.ReadFile(
+		filepath.Join(miner.Base.executablePath, "config.json"))
+	if err != nil {
+		return ProcessingConfig{}
+	}
+
+	// xmrig's threads field is not an int when it's GPU only so we need to use
+	// a defferent config structure
+	if miner.isGPU {
+		var config XmrigGPUConfig
+		err = json.Unmarshal(configBytes, &config)
+		if err != nil {
+			return ProcessingConfig{}
+		}
+		return ProcessingConfig{
+			MaxUsage:   config.MaxCPUUsage,
+			Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
+			MaxThreads: uint16(runtime.NumCPU()),
+			Type:       miner.name,
+		}
+	}
+
+	var config XmrigConfig
+	err = json.Unmarshal(configBytes, &config)
+	if err != nil {
+		return ProcessingConfig{}
+	}
+	return ProcessingConfig{
+		MaxUsage:   config.MaxCPUUsage,
+		Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
+		MaxThreads: uint16(runtime.NumCPU()),
+		Type:       miner.name,
+	}
 }
 
 // GetName returns the name of the miner
@@ -203,22 +289,25 @@ func (miner *Xmrig) GetStats() (Stats, error) {
 		SharesBad:         xmrigStats.Results.SharesTotal - xmrigStats.Results.SharesGood,
 		Errors:            errors,
 	}
+	miner.resultStatsCache = xmrigStats
 	return stats, nil
 }
 
-// defaultConfig returns a default setup for Xmrig
-func (miner *Xmrig) defaultConfig(
+// createConfig returns creates the config for Xmrig
+func (miner *Xmrig) createConfig(
 	poolEndpoint string,
-	walletAddress string) XmrigConfig {
+	walletAddress string,
+	processingConfig ProcessingConfig) XmrigConfig {
 
 	runInBackground := true
 	// On Mac OSX xmrig doesn't run is we fork the process to the background and
 	// xmrig forks to the background again
-	if runtime.GOOS == "darwin" {
+	// Seems like xmrig doesn't like running GPU in the background
+	if runtime.GOOS == "darwin" || miner.isGPU {
 		runInBackground = false
 	}
 
-	return XmrigConfig{
+	config := XmrigConfig{
 		Algo:        "cryptonight",
 		Av:          0,
 		Background:  runInBackground,
@@ -227,13 +316,13 @@ func (miner *Xmrig) defaultConfig(
 		CPUPriority: nil,
 		DonateLevel: 1,
 		LogFile:     nil,
-		MaxCPUUsage: 80,
+		MaxCPUUsage: processingConfig.MaxUsage,
 		PrintTime:   3600,
 		Retries:     5,
 		RetryPause:  5,
 		Safe:        false,
 		Syslog:      false,
-		Threads:     0,
+		Threads:     processingConfig.Threads,
 		Pools: []XmrigPoolConfig{
 			{
 				URL:       poolEndpoint,
@@ -250,4 +339,45 @@ func (miner *Xmrig) defaultConfig(
 			WorkerID:    nil,
 		},
 	}
+
+	return config
+}
+
+// createGPUConfig returns creates the config for Xmrig GPU setups
+func (miner *Xmrig) createGPUConfig(
+	poolEndpoint string,
+	walletAddress string) XmrigGPUConfig {
+
+	config := XmrigGPUConfig{
+		Algo:        "cryptonight",
+		Av:          0,
+		Background:  false,
+		Colors:      true,
+		CPUAffinity: nil,
+		CPUPriority: nil,
+		DonateLevel: 1,
+		LogFile:     nil,
+		PrintTime:   3600,
+		Retries:     5,
+		RetryPause:  5,
+		Safe:        false,
+		Syslog:      false,
+		Pools: []XmrigPoolConfig{
+			{
+				URL:       poolEndpoint,
+				User:      walletAddress,
+				Pass:      "Stellite GUI Miner",
+				Keepalive: true,
+				Nicehash:  false,
+				Variant:   1,
+			},
+		},
+		API: XmrigAPIConfig{
+			Port:        16000,
+			AccessToken: nil,
+			WorkerID:    nil,
+		},
+	}
+
+	return config
 }

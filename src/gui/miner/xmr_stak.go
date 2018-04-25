@@ -5,16 +5,19 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"path/filepath"
+	"runtime"
 )
 
 // XmrStak implements the miner interface for the xmr-stak miner
 // https://github.com/fireice-uk/xmr-stak
 type XmrStak struct {
 	Base
-	name         string
-	endpoint     string
-	lastHashrate float64
+	name             string
+	endpoint         string
+	lastHashrate     float64
+	resultStatsCache XmrStakResponse
 }
 
 // XmrStakResponse contains the data from xmr-stak API
@@ -71,7 +74,8 @@ func NewXmrStak(config Config) (*XmrStak, error) {
 // WriteConfig writes the miner's configuration in the xmr-stak format
 func (miner *XmrStak) WriteConfig(
 	poolEndpoint string,
-	walletAddress string) error {
+	walletAddress string,
+	processingConfig ProcessingConfig) error {
 
 	// For xmr-stak, we assume some values for now. I'll extend this in
 	// future releases, for now it's fine
@@ -90,7 +94,34 @@ func (miner *XmrStak) WriteConfig(
 	if err != nil {
 		return err
 	}
+
+	// With xmr-stak you have the option to disable CPU mining, in that case
+	// we can't just check for 0. If the cpu.txt file exists then a zero
+	// means we're disabling it, else this is firstrun
+	_, err = os.Stat(filepath.Join(miner.Base.executablePath, "cpu.txt"))
+	if err == nil {
+		// File exists, we may disable
+		err = ioutil.WriteFile(
+			filepath.Join(miner.Base.executablePath, "cpu.txt"),
+			[]byte(miner.cpuConfig(processingConfig.Threads)),
+			0644)
+		if err != nil {
+			return err
+		}
+	}
+
 	return nil
+}
+
+// GetProcessingConfig returns the current miner processing config
+// TODO: Currently only CPU threads, extend this to full CPU/GPU config
+func (miner *XmrStak) GetProcessingConfig() ProcessingConfig {
+	return ProcessingConfig{
+		MaxUsage:   0,
+		Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
+		MaxThreads: uint16(runtime.NumCPU()),
+		Type:       miner.name,
+	}
 }
 
 // GetName returns the name of the miner
@@ -149,11 +180,12 @@ func (miner *XmrStak) GetStats() (Stats, error) {
 		SharesBad:         xmrStats.Results.SharesTotal - xmrStats.Results.SharesGood,
 		Errors:            errors,
 	}
+	miner.resultStatsCache = xmrStats
 	return stats, nil
 }
 
 // defaultConfig returns the base xmr-stak config
-// xmr-stak uses an abomination of JSON that doesn't have a compatible Go
+// xmr-stak uses a JSON format that doesn't have a compatible Go
 // parser which is why I'm doing this as text or templates
 func (miner *XmrStak) defaultConfig() string {
 	return `
@@ -320,7 +352,7 @@ func (miner *XmrStak) defaultConfig() string {
 }
 
 // buildPoolConfig returns the XmrStak pool config to be written to file
-// xmr-stak uses an abomination of JSON that doesn't have a compatible Go
+// xmr-stak uses a JSON format that doesn't have a compatible Go
 // parser which is why I'm doing this as text or templates
 func (miner *XmrStak) buildPoolConfig(
 	poolEndpoint string,
@@ -333,4 +365,53 @@ func (miner *XmrStak) buildPoolConfig(
 ],
 "currency" : "stellite",
 		`
+}
+
+// cpuConfig returns the XmrStak CPU config to be written to file based on
+// the amount of threads
+// xmr-stak uses a JSON format that doesn't have a compatible Go
+// parser which is why I'm doing this as text or templates
+func (miner *XmrStak) cpuConfig(threads uint16) string {
+
+	var threadsConfig string
+	for i := uint16(0); i < threads; i++ {
+		threadsConfig += fmt.Sprintf("{ \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %d },", i)
+	}
+
+	return `
+	/*
+	 * Thread configuration for each thread. Make sure it matches the number above.
+	 * low_power_mode - This can either be a boolean (true or false), or a number between 1 to 5. When set to true,
+	 *                  this mode will double the cache usage, and double the single thread performance. It will
+	 *                  consume much less power (as less cores are working), but will max out at around 80-85% of
+	 *                  the maximum performance. When set to a number N greater than 1, this mode will increase the
+	 *                  cache usage and single thread performance by N times.
+	 *
+	 * no_prefetch -    Some sytems can gain up to extra 5% here, but sometimes it will have no difference or make
+	 *                  things slower.
+	 *
+	 * affine_to_cpu -  This can be either false (no affinity), or the CPU core number. Note that on hyperthreading
+	 *                  systems it is better to assign threads to physical cores. On Windows this usually means selecting
+	 *                  even or odd numbered cpu numbers. For Linux it will be usually the lower CPU numbers, so for a 4
+	 *                  physical core CPU you should select cpu numbers 0-3.
+	 *
+	 * On the first run the miner will look at your system and suggest a basic configuration that will work,
+	 * you can try to tweak it from there to get the best performance.
+	 *
+	 * A filled out configuration should look like this:
+	 * "cpu_threads_conf" :
+	 * [
+	 *      { "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 0 },
+	 *      { "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 1 },
+	 * ],
+	 * If you do not wish to mine with your CPU(s) then use:
+	 * "cpu_threads_conf" :
+	 * null,
+	 */
+
+	"cpu_threads_conf" :
+	[
+` + threadsConfig + `
+	],
+`
 }

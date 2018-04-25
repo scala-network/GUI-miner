@@ -28,14 +28,16 @@ func main() {
 
 	// We need to get the acutal working directory to ensure proper operation
 	// on all platforms
-	workingDir, err := os.Executable()
+
+	// TODO: Add Back HACK workingDir, err := os.Executable()
+	workingDir, err := os.Getwd()
 	if err != nil {
 		log.Fatalf("Can't read current directory: %s", err)
 	}
-	workingDir = filepath.Dir(workingDir)
+	/*TODO workingDir = filepath.Dir(workingDir)
 	if err != nil {
 		log.Fatalf("Can't format current directory: %s", err)
-	}
+	}*/
 	if runtime.GOOS == "darwin" {
 		// Mac executes from within the .app/Content/MacOS folder, this moves
 		// the folder back to the actual app

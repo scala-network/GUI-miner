@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="app.css"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
     <link href="animate.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="nice-select.css">
+    <link rel="stylesheet" href="app.css"/>
     <script src="jquery.min.js"></script>
     <script src="jquery.animatecss.js"></script>
     <script src="chart.bundle.min.js"></script>
+    <script src="jquery.nice-select.min.js"></script>
 </head>
 <body class="miner">
   <a href="#" class="settings-button"><i class="fa fa-gear"/></i></a>
@@ -256,7 +258,7 @@ Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeq
       made with <i class="fa fa-heart"/></i> across the globe
     </div>
   </div>
-  <div id="settings" class="settings dn">
+  <div id="settings" class="settings">
     <div class="header">
       <h2>Miner Settings</h2>
     </div>
@@ -266,6 +268,35 @@ Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeq
       </p>
       <div>
         <input id="settings_mining_address" type="text" placeholder="Your Stellite address" value="current address"/>
+      </div>
+    </div>
+    <div class="section max-usage">
+      <p>
+        Mining power
+      </p>
+      <div>
+        I'd like to use
+        <div class="select-positioner">
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
+        of my 4 cores for mining
+        <div class="xmrig-extra">
+          at a maximum of
+          <div class="select-positioner">
+            <select>
+              <option>10%</option>
+              <option>20%</option>
+              <option>30%</option>
+              <option>40%</option>
+            </select>
+          </div>
+          CPU usage
+        </div>
       </div>
     </div>
     <div class="section pools">
@@ -286,7 +317,7 @@ Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeq
     </div>
   </div>
 
-  <div id="help" class="help">
+  <div id="help" class="help dn">
     <div class="header">
       <h2>What's next?</h2>
     </div>
@@ -333,6 +364,10 @@ Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeq
   <script src="app.js"></script>
   <script type="text/javascript">
     //app.init();
+    //
+    $(document).ready(function(){
+      $('select').niceSelect();
+    });
 
     var chart = $("#hashrate_chart");
     chart.attr('width', $('.chart').width());
@@ -397,7 +432,7 @@ Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeq
         }
         catch(e){ }
     }
-
+    /*
     window.setInterval(function(){
       console.log("GetStats");
 
@@ -415,6 +450,7 @@ Se3z4zz9Fgp25NrfA16KcePctEFAbupVzNieg9CmU4dWV1Z2mJ1ZaYjW9R3cMtrTZEYaHrFvxQH25aeq
         calcEstimateProfit(hashrate);
       });
     }, 2000);
+    */
   </script>
 </body>
 </html>

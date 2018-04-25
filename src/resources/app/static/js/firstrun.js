@@ -8,7 +8,7 @@ let firstrun = {
         asticode.modaler.init();
         asticode.notifier.init();
 
-        bindExternalLinks();
+        shared.bindExternalLinks();
 
         // Wait for the ready signal
         document.addEventListener('astilectron-ready', function() {
@@ -35,7 +35,7 @@ let firstrun = {
         var parsed = $.parseJSON(message.payload)
         switch (message.name) {
           case "fatal_error":
-            showError(parsed.Data);
+            shared.showError(parsed.Data);
         }
       });
     },
@@ -66,7 +66,7 @@ let firstrun = {
           }
           // Just make sure they're not using integrated addresses or
           // invalid ones
-          if (validateWalletAddress(address) == false)
+          if (shared.validateWalletAddress(address) == false)
           {
             alert("Please enter a valid Stellite address starting with 'Se'");
             return false;

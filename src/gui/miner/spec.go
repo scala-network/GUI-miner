@@ -13,6 +13,22 @@ type Config struct {
 	Endpoint string `json:"endpoint"`
 }
 
+// ProcessingConfig holds the config for the miner's processing setup
+// TODO: Right now this is only for CPU threads and will be extended into
+// full CPU/GPU config
+type ProcessingConfig struct {
+	// Type of miner
+	Type string `json:"type"`
+	// Threads is the amount of CPU threads
+	Threads uint16 `json:"threads"`
+	// MaxThreads is the maximum threads as read by runtime.NumCPU
+	MaxThreads uint16 `json:"max_threads"`
+	// MaxUsage is the maximum CPU usage in percentage the miner should
+	// attempt to use.
+	// Currently only supported by xmrig CPU backend
+	MaxUsage uint8 `json:"max_usage"`
+}
+
 // Stats contains the miner statistics required by the front-end
 type Stats struct {
 	// Hashrate is the current miner hashrate

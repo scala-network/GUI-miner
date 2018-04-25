@@ -3,7 +3,7 @@
     GUI Miner stylesheet
     Interface size is by default 1050px x 700px
 
-    'outs: ../src/resources/app/static/css/main.css, sourcemap: false, compress: true'
+    'outs: ../wip/interface/app.css, sourcemap: false, compress: true'
 */
 
 @desktop:  ~"only screen and (min-width: 600px)"; /* Mobile view / not a grid anymore */
@@ -198,23 +198,24 @@ body.miner {
 
     &.help {
       top: 10px;
-      right: 125px;
+      right: 115px;
     }
 
     &.settings {
       top: 10px;
-      right: 95px;
+      right: 85px;
     }
 
     &.minimize {
       top: 13px;
       right: 45px;
-      font-size: 18px;
+      font-size: 14px;
     }
 
     &.exit {
       top: 10px;
       right: 15px;
+      font-size: 18px;
     }
   }
 
@@ -452,12 +453,74 @@ body.miner {
       text-align: center;
     }
 
+    div.select-positioner {
+      position: relative;
+      display: inline-block;
+      top: 9px;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+
+    div.nice-select {
+      background-color: @color-blue-dark;
+      border-color: @color-stellite-purple-dark;
+      height: 28px;
+      line-height: 26px;
+      ul.list {
+        background-color: @color-blue-dark;
+        border: 1px solid @color-blue-dark-lighter;
+
+        li.option {
+          &:hover,
+          &:focus,
+          &.focus,
+          &.selected {
+            background-color: @color-stellite-purple-dark;
+          }
+        }
+      }
+    }
+
     div.section {
       text-align: center;
-      padding-bottom: 50px;
+      padding-bottom: 12px;
+
+      &.max-usage {
+        div.xmrig-extra {
+          display: inline;
+        }
+
+        a {
+          color: @color-turquoise-light;
+          .opacity(0.6);
+
+          &:hover {
+            .opacity(1.0);
+          }
+        }
+      }
 
       p {
+        text-transform: uppercase;
+        font-size: 17px;
         padding: 10px;
+
+        &.tip {
+          font-size: 13px;
+          text-transform: none;
+          margin-bottom: 0px;
+          padding-bottom: 0px;
+
+          a {
+            color: @color-turquoise-light;
+            font-size: 13px;
+            .opacity(0.6);
+
+            &:hover {
+              .opacity(1.0);
+            }
+          }
+        }
       }
       &.address {
         #settings_mining_address {
@@ -467,6 +530,8 @@ body.miner {
       }
 
       &.action {
+        margin-bottom: 0px;
+        padding-bottom: 0px;
         a.button {
           margin: 10px;
         }

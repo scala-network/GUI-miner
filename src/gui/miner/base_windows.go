@@ -24,8 +24,8 @@ func (b *Base) Start() error {
 	commandDir := b.executablePath
 	b.command = exec.Command(commandName, params...)
 	b.command.Dir = commandDir
-	// This hides the syscall section on Linux where SysProcAttr defines different
-	// attributes
+	// This conditional compile file hides the syscall section on Linux where
+	// SysProcAttr defines different attributes
 	b.command.SysProcAttr = &syscall.SysProcAttr{
 		HideWindow: true,
 	}

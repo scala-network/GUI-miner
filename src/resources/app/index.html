@@ -7,16 +7,17 @@
     <link rel="stylesheet" href="static/lib/astinotifier/astinotifier.css">
     <link rel="stylesheet" href="static/lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="static/lib/animate.css">
+    <link rel="stylesheet" href="static/lib/nice-select.css">
     <link rel="stylesheet" href="static/css/main.css"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
     <script>window.$ = window.jQuery = require('./static/lib/jquery.min.js');</script>
 </head>
 <body class="miner">
   <div class="draggable"></div>
-  <a href="#" class="header-button settings"><i class="fa fa-gear"/></i></a>
-  <a href="#" class="header-button help"><i class="fa fa-question-circle-o"/></i></a>
-  <a href="#" class="header-button minimize"><i class="fa fa-window-minimize"/></i></a>
-  <a href="#" class="header-button exit"><i class="fa fa-times"/></i></a>
+  <a href="#" title="Miner settings" class="header-button settings"><i class="fa fa-gear"/></i></a>
+  <a href="#" title="Help and what's next" class="header-button help"><i class="fa fa-question-circle-o"/></i></a>
+  <a href="#" title="Minimize" class="header-button minimize"><i class="fa fa-window-minimize"/></i></a>
+  <a href="#" title="Exit miner" class="header-button exit"><i class="fa fa-times"/></i></a>
   <div class="grid">
     <div class="info">
       <div class="logo">
@@ -231,9 +232,6 @@ Updating
             </div>
           </div>
         </div>
-        <!-- <a href="#" class="button start">Start Mining</a>
-        <a href="#" class="button stop">Stop Mining</a> -->
-
       </div>
       <div id="pool" class="current">
         <div class="pool">
@@ -285,6 +283,45 @@ Updating
       </p>
       <div>
         <input id="settings_mining_address" type="text" placeholder="Your Stellite address"/>
+      </div>
+    </div>
+    <div class="section max-usage">
+      <p>
+        Mining power
+      </p>
+      <div class="cpu-tuning">
+        I'd like to use
+        <div class="select-positioner" id="threads">
+          <select>
+            <option value="1" selected>1</option>
+          </select>
+        </div>
+        of my <span id="max_threads">1</span> CPU thread<span id="max_threads_multiple">s</span>
+        <div class="xmrig-extra dn">
+          at a maximum of
+          <div class="select-positioner" id="max_cpu">
+            <select>
+              <option value="10">10%</option>
+              <option value="20">20%</option>
+              <option value="30">30%</option>
+              <option value="40">40%</option>
+              <option value="50">50%</option>
+              <option value="60">60%</option>
+              <option value="70">70%</option>
+              <option value="80">80%</option>
+              <option value="90">90%</option>
+              <option value="100">100%</option>
+            </select>
+          </div>
+          CPU usage
+        </div>
+         for mining
+      </div>
+      <p class="description tip cpu-tuning">
+        Lower values will ensure your computer stays usable while mining. Join <a href="https://discord.gg/8PhF342">#mining</a> to learn more.
+      </p>
+      <div class="gpu-tuning dn">
+        You are running a GPU only miner. To tune the values open the miner/config.json file. Join <a href="https://discord.gg/8PhF342">#mining</a> to learn more.
       </div>
     </div>
     <div class="section pools">
@@ -352,60 +389,11 @@ Updating
   <script src="static/lib/astimodaler/astimodaler.js"></script>
   <script src="static/lib/astinotifier/astinotifier.js"></script>
   <script src="static/lib/chart.bundle.min.js"></script>
+  <script src="static/lib/jquery.nice-select.min.js"></script>
   <script src="static/js/shared.js"></script>
   <script src="static/js/app.js"></script>
   <script type="text/javascript">
     app.init();
-
-    var chart = $("#hashrate_chart");
-    chart.attr('width', $('.chart').width());
-    chart.attr('height', $('.chart').height());
-
-    var hashrateChart = new Chart(chart, {
-      type: 'line',
-      data: {
-        labels: ["5 minutes ago", "4 minutes ago", "3 minutes ago", "2 minutes ago", "1 minute ago", "Now"],
-        datasets: [{
-          label: 'H/s',
-          data: [0,0,0,0,0,0],
-          backgroundColor: [
-            'rgba(13, 17, 45, 1.0)'
-          ],
-          borderColor: [
-            'rgba(232,212,0,9)'
-          ],
-          borderWidth: 1,
-        }]
-      },
-      options: {
-        tooltips: {
-          mode: 'index',
-          intersect: false,
-        },
-        legend: {
-          display: false,
-        },
-        elements: {
-          line: {
-            tension: 0, // disables bezier curves
-          },
-        },
-        layout: {
-          padding: {
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0
-          }
-        },
-        scales:
-        {
-          yAxes: [{
-            //display: false
-          }]
-        }
-      }
-    });
   </script>
 </body>
 </html>

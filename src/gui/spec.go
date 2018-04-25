@@ -21,6 +21,14 @@ type ElectronMessage struct {
 	Data string `json:"data"`
 }
 
+// frontendConfig is received from the miner's config page
+type frontendConfig struct {
+	Address string `json:"address"`
+	Pool    int    `json:"pool"`
+	Threads uint16 `json:"threads"`
+	MaxCPU  uint8  `json:"max_cpu"`
+}
+
 // PoolData contains the parsed JSON data from the pool list
 type PoolData struct {
 	ID             int    `json:"id"`

@@ -8,7 +8,8 @@ let app = {
         asticode.modaler.init();
         asticode.notifier.init();
 
-        bindExternalLinks();
+        shared.bindExternalLinks();
+        app.setupChart();
 
         // Wait for the ready signal
         document.addEventListener('astilectron-ready', function() {
@@ -30,7 +31,7 @@ let app = {
         var parsed = $.parseJSON(message.payload)
         switch (message.name) {
           case "fatal_error":
-            showError(parsed.Data);
+            shared.showError(parsed.Data);
             break;
           case "network_stats":
             $('#circulation').html(parsed.circulation);
@@ -56,11 +57,11 @@ let app = {
             $('#miner_address').html(parsed.address);
             // Move the graph, we only refresh it once a minute
             if (parsed.update_graph == true) {
-              hashrateChart.data.datasets.forEach((dataset) => {
+              app.hashrateChart.data.datasets.forEach((dataset) => {
                 dataset.data.shift();
                 dataset.data.push(parsed.hashrate);
               });
-              hashrateChart.update();
+              app.hashrateChart.update();
             }
 
             if (parsed.errors !== null && parsed.errors.length > 0) {
@@ -106,7 +107,7 @@ let app = {
             $('#start_stop').html('Stop mining');
           });
         }
-        e.stopPropogation();
+        e.stopPropagation();
         return false;
       });
 
@@ -143,7 +144,9 @@ let app = {
       $('#update').bind('click', function(){
         var configData = {
           address: $('#settings_mining_address').val(),
-          pool: $('#pool_list').find('.selected').data('id')
+          pool: $('#pool_list').find('.selected').data('id'),
+          threads: parseInt($('#threads option:selected').attr('value')),
+          max_cpu: parseInt($('#max_cpu option:selected').attr('value'))
         };
         if (configData.address == '') {
           alert("You must enter your address");
@@ -151,7 +154,7 @@ let app = {
         }
         // Just make sure they're not using integrated addresses or
         // invalid ones
-        if (validateWalletAddress(configData.address) == false)
+        if (shared.validateWalletAddress(configData.address) == false)
         {
           alert("Please enter a valid Stellite address starting with 'Se'");
           return false;
@@ -171,6 +174,50 @@ let app = {
     },
     loadSettings: function() {
       $('#settings_mining_address').val($('#miner_address').html());
+
+      // get-processing-config get the current miner processing config
+      astilectron.sendMessage({name: "get-processing-config", payload: ""}, function(message) {
+        var parsed = $.parseJSON(message.payload)
+        $('#max_threads').html(parsed.max_threads);
+        if (parsed.max_threads <= 1) {
+          $('#max_threads_multiple').hide();
+        } else $('#max_threads_multiple').show();
+
+        if (parsed.type == 'xmrig') {
+          $('.xmrig-extra').show();
+        } else $('.xmrig-extra').hide();
+
+        // For xmrig's GPU only setup we don't show the CPU tuning options
+        if (parsed.type != "xmrig-gpu") {
+          // TODO: Do this in a better way, i.e - not as text
+          var threadOptions = "<select>";
+          var startThreadCount = 1;
+          if (parsed.type == 'xmr-stak') {
+            startThreadCount = 0;
+          }
+          for (var i = startThreadCount; i <= parsed.max_threads; i++) {
+            if (i == parsed.threads) {
+              threadOptions += '<option value="' + i + '" selected>' + i + '</option>';
+            } else {
+              threadOptions += '<option value="' + i + '">' + i +'</option>';
+            }
+          }
+          threadOptions += "</select>";
+          $('#threads').html(threadOptions);
+          $('#threads select').niceSelect();
+          // Not set means 100%
+          if (parsed.max_usage == 0) {
+            $('#max_cpu select').find('option[value=100]').attr('selected','selected');
+          }
+          else $('#max_cpu select').find('option[value=' + parsed.max_usage + ']').attr('selected','selected');
+          $('#max_cpu select').niceSelect();
+        } else {
+          // GPU only
+          $('.cpu-tuning').hide();
+          $('.gpu-tuning').show();
+        }
+      });
+
       // The pool-list command returns the pool list for the GUI miner
       astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
         $('#pool_list').html(message.payload);
@@ -186,5 +233,56 @@ let app = {
       $('#miner_shares').html('0');
       $('#miner_shares_bad').html('0');
       $('#miner_payout').html('0.00 XTL');
+    },
+    setupChart: function() {
+      var chart = $("#hashrate_chart");
+      chart.attr('width', $('.chart').width());
+      chart.attr('height', $('.chart').height());
+
+      app.hashrateChart = new Chart(chart, {
+        type: 'line',
+        data: {
+          labels: ["5 minutes ago", "4 minutes ago", "3 minutes ago", "2 minutes ago", "1 minute ago", "Now"],
+          datasets: [{
+            label: 'H/s',
+            data: [0,0,0,0,0,0],
+            backgroundColor: [
+              'rgba(13, 17, 45, 1.0)'
+            ],
+            borderColor: [
+              'rgba(232,212,0,9)'
+            ],
+            borderWidth: 1,
+          }]
+        },
+        options: {
+          tooltips: {
+            mode: 'index',
+            intersect: false,
+          },
+          legend: {
+            display: false,
+          },
+          elements: {
+            line: {
+              tension: 0, // disables bezier curves
+            },
+          },
+          layout: {
+            padding: {
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0
+            }
+          },
+          scales:
+          {
+            yAxes: [{
+              //display: false
+            }]
+          }
+        }
+      });
     },
 };
