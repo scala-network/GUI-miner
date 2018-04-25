@@ -11,6 +11,13 @@ let app = {
         shared.bindExternalLinks();
         app.setupChart();
 
+        if (shared.isMac) {
+          $('.minimize').hide();
+          $('.exit').hide();
+          $('.settings').css('right', '15px');
+          $('.help').css('right', '45px');
+        }
+
         // Wait for the ready signal
         document.addEventListener('astilectron-ready', function() {
           // Start the miner on start

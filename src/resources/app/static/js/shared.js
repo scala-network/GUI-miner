@@ -36,5 +36,8 @@ let shared = {
     $(document).on('click', 'a[href^="#"]', function(event) {
       event.preventDefault();
     });
+  },
+  isMac: function() {
+    return window.navigator.platform.toLowerCase().includes("mac");
   }
 }

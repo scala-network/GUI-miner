@@ -90,6 +90,18 @@ func New(
 	logrus.SetLevel(logrus.InfoLevel)
 
 	logrus.SetOutput(os.Stdout)
+
+	// Create the window options
+	windowOptions := astilectron.WindowOptions{
+		// If frame is false, the window frame is removed. If isDebug is true,
+		// we show the frame to have debugging options available
+		Frame:           astilectron.PtrBool(isDebug),
+		BackgroundColor: astilectron.PtrStr("#0B0C22"),
+		Center:          astilectron.PtrBool(true),
+		Height:          astilectron.PtrInt(700),
+		Width:           astilectron.PtrInt(1175),
+	}
+
 	if isDebug {
 		logrus.SetLevel(logrus.DebugLevel)
 		debugLog, err := os.OpenFile(
@@ -133,6 +145,9 @@ func New(
 				},
 			},
 		})
+
+		windowOptions.Frame = astilectron.PtrBool(isDebug)
+		windowOptions.TitleBarStyle = astilectron.PtrStr("hidden")
 	}
 
 	// Setting the WithFields now will ensure all log entries from this point
@@ -151,15 +166,7 @@ func New(
 			AppIconDarwinPath:  "resources/icon.icns",
 			AppIconDefaultPath: "resources/icon.png",
 		},
-		WindowOptions: &astilectron.WindowOptions{
-			// If frame is false, the window frame is removed. If isDebug is true,
-			// we show the frame to have debugging options available
-			Frame:           astilectron.PtrBool(isDebug),
-			BackgroundColor: astilectron.PtrStr("#0B0C22"),
-			Center:          astilectron.PtrBool(true),
-			Height:          astilectron.PtrInt(700),
-			Width:           astilectron.PtrInt(1175),
-		},
+		WindowOptions: &windowOptions,
 		// TODO: Fix this tray to display nicely
 		/*TrayOptions: &astilectron.TrayOptions{
 			Image:   astilectron.PtrStr("/static/i/miner-logo.png"),
