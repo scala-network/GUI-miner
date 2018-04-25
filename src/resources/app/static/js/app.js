@@ -1,3 +1,6 @@
+/*
+  This handles the miner
+ */
 const remote = require('electron').remote;
 let app = {
     init: function() {
@@ -5,17 +8,7 @@ let app = {
         asticode.modaler.init();
         asticode.notifier.init();
 
-        //open links externally by default
-        var shell = require('electron').shell;
-        $(document).on('click', 'a[href^="http"]', function(event) {
-            event.preventDefault();
-            shell.openExternal(this.href);
-        });
-        // This stops electron from updating the window title when a link
-        // is clicked
-        $(document).on('click', 'a[href^="#"]', function(event) {
-            event.preventDefault();
-        });
+        bindExternalLinks();
 
         // Wait for the ready signal
         document.addEventListener('astilectron-ready', function() {

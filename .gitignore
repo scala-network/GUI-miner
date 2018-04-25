@@ -7,3 +7,6 @@ bin
 vendor*
 src/vendor*
 windows.syso
+miner/*
+config.json
+*.log

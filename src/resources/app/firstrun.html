@@ -12,8 +12,12 @@
     <script>window.$ = window.jQuery = require('./static/lib/jquery.min.js');</script>
 </head>
 <body class="firstrun">
+  <div class="draggable"></div>
   <div class="centered">
     <div class="welcome main-section">
+      <div class="chat-box step" id="intro_anim_logo">
+        <img src="static/i/miner-logo.png" />
+      </div>
       <div class="chat-box step dn" id="intro_anim_a">
         Hey there <span id="username"></span>!
       </div>
@@ -168,6 +172,7 @@
       </div>
     </div>
   </div>
+  <a href="#" id="exit" class="dn">Cancel and exit</a>
   <script src="static/lib/astiloader/astiloader.js"></script>
   <script src="static/lib/astimodaler/astimodaler.js"></script>
   <script src="static/lib/astinotifier/astinotifier.js"></script>

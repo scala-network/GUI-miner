@@ -23,3 +23,17 @@ function validateWalletAddress(address) {
   */
  return /^(Se)\d[0-9a-zA-Z]{94}$/.test(address);
 }
+
+// bindExternalLinks ensures external links are opened outside of Electron
+function bindExternalLinks() {
+  var shell = require('electron').shell;
+  $(document).on('click', 'a[href^="http"]', function(event) {
+      event.preventDefault();
+      shell.openExternal(this.href);
+  });
+  // This stops electron from updating the window title when a link
+  // is clicked
+  $(document).on('click', 'a[href^="#"]', function(event) {
+      event.preventDefault();
+  });
+}

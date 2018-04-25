@@ -1,23 +1,14 @@
 /*
   This handles the initial user setup
  */
+const remote = require('electron').remote;
 let firstrun = {
     init: function() {
         asticode.loader.init();
         asticode.modaler.init();
         asticode.notifier.init();
 
-        //open links externally by default
-        var shell = require('electron').shell;
-        $(document).on('click', 'a[href^="http"]', function(event) {
-            event.preventDefault();
-            shell.openExternal(this.href);
-        });
-        // This stops electron from updating the window title when a link
-        // is clicked
-        $(document).on('click', 'a[href^="#"]', function(event) {
-            event.preventDefault();
-        });
+        bindExternalLinks();
 
         // Wait for the ready signal
         document.addEventListener('astilectron-ready', function() {
@@ -99,6 +90,10 @@ let firstrun = {
         });
       });
 
+      $('#exit').bind('click', function(){
+        remote.getCurrentWindow().close();
+      });
+
 
       $(document).on('click', '.pool', function(){
         $('.pool').removeClass('selected');
@@ -108,18 +103,22 @@ let firstrun = {
     },
     animateIntro: function() {
       // A couple of steps to get you set up
-      /*$('#intro_anim_a').fadeIn(2500, function(){
-        $('#intro_anim_a').fadeOut(1000, function(){
-          $('#intro_anim_b').fadeIn(2000, function(){
-            $('#intro_anim_b').fadeOut(1000, function(){
-              $('#intro_anim_c').fadeIn(1500, function(){
-                $('#initial-wallet').animateCss('fadeInUp');
+      $('#intro_anim_logo').fadeOut(1000, function() {
+        $('#intro_anim_a').fadeIn(2500, function(){
+          $('#exit').fadeIn(1000);
+          $('#intro_anim_a').fadeOut(1000, function(){
+            $('#intro_anim_b').fadeIn(2000, function(){
+              $('#intro_anim_b').fadeOut(1000, function(){
+                $('#intro_anim_c').fadeIn(1500, function(){
+                  $('#initial-wallet').animateCss('fadeInUp');
+                });
               });
             });
           });
         });
-      });*/
-      $('#intro_anim_a').fadeIn(250, function(){
+      });
+      /*$('#intro_anim_a').fadeIn(250, function(){
+        $('#exit').fadeIn(1000);
         $('#intro_anim_a').fadeOut(100, function(){
           $('#intro_anim_b').fadeIn(200, function(){
             $('#intro_anim_b').fadeOut(100, function(){
@@ -129,7 +128,7 @@ let firstrun = {
             });
           });
         });
-      });
+      });*/
     }
 
 };

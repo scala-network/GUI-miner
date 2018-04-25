@@ -605,8 +605,24 @@ body.firstrun {
     right: 0;
 
     margin: auto;
+  }
 
-    //border: 1px solid #ff0000;
+  #exit {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: #D59D0E;
+    z-index: 1001;
+    font-size: 14px;
+    text-transform: uppercase;
+    .opacity(0.6);
+
+    &:hover {
+      .opacity(0.8);
+    }
   }
 
   div.chat-box {
@@ -629,12 +645,19 @@ body.firstrun {
     }
   }
 
+  #intro_anim_logo {
+    text-align: center;
+    img {
+      width: 200px;
+    }
+  }
+
   div.setup-wallet {
     div.selection {
       margin-top: 20px;
       a.wallet {
         margin: 15px;
-        height: 155px;
+        height: 170px;
         width: 400px;
         color: #fafafa;
         border: 1px solid @color-stellite-purple-dark;

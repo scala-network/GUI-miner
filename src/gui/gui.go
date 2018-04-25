@@ -472,7 +472,6 @@ func (gui *GUI) updateNetworkStats() {
 		gui.logger.Warning("No config set yet")
 		return
 	}
-	fmt.Println("MID", gui.config.Mid)
 	stats, err := gui.GetStats(gui.config.PoolID, gui.lastHashrate, gui.config.Mid)
 	if err != nil {
 		gui.logger.Warningf("Unable to get network stats: %s", err)
