@@ -11,7 +11,7 @@ let app = {
         shared.bindExternalLinks();
         app.setupChart();
 
-        if (shared.isMac) {
+        if (shared.isMac()) {
           $('.minimize').hide();
           $('.exit').hide();
           $('.settings').css('right', '15px');
@@ -39,6 +39,18 @@ let app = {
         switch (message.name) {
           case "fatal_error":
             shared.showError(parsed.Data);
+            break;
+          case "ann":
+            let errDiv = document.createElement("div");
+            errDiv.innerHTML = "<h2>Announcement</h2>" +
+              "<span>" + parsed.date + "</span>" +
+              "<p>" + parsed.text + "</p>" +
+              "<div>" +
+              "<a target='_blank' href='" + parsed.link + "'>Visit announcement</a>" +
+              "</div>";
+            $('.astimodaler-body').addClass('ann');
+            asticode.modaler.setContent(errDiv);
+            asticode.modaler.show();
             break;
           case "network_stats":
             $('#circulation').html(parsed.circulation);

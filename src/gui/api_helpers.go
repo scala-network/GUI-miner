@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"time"
 )
 
 // GetPoolList returns the list of pools available to the GUI miner
@@ -109,4 +110,26 @@ func (gui *GUI) GetStats(
 		return "", err
 	}
 	return string(statBytes), nil
+}
+
+// GetAnnouncement returns the announcement if available
+func (gui *GUI) GetAnnouncement() (Announcement, error) {
+	var ann Announcement
+	resp, err := http.Get(fmt.Sprintf("%s/announcement", gui.config.APIEndpoint))
+	if err != nil {
+		return ann, err
+	}
+	err = json.NewDecoder(resp.Body).Decode(&ann)
+	if err != nil {
+		return ann, err
+	}
+
+	// Format tje date string into soemthing we can use
+	ann.Date, err = time.Parse("2006-01-02 15:04:05", ann.DateString)
+	if err != nil {
+		// To have the date not be screwed on the interface, just set it to now
+		ann.Date = time.Now()
+	}
+
+	return ann, nil
 }

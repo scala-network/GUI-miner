@@ -41,6 +41,10 @@ type GUI struct {
 	// networkStatsTicker controls the interval for fetching network, trading
 	// and other stats
 	networkStatsTicker *time.Ticker
+	// annTicker controls the interval for checking for announements
+	annTicker *time.Ticker
+	// annProcessed keeps track of announcements already processed and displayed
+	annProcessed map[int]bool
 }
 
 // New creates a new instance of the miner application
@@ -58,8 +62,9 @@ func New(
 	}
 
 	gui := GUI{
-		config:     config,
-		workingDir: workingDir,
+		config:       config,
+		workingDir:   workingDir,
+		annProcessed: make(map[int]bool),
 	}
 
 	// If no config is specified then this is the first run
@@ -190,6 +195,12 @@ func New(
 					gui.updateNetworkStats()
 				}
 			}()
+			gui.annTicker = time.NewTicker(time.Second * 5)
+			go func() {
+				for _ = range gui.annTicker.C {
+					gui.checkAnnouncement()
+				}
+			}()
 			// Trigger a network stats update as soon as we start
 			gui.updateNetworkStats()
 			return nil
@@ -214,6 +225,7 @@ func (gui *GUI) Run() error {
 	}
 	gui.miningStatsTicker.Stop()
 	gui.networkStatsTicker.Stop()
+	gui.annTicker.Stop()
 	return nil
 }
 
@@ -560,10 +572,55 @@ func (gui *GUI) updateMiningStatsLoop() {
 	}
 }
 
+// checkAnnouncement checks for a new announcement and sends it to the
+// front-end if one is available
+func (gui *GUI) checkAnnouncement() {
+	ann, err := gui.GetAnnouncement()
+	if err != nil {
+		gui.logger.Warningf("Unable to fetch announcements: %s", err)
+		return
+	}
+	if ann.Ann == false {
+		gui.logger.Debug("No new announcements are available")
+		return
+	}
+
+	gui.logger.WithFields(logrus.Fields{
+		"id":   ann.ID,
+		"date": ann.Date,
+		"link": ann.Link,
+	}).Debug("Announcement fetched")
+
+	// Only show announcements we haven't shown before in this session
+	if _, ok := gui.annProcessed[ann.ID]; !ok {
+		ann.DateString = fmt.Sprintf(
+			"%s at %s UTC",
+			ann.Date.Format("Monday January 2"),
+			ann.Date.Format("15:04"))
+		err = gui.sendElectronCommand("ann", ann)
+		if err != nil {
+			gui.logger.Warningf("Unable to send ANN to Electron: %s", err)
+		}
+		gui.annProcessed[ann.ID] = true
+
+		gui.logger.WithFields(logrus.Fields{
+			"id":   ann.ID,
+			"date": ann.Date,
+			"link": ann.Link,
+		}).Info("New announcement available")
+	} else {
+		gui.logger.WithFields(logrus.Fields{
+			"id":   ann.ID,
+			"date": ann.Date,
+			"link": ann.Link,
+		}).Debug("Announcement already displayed in this session")
+	}
+}
+
 // sendElectronCommand sends the given data to Electron under the command name
 func (gui *GUI) sendElectronCommand(
 	name string,
-	data ElectronMessage) error {
+	data interface{}) error {
 	dataBytes, err := json.Marshal(&data)
 	if err != nil {
 		return err

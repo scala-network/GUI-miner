@@ -2,6 +2,7 @@ package miner
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
@@ -136,8 +137,13 @@ func NewXmrig(config Config) (*Xmrig, error) {
 		name:     "xmrig",
 		endpoint: endpoint,
 	}
-	// mxrig appends either nvidia or amd to the miner if it's GPU only
-	if strings.Contains(config.Path, "nvidia") || strings.Contains(config.Path, "amd") {
+	// xmrig appends either nvidia or amd to the miner if it's GPU only
+	// just make sure that it's not the platform name containing amd64
+	if (strings.Contains(config.Path, "nvidia") ||
+		strings.Contains(config.Path, "amd")) &&
+		strings.Contains(config.Path, "amd64") == false {
+		fmt.Println("SETTING TO GPU")
+		fmt.Println(config.Path)
 		miner.isGPU = true
 		miner.name += "-gpu"
 	}

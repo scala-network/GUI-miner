@@ -6,9 +6,9 @@ let shared = {
   // showError takes an error message and display's it using the
   // bundled modal
   showError: function(message) {
-    alert("Testing " + val);
     let errDiv = document.createElement("div");
-    errDiv.innerHTML = parsed.data;
+    errDiv.innerHTML = "<h2>Something went wrong</h2>" +
+      "<p>" + message + "</p>";
     $('.astimodaler-body').addClass('error');
     asticode.modaler.setContent(errDiv);
     asticode.modaler.show();

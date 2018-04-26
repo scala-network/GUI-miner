@@ -105,7 +105,7 @@ let firstrun = {
       // A couple of steps to get you set up
       $('#intro_anim_logo').fadeOut(1000, function() {
         $('#intro_anim_a').fadeIn(2500, function(){
-          if (!shared.isMac) {
+          if (!shared.isMac()) {
             $('#exit').fadeIn(1000);
           }
           $('#intro_anim_a').fadeOut(1000, function(){

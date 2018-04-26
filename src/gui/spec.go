@@ -1,6 +1,10 @@
 package gui
 
-import "github.com/donovansolms/stellite-gui-miner/src/gui/miner"
+import (
+	"time"
+
+	"github.com/donovansolms/stellite-gui-miner/src/gui/miner"
+)
 
 // Config contains the basic configuration for a miner
 type Config struct {
@@ -75,4 +79,15 @@ type GlobalStats struct {
 	// PoolHTML is injected before sending the update to the front-end. Avoids
 	// having to send extra packets
 	PoolHTML string `json:"pool_html"`
+}
+
+// Announcement is the structure returned is an announcement is made
+// available
+type Announcement struct {
+	ID         int       `json:"id"`
+	Text       string    `json:"text"`
+	Link       string    `json:"link"`
+	DateString string    `json:"date"`
+	Date       time.Time `json:"-"`
+	Ann        bool      `json:"ann"`
 }
