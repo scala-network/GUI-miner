@@ -190,7 +190,7 @@ let app = {
           $('#update').html('Update');
           $('#miner_address').html("Updating")
           app.resetMinerStats();
-          asticode.notifier.info('Miner reconfigured');
+          asticode.notifier.success('Miner reconfigured');
         });
 
       });

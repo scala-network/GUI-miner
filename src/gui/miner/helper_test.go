@@ -37,9 +37,9 @@ func TestHumanizeTime(t *testing.T) {
 // TestHumanizeHashrate tests if the hashrate to H/s, KH/s and MH/s is correct
 func TestHumanizeHashrate(t *testing.T) {
 	tests := map[float64]string{
-		0:       "0 H/s",
-		1:       "1 H/s",
-		500.2:   "500 H/s",
+		0:       "0.00 H/s",
+		1:       "1.00 H/s",
+		500.2:   "500.20 H/s",
 		1000:    "1.00 KH/s",
 		1500:    "1.50 KH/s",
 		18300:   "18.30 KH/s",

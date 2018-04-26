@@ -342,6 +342,7 @@ func (gui *GUI) handleElectronCommands(
 		gui.startMiner()
 		gui.logger.Info("Miner reconfigured")
 
+		gui.lastHashrate = 0.00
 		// Trigger pool update
 		go gui.updateNetworkStats()
 
@@ -559,6 +560,7 @@ func (gui *GUI) updateMiningStatsLoop() {
 				// user doesn't think it doesn't work
 				gui.updateNetworkStats()
 			}
+			gui.lastHashrate = stats.Hashrate
 			stats.Address = gui.config.Address
 
 			if time.Since(lastGraphUpdate).Minutes() >= 1 {

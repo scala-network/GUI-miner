@@ -109,7 +109,8 @@ func (miner *XmrStak) WriteConfig(
 			return err
 		}
 	}
-
+	// Reset hashrate
+	miner.lastHashrate = 0.00
 	return nil
 }
 

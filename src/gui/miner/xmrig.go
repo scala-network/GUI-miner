@@ -187,7 +187,8 @@ func (miner *Xmrig) WriteConfig(
 	if err != nil {
 		return err
 	}
-
+	// Reset hashrate
+	miner.lastHashrate = 0.00
 	return nil
 }
 
