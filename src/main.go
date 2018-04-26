@@ -29,7 +29,7 @@ func main() {
 	// We need to get the acutal working directory to ensure proper operation
 	// on all platforms
 
-	// TODO: Add Back HACK os.Executable()
+	// TODO: Add Back HACK LOCAL os.Executable()
 	workingDir, err := os.Executable()
 	//workingDir, err := os.Getwd()
 	if err != nil {
@@ -60,8 +60,8 @@ func main() {
 	} else {
 		config = nil
 		// Not set yet, set to default
-		apiEndpoint = "http://stellite.live.local/miner"
-		//apiEndpoint = "https://www.stellite.live/miner"
+		//apiEndpoint = "http://stellite.live.local/miner"
+		apiEndpoint = "https://www.stellite.live/miner"
 	}
 
 	// Create the miner

@@ -203,6 +203,8 @@ func New(
 			}()
 			// Trigger a network stats update as soon as we start
 			gui.updateNetworkStats()
+			// Check for any initial announcement
+			gui.checkAnnouncement()
 			return nil
 		},
 		MessageHandler: gui.handleElectronCommands,

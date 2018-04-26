@@ -35,21 +35,22 @@ let app = {
     listen: function() {
       var errorCount = 0;
       astilectron.onMessage(function(message) {
-        var parsed = $.parseJSON(message.payload)
+        var parsed = $.parseJSON(message.payload);
         switch (message.name) {
           case "fatal_error":
-            shared.showError(parsed.Data);
+            shared.showError(parsed.data);
             break;
           case "ann":
-            let errDiv = document.createElement("div");
-            errDiv.innerHTML = "<h2>Announcement</h2>" +
+            let annDiv = document.createElement("div");
+            annDiv.innerHTML = "<h2>Announcement</h2>" +
               "<span>" + parsed.date + "</span>" +
               "<p>" + parsed.text + "</p>" +
               "<div>" +
               "<a target='_blank' href='" + parsed.link + "'>Visit announcement</a>" +
               "</div>";
+            $('.astimodaler-body').removeClass('error');
             $('.astimodaler-body').addClass('ann');
-            asticode.modaler.setContent(errDiv);
+            asticode.modaler.setContent(annDiv);
             asticode.modaler.show();
             break;
           case "network_stats":
@@ -74,6 +75,13 @@ let app = {
             $('#miner_shares').html(parsed.shares_good + parsed.shares_bad);
             $('#miner_shares_bad').html(parsed.shares_bad);
             $('#miner_address').html(parsed.address);
+            // In case we stop the miner and it is started from somewhere else,
+            // update the mining button
+            if ($('#start_stop').hasClass('start')) {
+              $('#start_stop').addClass('stop');
+              $('#start_stop').removeClass('start');
+              $('#start_stop').html('Stop mining');
+            }
             // Move the graph, we only refresh it once a minute
             if (parsed.update_graph == true) {
               app.hashrateChart.data.datasets.forEach((dataset) => {
@@ -84,11 +92,7 @@ let app = {
             }
 
             if (parsed.errors !== null && parsed.errors.length > 0) {
-              let errDiv = document.createElement("div");
-              errDiv.innerHTML = parsed.errors[0];
-              $('.astimodaler-body').addClass('error');
-              asticode.modaler.setContent(errDiv);
-              asticode.modaler.show();
+              shared.showError(parsed.errors[0]);
               errorCount++;
               $('#miner_errors').html(errorCount);
               window.setTimeout(function(){

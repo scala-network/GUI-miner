@@ -9,6 +9,7 @@ let shared = {
     let errDiv = document.createElement("div");
     errDiv.innerHTML = "<h2>Something went wrong</h2>" +
       "<p>" + message + "</p>";
+    $('.astimodaler-body').removeClass('ann');
     $('.astimodaler-body').addClass('error');
     asticode.modaler.setContent(errDiv);
     asticode.modaler.show();

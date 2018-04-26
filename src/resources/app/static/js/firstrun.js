@@ -32,10 +32,10 @@ let firstrun = {
     },
     listen: function() {
       astilectron.onMessage(function(message) {
-        var parsed = $.parseJSON(message.payload)
+        var parsed = $.parseJSON(message.payload);
         switch (message.name) {
           case "fatal_error":
-            shared.showError(parsed.Data);
+            shared.showError(parsed.data);
         }
       });
     },
