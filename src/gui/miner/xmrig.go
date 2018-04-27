@@ -268,6 +268,7 @@ func (miner *Xmrig) GetStats() (Stats, error) {
 		the command line you'll notice errors printed, but not added in the API.
 		ApiState.cpp::getConnection and getResults functions might give some clues
 		to getting it fixed.
+		Issue reported: https://github.com/xmrig/xmrig/issues/589
 	*/
 	/*
 		if len(xmrigStats.Connection.ErrorLog) > 0 {
