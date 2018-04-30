@@ -16,6 +16,11 @@ let firstrun = {
           astilectron.sendMessage({name: "firstrun", payload: ""}, function(message) {
             $('#username').html(message.payload);
           });
+
+          astilectron.sendMessage({name: "get-miner-path", payload: ""}, function(message) {
+            $('#miner_path').html(message.payload);
+          });
+
           // The pool-list command returns the pool list for the GUI miner
           astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
             $('#pool_list').html(message.payload);
@@ -119,18 +124,5 @@ let firstrun = {
           });
         });
       });
-      /*$('#intro_anim_a').fadeIn(250, function(){
-        $('#exit').fadeIn(1000);
-        $('#intro_anim_a').fadeOut(100, function(){
-          $('#intro_anim_b').fadeIn(200, function(){
-            $('#intro_anim_b').fadeOut(100, function(){
-              $('#intro_anim_c').fadeIn(150, function(){
-                $('#initial-wallet').animateCss('fadeInUp');
-              });
-            });
-          });
-        });
-      });*/
     }
-
 };

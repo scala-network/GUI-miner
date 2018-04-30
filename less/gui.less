@@ -680,11 +680,15 @@ body.miner {
     }
 
     div.section {
-      width: 70%;
+      width: 85%;
       margin-left: auto;
       margin-right: auto;
       text-align: left;
       padding-bottom: 25px;
+
+      &.center {
+        text-align: center;
+      }
 
       p {
         padding: 10px;
@@ -717,7 +721,23 @@ body.miner {
         .opacity(1.0);
       }
     }
-  }
+
+    div.next-piece {
+      border: 1px solid @color-purple-grey;
+      .border-radius(4px);
+      padding: 5px;
+      max-width: 300px;
+      display: inline-block;
+      float: left;
+      height: 100px;
+      margin: 10px;
+    }
+
+    div.cb {
+      clear: both;
+    }
+
+  } // div.help
 } // body.miner
 
 
@@ -770,6 +790,35 @@ body.firstrun {
     position:relative;
     div.step {
       text-align: center;
+    }
+  }
+
+  div.antivirus {
+    font-size: 14px;
+    ul {
+      margin-top: 25px;
+      width: 350px;
+      margin-left: auto;
+      margin-right: auto;
+      list-style-type: none;
+      margin-bottom: 25px;
+      li {
+        text-align: left;
+        font-size: 14px;
+      }
+    }
+    a.link {
+      font-size: 14px;
+      color: @color-turquoise-light;
+      .opacity(0.6);
+
+      &:hover {
+        .opacity(1.0);
+      }
+    }
+    pre {
+      font-size: 14px;
+      color: @color-yellow;
     }
   }
 

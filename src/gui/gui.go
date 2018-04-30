@@ -258,6 +258,11 @@ func (gui *GUI) handleElectronCommands(
 		}
 		return username, nil
 
+	// get-miner-path is requested so the UI can show the path to exclude
+	// in antivirus software
+	case "get-miner-path":
+		return filepath.Join(gui.workingDir, "miner"), nil
+
 	// pool-list requests the recommended pool list from the miner API
 	// and returns the rendered HTML
 	case "pool-list":

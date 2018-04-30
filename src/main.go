@@ -29,9 +29,10 @@ func main() {
 	// We need to get the acutal working directory to ensure proper operation
 	// on all platforms
 
-	// TODO: Add Back HACK LOCAL os.Executable()
-	workingDir, err := os.Executable()
+	// HACK For local development use os.Getwd() to avoid having the build
+	// process wipe the miner everytime
 	//workingDir, err := os.Getwd()
+	workingDir, err := os.Executable()
 	if err != nil {
 		log.Fatalf("Can't read current directory: %s", err)
 	}
@@ -60,7 +61,6 @@ func main() {
 	} else {
 		config = nil
 		// Not set yet, set to default
-		//apiEndpoint = "http://stellite.live.local/miner"
 		apiEndpoint = "https://www.stellite.live/miner"
 	}
 
