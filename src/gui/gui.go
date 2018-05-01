@@ -283,14 +283,22 @@ func (gui *GUI) handleElectronCommands(
 			log.Fatalf("Unable to load pool template: '%s'", err)
 		}
 		var poolsList string
-		for _, poolData := range poolJSONs {
+		for i, poolData := range poolJSONs {
 			var templateHTML bytes.Buffer
 			err = poolTemplate.Execute(&templateHTML, poolData)
 			if err != nil {
 				log.Fatalf("Unable to load pool template: '%s'", err)
 			}
+			// TODO: This is a dirty way to only show the top 3 and reveal the rest
+			// when needed. An API that implements paging is needed to fix this
+			if i == 3 {
+				poolsList += "<a href=\"#\" id=\"show_pool_list\">Show all</a>"
+				poolsList += "<div id=\"pool_list_bottom\" class=\"dn\">"
+			}
 			poolsList += templateHTML.String()
 		}
+		// TODO: Part of the hack above
+		poolsList += "</div>"
 		return poolsList, nil
 
 	// get-processing-config returns the current miner's processing config

@@ -15,7 +15,7 @@ import (
 // GetPoolList returns the list of pools available to the GUI miner
 func (gui *GUI) GetPoolList() ([]PoolData, error) {
 	var pools []PoolData
-	resp, err := http.Get(fmt.Sprintf("%s/pool-list", gui.config.APIEndpoint))
+	resp, err := http.Get(fmt.Sprintf("%s/pool-list?all=true", gui.config.APIEndpoint))
 	if err != nil {
 		return pools, err
 	}

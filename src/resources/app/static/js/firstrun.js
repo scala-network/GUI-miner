@@ -59,6 +59,12 @@ let firstrun = {
         }
       });
 
+      // TODO: Part of the show more pools hack
+      $(document).on('click', '#show_pool_list', function(){
+        $(this).hide();
+        $('#pool_list_bottom').slideDown();
+      });
+
       $('.button').bind('click', function() {
         var target = $(this).data('target');
 
@@ -108,15 +114,32 @@ let firstrun = {
     },
     animateIntro: function() {
       // A couple of steps to get you set up
-      $('#intro_anim_logo').fadeOut(1000, function() {
-        $('#intro_anim_a').fadeIn(2500, function(){
+      // $('#intro_anim_logo').fadeOut(1000, function() {
+      //   $('#intro_anim_a').fadeIn(2500, function(){
+      //     if (!shared.isMac()) {
+      //       $('#exit').fadeIn(1000);
+      //     }
+      //     $('#intro_anim_a').fadeOut(1000, function(){
+      //       $('#intro_anim_b').fadeIn(2000, function(){
+      //         $('#intro_anim_b').fadeOut(1000, function(){
+      //           $('#intro_anim_c').fadeIn(1500, function(){
+      //             $('#initial-wallet').animateCss('fadeInUp');
+      //           });
+      //         });
+      //       });
+      //     });
+      //   });
+      // });
+      //
+      $('#intro_anim_logo').fadeOut(100, function() {
+        $('#intro_anim_a').fadeIn(250, function(){
           if (!shared.isMac()) {
-            $('#exit').fadeIn(1000);
+            $('#exit').fadeIn(100);
           }
-          $('#intro_anim_a').fadeOut(1000, function(){
-            $('#intro_anim_b').fadeIn(2000, function(){
-              $('#intro_anim_b').fadeOut(1000, function(){
-                $('#intro_anim_c').fadeIn(1500, function(){
+          $('#intro_anim_a').fadeOut(100, function(){
+            $('#intro_anim_b').fadeIn(200, function(){
+              $('#intro_anim_b').fadeOut(100, function(){
+                $('#intro_anim_c').fadeIn(150, function(){
                   $('#initial-wallet').animateCss('fadeInUp');
                 });
               });

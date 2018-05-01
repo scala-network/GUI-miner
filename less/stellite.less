@@ -1,27 +1,48 @@
 // out: ../src/resources/app/static/css/main.css, sourcemap: false, compress: true
 /*
-    GUI Miner stylesheet
-    Interface size is by default 1050px x 700px
+    Stellite GUI Miner stylesheet
+    Interface size is by default 1175px x 700px
 
     'outs: ../wip/interface/app.css, sourcemap: false, compress: true'
 */
 
-@desktop:  ~"only screen and (min-width: 600px)"; /* Mobile view / not a grid anymore */
-@mobile:  ~"only screen and (max-width: 600px)"; /* Mobile view / not a grid anymore */
+@import "common/reset.less";
+@import "common/elements.less";
 
-@import "reset.less";
-@import "elements.less";
-
-/* Colours */
-@color-purple: #8255fd;
+/* Stellite colours */
 @color-blue-dark: #0B0C22;
 @color-blue-darker: #06071D;
 @color-blue-dark-lighter: #0D112D;
 @color-purple-grey: #8284a5;
-@color-turquoise-light: #00FFFF;
+@color-link: #00FFFF;
 @color-stellite-purple: #9012F0;
 @color-stellite-purple-dark: #540C87;
-@color-yellow: #E8D400;
+@color-selected: #E8D400;
+@color-text: #fafafa;
+
+/*
+  The colours are defined verbosely on purpose to make it very clear what
+  you are changing
+ */
+@color-miner-background: @color-blue-dark;
+
+@color-notifier-ok: #17E800;
+@color-notifier-error: #E81600;
+
+@color-notifier-background: #101749;
+@color-notifier-error-background: #491013;
+
+@color-button-default: @color-stellite-purple-dark;
+@color-button-default-hover: @color-stellite-purple;
+@color-button-ok: #1D870C;
+@color-button-ok-hover: #229B0F;
+@color-button-cancel: #87330C;
+@color-button-cancel-hover: #9B310F;
+@color-button-back: @color-purple-grey;
+
+@color-scrollbar: @color-blue-dark-lighter;
+@color-scrollbar-background: @color-blue-dark;
+
 
 /* Fonts */
 @font-family-main: 'Poppins', sans-serif;
@@ -33,13 +54,24 @@
 
 html {
   font-family: @font-family-main;
-  color: #fafafa;
+  color: @color-text;
   font-weight: 400;
   width: 100%;
   height: 100%;
-  background-color: @color-blue-dark;
-
+  background-color: @color-miner-background;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: @color-scrollbar-background;
+}
+
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+  .border-radius(4px);
+  background:  @color-scrollbar;
+}
+
 
 a {
   text-decoration: none;
@@ -69,17 +101,17 @@ input::-moz-focus-inner {
   z-index: 1500;
 }
 .astinotifier-item.success {
-  border: 1px solid #17E800;
-  background: #101749;
-  color: #fafafa;
+  border: 1px solid @color-notifier-ok;
+  background: @color-notifier-background;
+  color: @color-text;
 }
 
 .astimodaler-body {
   padding: 15px;
   &.error {
-    border: 1px solid #E81600;
-    background-color: #491013;
-    color: #fafafa;
+    border: 1px solid @color-notifier-error;
+    background-color: @color-notifier-error-background;
+    color: @color-text;
 
     h2 {
       text-transform: uppercase;
@@ -95,9 +127,9 @@ input::-moz-focus-inner {
     }
   }
   &.ann {
-    border: 1px solid @color-yellow;
-    background-color: #101749;
-    color: #fafafa;
+    border: 1px solid @color-selected;
+    background-color: @color-notifier-background;
+    color: @color-text;
 
     h2 {
       text-transform: uppercase;
@@ -122,12 +154,12 @@ input::-moz-focus-inner {
 
     a {
       display: inline-block;
-      border: 1px solid @color-turquoise-light;
+      border: 1px solid @color-link;
       font-size: 14px;
       margin: 3px;
       padding: 10px;
       .border-radius(4px);
-      color: @color-turquoise-light;
+      color: @color-link;
       .opacity(0.7);
 
       &:hover {
@@ -159,8 +191,8 @@ p.description {
 
 a.button {
   display: inline-block;
-  background-color: @color-stellite-purple-dark;
-  color: #ffffff;
+  background-color: @color-button-default;
+  color: @color-text;
   padding: 10px;
   .border-radius(4px);
   text-transform: uppercase;
@@ -168,22 +200,22 @@ a.button {
   padding-right: 30px;
 
   &:hover {
-    background-color: @color-stellite-purple;
+    background-color: @color-button-default-hover;
   }
   &:active {
-    background-color: @color-stellite-purple-dark;
+    background-color: @color-button-default;
   }
 
   &.start {
-    background-color: #1D870C;
+    background-color: @color-button-ok;
     &:hover {
-      background-color: #229B0F;
+      background-color: @color-button-ok-hover;
     }
   }
   &.stop {
-    background-color: #87330C;
+    background-color: @color-button-cancel;
     &:hover {
-      background-color: #9B310F;
+      background-color: @color-button-cancel-hover;
     }
   }
   &.small {
@@ -192,7 +224,7 @@ a.button {
   }
 
   &.back {
-    background-color: @color-purple-grey;
+    background-color: @color-button-back;
     .opacity(0.8);
     &:hover {
       .opacity(1.0);
@@ -211,9 +243,8 @@ a.button {
   font-size: 12px;
   text-transform: uppercase;
   &.recommended {
-    border: 1px solid @color-turquoise-light;
-    color: @color-turquoise-light;
-
+    color: @color-link;
+    border: 1px solid @color-link;
   }
   &.dull {
     display: inline-block;
@@ -223,7 +254,6 @@ a.button {
     top: 4px;
     text-align: center;
     max-width: 100px;
-    //border: 1px solid #D59D0E;
     color: #D59D0E;
     .opacity(0.6);
     &:hover {
@@ -285,13 +315,7 @@ body.miner {
   div.grid {
     height: 100%;
     display: grid;
-    @media @desktop {
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    }
-
-    div {
-    //  border: 1px solid @color-yellow;
-    }
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   }
 
   table.stats {
@@ -309,10 +333,8 @@ body.miner {
   }
 
   div.sidebar-info {
-    @media @desktop {
-      grid-column: span 2;
-      grid-row: span 7;
-    }
+    grid-column: span 2;
+    grid-row: span 7;
     background-color: @color-blue-darker;
     div.logo {
       margin-top: 10px;
@@ -359,10 +381,8 @@ body.miner {
   }
 
   div.mining {
-    @media @desktop {
-      grid-column: span 6;
-      grid-row: span 4;
-    }
+    grid-column: span 6;
+    grid-row: span 4;
     position: relative;
     width: 100%;
     div.miner {
@@ -457,7 +477,7 @@ body.miner {
       }
 
       a.address {
-        color: @color-turquoise-light;
+        color: @color-link;
         font-size: 12px;
         .opacity(0.6);
 
@@ -470,10 +490,8 @@ body.miner {
 
 
   div.chart {
-    @media @desktop {
-      grid-column: span 6;
-      grid-row: span 3;
-    }
+    grid-column: span 6;
+    grid-row: span 3;
     max-height: 100%;
     overflow: hidden;
     position: relative;
@@ -483,10 +501,8 @@ body.miner {
   }
 
   div.footer {
-    @media @desktop {
-      grid-column: span 8;
-      grid-row: span 1;
-    }
+    grid-column: span 8;
+    grid-row: span 1;
     background-color: @color-blue-darker;
     text-align: center;
     font-size: 12px;
@@ -554,7 +570,7 @@ body.miner {
         }
 
         a {
-          color: @color-turquoise-light;
+          color: @color-link;
           .opacity(0.6);
 
           &:hover {
@@ -575,7 +591,7 @@ body.miner {
           padding-bottom: 0px;
 
           a {
-            color: @color-turquoise-light;
+            color: @color-link;
             font-size: 13px;
             .opacity(0.6);
 
@@ -618,7 +634,7 @@ body.miner {
           }
 
           &.selected {
-            border-color: @color-yellow;
+            border-color: @color-selected;
           }
 
           div.stats {
@@ -647,7 +663,7 @@ body.miner {
             }
           }
           a.address {
-            color: @color-turquoise-light;
+            color: @color-link;
             font-size: 12px;
             .opacity(0.6);
 
@@ -714,7 +730,7 @@ body.miner {
     }
 
     a.link {
-      color: @color-turquoise-light;
+      color: @color-link;
       .opacity(0.6);
 
       &:hover {
@@ -755,11 +771,29 @@ body.firstrun {
     margin: auto;
   }
 
-  #exit {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
+  #show_pool_list {
     text-align: center;
+    width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: #D59D0E;
+    z-index: 1001;
+    font-size: 14px;
+    text-transform: uppercase;
+    .opacity(0.6);
+
+    &:hover {
+      .opacity(0.8);
+    }
+  }
+
+  #exit {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    //width: 100%;
+    //text-align: center;
     margin-left: auto;
     margin-right: auto;
     color: #D59D0E;
@@ -809,7 +843,7 @@ body.firstrun {
     }
     a.link {
       font-size: 14px;
-      color: @color-turquoise-light;
+      color: @color-link;
       .opacity(0.6);
 
       &:hover {
@@ -818,7 +852,7 @@ body.firstrun {
     }
     pre {
       font-size: 14px;
-      color: @color-yellow;
+      color: @color-selected;
     }
   }
 
@@ -836,7 +870,7 @@ body.firstrun {
         margin: 15px;
         height: 170px;
         width: 400px;
-        color: #fafafa;
+        color: @color-text;
         border: 1px solid @color-stellite-purple-dark;
         .border-radius(4px);
         display: inline-block;
@@ -906,7 +940,7 @@ body.firstrun {
         }
         span {
           font-family: monospace;
-          color: @color-turquoise-light;
+          color: @color-link;
           display: inline;
         }
         input {
@@ -945,7 +979,7 @@ body.firstrun {
         }
 
         &.selected {
-          border-color: @color-yellow;
+          border-color: @color-selected;
         }
 
         div.stats {
@@ -975,7 +1009,7 @@ body.firstrun {
         }
 
         a.address {
-          color: @color-turquoise-light;
+          color: @color-link;
           font-size: 12px;
           .opacity(0.6);
 
