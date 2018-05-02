@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <script>
+      // Add Google Analytics
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="128x128">
+    <link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144">
+    <link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="196x196">
+    <link rel="apple-touch-icon" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/apple-icon-152x152.png">
+    <meta name="theme-color" content="#0B0C22"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta property="og:title" content="Download the Stellite GUI Miner"></meta>
+    <meta property="og:type" content="website"></meta>
+    <meta property="og:site_name" content="Download the Stellite GUI Miner"></meta>
+    <meta property="og:url" content="https://www.stellite.live/miner"></meta>
+    <meta property="og:image" content="https://www.stellite.live/i/logo-large.png"></meta>
+    <meta property="og:image:type" content="image/png"></meta>
+    <meta property="og:image:alt" content="Stellite Miner logo"></meta>
+    <meta property="og:image:width" content="332"></meta>
+    <meta property="og:image:height" content="331"></meta>
+    <meta property="og:description" content="An easy to use GUI miner for Stellite. Available for Windows, macOS and Linux"></meta>
+    <meta name="twitter:card" content="summary"></meta>
+    <meta name="twitter:site" content="@donovansolms"></meta>
+    <meta name="twitter:creator" content="@donovansolms"></meta>
+    <meta name="twitter:title" content="Download the Stellite GUI Miner"></meta>
+    <meta name="twitter:description" content="An easy to use GUI miner for Stellite. Available for Windows, macOS and Linux"></meta>
+    <meta name="twitter:image" content="https://www.stellite.live/i/logo-large.png"></meta>
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Poppins:400,600">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link rel="stylesheet" href="page.css">
+
+    <title>Stellite GUI Miner - An easy to use GUI miner available for Windows, macOS and Linux</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="miner-logo.png" alt="Stellite Miner logo" />
+        <h1>
+          Stellite GUI Miner
+        </h1>
+        <p>
+          An easy to use GUI miner available for Windows, macOS and Linux
+        </p>
+        <div class="release">
+          <p class="version">
+            v0.0.6
+          </p>
+          <p class="date">
+            May 2 2018
+          </p>
+        </div>
+        <img class="screenshot" src="miner-screenshot.png" alt="Miner screenshot"/>
+        <span class="caption">Screenshots</span>
+      </div>
+      <div class="platforms">
+        <div class="platform">
+          <h2><i class="fa fa-windows fa-fw"></i> Windows</h2>
+          <div class="bundle">
+            <h3>xmrig bundle</h3>
+            <p class="type">
+              CPU only
+            </p>
+            <a target="_blank" href="#"><i class="fa fa-download fa-fw"></i> Download</a>
+          </div>
+          <div class="bundle">
+            <h3>xmr-stak bundle</h3>
+            <p class="type">
+              CPU and GPU
+            </p>
+            <a target="_blank" href="#"><i class="fa fa-download fa-fw"></i> Download</a>
+          </div>
+        </div>
+        <div class="platform">
+          <h2><i class="fa fa-apple fa-fw"></i> macOS</h2>
+          <div class="bundle">
+            <h3>xmrig bundle</h3>
+            <p class="type">
+              CPU only
+            </p>
+            <a target="_blank" href="#"><i class="fa fa-download fa-fw"></i> Download</a>
+          </div>
+        </div>
+        <div class="platform">
+          <h2><i class="fa fa-linux fa-fw"></i> Linux</h2>
+          <div class="bundle">
+            <h3>xmrig bundle</h3>
+            <p class="type">
+              CPU only
+            </p>
+            <a target="_blank" href="#"><i class="fa fa-download fa-fw"></i> Download</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="qa">
+          <a href="#" class="q">
+            I have my own xmr-stak or xmrig configuration already
+          </a>
+          <div class="a">
+            <p>
+              You can use your existing (compatible) configuration for xmrig
+              and xmr-stak by replacing the config files in <pre>installation-directory/miner</pre>
+            </p>
+            <p>
+              For the mining stats to display correctly you need to enable the API for each miner by doing the following:
+            </p>
+            <div class="config-notes">
+              <span class="type">xmrig</span>
+              Ensure you have the following in you config.json file
+              <pre>
+"api":{
+  "port":16000,
+  "access-token":null,
+  "worker-id":null
+}
+              </pre>
+            </div>
+
+            <div class="config-notes">
+              <span class="type">xmr-stak</span>
+              Ensure you have the following in you config.txt file
+              <pre>
+"httpd_port" : 16000,
+              </pre>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="qa">
+          <a href="#" class="q">
+            I'm on macOS or Linux and would like to use xmr-stak, xmrig-nvidia or xmrig-amd
+          </a>
+          <div class="a">
+            <p>
+              If you already use one of these miners you can simply follow the answer for `I have my own xmr-stak or xmrig configuration already`.
+            </p>
+            <p>
+              If you don't have a version ready, you can follow the build instructions for <a target="_blank" href="https://github.com/xmrig/xmrig">xmrig</a> and
+              <a target="_blank" href="https://github.com/fireice-uk/xmr-stak">xmr-stak</a> on their GitHub pages
+            </p>
+          </div>
+        </div>
+
+        <div class="qa">
+          <a href="#" class="q">
+            I keep getting the 'no compatible miner found' error
+          </a>
+          <div class="a">
+            <p>
+              Your antivirus most likely removed the miner before you could exclude the folder from being scanned. If you followed
+              the antivirus guides in the initial setup you can simply extract the miner again, replacing the current files, and run the GUI miner again.
+            </p>
+            <p>
+              If you haven't exluded the miner's folder from being scanned, do so now and run the GUI miner again.
+            </p>
+
+          </div>
+        </div>
+
+        <div class="qa">
+          <a href="#" class="q">
+            I'd like to use a pool that is not listed
+          </a>
+          <div class="a">
+            <p>
+              We currently only list pools we have tested in the miner. You are free to change the config for xmrig and xmr-stak to rather use
+              a pool you want. You can track the progress on this feature <a target="_blank" href="https://github.com/donovansolms/stellite-gui-miner/issues/1">here</a>
+            </p>
+            <div class="config-notes">
+              <span class="type">xmrig</span>
+              Edit the config.json file in the miner folder
+              <pre>
+"pools":[
+	{
+		"url":"pool.example:5555",
+		"user":"your-stellite-address",
+		"pass":"Stellite GUI Miner",
+		"keepalive":true,
+		"nicehash":false,
+		"variant":1
+	}
+],
+              </pre>
+            </div>
+
+            <div class="config-notes">
+              <span class="type">xmr-stak</span>
+              Edit the pools.txt file in the miner folder
+              <pre>
+"pool_list":
+[
+  {
+    "pool_address" : "pool.example:3333",
+    "wallet_address" : "your-stellite-address",
+    "rig_id" : "",
+    "pool_password" : "Stellite GUI Miner",
+    "use_nicehash" : false,
+    "use_tls" : false,
+    "tls_fingerprint" : "",
+    "pool_weight" : 1
+  },
+],
+"currency" : "stellite",
+              </pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa">
+          <a href="#" class="q">
+            I have an issue not listed here
+          </a>
+          <div class="a">
+            <p>
+              Visit us on <a target="_blank" href="http://github.com/stellitecoin">GitHub</a> and log a new issue,
+              alternatively, contact us in the <a target="_blank" href="https://discord.gg/8PhF342">#issues</a>
+              channel on <a target="_blank" href="https://discord.gg/8PhF342">Discord</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="qa">
+          <a href="#" class="q">
+            I have a feature request
+          </a>
+          <div class="a">
+            <p>
+              Visit us on <a target="_blank" href="http://github.com/stellitecoin">GitHub</a> and log it as a new issue,
+              alternatively, contact us in the <a target="_blank" href="https://discord.gg/8PhF342">#issues</a>
+              channel on <a target="_blank" href="https://discord.gg/8PhF342">Discord</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        for the <i class="fa fa-heart fa-fw"></i> of mining stellite
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var current = 0;
+      var screenshots = ['miner-screenshot.png', 'miner-screenshot-2.png', 'miner-screenshot-3.png'];
+
+      $(document).ready(function(){
+        window.setInterval(function(){
+          current++;
+          if (current >= screenshots.length)
+            current = 0;
+
+          $('.screenshot').fadeOut(function(){
+            $('.screenshot').attr('src', screenshots[current]);
+            $('.screenshot').fadeIn();
+          });
+        },10000);
+      });
+
+
+      /*
+        // I don't know if hiding the answers initially is a good idea or not
+        $('.q').bind('click', function(e){
+          if ($(this).hasClass('active')) {
+            return false;
+          }
+
+          $('.q').removeClass('active');
+          $('.a').slideUp();
+          $(this).addClass('active');
+          $(this).parent().find('.a').slideDown();
+
+          e.stopPropagation();
+          return false;
+        });
+      */
+    </script>
+  </body>
+</html>
