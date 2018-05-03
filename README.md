@@ -1,4 +1,4 @@
-<img src="git-assets/miner-logo.png" alt="Stellite GUI Miner logo" style="width: 200px; margin-left: auto; margin-right: auto;"/>
+![](git-assets/miner-logo.png)
 
 #  Stellite GUI Miner
 
