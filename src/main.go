@@ -31,18 +31,18 @@ func main() {
 
 	// HACK For local development use os.Getwd() to avoid having the build
 	// process wipe the miner everytime
-	workingDir, err := os.Getwd()
-	//workingDir, err := os.Executable()
+	//workingDir, err := os.Getwd()
+	workingDir, err := os.Executable()
 	if err != nil {
 		log.Fatalf("Can't read current directory: %s", err)
 	}
 	// HACK For local development comment out filepath.Dir here
-	/*
-		workingDir = filepath.Dir(workingDir)
-		if err != nil {
-			log.Fatalf("Can't format current directory: %s", err)
-		}
-	*/
+
+	workingDir = filepath.Dir(workingDir)
+	if err != nil {
+		log.Fatalf("Can't format current directory: %s", err)
+	}
+
 	if runtime.GOOS == "darwin" {
 		// Mac executes from within the .app/Content/MacOS folder, this moves
 		// the folder back to the actual app
@@ -64,6 +64,7 @@ func main() {
 	} else {
 		config = nil
 		// Not set yet, set to default
+		// Hardcoded since we don't ship a config file
 		apiEndpoint = "https://www.stellite.live/miner"
 	}
 

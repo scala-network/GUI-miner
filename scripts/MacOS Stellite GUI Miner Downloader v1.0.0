@@ -1,0 +1,9 @@
+#!/bin/sh
+VER="1.0.0"
+echo "Downloading Stellite GUI Miner v$VER..."
+WD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+mkdir $WD/'Stellite GUI Miner v'$VER
+curl -# https://www.stellite.live/downloads/gui-miner-v1.0.0-macOS-amd64-xmrig-bundle.tar.gz | tar -zxf - -C $WD/'Stellite GUI Miner v'$VER
+echo "Stellite GUI Miner v$VER downloaded"
+echo "Open $WD/Stellite GUI Miner v$VER and double-click the App package to start the miner"
+echo "You can close this window"
