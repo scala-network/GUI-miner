@@ -50,5 +50,7 @@ If all goes well the binaries for Windows, macOS and Linux will be available in 
 
 In the spirit of open source we'll be making it really simple to fork and
 brand the miner for your own coin. Some structural changes need to be made to
-simplify the process. Subscribe to issue #3 to follow the progress on this
+simplify the process. Subscribe to issue [#3][i3] to follow the progress on this
 guide.
+
+[i3]: https://github.com/stellitecoin/gui-miner/issues/3
