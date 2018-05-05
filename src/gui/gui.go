@@ -189,13 +189,13 @@ func New(
 			gui.miningStatsTicker = time.NewTicker(time.Second * 5)
 			gui.logger.Info("Start capturing mining stats")
 			go gui.updateMiningStatsLoop()
-			gui.networkStatsTicker = time.NewTicker(time.Minute * 1)
+			gui.networkStatsTicker = time.NewTicker(time.Minute * 2)
 			go func() {
 				for _ = range gui.networkStatsTicker.C {
 					gui.updateNetworkStats()
 				}
 			}()
-			gui.annTicker = time.NewTicker(time.Second * 5)
+			gui.annTicker = time.NewTicker(time.Hour)
 			go func() {
 				for _ = range gui.annTicker.C {
 					gui.checkAnnouncement()

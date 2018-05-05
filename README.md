@@ -16,6 +16,8 @@ section later.
 
 ## Compiling
 
+### Linux
+
 The miner GUI is built using [Electron](https://electronjs.org) and
 [Go](https://golang.org) using the
 [Astilectron app framework](https://github.com/asticode/astilectron).
@@ -48,4 +50,5 @@ If all goes well the binaries for Windows, macOS and Linux will be available in 
 
 In the spirit of open source we'll be making it really simple to fork and
 brand the miner for your own coin. Some structural changes need to be made to
-simplify the process. Check back here soon for the forking guide.
+simplify the process. Subscribe to issue #3 to follow the progress on this
+guide.
