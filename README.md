@@ -6,6 +6,8 @@ The Stellite GUI miner is a beautiful, easy to use, interface for mining Stellit
 It is aimed at getting people that have never mined Stellite into the crypto
 game by making it really simple to get started.
 
+![Screenshot](https://i.imgur.com/ruK7z4Y.png "Screenshot")
+
 We currently support two very popular miner backends:
 
 1. [xmr-stak](https://github.com/fireice-uk/xmr-stak)
