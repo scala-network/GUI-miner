@@ -2,7 +2,6 @@ package miner
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
@@ -49,23 +48,26 @@ type XmrigConfig struct {
 // XmrigGPUConfig is the config.json structure for Xmrig's GPU
 // Generated with https://mholt.github.io/json-to-go/
 type XmrigGPUConfig struct {
-	Algo        string            `json:"algo"`
-	Av          int               `json:"av"`
-	Background  bool              `json:"background"`
-	Colors      bool              `json:"colors"`
-	CPUAffinity interface{}       `json:"cpu-affinity"`
-	CPUPriority interface{}       `json:"cpu-priority"`
-	DonateLevel int               `json:"donate-level"`
-	LogFile     interface{}       `json:"log-file"`
-	MaxCPUUsage uint8             `json:"max-cpu-usage"`
-	PrintTime   int               `json:"print-time"`
-	Retries     int               `json:"retries"`
-	RetryPause  int               `json:"retry-pause"`
-	Safe        bool              `json:"safe"`
-	Syslog      bool              `json:"syslog"`
-	Threads     []struct{}        `json:"threads"`
-	Pools       []XmrigPoolConfig `json:"pools"`
-	API         XmrigAPIConfig    `json:"api"`
+	Algo        string      `json:"algo"`
+	Av          int         `json:"av"`
+	Background  bool        `json:"background"`
+	Colors      bool        `json:"colors"`
+	CPUAffinity interface{} `json:"cpu-affinity"`
+	CPUPriority interface{} `json:"cpu-priority"`
+	DonateLevel int         `json:"donate-level"`
+	LogFile     interface{} `json:"log-file"`
+	MaxCPUUsage uint8       `json:"max-cpu-usage"`
+	PrintTime   int         `json:"print-time"`
+	Retries     int         `json:"retries"`
+	RetryPause  int         `json:"retry-pause"`
+	Safe        bool        `json:"safe"`
+	Syslog      bool        `json:"syslog"`
+	// TODO: This is the only difference between GPU and CPU, the threads
+	// structure in the config. I need to merge the the config structures into
+	// one with an omitempty tag on each and only fill in the one needed
+	Threads []struct{}        `json:"threads"`
+	Pools   []XmrigPoolConfig `json:"pools"`
+	API     XmrigAPIConfig    `json:"api"`
 }
 
 // XmrigPoolConfig contains the configuration for a pool in Xmrig
@@ -75,7 +77,7 @@ type XmrigPoolConfig struct {
 	Pass      string `json:"pass"`
 	Keepalive bool   `json:"keepalive"`
 	Nicehash  bool   `json:"nicehash"`
-	Variant   int    `json:"variant"`
+	Variant   string `json:"variant"`
 }
 
 // XmrigAPIConfig contains the Xmrig API config
@@ -142,8 +144,6 @@ func NewXmrig(config Config) (*Xmrig, error) {
 	if (strings.Contains(config.Path, "nvidia") ||
 		strings.Contains(config.Path, "amd")) &&
 		strings.Contains(config.Path, "amd64") == false {
-		fmt.Println("SETTING TO GPU")
-		fmt.Println(config.Path)
 		miner.isGPU = true
 		miner.name += "-gpu"
 	}
@@ -338,7 +338,7 @@ func (miner *Xmrig) createConfig(
 				Pass:      "Stellite GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
-				Variant:   1,
+				Variant:   "xtl",
 			},
 		},
 		API: XmrigAPIConfig{
@@ -377,7 +377,7 @@ func (miner *Xmrig) createGPUConfig(
 				Pass:      "Stellite GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
-				Variant:   1,
+				Variant:   "xtl",
 			},
 		},
 		API: XmrigAPIConfig{
