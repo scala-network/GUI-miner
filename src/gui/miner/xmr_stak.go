@@ -7,7 +7,9 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"regexp"
 	"runtime"
+	"strings"
 )
 
 // XmrStak implements the miner interface for the xmr-stak miner
@@ -118,8 +120,10 @@ func (miner *XmrStak) WriteConfig(
 // TODO: Currently only CPU threads, extend this to full CPU/GPU config
 func (miner *XmrStak) GetProcessingConfig() ProcessingConfig {
 	return ProcessingConfig{
-		MaxUsage:   0,
-		Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
+		MaxUsage: 0,
+		// xmr-stak reports GPU + CPU threads in the same section, for that reason
+		// we need to check the actual cpu.txt file to get the real thread count
+		Threads:    miner.getCPUThreadcount(),
 		MaxThreads: uint16(runtime.NumCPU()),
 		Type:       miner.name,
 	}
@@ -133,6 +137,40 @@ func (miner *XmrStak) GetName() string {
 // GetLastHashrate returns the last reported hashrate
 func (miner *XmrStak) GetLastHashrate() float64 {
 	return miner.lastHashrate
+}
+
+// getCPUThreadcount returns the threads used for the CPU as read from the
+// config
+func (miner *XmrStak) getCPUThreadcount() uint16 {
+	configPath := filepath.Join(miner.Base.executablePath, "cpu.txt")
+	configFileBytes, err := ioutil.ReadFile(configPath)
+	// If config file doesn't exist, return 0 as the threadcount
+	if err != nil {
+		return 0
+	}
+	// xmr-stak uses a strange JSON-like format, I haven't found a Go library
+	// that can parse the file, so we're doing some basic string matches
+	lines := strings.Split(string(configFileBytes), "\n")
+	var validLines string
+	for _, line := range lines {
+		for _, char := range line {
+			// This is a very very very basic check if this line is actually a comment
+			if string(char) == "/" || string(char) == "*" {
+				// Skip this line
+				break
+			} else {
+				validLines += string(char)
+			}
+		}
+	}
+
+	var threadcount uint16
+	// Match anything enclosed in {} for JSON object
+	var re = regexp.MustCompile(`{*}`)
+	for _ = range re.FindAllString(validLines, -1) {
+		threadcount++
+	}
+	return threadcount
 }
 
 // GetStats returns the current miner stats

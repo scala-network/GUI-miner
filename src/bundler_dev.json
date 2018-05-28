@@ -1,0 +1,10 @@
+{
+  "app_name": "Stellite GUI Miner v1.1.0",
+  "environments": [
+    {"arch": "amd64", "os": "linux"}
+  ],
+  "icon_path_darwin": "resources/icon.icns",
+  "icon_path_linux": "resources/icon.png",
+  "icon_path_windows": "resources/icon.ico",
+  "output_path": "../bin"
+}

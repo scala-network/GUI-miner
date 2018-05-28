@@ -1,8 +1,8 @@
 {
   "app_name": "Stellite GUI Miner v1.1.0",
   "environments": [
-    {"arch": "amd64", "os": "darwin"},
     {"arch": "amd64", "os": "linux"},
+    {"arch": "amd64", "os": "darwin"},
     {
       "arch": "amd64",
       "os": "windows",

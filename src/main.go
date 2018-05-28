@@ -36,8 +36,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Can't read current directory: %s", err)
 	}
-	// HACK For local development comment out filepath.Dir here
 
+	// HACK For local development comment out filepath.Dir here
 	workingDir = filepath.Dir(workingDir)
 	if err != nil {
 		log.Fatalf("Can't format current directory: %s", err)
