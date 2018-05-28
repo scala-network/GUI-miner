@@ -64,7 +64,9 @@ func NewXmrStak(config Config) (*XmrStak, error) {
 	}
 
 	miner := XmrStak{
-		name:     "xmr-stak",
+		// We've switched to our own miner in V4, xtl-stak, but I'm keeping
+		// everything else xmr-stak for clarity
+		name:     "xtl-stak",
 		endpoint: endpoint,
 	}
 	miner.Base.executableName = filepath.Base(config.Path)

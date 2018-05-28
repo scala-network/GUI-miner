@@ -136,7 +136,9 @@ func NewXmrig(config Config) (*Xmrig, error) {
 	}
 
 	miner := Xmrig{
-		name:     "xmrig",
+		// We've switched to our own miner in V4, xtlrig, but I'm keeping
+		// everything else xmrig for clarity
+		name:     "xtlrig",
 		endpoint: endpoint,
 	}
 	// xmrig appends either nvidia or amd to the miner if it's GPU only
@@ -322,7 +324,7 @@ func (miner *Xmrig) createConfig(
 		Colors:      true,
 		CPUAffinity: nil,
 		CPUPriority: nil,
-		DonateLevel: 1,
+		DonateLevel: 2,
 		LogFile:     nil,
 		MaxCPUUsage: processingConfig.MaxUsage,
 		PrintTime:   3600,
@@ -363,7 +365,7 @@ func (miner *Xmrig) createGPUConfig(
 		Colors:      true,
 		CPUAffinity: nil,
 		CPUPriority: nil,
-		DonateLevel: 1,
+		DonateLevel: 2,
 		LogFile:     nil,
 		PrintTime:   3600,
 		Retries:     5,
