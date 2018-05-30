@@ -10,8 +10,8 @@ game by making it really simple to get started.
 
 We currently support two very popular miner backends:
 
-1. [xmr-stak](https://github.com/fireice-uk/xmr-stak)
-2. [xmrig](https://github.com/xmrig/xmrig) (including [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd))
+1. [xtl-stak](https://github.com/stellitecoin/xtl-stak)
+2. [xtlrig](https://github.com/stellitecoin/xtlrig) (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) does not support our v4 proof-of-work algorithm yet)
 
 If you'd like to fork this miner for you own coin, please see the __forking__
 section later.
