@@ -9,6 +9,14 @@ APP_NAME := $(shell scripts/get_app_name.py)
 
 default: build
 
+dep:
+	go get -u github.com/asticode/go-astilectron
+	go get -u github.com/asticode/go-astilectron-bundler/...
+	go get -u github.com/asticode/go-astichartjs
+	go get -u github.com/asticode/go-astilectron-bootstrap
+	go get -u github.com/google/uuid
+	go get -u github.com/mitchellh/go-ps
+	
 build:
 	cd src/; astilectron-bundler -v
 
