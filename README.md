@@ -42,10 +42,13 @@ go get -u github.com/mitchellh/go-ps
 * Clone and build the app
 
 ```shell
-git clone git@github.com:donovansolms/stellite-gui-miner.git
-cd stellite-gui-miner
+git clone git@github.com:stellitecoin/gui-miner.git stellite/gui-miner
+cd stellite/gui-miner
 make
 ```
+
+NOTE: Ensure you clone the GUI miner into your working $GOPATH
+
 If all goes well the binaries for Windows, macOS and Linux will be available in the `bin` folder.
 
 ## Forking
