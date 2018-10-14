@@ -14,9 +14,9 @@ import (
 
 	astilectron "github.com/asticode/go-astilectron"
 	bootstrap "github.com/asticode/go-astilectron-bootstrap"
-	"github.com/donovansolms/stellite-gui-miner/src/gui/miner"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
+	"github.com/stellitecoin/gui-miner/src/gui/miner"
 )
 
 // GUI implements the core control for the GUI miner
@@ -165,13 +165,16 @@ func New(
 		Debug:         isDebug,
 		Asset:         asset,
 		RestoreAssets: restoreAssets,
-		Homepage:      startPage,
+		Windows: []*bootstrap.Window{{
+			Homepage:       startPage,
+			MessageHandler: gui.handleElectronCommands,
+			Options:        &windowOptions,
+		}},
 		AstilectronOptions: astilectron.Options{
 			AppName:            appName,
 			AppIconDarwinPath:  "resources/icon.icns",
 			AppIconDefaultPath: "resources/icon.png",
 		},
-		WindowOptions: &windowOptions,
 		// TODO: Fix this tray to display nicely
 		/*TrayOptions: &astilectron.TrayOptions{
 			Image:   astilectron.PtrStr("/static/i/miner-logo.png"),
@@ -181,11 +184,11 @@ func New(
 		// OnWait is triggered as soon as the electron window is ready and running
 		OnWait: func(
 			_ *astilectron.Astilectron,
-			window *astilectron.Window,
+			windows []*astilectron.Window,
 			_ *astilectron.Menu,
 			_ *astilectron.Tray,
 			_ *astilectron.Menu) error {
-			gui.window = window
+			gui.window = windows[0]
 			gui.miningStatsTicker = time.NewTicker(time.Second * 5)
 			gui.logger.Info("Start capturing mining stats")
 			go gui.updateMiningStatsLoop()
@@ -207,7 +210,6 @@ func New(
 			gui.checkAnnouncement()
 			return nil
 		},
-		MessageHandler: gui.handleElectronCommands,
 	}
 
 	gui.logger.Info("Setup complete")

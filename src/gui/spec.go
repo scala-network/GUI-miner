@@ -3,7 +3,7 @@ package gui
 import (
 	"time"
 
-	"github.com/donovansolms/stellite-gui-miner/src/gui/miner"
+	"github.com/stellitecoin/gui-miner/src/gui/miner"
 )
 
 // Config contains the basic configuration for a miner
