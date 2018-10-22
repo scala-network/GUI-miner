@@ -3,7 +3,7 @@ package gui
 import (
 	"time"
 
-	"github.com/stellitecoin/gui-miner/src/gui/miner"
+	"github.com/furiousteam/gui-miner/src/gui/miner"
 )
 
 // Config contains the basic configuration for a miner
@@ -74,7 +74,7 @@ type GlobalStats struct {
 		Price  string `json:"price"`
 		Volume string `json:"volume"`
 	} `json:"records"`
-	XtlPerDay string `json:"xtl_per_day"`
+	XtlPerDay string `json:"bloc_per_day"`
 	Hashrate  string `json:"hashrate"`
 	// PoolHTML is injected before sending the update to the front-end. Avoids
 	// having to send extra packets

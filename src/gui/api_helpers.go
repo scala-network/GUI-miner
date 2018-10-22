@@ -58,7 +58,7 @@ func (gui *GUI) SaveConfig(config Config) error {
 }
 
 // GetStats returns stats for the interface. It requires the miner's
-// hashrate to calculate XTL per dat
+// hashrate to calculate BLOC per dat
 func (gui *GUI) GetStats(
 	poolID int,
 	hashrate float64,

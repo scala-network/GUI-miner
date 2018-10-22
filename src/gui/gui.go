@@ -16,7 +16,7 @@ import (
 	bootstrap "github.com/asticode/go-astilectron-bootstrap"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
-	"github.com/stellitecoin/gui-miner/src/gui/miner"
+	"github.com/furiousteam/gui-miner/src/gui/miner"
 )
 
 // GUI implements the core control for the GUI miner
@@ -571,7 +571,7 @@ func (gui *GUI) updateMiningStatsLoop() {
 		} else {
 			if gui.lastHashrate == 0 && stats.Hashrate > 0 {
 				gui.lastHashrate = stats.Hashrate
-				// The first time we get a hashrate, update the XTL amount so that the
+				// The first time we get a hashrate, update the BLOC amount so that the
 				// user doesn't think it doesn't work
 				gui.updateNetworkStats()
 			}
