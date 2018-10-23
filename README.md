@@ -31,7 +31,8 @@ The miner GUI is built using [Electron](https://electronjs.org) and
 * Clone and build the app
 
 ```shell
-git clone https://github.com/furiousteam/GUI-miner.git bloc/gui-miner
+cd go
+git clone https://github.com/furiousteam/GUI-miner.git
 ```
 
 * Install required Go packages
