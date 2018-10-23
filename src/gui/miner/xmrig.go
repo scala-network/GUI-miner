@@ -77,7 +77,7 @@ type XmrigPoolConfig struct {
 	Pass      string `json:"pass"`
 	Keepalive bool   `json:"keepalive"`
 	Nicehash  bool   `json:"nicehash"`
-	Variant   string `json:"variant"`
+	Variant   int    `json:"variant"`
 }
 
 // XmrigAPIConfig contains the Xmrig API config
@@ -110,7 +110,7 @@ type XmrigResponse struct {
 		Threads [][]float64 `json:"threads"`
 	} `json:"hashrate"`
 	Results struct {
-		DiffCurrent int      `json:"diff_current"`
+		DiffCurrent int64    `json:"diff_current"`
 		SharesGood  int      `json:"shares_good"`
 		SharesTotal int      `json:"shares_total"`
 		AvgTime     int      `json:"avg_time"`

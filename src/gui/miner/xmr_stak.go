@@ -32,7 +32,7 @@ type XmrStakResponse struct {
 		Highest float64         `json:"highest"`
 	} `json:"hashrate"`
 	Results struct {
-		DiffCurrent int     `json:"diff_current"`
+		DiffCurrent int64     `json:"diff_current"`
 		SharesGood  int     `json:"shares_good"`
 		SharesTotal int     `json:"shares_total"`
 		AvgTime     float64 `json:"avg_time"`

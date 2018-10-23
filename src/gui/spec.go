@@ -58,7 +58,7 @@ type GlobalStats struct {
 	LastBlock   struct {
 		ID         int    `json:"id"`
 		Height     int    `json:"height"`
-		Difficulty int    `json:"difficulty"`
+		Difficulty string `json:"difficulty"`
 		TxCount    int    `json:"tx_count"`
 		Reward     string `json:"reward"`
 		Timestamp  string `json:"timestamp"`
@@ -74,7 +74,7 @@ type GlobalStats struct {
 		Price  string `json:"price"`
 		Volume string `json:"volume"`
 	} `json:"records"`
-	XtlPerDay string `json:"bloc_per_day"`
+	BlocPerDay string `json:"bloc_per_day"`
 	Hashrate  string `json:"hashrate"`
 	// PoolHTML is injected before sending the update to the front-end. Avoids
 	// having to send extra packets

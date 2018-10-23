@@ -158,7 +158,7 @@ func New(
 	// Setting the WithFields now will ensure all log entries from this point
 	// includes the fields
 	gui.logger = logrus.WithFields(logrus.Fields{
-		"service": "stellite-gui-miner",
+		"service": "bloc-gui-miner",
 	})
 
 	gui.astilectronOptions = bootstrap.Options{

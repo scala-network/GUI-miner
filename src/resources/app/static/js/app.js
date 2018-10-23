@@ -261,7 +261,7 @@ let app = {
     $('#miner_difficulty').html('0');
     $('#miner_shares').html('0');
     $('#miner_shares_bad').html('0');
-    $('#miner_payout').html('0.00 BLOC');
+    $('#miner_payout').html('0.0000 BLOC');
   },
   setupChart: function() {
     var chart = $("#hashrate_chart");
