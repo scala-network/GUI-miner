@@ -28,6 +28,12 @@ The miner GUI is built using [Electron](https://electronjs.org) and
 
 [https://golang.org/dl/](https://golang.org/dl/)
 
+* Clone and build the app
+
+```shell
+git clone https://github.com/furiousteam/GUI-miner.git bloc/gui-miner
+```
+
 * Install required Go packages
 
 ```shell
@@ -37,29 +43,18 @@ go get -u github.com/asticode/go-astichartjs
 go get -u github.com/asticode/go-astilectron-bootstrap
 go get -u github.com/google/uuid
 go get -u github.com/mitchellh/go-ps
-```
-
-* Clone and build the app
-
-```shell
-git clone https://github.com/furiousteam/GUI-miner.git bloc/gui-miner
-cd bloc/gui-miner
-make
+go get -u github.com/furiousteam/gui-miner/src/gui
+go get -u github.com/konsorten/go-windows-terminal-sequences
+go get -u github.com/mattn/go-colorable
 ```
 
 * COMPILE GUI MINER:
 
 ```shell
-go get -u github.com/asticode/go-astilectron
-go get -u github.com/asticode/go-astilectron-bundler/...
-go get -u github.com/asticode/go-astichartjs
-go get -u github.com/asticode/go-astilectron-bootstrap
-go get -u github.com/google/uuid
-go get -u github.com/mitchellh/go-ps
-
-go get -u github.com/furiousteam/gui-miner/src/gui
-go get -u github.com/konsorten/go-windows-terminal-sequences
-go get -u github.com/mattn/go-colorable
+source ~/.profile (make sure correct GOPATH is set)
+in HOME folder set sudo chmod -R 777 go/
+cd go/
+cd GUI-miner
 make
 ```
 
