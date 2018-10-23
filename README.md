@@ -1,9 +1,9 @@
 ![](git-assets/miner-logo.png)
 
-#  Stellite GUI Miner
+#  Bloc GUI Miner
 
-The Stellite GUI miner is a beautiful, easy to use, interface for mining Stellite.
-It is aimed at getting people that have never mined Stellite into the crypto
+The Bloc GUI miner is a beautiful, easy to use, interface for mining Bloc.
+It is aimed at getting people that have never mined Bloc into the crypto
 game by making it really simple to get started.
 
 ![Screenshot](https://i.imgur.com/ruK7z4Y.png "Screenshot")

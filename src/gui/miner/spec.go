@@ -49,7 +49,7 @@ type Stats struct {
 	Errors []string `json:"errors"`
 	// UpdateGraph is set to true if the stats graph should be updated
 	UpdateGraph bool `json:"update_graph"`
-	// Address contains the Stellite address we are mining to
+	// Address contains the Bloc address we are mining to
 	// TODO: This should be somewhere else, it's not stats!
 	Address string `json:"address"`
 }

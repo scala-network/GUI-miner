@@ -14,7 +14,7 @@ let shared = {
     asticode.modaler.setContent(errDiv);
     asticode.modaler.show();
   },
-  // validateWalletAddress checks if the given address is a valid Stellite
+  // validateWalletAddress checks if the given address is a valid Bloc
   // wallet address
   validateWalletAddress: function(address) {
     /*

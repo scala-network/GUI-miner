@@ -266,7 +266,7 @@ func (miner *Xmrig) GetStats() (Stats, error) {
 	var errors []string
 	/*
 		TODO: I noticed errors are not reported in the xmrig API. To replicate,
-		use an invalid Stellite address with a pool that checks the address. In
+		use an invalid Bloc address with a pool that checks the address. In
 		the command line you'll notice errors printed, but not added in the API.
 		ApiState.cpp::getConnection and getResults functions might give some clues
 		to getting it fixed.
@@ -318,7 +318,7 @@ func (miner *Xmrig) createConfig(
 	}
 
 	config := XmrigConfig{
-		Algo:        "cryptonight",
+		Algo:        "cryptonight-heavy",
 		Av:          0,
 		Background:  runInBackground,
 		Colors:      true,
@@ -337,10 +337,10 @@ func (miner *Xmrig) createConfig(
 			{
 				URL:       poolEndpoint,
 				User:      walletAddress,
-				Pass:      "Stellite GUI Miner",
+				Pass:      "BLOC GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
-				Variant:   "bloc",
+				Variant:   "xhv",
 			},
 		},
 		API: XmrigAPIConfig{
@@ -359,7 +359,7 @@ func (miner *Xmrig) createGPUConfig(
 	walletAddress string) XmrigGPUConfig {
 
 	config := XmrigGPUConfig{
-		Algo:        "cryptonight",
+		Algo:        "cryptonight-heavy",
 		Av:          0,
 		Background:  false,
 		Colors:      true,
@@ -376,10 +376,10 @@ func (miner *Xmrig) createGPUConfig(
 			{
 				URL:       poolEndpoint,
 				User:      walletAddress,
-				Pass:      "Stellite GUI Miner",
+				Pass:      "BLOC GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
-				Variant:   "bloc",
+				Variant:   "xhv",
 			},
 		},
 		API: XmrigAPIConfig{
