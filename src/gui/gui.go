@@ -172,8 +172,8 @@ func New(
 		}},
 		AstilectronOptions: astilectron.Options{
 			AppName:            appName,
-			AppIconDarwinPath:  "resources/icon.icns",
-			AppIconDefaultPath: "resources/icon.png",
+			AppIconDarwinPath:  "resources/icon-bloc.icns",
+			AppIconDefaultPath: "resources/icon-bloc.png",
 		},
 		// TODO: Fix this tray to display nicely
 		/*TrayOptions: &astilectron.TrayOptions{
