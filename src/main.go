@@ -65,7 +65,7 @@ func main() {
 		config = nil
 		// Not set yet, set to default
 		// Hardcoded since we don't ship a config file
-		apiEndpoint = "https://www.bloc.money/miner"
+		apiEndpoint = "https://www.stellite.live/miner"
 	}
 
 	// Create the miner
