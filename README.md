@@ -31,6 +31,7 @@ The miner GUI is built using [Electron](https://electronjs.org) and
 * Clone and build the app
 
 ```shell
+in HOME folder set sudo chmod -R 777 go/
 cd go
 git clone https://github.com/furiousteam/GUI-miner.git
 ```
@@ -53,7 +54,6 @@ go get -u github.com/mattn/go-colorable
 
 ```shell
 source ~/.profile (make sure correct GOPATH is set)
-in HOME folder set sudo chmod -R 777 go/
 cd go/
 cd GUI-miner
 make
