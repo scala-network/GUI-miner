@@ -77,7 +77,7 @@ type XmrigPoolConfig struct {
 	Pass      string `json:"pass"`
 	Keepalive bool   `json:"keepalive"`
 	Nicehash  bool   `json:"nicehash"`
-	Variant   int    `json:"variant"`
+	Variant   string `json:"variant"`
 }
 
 // XmrigAPIConfig contains the Xmrig API config
