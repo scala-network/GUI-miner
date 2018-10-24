@@ -65,7 +65,7 @@ type GlobalStats struct {
 	} `json:"last_block"`
 	Difficulty      string `json:"difficulty"`
 	Height          string `json:"height"`
-	VolumeCrex      string `json:"volume_crex"`
+	VolumeCrex      string `json:"volume_stex"`
 	VolumeTradeogre string `json:"volume_tradeogre"`
 	Volume          string `json:"volume"`
 	Price           string `json:"price"`

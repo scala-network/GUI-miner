@@ -62,7 +62,7 @@ let app = {
           $('#network_height').html(parsed.height);
           $('#trading_volume').html(parsed.volume + ' BTC');
           $('#trading_tradeogre_volume').html(parsed.volume_tradeogre + ' BTC');
-          $('#trading_crex_volume').html(parsed.volume_crex + ' BTC');
+          $('#trading_crex_volume').html(parsed.volume_stex + ' BTC');
           $('#record_volume').html(parsed.records.volume + ' BTC');
           $('#record_price').html(parsed.records.price + ' BTC');
           $('#miner_payout').html(parsed.bloc_per_day + ' BLOC');
