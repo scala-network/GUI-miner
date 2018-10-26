@@ -113,6 +113,8 @@ let firstrun = {
     });
   },
   animateIntro: function() {
+    $('#initial-wallet').animateCss('fadeInUp');
+	/*
     // A couple of steps to get you set up
     $('#intro_anim_logo').fadeOut(1000, function() {
       $('#intro_anim_a').fadeIn(2500, function(){
@@ -130,5 +132,6 @@ let firstrun = {
         });
       });
     });
+	*/
   }
 };
