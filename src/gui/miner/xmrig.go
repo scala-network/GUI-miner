@@ -198,36 +198,42 @@ func (miner *Xmrig) WriteConfig(
 // TODO: Currently only CPU threads, extend this to full CPU/GPU config
 func (miner *Xmrig) GetProcessingConfig() ProcessingConfig {
 
+/*
 	// Get max CPU usage from the config file
 	configBytes, err := ioutil.ReadFile(
 		filepath.Join(miner.Base.executablePath, "config.json"))
 	if err != nil {
 		return ProcessingConfig{}
 	}
-
+*/
 	// xmrig's threads field is not an int when it's GPU only so we need to use
 	// a defferent config structure
 	if miner.isGPU {
+		/*
 		var config XmrigGPUConfig
 		err = json.Unmarshal(configBytes, &config)
 		if err != nil {
 			return ProcessingConfig{}
 		}
+		*/
 		return ProcessingConfig{
-			MaxUsage:   config.MaxCPUUsage,
+			//MaxUsage:   config.MaxCPUUsage,
+			MaxUsage:   0,
 			Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
 			MaxThreads: uint16(runtime.NumCPU()),
 			Type:       miner.name,
 		}
 	}
-
+/*
 	var config XmrigConfig
 	err = json.Unmarshal(configBytes, &config)
 	if err != nil {
 		return ProcessingConfig{}
 	}
+*/
 	return ProcessingConfig{
-		MaxUsage:   config.MaxCPUUsage,
+		//MaxUsage:   config.MaxCPUUsage,
+		MaxUsage:   0,
 		Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
 		MaxThreads: uint16(runtime.NumCPU()),
 		Type:       miner.name,
