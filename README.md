@@ -50,6 +50,23 @@ go get -u github.com/konsorten/go-windows-terminal-sequences
 go get -u github.com/mattn/go-colorable
 ```
 
+* Update electron version from 1.8.1 to 3.0.8:
+
+edit `~/go/src/github.com/asticode/go-astilectron/astilectron.go` file
+
+```shell
+nano ~/go/src/github.com/asticode/go-astilectron/astilectron.go
+```
+
+and change `VersionElectron         = "1.8.1"` to `VersionElectron         = "3.0.8"`
+
+then, recompile go-astilectron-bundler
+
+```shell
+cd ~/go/src/github.com/asticode/go-astilectron-bundler
+make
+```
+
 * COMPILE GUI MINER:
 
 ```shell
@@ -62,12 +79,3 @@ make
 NOTE: Ensure you clone the GUI miner into your working $GOPATH
 
 If all goes well the binaries for Windows, macOS and Linux will be available in the `bin` folder.
-
-## Forking
-
-In the spirit of open source we'll be making it really simple to fork and
-brand the miner for your own coin. Some structural changes need to be made to
-simplify the process. Subscribe to issue [#3][i3] to follow the progress on this
-guide.
-
-[i3]: https://github.com/furiousteam/gui-miner/issues/3
