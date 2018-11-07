@@ -206,6 +206,8 @@ func New(
 			gui.updateNetworkStats()
 			// Check for any initial announcement
 			gui.checkAnnouncement()
+			// uncomment this to have development tools opened when the app is built
+			//gui.window.OpenDevTools()
 			return nil
 		},
 	}
@@ -292,8 +294,8 @@ func (gui *GUI) handleElectronCommands(
 			// TODO: This is a dirty way to only show the top 3 and reveal the rest
 			// when needed. An API that implements paging is needed to fix this
 			if i == 3 {
-				poolsList += "<a href=\"#\" id=\"show_pool_list\">Show all</a>"
-				poolsList += "<div id=\"pool_list_bottom\" class=\"dn\">"
+				// poolsList += "<a href=\"#\" id=\"show_pool_list\">Show all</a>"
+				// poolsList += "<div id=\"pool_list_bottom\" class=\"dn\">"
 			}
 			poolsList += templateHTML.String()
 		}

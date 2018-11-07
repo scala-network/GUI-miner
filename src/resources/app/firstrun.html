@@ -2,224 +2,219 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="static/css/main.css"/>
+	<link rel="stylesheet" href="static/lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="static/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="static/lib/animate.css">
     <link rel="stylesheet" href="static/lib/astiloader/astiloader.css">
     <link rel="stylesheet" href="static/lib/astimodaler/astimodaler.css">
     <link rel="stylesheet" href="static/lib/astinotifier/astinotifier.css">
-    <link rel="stylesheet" href="static/lib/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
-    <script>window.$ = window.jQuery = require('./static/lib/jquery.min.js');</script>
+    <link rel="stylesheet" href="static/lib/mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>
+    <link rel="stylesheet" href="static/css/new.css"/>
+	<script>window.$ = window.jQuery = require('./static/lib/jquery.min.js');</script>
+	<script>require('./static/lib/mCustomScrollbar/jquery.mCustomScrollbar.mousewheel.min.js')(window.$);</script>
+	<script>require('./static/lib/mCustomScrollbar/jquery.mCustomScrollbar.min.js')(window.$);</script>
 </head>
 <body class="firstrun">
-  <div class="draggable"></div>
-  <div class="centered">
-    <div class="welcome main-section">
-      <div class="chat-box step" id="intro_anim_logo">
-        <img src="static/i/miner-logo.png" />
-      </div>
-      <div class="chat-box step dn" id="intro_anim_a">
-        Hey there <span id="username"></span>!
-      </div>
-      <div class="chat-box step dn" id="intro_anim_b">
-        We're really happy you<br/>
-        chose to mine with us
-      </div>
-      <div class="step dn" id="intro_anim_c">
-        Let's get you set up
-      </div>
-      <div class="step dn" id="intro_anim_d">
-        Your wallet
-      </div>
-      <div class="chat-box step selection dn" id="initial-wallet">
-        <p class="description">
-          A cryptocurrency wallet is a secure application you'll use to transact with.<br/> Your wallet address
-          is used whenever you want to receive BLOC money, you can think of it as your bank account number, just more secure.
-        </p>
-        <p class="description">
-          Your BLOC wallet address is <b>safe</b> to share
-        </p>
-        <div class="option wallet-select" data-option="no-wallet">
-          <h3>
-            I don't have a wallet
-          </h3>
-          <p>
-            If you've never mined BLOC or don't have an address
-          </p>
-        </div>
-        <div class="option wallet-select" data-option="has-wallet">
-          <h3>
-            I have a wallet
-          </h3>
-          <p>
-            If you've mined BLOC before or have an address already
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="setup-wallet dn main-section">
-      <div class="chat-box">
-        Select your wallet
-      </div>
-      <div class="chat-box step selection">
-        <a href="https://stellite.cash/paperwallet.html" target="_blank" class="option wallet" data-option="no-wallet">
-          <h3>
-            Paper Wallet
-          </h3>
-          <p>
-            A paper wallet is a method of storing your BLOC money 'offline'.
-            Once you've generated a paper wallet you need to store the information
-            securely to later import into the GUI wallet for your BLOC to
-            be usable.
-          </p>
-          <div class="info-block none">
-            &nbsp;
-          </div>
-        </a>
-        <a href="https://bloc.money/download" target="_blank" class="option wallet" data-option="has-wallet">
-          <h3>
-            GUI Wallet
-          </h3>
-          <p>
-            The GUI wallet is a graphical wallet you'll install on your
-            computer. You can use the GUI wallet to send and receive
-            BLOC money to other people or exchanges. You can create a new
-            one or import an existing one.
-          </p>
-          <div class="info-block recommended">
-            recommended
-          </div>
-        </a>
-      </div>
-      <div class="chat-box small">
-        <p class="description tip">
-          Tip: The fastest way to get started is with the paper wallet.<br />
-          Once you are up and running you can import your paper wallet into the GUI wallet using your seed words
-        </p>
-        <p class="spaced">
-          Once you have your wallet set up, continue
-        </p>
-        <br/>
-        <a class="button back" data-target="initial-wallet" href="#">
-          Back
-        </a>
-        <a class="button ok" data-target="setup-mining" href="#">
-          Continue
-        </a>
-      </div>
-    </div>
+	<div class="draggable"></div>
+	<div class="container">
+		<!-- welcome message -->
+		<div class="main-section welcome text-center">
+			<img src="static/img/logo.png"><br />
+			<div class="miner-title">Miner 3.0</div>
+			<div class="message-bg">
+				<div class="message-title">Welcome <span id="username"></span>!</div>
+				<div class="message-text">We love to see you using our miner<br />
+				<a href="#" data-target="choose-wallet">Ok, we can start the setup now, Let's go!</a></div>
+			</div>
+		</div>
+		
+		<!-- choose new or existing wallet address -->
+		<div class="main-section hidden choose-wallet text-center" id="choose-wallet">
+			<img src="static/img/yellow-logo.png"><br />
+			<div class="miner-title">MINER SETUP</div>
+			<div class="wallet-bg first"><a href="#" data-target="miner-address">I ALREADY HAVE A BLOC WALLET ADDRESS</a></div>
+			<div class="wallet-bg last"><a href="#" data-target="select-wallet">I DON'T HAVE A BLOC WALLET ADDRESS</a></div>
+			<div class="wallet-note">If you do not have a Bloc wallet address, you just need to download one of our several<br />
+			wallet applications. Click on the button above to see our numerous options.</div>
+			<div class="wallet-tip">TIPS : The wallet application allow you to make transaction with your BLOC<br />
+			and to get your own address. it's a kind of bank account, but way more secure.<br />
+			It is safe to share your BLOC wallet address.</div>
+		</div>
+		
+		<!-- insert existing wallet address -->
+		<div class="main-section hidden miner-address text-center" id="miner-address">
+			<img src="static/img/miner-setup-logo.png"><br />
+			<div class="address-title">ADDRESS SETUP</div>
+			<div class="address-text">This is the address you received when you created your wallet. It will start with the characters <span>aBloc</span><br />
+			All the Bloc you'll mine will be send to this address.</div>
+			<div class="address-input"><input type="text" name="" value="" placeholder="Type or paste your BLOC address here" class="text-center" id="miner-address-input" /></div>
+			<div class="address-submit"><a href="#" class="btn btn-default" id="miner-address-next-step">OK, NEXT STEP</a><a href="#" class="hidden" data-target="select-pool"></a></div>
+			<div class="miner-address-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
+		</div>
+		
+		<!-- how to get a new wallet address -->
+		<div class="main-section hidden select-wallet text-center" id="select-wallet">
+			<img src="static/img/yellow-logo.png"><br />
+			<div class="select-wallet-title">SELECT A WALLET TYPE</div>
+			
+			<div class="row firstrow fivecolumns">
+				<div class="col-xs-4">
+					<div class="select-wallet-col-title"><a href="https://bloc.money/download">DESKTOP WALLET</a></div>
+					<div class="select-wallet-text">The GUI wallet is an application that you download on your computer that has a graphic interface. You can use it to send and receive your Bloc Coins to other people or exchange and to generate your own address.</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="select-wallet-col-title"><a href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8">IPHONE WALLET</a></div>
+					<div class="select-wallet-text">The BLOC iPhone application is available on the AppStore. You can use it to send and receive your Bloc Coins to other people or exchange and to generate your own address. And many more things.</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="select-wallet-col-title"><a href="https://t.me/bloc_wallet_bot">TELEGRAM WALLET</a></div>
+					<div class="select-wallet-text">You use Telegram ? simply join our Wallet chanel and you will automitcalty get your address instantly. You can also use it to send and receive your Bloc Coins to other people or exchange.</div>
+				</div>
+			</div>
 
-    <div class="setup-mining main-section dn" id="setup-mining">
-      <div class="chat-box">
-        Set up your mining
-      </div>
-      <div class="chat-box address">
-        <h3>
-          BLOC address to mine to
-        </h3>
-        <p>
-          This is the address you received when you created your wallet. It will start with the characters <span>abLoc</span>
-        </p>
-        <div>
-          <input id="mining_address" type="text" placeholder="Your BLOC address"/>
-        </div>
-      </div>
-      <div class="chat-box small">
-        <a class="button back" data-target="initial-wallet" href="#">
-          Back
-        </a>
-        <a class="button ok" data-target="setup-pool" href="#">
-          Continue
-        </a>
-      </div>
-    </div>
+			<div class="select-wallet-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
+			<div class="select-wallet-continue"><a href="#" data-target="miner-address">CONTINUE ----></a></div>
+		</div>
+		
+		<!-- choose a mining pool -->
+		<div class="main-section hidden select-pool text-center" id="select-pool">
+			<img src="static/img/select-pool-logo.png"><br />
+			<div class="pool-title">SELECT A MINING POOL</div>
+			<div class="pool-text">A mining pool is where many different miners work together to find a block and share the reward. If you were to mine on your own (solo mining) it could take weeks before you find a block, if you find a block. The community has set up a bunch of pools (with also official pools), some of the most popular ones are listed below. We recommend picking a pool that has some miners and a healthy hash rate.</div>
 
-    <div class="setup-pool main-section dn" id="setup-pool">
-      <div class="chat-box">
-        Select a mining pool
-        <p class="description">
-          A mining pool is where many different miners work together to find a block and share the reward. If you were<br/>
-          to mine on your own (solo mining) it could take weeks before you find a block, <b>if</b> you find a block.
-        </p>
-        <p class="description">
-          The community has set up a bunch of pools, some of the most popular ones are listed below. We recommend picking<br/>
-          a pool that has some miners and a healthy hash rate. Picking a busy pool results in smaller, more frequent payouts while a smaller<br/>
-          pool results in larger, less frequent payouts.
-        </p>
-      </div>
-      <div class="pool-selection">
-        <div id="pool_list">Pool List</div>
-        <div class="chat-box small">
-          <a class="button back" data-target="setup-mining" href="#">
-            Back
-          </a>
-          <a class="button ok dn" id="start_mining" data-target="antivirus" href="#">
-            Continue
-          </a>
-        </div>
+			<div class="table-container">
+				<div class="table-head">
+					<div class="table-col text-left">POOL NAME</div>
+					<div class="table-col">HASH RATE</div>
+					<div class="table-col">MINERS</div>
+					<div class="table-col">FEE</div>
+					<div class="table-col">PAYOUT</div>
+					<div class="table-col text-right">BLOCK FOUND</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="table-inner" id="table-inner">
+					<!--
+					<div class="table-body" data-id="1">
+						<div class="table-col text-left">bloc-mining.eu <span>(official pool)</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body" data-id="2">
+						<div class="table-col text-left">bloc-mining.asia <span>(official pool)</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body selected" data-id="3">
+						<div class="table-col text-left">bloc-mining.us <span>(official pool)</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body" data-id="4">
+						<div class="table-col text-left">bloc-mining.us</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body" data-id="5">
+						<div class="table-col text-left">bloc-mining.us</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body" data-id="6">
+						<div class="table-col text-left">bloc-mining.us</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body" data-id="7">
+						<div class="table-col text-left">bloc-mining.us</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body" data-id="8">
+						<div class="table-col text-left">bloc-mining.us</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					-->
+				</div>
+			</div>
 
-      </div>
-    </div>
+			<div class="pool-submit"><a href="#" class="btn btn-default" data-target="antivirus">OK, NEXT STEP</a></div>
+			<div class="pool-note">Click on the pool you want to select and then click the button to validate.</div>
+			<div class="pool-back"><a href="#" data-target="miner-address"><---- BACK</a></div>
+		</div>
 
-    <div class="antivirus main-section dn" id="antivirus">
-      <div class="chat-box">
-        Antivirus
-      </div>
-      <div class="chat-box step">
-        <p class="description">
-          Some antivirus packages detect cryptocurrency miners as malware and will
-          remove the miner as soon as it's started. In order for the GUI miner to
-          function, you'll need to exclude the miner from being scanned by your
-          antivirus software.
-        </p>
-        <p class="description">
-          Below are guides for the most popular packages, the path you need to exclude is
-            <pre id="miner_path"></pre>
-        </p>
-        <ul>
-          <li>
-            <a class="link" href="https://support.microsoft.com/en-za/help/4028485/windows-10-add-an-exclusion-to-windows-defender-antivirus">Windows Defender</a> (a must for Windows 10 users)
-          </li>
-          <li>
-            <a class="link" href="https://support.kaspersky.com/12987">Kaspersky</a>
-          </li>
-          <li>
-            <a class="link" href="https://support.avast.com/en-ww/article/Antivirus-scan-exclusions">Avast</a>
-          </li>
-          <li>
-            <a class="link" href="https://www.bitdefender.com/consumer/support/answer/2121/">BitDefender</a>
-          </li>
-        </ul>
-      </div>
-      <div class="chat-box small">
-        <a class="button ok" id="start_mining" data-target="configure_miner" href="#">
-          Ok, I've allowed the miner
-        </a>
-      </div>
-    </div>
+		<!-- disable antivirus message -->
+		<div class="main-section hidden antivirus text-center" id="antivirus">
+			<img src="static/img/antivirus-logo.png"><br />
+			<div class="antivirus-title">ANTIVIRUS</div>
+			<div class="antivirus-text">Some antivirus packages detect cryptocurrency miners as malware and will remove the<br />
+			miner as soon as it's started. In order for the GUI miner to function, you'll need to<br />
+			exclude the miner from being scanned by your antivirus software.</div>
+			<div class="antivirus-list"><span>Below are guides for the most popular packages, the path you need to exclude is :</span>
+				<pre id="miner_path">/Users/thomasgayet/Downloads/Stellite GUI Miner v1.1.0/miner</pre>
+				<ul class="list-unstyled">
+					<li><a href="https://support.microsoft.com/en-za/help/4028485/windows-10-add-an-exclusion-to-windows-defender-antivirus">- Guide for Windows Defender -</a></li>
+					<li><a href="https://support.kaspersky.com/12987">- Guide for Kaspersky -</a></li>
+					<li><a href="https://support.avast.com/en-ww/article/Antivirus-scan-exclusions">- Guide for Avast -</a></li>
+					<li><a href="https://www.bitdefender.com/consumer/support/answer/2121/">- Guide for Bitdefender -</a></li>
+				</ul>
+			</div>
+			<div class="antivirus-submit"><a href="#" class="btn btn-default" data-target="configuring-miner">OK, I'VE ALLOWED THE MINER</a></div>
+			<div class="antivirus-back"><a href="#" data-target="select-pool"><---- BACK</a></div>
+		</div>
 
-    <div class="setup-pool main-section dn" id="configure_miner">
-      <div class="chat-box">
-        Configuring your miner
-        <p class="description">
-          We'll be quick, we promise
-        </p>
-        <p>
-          <img src="static/i/configuring.gif" />
-        </p>
-      </div>
-    </div>
-  </div>
-  <a href="#" id="exit" class="dn">Cancel and exit</a>
-  <script src="static/lib/astiloader/astiloader.js"></script>
-  <script src="static/lib/astimodaler/astimodaler.js"></script>
-  <script src="static/lib/astinotifier/astinotifier.js"></script>
-  <script src="static/lib/jquery.animatecss.js"></script>
-  <script src="static/lib/chart.bundle.min.js"></script>
-  <script src="static/js/shared.js"></script>
-  <script src="static/js/firstrun.js"></script>
-  <script type="text/javascript">
-      firstrun.init();
-  </script>
+		<!-- wait message -->
+		<div class="main-section hidden configuring-miner text-center" id="configuring-miner">
+			<img src="static/img/configuring-miner-logo.png"><br />
+			<div class="configuring-miner-title">Perfect !</div>
+			<div class="configuring-miner-text">All the settings are now ok.<br />
+			Give us some seconds to configure and start<br />
+			your miner. It will be fast, we promise...</div>
+		</div>
+	</div>
+	<script src="static/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="static/lib/astiloader/astiloader.js"></script>
+	<script src="static/lib/astimodaler/astimodaler.js"></script>
+	<script src="static/lib/astinotifier/astinotifier.js"></script>
+	<script src="static/lib/jquery.animatecss.js"></script>
+	<script src="static/js/shared.js"></script>
+	<script src="static/js/firstrun.js"></script>
+	<script type="text/javascript">
+		firstrun.init();
+	</script>
 </body>
 </html>

@@ -1,0 +1,1046 @@
+body {
+	font-weight: 400;
+	font-family: 'Roboto';
+	font-size: 15px;
+	color: #fff;
+	background-color: #001b45;
+}
+body.firstrun {
+	background-image: url('../img/bg-first-screen.png');
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+body.miner.mining {
+	background-image: url('../img/bg-miner-mining.png');
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+@-webkit-keyframes rotation {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(359deg);
+	}
+}
+/*div.draggable {
+	-webkit-app-region:drag;
+	position:absolute;
+	z-index:1000;
+	left:0;
+	top:0;
+	height:50px;
+	width:100%
+}*/
+
+/* CUSTOM SCROLLBAR */
+.mCSB_scrollTools {
+	width: 20px;
+	opacity: 1;
+	right: 4px;
+}
+.mCS-rounded-dots.mCSB_scrollTools .mCSB_dragger {
+	height: 20px;
+}
+.mCS-rounded-dots.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	width: 20px;
+}
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	background: radial-gradient(#ecde1f, #9a920f);
+	background-color: #bfb200;
+	border-radius: 50%;
+	opacity: 1;
+}
+.mCS-rounded-dots.mCSB_scrollTools .mCSB_draggerRail {
+	width: 10px;
+	background-image: none;
+	background-color: #030621;
+	opacity: 1;
+}
+
+/* WELCOME */
+.welcome {
+	padding-top: 130px;
+}
+.welcome img {
+	margin-bottom: 10px;
+}
+.welcome .miner-title {
+	font-size: 15px;
+	color: #ffed00;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	margin-bottom: 26px;
+}
+.welcome .message-bg {
+	width: 508px;
+	margin: 0 auto;
+	background-color: #090a31cc;
+	border-radius: 3px;
+	padding: 40px 0;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+}
+.welcome .message-title {
+	font-size: 30px;
+	font-weight: 300;
+}
+.welcome .message-text {
+	font-size: 16px;
+}
+.welcome .message-text a {
+	color: #ffed00;
+}
+
+/* CHOOSE WALLET */
+.choose-wallet {
+	padding-top: 70px;
+}
+.choose-wallet img {
+	margin-bottom: 20px;
+}
+.choose-wallet .miner-title {
+	font-size: 30px;
+	color: #fff;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	margin-bottom: 63px;
+}
+.choose-wallet .wallet-bg {
+	width: 416px;
+	margin: 0 auto;
+	background-color: #090a31cc;
+	border-radius: 3px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+}
+.choose-wallet .wallet-bg.first {
+	margin-bottom: 22px;
+}
+.choose-wallet .wallet-bg.last {
+	margin-bottom: 58px;
+}
+.choose-wallet .wallet-bg a,
+.choose-wallet .wallet-bg a:hover {
+	display: block;
+	color: #ffed00;
+	padding: 28px 0;
+	text-decoration: none;
+	font-family: 'Roboto Condensed';
+	font-weight: 600;
+}
+.choose-wallet .wallet-note {
+	font-size: 16px;
+	opacity: .6;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	margin-bottom: 14px;
+}
+.choose-wallet .wallet-tip {
+	font-size: 16px;
+	opacity: .25;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+}
+
+/* ADDRESS SETUP */
+.miner-address {
+	position: relative;
+	padding-top: 87px;
+}
+.miner-address img {
+	margin-bottom: 22px;
+}
+.miner-address .address-title {
+	font-size: 30px;
+	color: #fff;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	margin-bottom: 12px;
+}
+.miner-address .address-text {
+	font-size: 16px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	margin-bottom: 60px;
+	opacity: .55;
+}
+.miner-address .address-text span {
+	color: #ffed00;
+}
+.miner-address .address-input {
+	margin-bottom: 60px;
+}
+.miner-address .address-input input {
+	width: 900px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px #7f90ab solid;
+	padding: 10px 0;
+	font-style: italic;
+	font-family: 'Roboto Condensed';
+	font-size: 16px;
+	outline: none;
+}
+.miner-address .address-input input::placeholder {
+	color: #fff;
+}
+.miner-address .address-submit .btn {
+	width: 243px;
+	margin: 0 auto;
+	background-color: #090a31cc;
+	border-radius: 3px;
+	font-family: 'Roboto Condensed';
+	font-weight: 600;
+	color: #ffed00;
+	padding: 20px 0;
+	border: none;
+}
+.miner-address .miner-address-back {
+	position: absolute;
+	top: 42px;
+	left: 18px;
+	background-color: #01072fcc;
+	border-radius: 3px;
+}
+.miner-address .miner-address-back a {
+	display: inline-block;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	padding: 10px 20px;
+	opacity: .6;
+	text-decoration: none;
+}
+
+/* CONFIGURING MINER */
+.configuring-miner {
+	padding-top: 151px;
+	position: relative;
+}
+.configuring-miner img {
+	animation: rotation 3s infinite linear;
+	margin-bottom: 20px;
+}
+.configuring-miner .configuring-miner-title {
+	font-family: 'Roboto Condensed';
+	font-weight: 600;
+	color: #ffed00;
+	font-size: 30px;
+	margin-bottom: 5px;
+}
+.configuring-miner .configuring-miner-text {
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	font-size: 24px;
+}
+
+/* ANTIVIRUS */
+.antivirus {
+	padding-top: 82px;
+	position: relative;
+}
+.antivirus img {
+	margin-bottom: 22px;
+}
+.antivirus pre {
+	background-color: #ffffff11;
+	border-color: transparent;
+	color: #fff;
+}
+.antivirus .antivirus-title {
+	font-size: 30px;
+	color: #fff;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	margin-bottom: 12px;
+}
+.antivirus .antivirus-text {
+	max-width: 790px;
+	margin: 0 auto 30px auto;
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	opacity: .55;
+}
+.antivirus .antivirus-list {
+	max-width: 602px;
+	margin: 0 auto 30px auto;
+	font-size: 16px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	padding: 25px 0;
+	background-color: #ffffff11;
+	border-radius: 8px;
+}
+.antivirus .antivirus-list span {
+	color: #fff;
+}
+.antivirus .antivirus-list ul {
+	margin-top: 25px;
+	color: #a79c01;
+}
+.antivirus .antivirus-list ul a,
+.antivirus .antivirus-list ul a:hover {
+	color: #a79c01;
+	text-decoration: none;
+}
+.antivirus .antivirus-back {
+	position: absolute;
+	top: 42px;
+	left: 18px;
+	background-color: #01072fcc;
+	border-radius: 3px;
+}
+.antivirus .antivirus-back a {
+	display: inline-block;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	padding: 10px 20px;
+	opacity: .6;
+	text-decoration: none;
+}
+.antivirus .antivirus-submit .btn {
+	width: 243px;
+	margin: 0 auto 10px auto;
+	background-color: #090a31cc;
+	border-radius: 3px;
+	font-family: 'Roboto Condensed';
+	font-weight: 600;
+	color: #ffed00;
+	padding: 20px 0;
+	border: none;
+}
+
+/* SELECT POOL */
+.select-pool {
+	padding-top: 40px;
+	position: relative;
+}
+.select-pool img {
+	margin-bottom: 22px;
+}
+.select-pool .pool-title {
+	font-size: 30px;
+	color: #fff;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	margin-bottom: 12px;
+}
+.select-pool .pool-text {
+	max-width: 790px;
+	margin: 0 auto 30px auto;
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	opacity: .55;
+}
+
+.select-pool .table-inner {
+	width: 972px;
+	margin: 0 auto;
+	max-height: 248px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-bottom: 35px;
+}
+.select-pool .table-inner .mCustomScrollBox {
+	padding-left: 12px;
+}
+.select-pool .table-inner .mCSB_container {
+	padding-left: 12px;
+}
+.select-pool .table-head {
+	width: 972px;
+	margin: 0 auto;
+	padding-right: 50px;
+	padding-left: 12px;
+}
+.select-pool .table-body.selected::before {
+	content: '';
+	position: absolute;
+	top: 9px;
+	left: -12px;
+	width: 23px;
+	height: 23px;
+	z-index: 9999;
+	background: url('../img/selected-ticker.png');
+}
+.select-pool .table-body.selected {
+	position: relative;
+	border: 1px #857f1c solid;
+	padding: 0;
+}
+.select-pool .table-head .table-col:first-child {
+	padding-left: 20px;
+}
+.select-pool .table-head .table-col:nth-child(6) {
+	padding-right: 20px;
+}
+.select-pool .table-head .table-col {
+	font-size: 15px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	padding: 10px 0;
+}
+.select-pool .table-body {
+	cursor: pointer;
+	border-radius: 6px;
+	margin-bottom: 12px;
+	padding: 1px;
+}
+.select-pool .table-body .table-col {
+	font-size: 14px;
+	color: #fff;
+	padding: 10px 28px;
+}
+.select-pool .table-body .table-col span {
+	color: #ffed00;
+	margin-left: 10px;
+	font-size: 14px;
+}
+.select-pool .table-body .table-col.opacity {
+	opacity: .5;
+}
+.select-pool .table-body:nth-child(even) {
+	background-color: #04072777;
+}
+.select-pool .table-body:nth-child(odd) {
+	background-color: #04072733;
+}
+.select-pool .table-head .table-col:nth-child(1),
+.select-pool .table-body .table-col:nth-child(1) {
+	width: 270px;
+	padding-right: 0
+}
+.select-pool .table-head .table-col:nth-child(2),
+.select-pool .table-body .table-col:nth-child(2) {
+	width: 125px
+}
+.select-pool .table-head .table-col:nth-child(3),
+.select-pool .table-body .table-col:nth-child(3) {
+	width: 95px
+}
+.select-pool .table-head .table-col:nth-child(4),
+.select-pool .table-body .table-col:nth-child(4) {
+	width: 105px
+}
+.select-pool .table-head .table-col:nth-child(5),
+.select-pool .table-body .table-col:nth-child(5) {
+	width: 115px
+}
+.select-pool .table-head .table-col:nth-child(6),
+.select-pool .table-body .table-col:nth-child(6) {
+	width: 190px;
+	padding-left: 0
+}
+.select-pool .table-head .table-col,
+.select-pool .table-body .table-col {
+	float: left;
+}
+.select-pool .pool-back {
+	position: absolute;
+	top: 42px;
+	left: 18px;
+	background-color: #01072fcc;
+	border-radius: 3px;
+}
+.select-pool .pool-back a {
+	display: inline-block;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	padding: 10px 20px;
+	opacity: .6;
+	text-decoration: none;
+}
+.select-pool .pool-submit .btn {
+	width: 243px;
+	margin: 0 auto 10px auto;
+	background-color: #090a31cc;
+	border-radius: 3px;
+	font-family: 'Roboto Condensed';
+	font-weight: 600;
+	color: #ffed00;
+	padding: 20px 0;
+	border: none;
+}
+.select-pool .pool-note {
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #fff;
+	opacity: .5;
+}
+
+/* MINER */
+body.miner .container {
+	padding-top: 16px;
+}
+body.miner > .container > div > .col-xs-3,
+body.miner > .container > div > .col-xs-2,
+body.miner > .container > div > .col-xs-7 {
+	padding-right: 8px;
+	padding-left: 8px;
+}
+body.miner > .container > div > .col-xs-3 {
+	width: 22%; /* from 25% */
+}
+body.miner > .container > div > .col-xs-7 {
+	width: 60%; /* from 58.33333333% */
+}
+body.miner > .container > div > .col-xs-2 {
+	width: 18%; /* from 16.66666667% */
+}
+body.miner table {
+	margin: 0;
+}
+body.miner table td {
+	border: none;
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	color: #fff;
+	opacity: .5;
+	padding: 1px 10px;
+}
+body.miner .first-col table td:first-child {
+	width: 100px;
+	padding-left: 0;
+}
+body.miner .first-col table td:last-child {
+	padding-right: 0;
+}
+body.miner .miner-box {
+	background-color: #090a31cc;
+	border-radius: 5px;
+	padding: 16px;
+	margin-bottom: 16px;
+}
+body.miner .text-title {
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	opacity: .5;
+	margin-bottom: 5px;
+}
+
+body.miner .middle-middle .address {
+	word-wrap: break-word;
+}
+body.miner .miner-box.downloads a,
+body.miner .miner-box.downloads a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+body.miner .miner-box.downloads img {
+	margin-top: -20px;
+}
+
+body.miner .miner-box.top-middle .hashrate {
+	font-size: 45px;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	color: #ffed00;
+}
+body.miner .miner-box.top-middle .no-opacity {
+	opacity: 1;
+}
+body.miner .miner-box.top-middle .estimated {
+	background-color: #1a2449;
+	border-radius: 5px;
+	padding: 16px;
+	margin-bottom: 20px;
+	font-size: 20px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #fff;
+}
+body.miner .miner-box.top-middle .col-xs-4:first-child {
+	padding-right: 0;
+}
+body.miner .miner-box.top-middle .col-xs-4:nth-child(2) {
+	padding-left: 0;
+	padding-right: 0;
+}
+body.miner .miner-box.top-middle .col-xs-4:last-child {
+	padding-left: 0;
+}
+body.miner .miner-box.top-middle .estimated span {
+	display: block;
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #fff;
+	opacity: .5;
+}
+body.miner .miner-box .switch {
+	width: 179px;
+	height: 56px;
+	overflow: hidden;
+	margin: 0 0 17px;
+}
+body.miner .miner-box .switch.off .on-rail,
+body.miner .miner-box .switch.off .on-text {
+	display: none;
+}
+body.miner .miner-box .switch .on-rail,
+body.miner .miner-box .switch .off-rail {
+	float: left;
+	position: relative;
+	cursor: pointer;
+}
+body.miner .miner-box .switch .on-knob,
+body.miner .miner-box .switch .off-knob {
+	position: absolute;
+	top: 0;
+	width: 53px;
+	height: 52px;
+	cursor: pointer;
+}
+
+body.miner .miner-box .switch .on-rail {
+	width: 122px;
+	height: 56px;
+	background-image: url('../img/miner/on_switch_rail.png');
+}
+body.miner .miner-box .switch .on-knob {
+	right: 0;
+	background-image: url('../img/miner/on_switch_knob.png');
+}
+body.miner .miner-box .switch .on-text {
+	float: left;
+	width: 57px;
+	height: 56px;
+	background-image: url('../img/miner/on_switch_text.png');
+}
+
+body.miner .miner-box .switch .off-rail {
+	width: 122px;
+	height: 56px;
+	background-image: url('../img/miner/off_switch_rail.png');
+}
+body.miner .miner-box .switch .off-knob {
+	left: 0;
+	background-image: url('../img/miner/off_switch_knob.png');
+}
+body.miner .miner-box .switch .off-text {
+	float: left;
+	width: 57px;
+	height: 56px;
+	background-image: url('../img/miner/off_switch_text.png');
+}
+
+body.miner .miner-box .dash-title {
+	display: inline-block;
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	color: #fff;
+	opacity: .5;
+	margin-bottom: 12px;
+}
+body.miner .miner-box .change-pool .btn {
+	background-color: #040d2d;
+	border-color: #404867;
+	color: #958b1a;
+	padding: 5px 12px;
+}
+body.miner .miner-box .pool-address {
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	color: #ffed00;
+	margin-bottom: 3px;
+}
+body.miner .miner-box .pool-stats td {
+	opacity: 1;
+	padding: 0;
+}
+body.miner .miner-box .pool-stats td.opacity {
+	opacity: 0.5;
+}
+body.miner .miner-box.settings ul {
+	margin: 0;
+}
+body.miner .miner-box.settings li {
+	float: left;
+	margin-bottom: 8px;
+	margin-right: 10px;
+}
+body.miner .miner-box.social-network ul {
+	margin: 0;
+}
+body.miner .miner-box.social-network li {
+	float: left;
+	margin-bottom: 8px;
+	margin-right: 10px;
+}
+body.miner .miner-box.social-network li:nth-child(4n) {
+	margin-right: 0;
+}
+body.miner .miner-box.bloc-network a,
+body.miner .miner-box.bloc-network a:hover {
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #fff;
+	opacity: .5;
+	text-decoration: none;
+}
+body.miner .miner-box.bloc-network ul {
+	margin: 0;
+}
+
+/* MINER SETTINGS */
+.miner-settings {
+	padding-top: 35px;
+}
+.miner-settings .miner-settings-title {
+	font-size: 30px;
+	color: #fff;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	margin-bottom: 19px;
+}
+.miner-settings .miner-settings-cpus {
+	background-color: #04072777;
+	padding: 13px 0;
+	margin-bottom: 14px;
+}
+.miner-settings .miner-settings-cpus-inner {
+	margin-bottom: 5px;
+}
+.miner-settings .miner-settings-cpus .text {
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	font-style: italic;
+	color: #fff;
+	opacity: .5;
+}
+.miner-settings .dropdown-toggle {
+	background-color: #040727aa;
+	border-color: #040727;
+	color: #fff;
+	padding: 8px 12px;
+}
+.miner-settings .dropdown-toggle .caret {
+	margin-left: 14px;
+}
+.miner-settings .address-input {
+	background-color: #04072777;
+	margin-bottom: 10px;
+	padding: 12px 0;
+}
+.miner-settings .address-input input {
+	width: 900px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px #7f90ab solid;
+	padding: 10px 0;
+	font-style: italic;
+	font-family: 'Roboto Condensed';
+	font-size: 16px;
+	outline: none;
+	margin-bottom: 5px;
+}
+.miner-settings .address-input input::placeholder {
+	color: #fff;
+}
+.miner-settings .address-input .text {
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #fff;
+	opacity: .5;
+}
+.miner-settings .table-inner {
+	width: 972px;
+	margin: 0 auto;
+	max-height: 196px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-bottom: 35px;
+}
+.miner-settings .table-inner .mCustomScrollBox {
+	padding-left: 12px;
+}
+.miner-settings .table-inner .mCSB_container {
+	padding-left: 12px;
+}
+.miner-settings .table-head {
+	width: 972px;
+	margin: 0 auto;
+	padding-right: 50px;
+	padding-left: 12px;
+}
+.miner-settings .table-body.selected::before {
+	content: '';
+	position: absolute;
+	top: 9px;
+	left: -12px;
+	width: 23px;
+	height: 23px;
+	z-index: 9999;
+	background: url('../img/selected-ticker.png');
+}
+.miner-settings .table-body.selected {
+	position: relative;
+	border: 1px #857f1c solid;
+}
+.miner-settings .table-head .table-col:first-child {
+	padding-left: 20px;
+}
+.miner-settings .table-head .table-col:nth-child(6) {
+	padding-right: 20px;
+}
+.miner-settings .table-head .table-col {
+	font-size: 15px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	padding: 10px 0;
+}
+.miner-settings .table-body {
+	cursor: pointer;
+	border-radius: 6px;
+	margin-bottom: 12px;
+}
+.miner-settings .table-body .table-col {
+	font-size: 14px;
+	color: #fff;
+	padding: 10px 28px;
+}
+.miner-settings .table-body .table-col span {
+	color: #ffed00;
+	margin-left: 10px;
+	font-size: 14px;
+}
+.miner-settings .table-body .table-col.opacity {
+	opacity: .5;
+}
+.miner-settings .table-body:nth-child(even) {
+	background-color: #04072777;
+}
+.miner-settings .table-body:nth-child(odd) {
+	background-color: #04072733;
+}
+.miner-settings .table-head .table-col:nth-child(1),
+.miner-settings .table-body .table-col:nth-child(1) {
+	width: 270px;
+	padding-right: 0
+}
+.miner-settings .table-head .table-col:nth-child(2),
+.miner-settings .table-body .table-col:nth-child(2) {
+	width: 125px
+}
+.miner-settings .table-head .table-col:nth-child(3),
+.miner-settings .table-body .table-col:nth-child(3) {
+	width: 95px
+}
+.miner-settings .table-head .table-col:nth-child(4),
+.miner-settings .table-body .table-col:nth-child(4) {
+	width: 105px
+}
+.miner-settings .table-head .table-col:nth-child(5),
+.miner-settings .table-body .table-col:nth-child(5) {
+	width: 115px
+}
+.miner-settings .table-head .table-col:nth-child(6),
+.miner-settings .table-body .table-col:nth-child(6) {
+	width: 190px;
+	padding-left: 0
+}
+.miner-settings .table-head .table-col,
+.miner-settings .table-body .table-col {
+	float: left;
+}
+.miner-settings .miner-settings-back {
+	position: absolute;
+	top: 42px;
+	left: 18px;
+	background-color: #01072fcc;
+	border-radius: 3px;
+}
+.miner-settings .miner-settings-back a {
+	display: inline-block;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	padding: 10px 20px;
+	opacity: .6;
+	text-decoration: none;
+}
+.miner-settings .miner-settings-submit .btn {
+	width: 243px;
+	margin: 0 auto 10px auto;
+	background-color: #090a31cc;
+	border-radius: 3px;
+	font-family: 'Roboto Condensed';
+	font-weight: 600;
+	color: #ffed00;
+	padding: 20px 0;
+	border: none;
+}
+
+/* SELECT WALLET */
+.select-wallet {
+	padding-top: 60px;
+	padding-left: 23px;
+	padding-right: 23px;
+}
+.select-wallet .select-wallet-title {
+	font-size: 30px;
+	color: #fff;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	margin-bottom: 50px;
+}
+.select-wallet .select-wallet-col-title {
+	margin: 0 auto 20px auto;
+	background-color: #090a31cc;
+	border-radius: 3px;
+	border: none;
+}
+.select-wallet .select-wallet-col-title a,
+.select-wallet .select-wallet-col-title a:hover {
+	display: block;
+	font-family: 'Roboto Condensed';
+	font-weight: 600;
+	color: #ffed00;
+	padding: 20px 0;
+	text-decoration: none;
+}
+.select-wallet .select-wallet-text {
+	max-width: 790px;
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	opacity: .55;
+}
+.select-wallet .select-wallet-back {
+	position: absolute;
+	top: 42px;
+	left: 18px;
+	background-color: #01072fcc;
+	border-radius: 3px;
+}
+.select-wallet .select-wallet-back a {
+	display: inline-block;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	padding: 10px 20px;
+	opacity: .6;
+	text-decoration: none;
+}
+.select-wallet .select-wallet-continue {
+	position: absolute;
+	top: 42px;
+	right: 18px;
+	background-color: #01072fcc;
+	border-radius: 3px;
+}
+.select-wallet .select-wallet-continue a {
+	display: inline-block;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	padding: 10px 20px;
+	opacity: .6;
+	text-decoration: none;
+}
+
+/* WHATS NEXT */
+.whatsnext {
+	padding-top: 20px;
+	padding-left: 23px;
+	padding-right: 23px;
+}
+.whatsnext .col-xs-2 {
+	padding-right: 9px;
+    padding-left: 9px;
+}
+.whatsnext .whatsnext-title {
+	font-size: 30px;
+	color: #fff;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+}
+.whatsnext .whatsnext-text {
+	max-width: 790px;
+	margin: 0 auto 30px auto;
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	opacity: .5;
+}
+.whatsnext .whatsnext-box {
+	height: 266px;
+	padding: 21px 29px;
+	text-align: left;
+	background-color: #00002999;
+	border-radius: 3px;
+	overflow: hidden;
+}
+.whatsnext .firstrow {
+	margin-bottom: 26px;
+}
+.whatsnext .whatsnext-box img {
+	margin-bottom: 5px;
+}
+.whatsnext .whatsnext-box a,
+.whatsnext .whatsnext-box a:hover {
+	color: #a59a1f;
+}
+.whatsnext .whatsnext-box .title {
+	font-size: 16px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	margin-bottom: 7px;
+}
+.whatsnext .whatsnext-box .text {
+	font-size: 15px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	opacity: .5;
+	color: #fff;
+}
+.whatsnext .whatsnext-back {
+	position: absolute;
+	top: 42px;
+	left: 18px;
+	background-color: #01072fcc;
+	border-radius: 3px;
+}
+.whatsnext .whatsnext-back a {
+	display: inline-block;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	padding: 10px 20px;
+	opacity: .6;
+	text-decoration: none;
+}
+@media (min-width: 768px){
+    .fivecolumns .col-xs-2 {
+        width: 18.297872340425532%;
+        width: 20%;
+    }
+}
+@media (min-width: 1200px) {
+    .fivecolumns .col-xs-2 {
+        width: 17.9487179487179488%;
+        width: 20%;
+    }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+    .fivecolumns .col-xs-2 {
+        width: 17.79005524861878448%;
+        width: 20%;
+    }
+}
