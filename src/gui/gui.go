@@ -98,9 +98,7 @@ func New(
 
 	// Create the window options
 	windowOptions := astilectron.WindowOptions{
-		// If frame is false, the window frame is removed. If isDebug is true,
-		// we show the frame to have debugging options available
-		Frame:           astilectron.PtrBool(isDebug),
+		Frame:           astilectron.PtrBool(true),
 		BackgroundColor: astilectron.PtrStr("#0B0C22"),
 		Center:          astilectron.PtrBool(true),
 		Height:          astilectron.PtrInt(700),
