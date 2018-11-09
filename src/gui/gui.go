@@ -99,10 +99,13 @@ func New(
 	// Create the window options
 	windowOptions := astilectron.WindowOptions{
 		Frame:           astilectron.PtrBool(true),
-		BackgroundColor: astilectron.PtrStr("#0B0C22"),
+		BackgroundColor: astilectron.PtrStr("#001B45"),
 		Center:          astilectron.PtrBool(true),
 		Height:          astilectron.PtrInt(700),
-		Width:           astilectron.PtrInt(1175),
+		MinHeight:       astilectron.PtrInt(500),
+		Width:           astilectron.PtrInt(1200),
+		MinWidth:        astilectron.PtrInt(1200),
+		MaxWidth:        astilectron.PtrInt(1300),
 	}
 
 	if isDebug {
