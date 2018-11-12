@@ -40,8 +40,7 @@ let shared = {
 		if (el) el.click();
 	};
   },
-  // validateWalletAddress checks if the given address is a valid BLOC
-  // wallet address
+  // check if the given address is a valid BLOC wallet address
   validateWalletAddress: function(address) {
 	var regexp = /^([a-z0-9]{99}|[a-z0-9]{187})$/gi;
     if (address.substring(0, 5) == 'abLoc' && address.match(regexp))

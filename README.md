@@ -122,5 +122,5 @@ If all goes well, the binaries for Windows, macOS and Linux will be available in
 
 ### Attach the miner
 
-before you start the GUI-miner, make sure you have copied the binaries of `blocrig` into the `miner` subfolder right next to the main GUI-miner executable
+before you start the GUI-miner, make sure you have copied the binaries of [blocrig](https://github.com/furiousteam/blocrig) into the `miner` subfolder right next to the main GUI-miner executable
 

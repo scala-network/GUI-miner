@@ -10,11 +10,24 @@ body.firstrun {
 	background-repeat: no-repeat;
 	background-position: center top;
 }
-body.miner.mining {
+body.miner {
 	background-image: url('../img/bg-miner-mining.png');
 	background-repeat: no-repeat;
 	background-position: center top;
 }
+/*
+body.miner .miner-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-image: url('../img/bg-miner-mining.png');
+	background-repeat: no-repeat;
+	background-position: center top;
+	z-index: -1;
+}
+*/
 @-webkit-keyframes rotation {
 	from {
 		transform: rotate(0deg);
@@ -23,15 +36,12 @@ body.miner.mining {
 		transform: rotate(359deg);
 	}
 }
-/*div.draggable {
-	-webkit-app-region:drag;
-	position:absolute;
-	z-index:1000;
-	left:0;
-	top:0;
-	height:50px;
-	width:100%
-}*/
+.astinotifier {
+	z-index: 2;
+}
+.astiloader {
+	z-index: 10000;
+}
 
 /* CUSTOM SCROLLBAR */
 .mCSB_scrollTools {
@@ -365,7 +375,7 @@ body.miner.mining {
 	left: -12px;
 	width: 23px;
 	height: 23px;
-	z-index: 9999;
+	z-index: 3;
 	background: url('../img/selected-ticker.png');
 }
 .select-pool .table-body.selected {
@@ -479,19 +489,19 @@ body.miner.mining {
 body.miner .container {
 	padding-top: 16px;
 }
-body.miner > .container > div > .col-xs-3,
-body.miner > .container > div > .col-xs-2,
-body.miner > .container > div > .col-xs-7 {
+body.miner > .container .row > .col-xs-3,
+body.miner > .container .row > .col-xs-2,
+body.miner > .container .row > .col-xs-7 {
 	padding-right: 8px;
 	padding-left: 8px;
 }
-body.miner > .container > div > .col-xs-3 {
+body.miner > .container .row > .col-xs-3 {
 	width: 22%; /* from 25% */
 }
-body.miner > .container > div > .col-xs-7 {
+body.miner > .container .row > .col-xs-7 {
 	width: 60%; /* from 58.33333333% */
 }
-body.miner > .container > div > .col-xs-2 {
+body.miner > .container .row > .col-xs-2 {
 	width: 18%; /* from 16.66666667% */
 }
 body.miner table {
@@ -569,13 +579,16 @@ body.miner .miner-box.top-middle .col-xs-4:nth-child(2) {
 body.miner .miner-box.top-middle .col-xs-4:last-child {
 	padding-left: 0;
 }
-body.miner .miner-box.top-middle .estimated span {
+body.miner .miner-box.top-middle .estimated span:first-child {
 	display: block;
 	font-size: 14px;
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
 	color: #fff;
 	opacity: .5;
+}
+body.miner .actual-miner .chart {
+	margin-top: 20px;
 }
 body.miner .miner-box .switch {
 	width: 179px;
@@ -785,12 +798,13 @@ body.miner .miner-box.bloc-network ul {
 	left: -12px;
 	width: 23px;
 	height: 23px;
-	z-index: 9999;
+	z-index: 3;
 	background: url('../img/selected-ticker.png');
 }
 .miner-settings .table-body.selected {
 	position: relative;
 	border: 1px #857f1c solid;
+	padding: 0;
 }
 .miner-settings .table-head .table-col:first-child {
 	padding-left: 20px;
@@ -808,6 +822,7 @@ body.miner .miner-box.bloc-network ul {
 	cursor: pointer;
 	border-radius: 6px;
 	margin-bottom: 12px;
+	padding: 1px;
 }
 .miner-settings .table-body .table-col {
 	font-size: 14px;

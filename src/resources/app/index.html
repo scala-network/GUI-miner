@@ -2,436 +2,472 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+	<link rel="stylesheet" href="static/lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="static/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="static/lib/animate.css">
     <link rel="stylesheet" href="static/lib/astiloader/astiloader.css">
     <link rel="stylesheet" href="static/lib/astimodaler/astimodaler.css">
     <link rel="stylesheet" href="static/lib/astinotifier/astinotifier.css">
-    <link rel="stylesheet" href="static/lib/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="static/lib/animate.css">
-    <link rel="stylesheet" href="static/lib/nice-select.css">
-    <link rel="stylesheet" href="static/css/main.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
-    <script>window.$ = window.jQuery = require('./static/lib/jquery.min.js');</script>
+    <link rel="stylesheet" href="static/lib/mCustomScrollbar/jquery.mCustomScrollbar.min.css"/>
+    <link rel="stylesheet" href="static/css/new.css"/>
+	<script>window.$ = window.jQuery = require('./static/lib/jquery.min.js');</script>
+	<script>require('./static/lib/mCustomScrollbar/jquery.mCustomScrollbar.mousewheel.min.js')(window.$);</script>
+	<script>require('./static/lib/mCustomScrollbar/jquery.mCustomScrollbar.min.js')(window.$);</script>
 </head>
-<body class="miner">
-  <div class="draggable"></div>
-  <a href="#" title="Miner settings" class="header-button settings"><i class="fa fa-gear"/></i></a>
-  <a href="#" title="Help and what's next" class="header-button help"><i class="fa fa-question-circle-o"/></i></a>
-  <a href="#" title="Minimize" class="header-button minimize"><i class="fa fa-window-minimize"/></i></a>
-  <a href="#" title="Exit miner" class="header-button exit"><i class="fa fa-times"/></i></a>
-  <div class="grid">
-    <div class="sidebar-info">
-      <div class="logo">
-        <img src="static/i/bloc-miner-logo.png"/>
-      </div>
-      <div class="section spec">
-        <table class="stats">
-          <tr>
-            <td class="title">
-              Ticker
-            </td>
-            <td>
-              BLOC
-            </td>
-          </tr>
-          <tr>
-            <td class="title">
-              Supply
-            </td>
-            <td>
-              50 million
-            </td>
-          </tr>
-          <tr>
-            <td class="title">
-              Circulation
-            </td>
-            <td>
-              <!-- 2.1 billion (~10%) -->
-              <span id="circulation">Updating</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">
-              Market cap
-            </td>
-            <td>
-              <!-- USD 3 million -->
-              <span id="market_cap">Updating</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">
-              Price
-            </td>
-            <td>
-              <!-- 0.00000020 BTC -->
-              <span id="price">Updating</span>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="section network">
-        <h3>Network</h3>
-        <table class="stats">
-          <tr>
-            <td class="title">
-              Hashrate
-            </td>
-            <td>
-              <!-- 20 MH/s -->
-              <span id="network_hashrate">Updating</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">
-              Difficulty
-            </td>
-            <td>
-              <!-- 1 234 912 392 -->
-              <span id="network_difficulty">Updating</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">
-              Height
-            </td>
-            <td>
-              <!-- 108 000 -->
-              <span id="network_height">Updating</span>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="section exchanges">
-        <h3>Exchanges</h3>
-        <table class="stats">
-          <tr>
-            <td class="title">
-              Volume today
-            </td>
-            <td>
-              <!-- 30.3264 BTC -->
-              <span id="trading_volume">Updating</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">
-              TradeOgre
-            </td>
-            <td>
-              <!-- 3.4222 BTC -->
-              <span id="trading_tradeogre_volume">Updating</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">
-              STEX
-            </td>
-            <td>
-              <!-- 1.8239 BTC -->
-              <span id="trading_crex_volume">Updating</span>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="section records">
-        <h3>All Time High</h3>
-        <table class="stats">
-          <tr>
-            <td class="title">
-              Volume
-            </td>
-            <td>
-              <!-- 30.3264 BTC -->
-              <span id="record_volume">Updating</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">
-              Price
-            </td>
-            <td>
-              <!-- 0.000000023 BTC -->
-              <span id="record_price">Updating</span>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="section contact">
-        <h3>Contact</h3>
-        <div class="links">
-          <a target="_blank" href="https://bloc.money">Official Website</a>
-          <a target="_blank" href="https://bloc.money/files/whitepaper/bloc-white-paper.pdf">White Paper</a>
-          <a target="_blank" href="https://github.com/furiousteam/BLOC">GitHub</a>
-          <a target="_blank" href="https://bitcointalk.org/index.php?topic=4108831.0">ANN</a>
-          <a target="_blank" href="https://bloc-explorer.com/">Explorer</a>
-          <a target="_blank" href="https://bloc-mining.com/">Web Mining</a>
-          <a target="_blank" href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8&ign-mpt=uo%3D2">App Store</a>
-          <a target="_blank" href="https://dashboard.bloc.money">Dashboard</a>
-          <a target="_blank" href="https://medium.com/@bloc.money">News</a>
-          <a target="_blank" href="https://discord.gg/5Buudya">Discord</a>
-          <a target="_blank" href="https://t.me/bloc_money">Telegram Group</a>
-          <a target="_blank" href="https://t.me/bloc_money">Telegram Channel</a>
-          <a target="_blank" href="https://www.facebook.com/Blocmoney-383098922176113">Facebook</a>
-          <a target="_blank" href="https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA">Youtube</a>
-          <a target="_blank" href="https://twitter.com/bloc_money">Twitter</a>
-          <a target="_blank" href="https://coinmarketcap.com/currencies/bloc-money/">Coin Market Cap</a>
-          <a target="_blank" href="https://www.coingecko.com/en/coins/bloc-money">CoinGecko</a>
-          <a target="_blank" href="https://tradeogre.com/exchange/BTC-BLOC">TradeOgre</a>
-          <a target="_blank" href="https://app.stex.com/en/basic-trade/pair/BTC/BLOC/30">STEX</a>
-        </div>
-      </div>
-    </div>
-    <div class="mining">
-      <div class="miner">
-        <div class="mining-stats">
-          <div class="hashrate">
-            <span id="miner_hashrate">0 H/s</span>
-          </div>
-          <div class="detail">Hashrate</div>
-          <a href="#" class="button stop small" id="start_stop">Stop Mining</a>
-          <div class="xmrstak">
-            <table>
-              <tr>
-                <th>
-                  Mining Time
-                </th>
-                <th>
-                  Difficulty
-                </th>
-                <th>
-                  Total Shares
-                </th>
-                <th>
-                  Bad Shares
-                </th>
-                <th>
-                  Errors
-                </th>
-              </tr>
-              <tr>
-                <td>
-                  <span id="miner_uptime">Updating</span>
-                </td>
-                <td>
-                  <span id="miner_difficulty">Updating</span>
-                </td>
-                <td>
-                  <span id="miner_shares">Updating</span>
-                </td>
-                <td>
-                  <span id="miner_shares_bad">Updating</span>
-                </td>
-                <td>
-                  <span id="miner_errors">0</span>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="payment">
-            <div class="estimate">
-              <div class="detail">you are mining an estimated</div>
-              <div id="miner_payout">0.0000 BLOC</div>
-              <div class="detail">per day</div>
-            </div>
-            <div class="address">
-              <pre id="miner_address">
-Updating
-              </pre>
-              <div class="detail">Bloc Wallet Address</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="pool" class="current">
-        <div class="pool">
-          <h3>Updating <a href="#" class="info-block dull">Change</a></h3>
-          <a href="https://communitypool.stellite.cash" target="_blank" class="address">Updating</a>
-          <div class="stats">
-            <table>
-              <tr>
-                <th>
-                  Hash Rate
-                </th>
-                <th>
-                  Miners
-                </th>
-                <th>
-                  Last Block Found
-                </th>
-              </tr>
-              <tr>
-                <td id="pool_hashrate">
-                  0 MH/s
-                </td>
-                <td id="pool_miners">
-                  0
-                </td>
-                <td id="pool_last_block">
-                  0 hours ago
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chart" style="position:relative">
-      <canvas id="hashrate_chart" width="400" height="400"></canvas>
-    </div>
-    <div class="footer">
-      in BLOC we trust <i class="fa fa-heart"/></i>
-    </div>
-  </div>
-  <div id="settings" class="settings dn">
-    <div class="header">
-      <h2>Miner Settings</h2>
-    </div>
-    <div class="section address">
-      <p>
-        Bloc address to mine to
-      </p>
-      <div>
-        <input id="settings_mining_address" type="text" placeholder="Your Bloc address"/>
-      </div>
-    </div>
-    <div class="section max-usage">
-      <p>
-        Mining power
-      </p>
-      <div class="cpu-tuning">
-        I'd like to use
-        <div class="select-positioner" id="threads">
-          <select>
-            <option value="1" selected>1</option>
-          </select>
-        </div>
-        of my <span id="max_threads">1</span> CPU thread<span id="max_threads_multiple">s</span>
-        <div class="xmrig-extra dn">
-          at a maximum of
-          <div class="select-positioner" id="max_cpu">
-            <select>
-              <option value="10">10%</option>
-              <option value="20">20%</option>
-              <option value="30">30%</option>
-              <option value="40">40%</option>
-              <option value="50">50%</option>
-              <option value="60">60%</option>
-              <option value="70">70%</option>
-              <option value="80">80%</option>
-              <option value="90">90%</option>
-              <option value="100">100%</option>
-            </select>
-          </div>
-          CPU usage
-        </div>
-         for mining
-      </div>
-      <p class="description tip cpu-tuning">
-        Lower values will ensure your computer stays usable while mining. Join <a href="https://discord.gg/8PhF342">#mining</a> to learn more.
-      </p>
-      <div class="gpu-tuning dn">
-        You are running a GPU only miner. To tune the values open the miner/config.json file. Join <a href="https://discord.gg/8PhF342">#mining</a> to learn more.
-      </div>
-    </div>
-    <div class="section pools">
-      <p>
-        Mining pool
-      </p>
-      <div class="pool-selection" id="pool_list">
+<body class="miner-container miner">
+	<div class="container">
+		<!-- the actual miner -->
+		<div class="main-section actual-miner" id="actual-miner">
+			<div class="miner-bg" id="nice-bg" style="display: none"></div>
+			<div class="row">
+				<div class="col-xs-3 first-col">
+					<div class="miner-box information">
+						<div class="img pull-right"><img src="static/img/miner/btc-icon.png"></div>
+						<div class="text-title">Information</div>
 
-      </div>
-    </div>
-    <div class="section action">
-      <a class="button back close-settings" href="#">
-        Cancel
-      </a>
-      <a id="update" class="button ok" href="#">
-        Update
-      </a>
-    </div>
-  </div>
-  <div id="help" class="help dn">
-    <div class="header">
-      <h2>What's next?</h2>
-    </div>
-    <div class="section">
-      <p class="ac">
-        You are mining and earning BLOC money, what should you do now?
-      </p>
+						<table class="table table-condensed">
+							<tbody>
+								<tr>
+									<td>Ticker</td>
+									<td>BLOC</td>
+								</tr>
+								<tr>
+									<td>Supply</td>
+									<td>50 millions</td>
+								</tr>
+								<tr>
+									<td>Circulation</td>
+									<td id="circulation">0 million</td>
+								</tr>
+								<tr>
+									<td>Market cap</td>
+									<td id="market_cap">USD 0</td>
+								</tr>
+								<tr>
+									<td>Price</td>
+									<td id="price">0.00000000 BTC</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="miner-box network">
+						<div class="img pull-right"><img src="static/img/miner/network-icon.png"></div>
+						<div class="text-title">Network</div>
 
-      <div class="next-piece">
-        <h3>Visit your mining pool</h3>
-        <p>
-          Enter your BLOC address to see your payment history, set payment limits and see more stats
-        </p>
-      </div>
-      <div class="next-piece">
-          <h3>Download the app</h3>
-          <p>
-          The 1st BLOC wallet for iOS with a focus on accessibility, security and simplicity available in the  <a class="link" target="_blank" href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8&ign-mpt=uo%3D2">App store</a>
-          </p>
-        </div>
-      <div class="next-piece">
-        <h3>Learn about BLOC</h3>
-        <p>
-          And what it brings to the cryptocurrency world by visiting the <a class="link" target="_blank" href="https://www.bloc.money">official Bloc website</a>
-        </p>
-      </div>
-      <div class="next-piece">
-        <h3>Come say hi</h3>
-        <p>
-          Join the amazing BLOC community on <a class="link" target="_blank" href="https://t.me/bloc_money">Telegram</a>
-        </p>
-      </div>
-      <div class="next-piece">
-        <h3>Buy and sell BLOC</h3>
-        <p>
-          Start trading BLOC on one of our listed exchanges <a class="link" target="_blank" href="https://discord.gg/5Buudya">TradeOgre</a> or <a class="link" target="_blank" href="https://app.stex.com/en/basic-trade/pair/BTC/BLOC/30">STEX</a>
-        </p>
-      </div>
-      <div class="next-piece">
-        <h3>Mine 'till you drop!</h3>
-        <p>
-          Learn more about mining in the <a class="link" target="_blank" href="https://discord.gg/5Buudya">#mining</a>
-          channel on <a class="link" target="_blank" href="https://discord.gg/5Buudya">Discord</a>
-        </p>
-      </div>
-      <div class="next-piece">
-        <h3>Be a stalker</h3>
-        <p>
-          Follow us on <a class="link" href="https://twitter.com/bloc_money">Twitter</a>, <a class="link" href="https://www.facebook.com/Blocmoney-383098922176113">Facebook</a>
-          and subscribe our <a class="link" href="https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA">Youtube channel</a>
-        </p>
-      </div>
-      <div class="cb"></div>
-    </div>
-    <div class="header">
-      <h2>Something not quite right?</h2>
-    </div>
-    <div class="section center">
-      <p>
-        The BLOC community is very friendly and always ready to help. Join us in the <a class="link" target="_blank" href="https://discord.gg/5Buudya">#mining</a>
-         or <a class="link" target="_blank" href="https://discord.gg/5Buudya">#trading</a> channels on <a class="link" target="_blank" href="https://discord.gg/5Buudya">Discord</a>
-        and we'll help you out. Some common answers can be found on the miner's download page.
-      </p>
-    </div>
-    <div class="section action">
-      <a class="button back close-help" href="#">
-        Close
-      </a>
-    </div>
-  </div>
+						<table class="table table-condensed">
+							<tbody>
+								<tr>
+									<td>Hashrate</td>
+									<td id="network_hashrate">0.00 H/s</td>
+								</tr>
+								<tr>
+									<td>Difficulty</td>
+									<td id="network_difficulty">0</td>
+								</tr>
+								<tr>
+									<td>Height</td>
+									<td id="network_height">0</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="miner-box exchanges">
+						<div class="img pull-right"><img src="static/img/miner/exchanges-icon.png"></div>
+						<div class="text-title">Exchanges</div>
 
-  <script src="static/lib/astiloader/astiloader.js"></script>
-  <script src="static/lib/astimodaler/astimodaler.js"></script>
-  <script src="static/lib/astinotifier/astinotifier.js"></script>
-  <script src="static/lib/chart.bundle.min.js"></script>
-  <script src="static/lib/jquery.nice-select.min.js"></script>
-  <script src="static/js/shared.js"></script>
-  <script src="static/js/app.js"></script>
-  <script type="text/javascript">
-    app.init();
-  </script>
+						<table class="table table-condensed">
+							<tbody>
+								<tr>
+									<td>Volume today</td>
+									<td id="trading_volume">0.00000000 BTC</td>
+								</tr>
+								<tr>
+									<td>TradeOger</td>
+									<td id="price_tradeogre">0.00000000 BTC</td>
+								</tr>
+								<tr>
+									<td>STEX</td>
+									<td id="price_stex">0.00000000 BTC</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="miner-box all-time-high">
+						<div class="img pull-right"><img src="static/img/miner/all-time-high-icon.png"></div>
+						<div class="text-title">All time high</div>
+
+						<table class="table table-condensed">
+							<tbody>
+								<tr>
+									<td>Volume</td>
+									<td id="record_volume">0.00000000 BTC</td>
+								</tr>
+								<tr>
+									<td>Price</td>
+									<td id="record_price">0.00000000 BTC</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="miner-box downloads">
+						<div class="text-title">Bloc Applications</div>
+
+						<table class="table table-condensed">
+							<tbody>
+								<tr>
+									<td><a href="https://bloc.money/download">Download page</a></td>
+									<td><a href="https://bloc.money/download" class="pull-right"><img src="static/img/miner/download-icon.png"></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="col-xs-7">
+					<div class="miner-box top-middle">
+						<div class="row">
+							<div class="col-xs-4">
+								<div class="logo"><img src="static/img/miner/miner-big-logo.png"></div>
+							</div>
+							<div class="col-xs-4">
+								<div class="hashrate" id="miner_hashrate">0.00 H/s</div>
+								
+								<table class="table table-condensed">
+									<tbody>
+										<tr>
+											<td>Mining time</td>
+											<td class="no-opacity" id="miner_uptime">0 seconds</td>
+										</tr>
+										<tr>
+											<td>Difficulty</td>
+											<td class="no-opacity" id="miner_difficulty">0</td>
+										</tr>
+										<tr>
+											<td>Total shares</td>
+											<td class="no-opacity" id="miner_shares">0</td>
+										</tr>
+										<tr>
+											<td>Bad shares</td>
+											<td class="no-opacity" id="miner_shares_bad">0</td>
+										</tr>
+										<tr>
+											<td>Errors</td>
+											<td class="no-opacity" id="miner_errors">0</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-xs-4">
+								<div class="switch pull-right off" id="on-off-switch">
+									<div class="on-rail"><div class="on-knob"></div></div>
+									<div class="on-text"></div>
+									<div class="off-rail"><div class="off-knob"></div></div>
+									<div class="off-text"></div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="estimated text-center">
+									<span>You are mining an estimated</span>
+									<span id="miner_payout">0 BLOC</span> / day
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="miner-box middle-middle">
+								<div class="dash-title opacity">---> YOUR WALLET ADDRESS</div>
+								<div class="address" id="miner_address">Updating...</div>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="miner-box middle-middle">
+								<div class="change-pool pull-right"><a href="#" class="btn btn-default" data-target="miner-settings">Change</a></div>
+								<div class="dash-title opacity">---> YOUR POOL</div>
+								<div class="pool-address" id="pool-address" data-id="0">Updating...</div>
+								<div class="pool-stats">
+									<table class="table table-condensed">
+										<tbody>
+											<tr>
+												<td class="opacity">Hashrate:</td>
+												<td id="pool_hashrate">0 H/s</td>
+												<td class="opacity text-right">Last Block found</td>
+											</tr>
+											<tr>
+												<td class="opacity">Miners:</td>
+												<td id="pool_miners">0</td>
+												<td class="text-right" id="pool_last_block">0 seconds</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="miner-box">
+						<div class="chart" style="position:relative">
+							<canvas id="hashrate_chart" width="400" height="200"></canvas>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="miner-box settings">
+						<div class="text-title">Settings</div>
+
+						<ul class="list-unstyled">
+							<li><a href="#" data-target="miner-settings"><img src="static/img/miner/settings_icon_settings.png"></a></li>
+							<li><a href="#" data-target="whatsnext"><img src="static/img/miner/settings_icon_help.png"></a></li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="miner-box social-network">
+						<div class="text-title">Social Network</div>
+
+						<ul class="list-unstyled">
+							<li><a href="https://bloc.money/"><img src="static/img/miner/network_icon_website.png"></a></li>
+							<li><a href="https://discord.gg/5Buudya"><img src="static/img/miner/network_icon_discord.png"></a></li>
+							<li><a href="https://t.me/bloc_money"><img src="static/img/miner/network_icon_telegram.png"></a></li>
+							<li><a href="https://bitcointalk.org/index.php?topic=4108831.0"><img src="static/img/miner/network_icon_bitcointalk.png"></a></li>
+							<li><a href="https://github.com/furiousteam"><img src="static/img/miner/network_icon_github.png"></a></li>
+							<li><a href="https://twitter.com/bloc_money"><img src="static/img/miner/network_icon_twatter.png"></a></li>
+							<li><a href="https://medium.com/@bloc.money"><img src="static/img/miner/network_icon_medium.png"></a></li>
+							<li><a href="https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA"><img src="static/img/miner/network_icon_yuotube.png"></a></li>
+							<li><a href="https://www.facebook.com/Blocmoney-383098922176113"><img src="static/img/miner/network_icon_facbook.png"></a></li>
+							<li><a href="https://www.instagram.com/bloc.money"><img src="static/img/miner/network_icon_instgram.png"></a></li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="miner-box bloc-network">
+						<div class="text-title">The BLOC Network</div>
+
+						<ul class="list-unstyled">
+							<li><a href="https://bloc.money/">- Official website</a></li>
+							<li><a href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8">- iPhone app</a></li>
+							<li><a href="https://bloc-explorer.com/">- Bloc Explorer</a></li>
+							<li><a href="https://bloc-developer.com/">- Bloc Developper</a></li>
+							<li><a href="https://bloc-mining.com/">- Bloc Web Mining</a></li>
+							<li><a href="https://bloc-mining.eu/">- Bloc Mining EU</a></li>
+							<li><a href="https://bloc-mining.us/">- Bloc Mining US</a></li>
+							<li><a href="https://bloc-mining.asia/">- Bloc Mining ASIA</a></li>
+							<li><a href="https://bloc.cool/">- Bloc Cool</a></li>
+							<li><a href="https://t.me/bloc_wallet_bot">- Telegram wallet</a></li>
+							<li><a href="https://t.me/bloc_explorer_bot">- Telegram explorer</a></li>
+							<li><a href="https://paychange.com/">- PayChange</a></li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- the miner settings -->
+		<div class="main-section hidden miner-settings text-center" id="miner-settings">
+			<div class="miner-settings-title">MINER SETTINGS</div>
+
+			<div class="miner-settings-cpus">
+				<div class="miner-settings-cpus-inner">
+					<div class="selects">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="cpu-cores">
+								<span><b>1 CPU</b> CORE</span> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" id="cpu-cores-values">
+								<li><a href="#" data-value="1"><b>1 CPU</b> CORE</a></li>
+								<li><a href="#" data-value="2"><b>2 CPU</b> CORES</a></li>
+							</ul>
+						</div>
+						&nbsp;&nbsp;at a maximum of&nbsp;&nbsp;
+						<div class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="cpu-max">
+								<span><b>20%</b> CPU mining</span> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#" data-value="0"><b>0%</b> CPU mining</a></li>
+								<li><a href="#" data-value="10"><b>10%</b> CPU mining</a></li>
+								<li><a href="#" data-value="20"><b>20%</b> CPU mining</a></li>
+								<li><a href="#" data-value="30"><b>30%</b> CPU mining</a></li>
+								<li><a href="#" data-value="40"><b>40%</b> CPU mining</a></li>
+								<li><a href="#" data-value="50"><b>50%</b> CPU mining</a></li>
+								<li><a href="#" data-value="60"><b>60%</b> CPU mining</a></li>
+								<li><a href="#" data-value="70"><b>70%</b> CPU mining</a></li>
+								<li><a href="#" data-value="80"><b>80%</b> CPU mining</a></li>
+								<li><a href="#" data-value="90"><b>90%</b> CPU mining</a></li>
+								<li><a href="#" data-value="100"><b>100%</b> CPU mining</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="text">Lower values will ensure your computer stays usable while mining.</div>
+			</div>
+
+			<div class="address-input">
+				<input type="text" name="" value="" placeholder="Type or paste your BLOC address here" class="text-center" id="settings_mining_address" />
+				<div class="text">YOUR BLOC ADDRESS</div>
+			</div>
+
+			<div class="table-container">
+				<div class="table-head">
+					<div class="table-col text-left">POOL NAME</div>
+					<div class="table-col">HASH RATE</div>
+					<div class="table-col">MINERS</div>
+					<div class="table-col">FEE</div>
+					<div class="table-col">PAYOUT</div>
+					<div class="table-col text-right">BLOCK FOUND</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="table-inner" id="pool-list">
+					<!--
+					<div class="table-body">
+						<div class="table-col text-left">bloc-mining.eu <span>(official pool)</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body">
+						<div class="table-col text-left">bloc-mining.asia <span>(official pool)</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body selected">
+						<div class="table-col text-left">bloc-mining.us <span>(official pool)</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body">
+						<div class="table-col text-left">bloc-mining.us</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="table-body">
+						<div class="table-col text-left">bloc-mining.us</span></div>
+						<div class="table-col opacity">868 H/S</div>
+						<div class="table-col opacity">19</div>
+						<div class="table-col opacity">1.00 %</div>
+						<div class="table-col opacity">1.0000</div>
+						<div class="table-col text-right opacity">5 hours, 39 minutes</div>
+						<div class="clearfix"></div>
+					</div>
+					-->
+				</div>
+			</div>
+
+			<div class="miner-settings-submit"><a href="#" class="btn btn-default" id="save-miner-settings">CLICK HERE TO SAVE THE SETTINGS</a></div>
+			<div class="miner-settings-back"><a href="#" data-target="actual-miner"><---- BACK</a></div>
+		</div>
+
+		<!-- the miner whatsnext -->
+		<div class="main-section hidden whatsnext text-center" id="whatsnext">
+			<div class="whatsnext-title">Ok, i am mining, what’s next ?</div>
+			<div class="whatsnext-text">You want to go further? this is a non exhaustive  list of what you should  do.</div>
+			
+			<div class="row firstrow fivecolumns">
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-01.png">
+						<div class="title">Visit your mining pool to know more.</div>
+						<div class="text">Enter your BLOC address to see your payment history and see more statistics about your mining and the mining of the pool.</div>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-02.png">
+						<div class="title">Learn more about the BLOC.MONEY</div>
+						<div class="text">And why we are going to change the world by reading our whitepaper, our roadmap and much more on the <a href="https://bloc.money/">official website</a>. Learn everything about us.</div>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-03.png">
+						<div class="title">Create your own BLOC Dashboard</div>
+						<div class="text">Affiliation, Airdrop mission, all the latest informations about us, but also a light wallet with our secure physicial dongle (dongle coming soon). <a href="https://dashboard.bloc.money/">Go here.</a></div>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-04.png">
+						<div class="title">Join our amazing community.</div>
+						<div class="text">BLOC.MONEY is nothing without it’s amazing and friendly community that you can meet on our official <a href="https://t.me/bloc_money">Telegram Chanel</a> and <a href="https://discord.gg/5Buudya">Discord</a>. Join us and let’s talk!</div>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-05.png">
+						<div class="title">Buy and sell BLOC on exchange</div>
+						<div class="text">Start trading your BLOC on one of our listed exchanges. For now 2 are available : <ul class="list-unstyled"><li><a href="https://app.stex.com/en/basic-trade/pair/BTC/BLOC/30">- Stex</a></li><li><a href="https://tradeogre.com/exchange/BTC-BLOC">- TradeOgre</a></li></ul></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row fivecolumns">
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-06.png">
+						<div class="title">Follow us and miss nothing</div>
+						<div class="text">We are updating all our social network regulary, the best way to stay updated about the BLOC. Follow us on <a href="https://medium.com/@bloc.money">Medium</a>, <a href="https://twitter.com/bloc_money">Twitter</a>, <a href="https://www.facebook.com/Blocmoney-383098922176113">Facebook</a> and <a href="https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA">Youtube</a></div>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-07.png">
+						<div class="title">Download our smart-phone application</div>
+						<div class="text">Yes, you can download our <a href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8">iPhone application</a>. Create or import a wallet, send and received coins and many more features. Android version is coming soon.</div>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-08.png">
+						<div class="title">You need help about the BLOC ?</div>
+						<div class="text">Join our <a href="https://t.me/bloc_money">Telegram</a> chanel or our <a href="https://discord.gg/5Buudya">discord</a>. We and the community will be happy to help you.</div>
+					</div>
+				</div>
+				<!--
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-09.png">
+						<div class="title">Buy crypto stuff in our shop.</div>
+						<div class="text">Discover our <a href="#">official shop</a> where you can buy cryptorelated products with your BLOC but also all the goodies made with love by our team for the BLOC. MONEY.</div>
+					</div>
+				</div>
+				-->
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="static/img/whatsnext/img-10.png">
+						<div class="title">Don't forget to sleep mine !</div>
+						<div class="text">An easy way to mine BLOC with your smartphone and make a passive income while you are sleeping! All the <a href="https://medium.com/@bloc.money/introducing-sleep-mining-for-bloc-make-extra-cash-while-you-are-sleeping-using-your-mobile-phone-9d396b0bc74">information here</a>.</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="whatsnext-back"><a href="#" data-target="actual-miner"><---- BACK</a></div>
+		</div>
+	</div>
+	<script src="static/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="static/lib/astiloader/astiloader.js"></script>
+	<script src="static/lib/astimodaler/astimodaler.js"></script>
+	<script src="static/lib/astinotifier/astinotifier.js"></script>
+	<script src="static/lib/chart.bundle.min.js"></script>
+	<script src="static/lib/jquery.animatecss.js"></script>
+	<script src="static/lib/jquery.dropselect.js"></script>
+	<script src="static/js/shared.js"></script>
+	<script src="static/js/app.js"></script>
+	<script type="text/javascript">
+		app.init();
+	</script>
 </body>
 </html>
