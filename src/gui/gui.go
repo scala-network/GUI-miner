@@ -42,7 +42,7 @@ type GUI struct {
 	// and other stats
 	networkStatsTicker *time.Ticker
 	// annTicker controls the interval for checking for announements
-	annTicker *time.Ticker
+	//annTicker *time.Ticker
 	// annProcessed keeps track of announcements already processed and displayed
 	annProcessed map[int]bool
 }
@@ -199,16 +199,18 @@ func New(
 					gui.updateNetworkStats()
 				}
 			}()
+			/*
 			gui.annTicker = time.NewTicker(time.Hour)
 			go func() {
 				for _ = range gui.annTicker.C {
 					gui.checkAnnouncement()
 				}
 			}()
+			*/
 			// Trigger a network stats update as soon as we start
 			gui.updateNetworkStats()
 			// Check for any initial announcement
-			gui.checkAnnouncement()
+			//gui.checkAnnouncement()
 			// uncomment this to have development tools opened when the app is built
 			//gui.window.OpenDevTools()
 			return nil
@@ -232,7 +234,7 @@ func (gui *GUI) Run() error {
 	}
 	gui.miningStatsTicker.Stop()
 	gui.networkStatsTicker.Stop()
-	gui.annTicker.Stop()
+	//gui.annTicker.Stop()
 	return nil
 }
 
