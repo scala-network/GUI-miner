@@ -193,7 +193,7 @@ func New(
 			gui.miningStatsTicker = time.NewTicker(time.Second * 5)
 			gui.logger.Info("Start capturing mining stats")
 			go gui.updateMiningStatsLoop()
-			gui.networkStatsTicker = time.NewTicker(time.Minute * 2)
+			gui.networkStatsTicker = time.NewTicker(time.Second * 20)
 			go func() {
 				for _ = range gui.networkStatsTicker.C {
 					gui.updateNetworkStats()
