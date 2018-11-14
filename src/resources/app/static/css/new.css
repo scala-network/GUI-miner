@@ -663,11 +663,14 @@ body.miner .miner-box .change-pool .btn {
 	padding: 5px 12px;
 }
 body.miner .miner-box .pool-address {
+	margin-bottom: 3px;
+}
+body.miner .miner-box .pool-address a,
+body.miner .miner-box .pool-address a:hover {
 	font-size: 14px;
 	font-family: 'Roboto Condensed';
 	font-weight: 300;
 	color: #ffed00;
-	margin-bottom: 3px;
 }
 body.miner .miner-box .pool-stats td {
 	opacity: 1;

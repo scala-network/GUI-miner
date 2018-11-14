@@ -44,7 +44,7 @@ let app = {
 					$('#record_price').html(parsed.records.price + ' BTC');
 					$('#price_stex').html(parsed.price_stex + ' BTC');
 					$('#price_tradeogre').html(parsed.price_tradeogre + ' BTC');
-					$('#pool-address').html(parsed.pool.url).data('id', parsed.pool.id);
+					$('#pool-address').html('<a href="' + parsed.pool.url + '">' + parsed.pool.url + '</a>').data('id', parsed.pool.id);
 					break;
 				case "miner_stats":
 					console.log('[' + new Date().toUTCString() + '] ', "miner_stats", parsed);
