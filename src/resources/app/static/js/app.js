@@ -154,14 +154,22 @@ let app = {
 		// Save miner settings button
 		$('#save-miner-settings').on('click', function() {
 			asticode.loader.show();
-			var configData = {
-				address: $('#miner_address').html(),
-				pool: $('#pool-list').find('.selected').data('id'),
-				threads: parseInt($('#cpu-cores').dropselect('value')),
-				max_cpu: parseInt($('#cpu-max').dropselect('value'))
-			};
-			astilectron.sendMessage({name: "configure", payload: configData}, function(message){
-				document.location = 'index.html';
+
+			// Stop the miner first
+			astilectron.sendMessage({
+				name: "miner_stop",
+				payload: ""
+			}, function(message) {
+				// Save the miner settings
+				var configData = {
+					address: $('#miner_address').html(),
+					pool: $('#pool-list').find('.selected').data('id'),
+					threads: parseInt($('#cpu-cores').dropselect('value')),
+					max_cpu: parseInt($('#cpu-max').dropselect('value'))
+				};
+				astilectron.sendMessage({name: "configure", payload: configData}, function(message){
+					document.location = 'index.html';
+				});
 			});
 		});
 	},
