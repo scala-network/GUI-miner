@@ -167,6 +167,7 @@ let app = {
 					threads: parseInt($('#cpu-cores').dropselect('value')),
 					max_cpu: parseInt($('#cpu-max').dropselect('value'))
 				};
+				console.log('[' + new Date().toUTCString() + '] ', "configure", configData);
 				astilectron.sendMessage({name: "configure", payload: configData}, function(message){
 					document.location = 'index.html';
 				});
