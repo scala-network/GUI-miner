@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This has been tested on Ubuntu 16.04 ONLY!
+# Use it on your own risk!
+
 # https://stackoverflow.com/a/5947802/1057527
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'

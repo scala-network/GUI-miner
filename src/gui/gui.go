@@ -101,11 +101,11 @@ func New(
 		Frame:           astilectron.PtrBool(true),
 		BackgroundColor: astilectron.PtrStr("#001B45"),
 		Center:          astilectron.PtrBool(true),
-		Height:          astilectron.PtrInt(700),
+		Height:          astilectron.PtrInt(745),
 		MinHeight:       astilectron.PtrInt(500),
-		Width:           astilectron.PtrInt(1215),
-		MinWidth:        astilectron.PtrInt(1215),
-		MaxWidth:        astilectron.PtrInt(1215),
+		Width:           astilectron.PtrInt(1220),
+		MinWidth:        astilectron.PtrInt(1220),
+		MaxWidth:        astilectron.PtrInt(1500),
 	}
 
 	if isDebug {
