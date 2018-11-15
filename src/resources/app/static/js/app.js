@@ -49,7 +49,10 @@ let app = {
 				case "miner_stats":
 					console.log('[' + new Date().toUTCString() + '] ', "miner_stats", parsed);
 					$('#miner_address').html(parsed.address);
-					$('#settings_mining_address').val(parsed.address); // settings wallet address
+					if (!app.populatedAddress) {
+						$('#settings_mining_address').val(parsed.address); // settings wallet address
+						app.populatedAddress = true;
+					}
 
 					$('#miner_hashrate').html(parsed.hashrate_human);
 					$('#miner_uptime').html(parsed.uptime_human);
@@ -63,7 +66,7 @@ let app = {
 						$('#miner_errors').html(errorCount);
 						window.setTimeout(function(){
 							asticode.modaler.hide();
-						}, 4000);
+						}, 30000);
 					}
 
 					// Move the graph, we only refresh it once a minute
@@ -162,7 +165,7 @@ let app = {
 			}, function(message) {
 				// Save the miner settings
 				var configData = {
-					address: $('#miner_address').html(),
+					address: $('#settings_mining_address').val(),
 					pool: $('#pool-list').find('.selected').data('id'),
 					threads: parseInt($('#cpu-cores').dropselect('value')),
 					max_cpu: parseInt($('#cpu-max').dropselect('value'))
@@ -255,5 +258,6 @@ let app = {
 				}
 			}
 		});
-	}
+	},
+	populatedAddress: false
 }
