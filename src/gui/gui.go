@@ -103,9 +103,9 @@ func New(
 		Center:          astilectron.PtrBool(true),
 		Height:          astilectron.PtrInt(700),
 		MinHeight:       astilectron.PtrInt(500),
-		Width:           astilectron.PtrInt(1200),
-		MinWidth:        astilectron.PtrInt(1200),
-		MaxWidth:        astilectron.PtrInt(1300),
+		Width:           astilectron.PtrInt(1215),
+		MinWidth:        astilectron.PtrInt(1215),
+		MaxWidth:        astilectron.PtrInt(1215),
 	}
 
 	if isDebug {
