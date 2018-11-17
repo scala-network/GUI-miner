@@ -136,9 +136,9 @@ func NewXmrig(config Config) (*Xmrig, error) {
 	}
 
 	miner := Xmrig{
-		// We've switched to our own miner in V4, blocrig, but I'm keeping
-		// everything else xmrig for clarity
-		name:     "blocrig",
+		// We've switched back to the original miner XMRIG but we will 
+		// keep an eye on it to make sure the compatibility works for future update
+		name:     "xmrig",
 		endpoint: endpoint,
 	}
 	// xmrig appends either nvidia or amd to the miner if it's GPU only

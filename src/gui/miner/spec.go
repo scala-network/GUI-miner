@@ -1,7 +1,7 @@
 package miner
 
 // SupportedMiners contains a list of the currently supported miners
-var SupportedMiners = []string{"bloc-stak", "blocrig"}
+var SupportedMiners = []string{"xmr-stak", "xmrig"}
 
 // Config holds miner specific configuration information
 type Config struct {

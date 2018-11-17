@@ -10,8 +10,8 @@ game by making it really simple to get started.
 
 We currently support two very popular miner backends:
 
-1. [bloc-stak](https://github.com/furiousteam/bloc-stak)
-2. [blocrig](https://github.com/furiousteam/blocrig) (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) does not support our v4 proof-of-work algorithm yet)
+1. [xmr-stak](https://github.com/fireice-uk/xmr-stak)
+2. [xmrig](https://github.com/xmrig/xmrig) (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) does not support our v4 proof-of-work algorithm yet)
 
 ## Compiling on Linux (Ubuntu)
 
@@ -30,7 +30,7 @@ sudo apt-get install gcc make python libmicrohttpd10 libnss3 -y
 
 - gcc and make are required for go packages  
 - python is required for GUI-miner  
-- libmicrohttpd is required for blocrig  
+- libmicrohttpd is required for xmrig  
 - libnss3 is required for electron  
 
 ### Install Go
@@ -122,5 +122,5 @@ If all goes well, the binaries for Windows, macOS and Linux will be available in
 
 ### Attach the miner
 
-before you start the GUI-miner, make sure you have copied the binaries of [blocrig](https://github.com/furiousteam/blocrig) into the `miner` subfolder right next to the main GUI-miner executable
+before you start the GUI-miner, make sure you have copied the binaries of [xmrig](https://github.com/xmrig/xmrig) into the `miner` subfolder right next to the main GUI-miner executable
 
