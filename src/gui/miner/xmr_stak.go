@@ -404,7 +404,7 @@ func (miner *XmrStak) buildPoolConfig(
 [
 	{"pool_address" : "` + poolEndpoint + `", "wallet_address" : "` + walletAddress + `", "rig_id" : "", "pool_password" : "BLOC GUI Miner", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
 ],
-"currency" : "bloc",
+"currency" : "cryptonight_haven",
 		`
 }
 
