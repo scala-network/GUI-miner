@@ -1,5 +1,5 @@
 {
-  "app_name": "Bloc GUI Miner v1.1.0",
+  "app_name": "Bloc GUI Miner v0.0.1",
   "environments": [
     {"arch": "amd64", "os": "linux"}
   ],
