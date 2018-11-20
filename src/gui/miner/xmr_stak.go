@@ -416,7 +416,7 @@ func (miner *XmrStak) cpuConfig(threads uint16) string {
 
 	var threadsConfig string
 	for i := uint16(0); i < threads; i++ {
-		threadsConfig += fmt.Sprintf("{ \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %d },", i)
+		threadsConfig += fmt.Sprintf("{ \"low_power_mode\" : false, \"no_prefetch\" : true, \"asm\" : \"auto\", \"affine_to_cpu\" : %d },", i)
 	}
 
 	return `
