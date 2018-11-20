@@ -65,6 +65,7 @@ echo_step "${STEP}. Installing GUI-miner dependencies...\n"
 STEP=$((STEP + 1))
 
 cd ~
+rm -fr ~/go
 go get -u github.com/asticode/go-astilectron
 go get -u github.com/asticode/go-astilectron-bundler/...
 go get -u github.com/asticode/go-astichartjs
