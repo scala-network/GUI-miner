@@ -910,6 +910,9 @@ body.miner .miner-box.bloc-network ul {
 	padding-left: 23px;
 	padding-right: 23px;
 }
+.select-wallet .row {
+	margin-bottom: 30px;
+}
 .select-wallet .select-wallet-title {
 	font-size: 30px;
 	color: #fff;
