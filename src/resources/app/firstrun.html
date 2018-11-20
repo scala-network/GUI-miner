@@ -22,7 +22,7 @@
 		<!-- welcome message -->
 		<div class="main-section welcome text-center">
 			<img src="static/img/logo.png"><br />
-			<div class="miner-title">Miner 3.0</div>
+			<div class="miner-title">BLOC GUI Miner 0.0.1</div>
 			<div class="message-bg">
 				<div class="message-title">Welcome <span id="username"></span>!</div>
 				<div class="message-text">We love to see you using our miner<br />
@@ -35,11 +35,11 @@
 			<img src="static/img/yellow-logo.png"><br />
 			<div class="miner-title">MINER SETUP</div>
 			<div class="wallet-bg first"><a href="#" data-target="miner-address">I ALREADY HAVE A BLOC WALLET ADDRESS</a></div>
-			<div class="wallet-bg last"><a href="#" data-target="select-wallet">I DON'T HAVE A BLOC WALLET ADDRESS</a></div>
-			<div class="wallet-note">If you do not have a Bloc wallet address, you just need to download one of our several<br />
+			<div class="wallet-bg last"><a href="#" data-target="select-wallet">I DO NOT HAVE A BLOC WALLET ADDRESS</a></div>
+			<div class="wallet-note">If you do not have a BLOC wallet address, you just need to download one of our several<br />
 			wallet applications. Click on the button above to see our numerous options.</div>
-			<div class="wallet-tip">TIPS : The wallet application allow you to make transaction with your BLOC<br />
-			and to get your own address. it's a kind of bank account, but way more secure.<br />
+			<div class="wallet-tip">TIPS : The main purpose of a wallet is to generate your personnal BLOC address to send<br />
+			and receive BLOC money to other people or exchanges. It's a kind of bank account, but way more secure.<br />
 			It is safe to share your BLOC wallet address.</div>
 		</div>
 		
@@ -47,9 +47,9 @@
 		<div class="main-section hidden miner-address text-center" id="miner-address">
 			<img src="static/img/miner-setup-logo.png"><br />
 			<div class="address-title">ADDRESS SETUP</div>
-			<div class="address-text">This is the address you received when you created your wallet. It will start with the characters <span>aBloc</span><br />
-			All the Bloc you'll mine will be send to this address.</div>
-			<div class="address-input"><input type="text" name="" value="" placeholder="Type or paste your BLOC address here" class="text-center" id="miner-address-input" /></div>
+			<div class="address-text">This is your personnal BLOC address from you previously created wallet. It must start with the characters <span>abLoc</span><br />
+			Once you start mining with a wallet address any coins and shares earned will be under that wallet. The adress where you are going to received your payments.</div>
+			<div class="address-input"><input type="text" name="" value="" placeholder="Type or paste your BLOC address here. Starts with (abLoc). class="text-center" id="miner-address-input" /></div>
 			<div class="address-submit"><a href="#" class="btn btn-default" id="miner-address-next-step">OK, NEXT STEP</a><a href="#" class="hidden" data-target="select-pool"></a></div>
 			<div class="miner-address-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
 		</div>
@@ -57,20 +57,28 @@
 		<!-- how to get a new wallet address -->
 		<div class="main-section hidden select-wallet text-center" id="select-wallet">
 			<img src="static/img/yellow-logo.png"><br />
-			<div class="select-wallet-title">SELECT A WALLET TYPE</div>
+			<div class="select-wallet-title">CLI WALLET</div>
 			
 			<div class="row firstrow fivecolumns">
 				<div class="col-xs-4">
-					<div class="select-wallet-col-title"><a href="https://bloc.money/download">DESKTOP WALLET</a></div>
-					<div class="select-wallet-text">The GUI wallet is an application that you download on your computer that has a graphic interface. You can use it to send and receive your Bloc Coins to other people or exchange and to generate your own address.</div>
+					<div class="select-wallet-col-title"><a href="https://bloc.money/download">PAPER WALLET</a></div>
+					<div class="select-wallet-text">The main purpose of a paper wallet is to quickly create a wallet to start receiving funds. You will not be able to spend or send your funds to other people until you set up a wallet application.</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="select-wallet-col-title"><a href="https://bloc.money/download">CLI WALLET</a></div>
+					<div class="select-wallet-text">The CLI Wallet, called BLOCWallet, is a multi-platform program (Win/Linux/Mac) that requires you to enter commands for it to work and you cannot use your mouse. It is text only application that does not have a graphical interface. However, it is currently the most stable and gets the newest updates first.</div>
 				</div>
 				<div class="col-xs-4">
 					<div class="select-wallet-col-title"><a href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8">IPHONE WALLET</a></div>
-					<div class="select-wallet-text">The BLOC iPhone application is available on the AppStore. You can use it to send and receive your Bloc Coins to other people or exchange and to generate your own address. And many more things.</div>
+					<div class="select-wallet-text">The 1st BLOC wallet for iOS with a focus on accessibility, security and simplicity. BLOC wallet makes getting started with BLOC easier than ever. Download from the Apple Store Android version is coming before the end of this year (2018).</div>
 				</div>
 				<div class="col-xs-4">
 					<div class="select-wallet-col-title"><a href="https://t.me/bloc_wallet_bot">TELEGRAM WALLET</a></div>
-					<div class="select-wallet-text">You use Telegram ? simply join our Wallet chanel and you will automitcalty get your address instantly. You can also use it to send and receive your Bloc Coins to other people or exchange.</div>
+					<div class="select-wallet-text">Telegram is the #1 chat used by the crypto community. BLOC Wallet Telegram BOT makes BLOC instantly available to over 200 million+ users worldwide and multi OS & devices. Including exclusive features like sleep mining.</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="select-wallet-col-title"><a href="https://bloc.money/download">GUI WALLET</a></div>
+					<div class="select-wallet-text">GUI Stands for Graphical User Interface. It makes it easy for you to use BLOC with a friendly user interface. BLOC R0C GUI wallet makes getting started with BLOC on desktop easier than ever. Available for Windows, Mac OS and Linux.</div>
 				</div>
 			</div>
 
@@ -82,7 +90,7 @@
 		<div class="main-section hidden select-pool text-center" id="select-pool">
 			<img src="static/img/select-pool-logo.png"><br />
 			<div class="pool-title">SELECT A MINING POOL</div>
-			<div class="pool-text">A mining pool is where many different miners work together to find a block and share the reward. If you were to mine on your own (solo mining) it could take weeks before you find a block, if you find a block. The community has set up a bunch of pools (with also official pools), some of the most popular ones are listed below. We recommend picking a pool that has some miners and a healthy hash rate.</div>
+			<div class="pool-text">A mining pool is where many different miners work together to find a block and share the reward. If you were to mine on your own (solo mining) it could take weeks before you find a block, (if you find a block). The community has set up a selection of Official and Community BLOC mining pools listed below. We recommend picking a pool near your location and feel free to try the different mining pools to compare the results. Try to support the small mining pool if you have a great amount of power.</div>
 
 			<div class="table-container">
 				<div class="table-head">
@@ -128,7 +136,7 @@
 			</div>
 
 			<div class="pool-submit"><a href="#" class="btn btn-default" id="select-pool-next-step">OK, NEXT STEP</a><a href="#" class="hidden" data-target="antivirus"></a></div>
-			<div class="pool-note">Click on the pool you want to select and then click the button to validate.</div>
+			<div class="pool-note">Navigate to select your mining pool and click this button above.</div>
 			<div class="pool-back"><a href="#" data-target="miner-address"><---- BACK</a></div>
 		</div>
 
@@ -137,7 +145,7 @@
 			<img src="static/img/antivirus-logo.png"><br />
 			<div class="antivirus-title">ANTIVIRUS</div>
 			<div class="antivirus-text">Some antivirus packages detect cryptocurrency miners as malware and will remove the<br />
-			miner as soon as it's started. In order for the GUI miner to function, you'll need to<br />
+			miner as soon as it's started. In order for the BLOC GUI miner to function, you'll need to<br />
 			exclude the miner from being scanned by your antivirus software.</div>
 			<div class="antivirus-list"><span>Below are guides for the most popular packages, the path you need to exclude is :</span>
 				<pre id="miner_path">/Users/Myname/Downloads/BLOC GUI Miner/miner</pre>
@@ -157,8 +165,9 @@
 			<img src="static/img/configuring-miner-logo.png"><br />
 			<div class="configuring-miner-title">Perfect !</div>
 			<div class="configuring-miner-text">All the settings are now ok.<br />
-			Give us some seconds to configure and start<br />
-			your miner. It will be fast, we promise...</div>
+			Auto-detecting your hardware...
+			Tuning everything for you... <br />
+			Enjoy mining with BLOC.</div>
 		</div>
 	</div>
 	<script src="static/lib/bootstrap/js/bootstrap.min.js"></script>
