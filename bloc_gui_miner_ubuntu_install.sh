@@ -57,7 +57,7 @@ echo_step "${STEP}. Cloning GUI-miner...\n"
 STEP=$((STEP + 1))
 
 cd ~
-rm -fr GUI-miner
+rm -fr ~/GUI-miner
 git clone https://github.com/furiousteam/GUI-miner.git GUI-miner
 
 # Installing GUI-miner dependencies
