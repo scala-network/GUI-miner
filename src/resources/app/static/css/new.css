@@ -711,6 +711,29 @@ body.miner .miner-box.bloc-network ul {
 	margin: 0;
 }
 
+body.miner .miner-box .loading-settings {
+	position: relative;
+}
+body.miner .miner-box .loading-settings img {
+	opacity: 0.5;
+}
+body.miner .miner-box .loading-settings.done img {
+	opacity: 1;
+}
+body.miner .miner-box .loading-settings span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+body.miner .miner-box .loading-settings .fa-spin {
+	font-size: 23px;
+}
+body.miner .miner-box .loading-settings.done span {
+	display: none;
+}
+
 /* MINER SETTINGS */
 .miner-settings {
 	padding-top: 35px;
