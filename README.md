@@ -20,8 +20,8 @@ This is the a BETA release. A complete tutorial and instructions how to use the 
 
 We currently support two very popular miner backends:
 
-1. [xmr-stak](https://github.com/fireice-uk/xmr-stak)
-2. [xmrig](https://github.com/xmrig/xmrig) (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet tested
+1. [xmr-stak](https://github.com/fireice-uk/xmr-stak) **v2.6.0**
+2. [xmrig](https://github.com/xmrig/xmrig) **v2.8.3** (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet tested
 
 ## Compiling on Linux (Ubuntu)
 
@@ -139,4 +139,3 @@ before you start the GUI-miner, make sure you have copied the binaries of [xmrig
 - [Fireice](https://github.com/fireice-uk/xmr-stak) for his precious help
 - [Stellite](https://github.com/stellitecoin/GUI-miner) for creating the 1st version of this GUI miner
 - [BLOC Developers](https://github.com/furiousteam/BLOC) for the great work
-
