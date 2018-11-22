@@ -1,4 +1,4 @@
-![](git-assets/miner-logo.png)
+![in BLOC we trust logo](DOCS/images/bloc-logo-intro.png)
 
 # BLOC GUI Miner
 
@@ -6,18 +6,22 @@ BLOC GUI miner is a beautiful, easy to use, Graphical User interface for mining 
 It is aimed at getting people that have never tried mining before with a focus on accessibility, security and simplicity.
 BLOC GUI miner makes getting started with [BLOC](https://bloc.money) mining easier than ever.
 
-![Screenshot](https://i.imgur.com/ruK7z4Y.png "Screenshot")
+BLOC GUI Miner support two very popular miner backends: [xmr-stak](https://github.com/fireice-uk/xmr-stak) and [xmrig](https://github.com/xmrig/xmrig)
 
-## BLOC GUI Features
+BLOC GUI Miner comes with [xmr-stak](https://github.com/fireice-uk/xmr-stak) already built in including configuration files for CPU and GPU mining in most of the cases.
 
-BLOC GUI miner is a wrapper for the most popular cryptonote based coins miner XMR-STAK and XMRIG.
+![Screenshot](../DOCS/images/BLOC-GUI-Miner-v0.0.1-BETA.jpg "Screenshot")
+
+## BETA Release
+
+This is the a BETA release. A complete tutorial and instructions how to use the BLOC-GUI-Miner is coming soon.
 
 ## Supported Miners
 
 We currently support two very popular miner backends:
 
 1. [xmr-stak](https://github.com/fireice-uk/xmr-stak)
-2. [xmrig](https://github.com/xmrig/xmrig) (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) does not support our v4 proof-of-work algorithm yet)
+2. [xmrig](https://github.com/xmrig/xmrig) (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet tested
 
 ## Compiling on Linux (Ubuntu)
 
@@ -120,7 +124,7 @@ make
 ### Compile the miner
 
 ```shell
-cd ~/GUI-miner
+cd ~/BLOC-GUI-Miner
 make
 ```
 
