@@ -10,7 +10,7 @@ BLOC GUI Miner support two very popular miner backends: [xmr-stak](https://githu
 
 BLOC GUI Miner comes with [xmr-stak](https://github.com/fireice-uk/xmr-stak) already built in including configuration files for CPU and GPU mining in most of the cases.
 
-![Screenshot](../DOCS/images/BLOC-GUI-Miner-v0.0.1-BETA.jpg "Screenshot")
+![Screenshot](DOCS/images/BLOC-GUI-Miner-v0.0.1-BETA.jpg "Screenshot")
 
 ## BETA Release
 
@@ -133,3 +133,10 @@ If all goes well, the binaries for Windows, macOS and Linux will be available in
 ### Attach the miner
 
 before you start the GUI-miner, make sure you have copied the binaries of [xmrig](https://github.com/xmrig/xmrig) or [xmr-stak](https://github.com/fireice-uk/xmr-stak) into the `miner` subfolder right next to the main GUI-miner executable
+
+### Thanks
+
+- [Fireice](https://github.com/fireice-uk/xmr-stak) for his precious help
+- [Stellite](https://github.com/stellitecoin/GUI-miner) for creating the 1st version of this GUI miner
+- [BLOC Developers](https://github.com/furiousteam/BLOC) for the great work
+
