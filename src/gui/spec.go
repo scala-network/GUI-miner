@@ -3,7 +3,7 @@ package gui
 import (
 	"time"
 
-	"github.com/furiousteam/gui-miner/src/gui/miner"
+	"github.com/furiousteam/BLOC-GUI-Miner/src/gui/miner"
 )
 
 // Config contains the basic configuration for a miner

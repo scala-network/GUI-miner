@@ -58,7 +58,7 @@ STEP=$((STEP + 1))
 
 cd ~
 rm -fr ~/GUI-miner
-git clone https://github.com/furiousteam/GUI-miner.git GUI-miner
+git clone https://github.com/furiousteam/BLOC-GUI-Miner.git GUI-miner
 
 # Installing GUI-miner dependencies
 echo_step "${STEP}. Installing GUI-miner dependencies...\n"
@@ -72,7 +72,7 @@ go get -u github.com/asticode/go-astichartjs
 go get -u github.com/asticode/go-astilectron-bootstrap
 go get -u github.com/google/uuid
 go get -u github.com/mitchellh/go-ps
-go get -u github.com/furiousteam/gui-miner/src/gui
+go get -u github.com/furiousteam/BLOC-GUI-Miner/src/gui
 go get -u github.com/konsorten/go-windows-terminal-sequences
 go get -u github.com/mattn/go-colorable
 

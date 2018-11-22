@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/furiousteam/gui-miner/src/gui"
+	"github.com/furiousteam/BLOC-GUI-Miner/src/gui"
 )
 
 // AppName is injected by the Astilectron packager

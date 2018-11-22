@@ -16,7 +16,7 @@ import (
 	bootstrap "github.com/asticode/go-astilectron-bootstrap"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
-	"github.com/furiousteam/gui-miner/src/gui/miner"
+	"github.com/furiousteam/BLOC-GUI-Miner/src/gui/miner"
 )
 
 // GUI implements the core control for the GUI miner

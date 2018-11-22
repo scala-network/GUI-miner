@@ -83,7 +83,7 @@ go version
 
 ```shell
 cd ~
-git clone https://github.com/furiousteam/GUI-miner.git
+git clone https://github.com/furiousteam/BLOC-GUI-Miner.git
 ```
 
 ### Install required Go packages
@@ -95,7 +95,7 @@ go get -u github.com/asticode/go-astichartjs
 go get -u github.com/asticode/go-astilectron-bootstrap
 go get -u github.com/google/uuid
 go get -u github.com/mitchellh/go-ps
-go get -u github.com/furiousteam/gui-miner/src/gui
+go get -u github.com/furiousteam/BLOC-GUI-Miner/src/gui
 go get -u github.com/konsorten/go-windows-terminal-sequences
 go get -u github.com/mattn/go-colorable
 ```
