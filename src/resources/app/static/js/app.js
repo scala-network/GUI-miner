@@ -45,6 +45,13 @@ let app = {
 					$('#price_stex').html(parsed.price_stex + ' BTC');
 					$('#price_tradeogre').html(parsed.price_tradeogre + ' BTC');
 					$('#pool-address').html('<a href="' + parsed.pool.url + '">' + parsed.pool.url + '</a>').data('id', parsed.pool.id);
+
+					app.networkStatsOnce = true;
+					if (!app.minerAndNetworkStatsDone && app.minerStatsOnce) {
+						app.minerAndNetworkStatsDone = true;
+						app.enableSettingsButton();
+					}
+
 					break;
 				case "miner_stats":
 					console.log('[' + new Date().toUTCString() + '] ', "miner_stats", parsed);
@@ -76,6 +83,12 @@ let app = {
 							dataset.data.push(parsed.hashrate);
 						});
 						app.hashrateChart.update();
+					}
+
+					app.minerStatsOnce = true;
+					if (!app.minerAndNetworkStatsDone && app.networkStatsOnce) {
+						app.minerAndNetworkStatsDone = true;
+						app.enableSettingsButton();
 					}
 					break;
 			}
@@ -259,5 +272,11 @@ let app = {
 			}
 		});
 	},
-	populatedAddress: false
+	enableSettingsButton: function() {
+		$('#loading-settings').addClass('done');
+	},
+	populatedAddress: false,
+	networkStatsOnce: false,
+	minerStatsOnce: false,
+	minerAndNetworkStatsDone: false
 }
