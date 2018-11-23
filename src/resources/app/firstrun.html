@@ -35,12 +35,25 @@
 			<img src="static/img/yellow-logo.png"><br />
 			<div class="miner-title">MINER SETUP</div>
 			<div class="wallet-bg first"><a href="#" data-target="miner-address">I ALREADY HAVE A BLOC WALLET ADDRESS</a></div>
-			<div class="wallet-bg last"><a href="#" data-target="select-wallet">I DO NOT HAVE A BLOC WALLET ADDRESS</a></div>
+			<div class="wallet-bg"><a href="#" data-target="select-wallet">I DO NOT HAVE A BLOC WALLET ADDRESS</a></div>
+			<div class="wallet-bg last"><a href="#" data-target="other-currencies">I WANT TO MINE OTHER CRYPTOCURRENCIES</a></div>
 			<div class="wallet-note">If you do not have a BLOC wallet address, you just need to download one of our several<br />
 			wallet applications. Click on the button above to see our numerous options.</div>
 			<div class="wallet-tip">TIPS : The main purpose of a wallet is to generate your personnal BLOC address to send<br />
 			and receive BLOC money to other people or exchanges. It's a kind of bank account, but way more secure.<br />
 			It is safe to share your BLOC wallet address.</div>
+		</div>
+		
+		<!-- choose another currency to mine -->
+		<div class="main-section hidden other-currencies text-center" id="other-currencies">
+			<img src="static/img/miner-setup-logo.png"><br />
+			<div class="currencies-title">CHOOSE ANOTHER CURRENCY TO MINE</div>
+			<div class="currencies-text">Besides BLOC, you can mine Monero (XMR), Haven (XHV), TurtleCoin (TRTL) with this miner.</div>
+			<div class="currency-bg first"><a href="#" class="currency-btn" data-coin_type="xmr" data-coin_algo="cryptonight">Monero (XMR)</a></div>
+			<div class="currency-bg"><a href="#" class="currency-btn" data-coin_type="xhv" data-coin_algo="cryptonight_haven">Haven (XHV)</a></div>
+			<div class="currency-bg last"><a href="#" class="currency-btn" data-coin_type="trtl" data-coin_algo="cryptonight_lite_v7">TurtleCoin (TRTL)</a></div>
+			<a href="#" class="hidden" data-target="miner-address" id="other-currencies-next-step"></a>
+			<div class="currencies-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
 		</div>
 		
 		<!-- insert existing wallet address -->

@@ -29,8 +29,6 @@ let firstrun = {
 			// Return the pool list for the GUI miner
 			astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
 				$('#pool-list').html(message.payload);
-				// select the first pool
-				//$('#pool-list').find('.table-body').first().addClass('selected');
 			});
 			/*
 			// overide the firstrun
@@ -78,12 +76,19 @@ let firstrun = {
 				// then wait for Go's OK to continue
 				var configData = {
 					address: $('#miner-address-input').val().trim(),
-					pool: $('#pool-list').find('.table-body.selected').data('id')
+					pool: $('#pool-list').find('.table-body.selected').data('id'),
+					coin_type: firstrun.coin_type,
+					coin_algo: firstrun.coin_algo
 				};
 				astilectron.sendMessage({name: "configure", payload: configData}, function(message) {
 					document.location = 'index.html';
 				});
 			}
+		});
+		// If i've clicked "i already have a wallet" button, reset to BLOC
+		$('#choose-wallet a[data-target="miner-address"]').on('click', function(event) {
+			firstrun.coin_type = 'bloc';
+			firstrun.coin_algo = 'cryptonight_haven';
 		});
 
 		// Pool list validation
@@ -111,5 +116,15 @@ let firstrun = {
 				$(this).next().trigger('click');
 			}
 		});
-	}
+
+		// Events to mine other currencies buttons
+		var cb = $('#other-currencies .currency-btn');
+		cb.on('click', function(event) {
+			firstrun.coin_type = $(this).data('coin_type');
+			firstrun.coin_algo = $(this).data('coin_algo');
+			$('#other-currencies-next-step').trigger('click');
+		});
+	},
+	coin_type: 'bloc',
+	coin_algo: 'cryptonight_haven'
 };

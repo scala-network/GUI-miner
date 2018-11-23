@@ -15,7 +15,7 @@ import (
 // GetPoolList returns the list of pools available to the GUI miner
 func (gui *GUI) GetPoolList() ([]PoolData, error) {
 	var pools []PoolData
-	resp, err := http.Get(fmt.Sprintf("%s/pool-list?allowed=true", gui.config.APIEndpoint))
+	resp, err := http.Get(fmt.Sprintf("%s/pool-list?allowed=true&coin=%s", gui.config.APIEndpoint, gui.config.CoinType))
 	if err != nil {
 		return pools, err
 	}
@@ -30,7 +30,7 @@ func (gui *GUI) GetPoolList() ([]PoolData, error) {
 // GetPool returns a single pool's information
 func (gui *GUI) GetPool(id int) (PoolData, error) {
 	var pool PoolData
-	resp, err := http.Get(fmt.Sprintf("%s/pool/%d", gui.config.APIEndpoint, id))
+	resp, err := http.Get(fmt.Sprintf("%s/pool/%d?coin=%s", gui.config.APIEndpoint, id, gui.config.CoinType))
 	if err != nil {
 		return pool, err
 	}
@@ -68,11 +68,12 @@ func (gui *GUI) GetStats(
 		return "", errors.New("No data yet")
 	}
 	resp, err := http.Get(
-		fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s",
+		fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s&coin=%s",
 			gui.config.APIEndpoint,
 			poolID,
 			hashrate,
-			mid))
+			mid,
+			gui.config.CoinType))
 	if err != nil {
 		return "", err
 	}
@@ -115,7 +116,7 @@ func (gui *GUI) GetStats(
 // GetAnnouncement returns the announcement if available
 func (gui *GUI) GetAnnouncement() (Announcement, error) {
 	var ann Announcement
-	resp, err := http.Get(fmt.Sprintf("%s/announcement", gui.config.APIEndpoint))
+	resp, err := http.Get(fmt.Sprintf("%s/announcement?coin=%s", gui.config.APIEndpoint, gui.config.CoinType))
 	if err != nil {
 		return ann, err
 	}

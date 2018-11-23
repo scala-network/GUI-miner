@@ -10,6 +10,10 @@ import (
 type Config struct {
 	// APIEndpoint is the web endpoint where stats and pools are retrieved from
 	APIEndpoint string `json:"api_endpoint"`
+	// CoinType is the type of the coin the miner is currently minning
+	CoinType string `json:"coin_type"`
+	// CoinAlgo is the algo of the coin the miner is currently minning
+	CoinAlgo string `json:"coin_algo"`
 	// Address to mine to
 	Address string `json:"address"`
 	// PoolID selected on startup
@@ -27,10 +31,12 @@ type ElectronMessage struct {
 
 // frontendConfig is received from the miner's config page
 type frontendConfig struct {
-	Address string `json:"address"`
-	Pool    int    `json:"pool"`
-	Threads uint16 `json:"threads"`
-	MaxCPU  uint8  `json:"max_cpu"`
+	Address  string `json:"address"`
+	Pool     int    `json:"pool"`
+	Threads  uint16 `json:"threads"`
+	MaxCPU   uint8  `json:"max_cpu"`
+	CoinType string `json:"coin_type"`
+	CoinAlgo string `json:"coin_algo"`
 }
 
 // PoolData contains the parsed JSON data from the pool list

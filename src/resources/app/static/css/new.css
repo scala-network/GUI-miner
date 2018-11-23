@@ -102,6 +102,68 @@ body.miner .miner-bg {
 	color: #ffed00;
 }
 
+/* OTHER CURRENCIES */
+.other-currencies {
+	position: relative;
+	padding-top: 70px;
+}
+.other-currencies img {
+	margin-bottom: 22px;
+}
+.other-currencies .currencies-title {
+	font-size: 30px;
+	color: #fff;
+	font-family: 'Roboto Condensed';
+	font-weight: 300;
+	margin-bottom: 12px;
+}
+.other-currencies .currencies-text {
+	font-size: 16px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	margin-bottom: 40px;
+	opacity: .55;
+}
+.other-currencies .currency-bg {
+	width: 416px;
+	margin: 0 auto 15px auto;
+	background-color: #090a31cc;
+	border-radius: 3px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+}
+.other-currencies .currency-bg.first {
+	margin-bottom: 15px;
+}
+.other-currencies .currency-bg.last {
+	margin-bottom: 38px;
+}
+.other-currencies .currency-bg a,
+.other-currencies .currency-bg a:hover {
+	display: block;
+	color: #ffed00;
+	padding: 28px 0;
+	text-decoration: none;
+	font-family: 'Roboto Condensed';
+	font-weight: 600;
+}
+.other-currencies .currencies-back {
+	position: absolute;
+	top: 42px;
+	left: 18px;
+	background-color: #01072fcc;
+	border-radius: 3px;
+}
+.other-currencies .currencies-back a {
+	display: inline-block;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #ffed00;
+	padding: 10px 20px;
+	opacity: .6;
+	text-decoration: none;
+}
+
 /* CHOOSE WALLET */
 .choose-wallet {
 	padding-top: 70px;
@@ -114,21 +176,21 @@ body.miner .miner-bg {
 	color: #fff;
 	font-family: 'Roboto Condensed';
 	font-weight: 300;
-	margin-bottom: 63px;
+	margin-bottom: 30px;
 }
 .choose-wallet .wallet-bg {
 	width: 416px;
-	margin: 0 auto;
+	margin: 0 auto 15px auto;
 	background-color: #090a31cc;
 	border-radius: 3px;
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
 }
 .choose-wallet .wallet-bg.first {
-	margin-bottom: 22px;
+	margin-bottom: 15px;
 }
 .choose-wallet .wallet-bg.last {
-	margin-bottom: 58px;
+	margin-bottom: 38px;
 }
 .choose-wallet .wallet-bg a,
 .choose-wallet .wallet-bg a:hover {

@@ -54,6 +54,8 @@ func New(
 	asset bootstrap.Asset,
 	restoreAssets bootstrap.RestoreAssets,
 	apiEndpoint string,
+	coinType string,
+	coinAlgo string,
 	workingDir string,
 	isDebug bool) (*GUI, error) {
 
@@ -82,6 +84,8 @@ func New(
 		// Nothing has been configured yet, set some defaults
 		gui.config = &Config{
 			APIEndpoint: apiEndpoint,
+			CoinType:    coinType,
+			CoinAlgo:    coinAlgo,
 			Mid:         uuid.New().String(),
 		}
 	}
@@ -407,6 +411,8 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	}
 	gui.config.Address = newConfig.Address
 	gui.config.PoolID = newConfig.Pool
+	gui.config.CoinType = newConfig.CoinType
+	gui.config.CoinAlgo = newConfig.CoinAlgo
 
 	scanPath := filepath.Join(gui.workingDir, "miner")
 	// TODO: Fix own miner paths option
