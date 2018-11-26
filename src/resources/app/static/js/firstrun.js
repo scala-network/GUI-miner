@@ -25,11 +25,6 @@ let firstrun = {
 			astilectron.sendMessage({name: "get-miner-path", payload: ""}, function(message) {
 				$('#miner_path').html(message.payload);
 			});
-
-			// Return the pool list for the GUI miner
-			astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
-				$('#pool-list').html(message.payload);
-			});
 			/*
 			// overide the firstrun
 			var configData = {
@@ -57,8 +52,14 @@ let firstrun = {
 		$(document).on('click', '[data-target]', function() {
 			var id = $(this).data('target');
 			if (id == 'select-pool') {
-				// make the pool list table scrollable
-				if (!$("#pool-list").hasClass('mCSB_container'))  {
+				asticode.loader.show();
+				// Return the pool list for the GUI miner
+				astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
+					$("#pool-list").mCustomScrollbar("destroy");
+					$('#pool-list').html(message.payload);
+					asticode.loader.hide();
+
+					// make the pool list table scrollable
 					$("#pool-list").mCustomScrollbar({
 						theme:"rounded-dots",
 						scrollInertia:400
@@ -68,8 +69,13 @@ let firstrun = {
 					$('#pool-list').find('.table-body').off('click').on('click', function() {
 						$(this).parent().find('.table-body').removeClass('selected');
 						$(this).addClass('selected');
+						firstrun.selected_pool = parseInt($(this).data('id'));
 					});
-				}
+
+					// trigger the selected pool
+					$('#pool-list').find('.table-body[data-id="' + firstrun.selected_pool + '"]').trigger('click');
+					console.log(firstrun.selected_pool);
+				});
 			}
 			if (id == 'configuring-miner') {
 				// Send the configuration to Go backend,
@@ -84,6 +90,28 @@ let firstrun = {
 					document.location = 'index.html';
 				});
 			}
+			// change the miner-address content based on the selected coin
+			if (id == 'miner-address') {
+				// setup
+				var mac = $('#miner-address-content');
+				jQuery.extend({encode: function(text) {return text}}); // remove the escape made by jquery.tmpl.min.js
+
+				// precompile
+				$.template("miner_address_text", miner_address_text);
+				$.template("miner_address_input", miner_address_input);
+
+				// get coin data based on coin type
+				var coin_data = shared.getCoinData(firstrun.coin_type);
+				coin_data.extra = coin_data.coin_prefix != '' ? true : null;
+
+				// replace text vars
+				var mat = $.tmpl("miner_address_text", coin_data);
+				mac.find('.address-text').html(mat);
+
+				// replace input vars
+				var mai = $.tmpl("miner_address_input", coin_data);
+				mac.find('.address-input input').attr('placeholder', mai.text());
+			}
 		});
 		// If i've clicked "i already have a wallet" button, reset to BLOC
 		$('#choose-wallet a[data-target="miner-address"]').on('click', function(event) {
@@ -95,8 +123,7 @@ let firstrun = {
 		$('#select-pool-next-step').on('click', function(event) {
 			event.preventDefault();
 			asticode.notifier.close();
-			var selected_pool = $('#pool-list').find('.table-body.selected');
-			if (selected_pool.length == 0) {
+			if (firstrun.selected_pool == 0) {
 				asticode.notifier.error('You must choose one of the pools');
 			} else {
 				$(this).next().trigger('click');
@@ -110,8 +137,8 @@ let firstrun = {
 			var address = $('#miner-address-input').val().trim();
 			if (address == '') {
 				asticode.notifier.error('You must enter your address');
-			} else if (!shared.validateWalletAddress(address)) {
-				asticode.notifier.error("Please enter a valid Bloc address starting with 'abLoc'");
+			} else if (!shared.validateWalletAddress(address, firstrun.coin_type)) {
+				asticode.notifier.error("Please enter a valid wallet address");
 			} else {
 				$(this).next().trigger('click');
 			}
@@ -126,5 +153,6 @@ let firstrun = {
 		});
 	},
 	coin_type: 'bloc',
-	coin_algo: 'cryptonight_haven'
+	coin_algo: 'cryptonight_haven',
+	selected_pool: 0
 };

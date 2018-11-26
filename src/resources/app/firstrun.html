@@ -60,11 +60,17 @@
 		<div class="main-section hidden miner-address text-center" id="miner-address">
 			<img src="static/img/miner-setup-logo.png"><br />
 			<div class="address-title">ADDRESS SETUP</div>
-			<div class="address-text">This is your personnal BLOC address from you previously created wallet. It must start with the characters <span>abLoc</span><br />
-			Once you start mining with a wallet address any coins and shares earned will be under that wallet. The address you are going to receive your payments.</div>
-			<div class="address-input"><input type="text" name="" value="" placeholder="Type or paste your BLOC address here. Starts with (abLoc)" class="text-center" id="miner-address-input" /></div>
+			<div id="miner-address-content">
+				<div class="address-text">This is your personnal BLOC address from you previously created wallet. It must start with the characters <span>abLoc</span><br />
+				Once you start mining with a wallet address any coins and shares earned will be under that wallet. The address you are going to receive your payments.</div>
+				<div class="address-input"><input type="text" name="" value="" placeholder="Type or paste your BLOC address here. Starts with (abLoc)" class="text-center" id="miner-address-input" /></div>
+			</div>
 			<div class="address-submit"><a href="#" class="btn btn-default" id="miner-address-next-step">OK, NEXT STEP</a><a href="#" class="hidden" data-target="select-pool"></a></div>
 			<div class="miner-address-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
+			<script>
+			var miner_address_text = "This is your personnal ${coin_abbr} address from you previously created wallet. {{if coin_prefix}}It must start with the characters <span>${coin_prefix}</span>{{/if}}<br />Once you start mining with a wallet address any coins and shares earned will be under that wallet. The address you are going to receive your payments.";
+			var miner_address_input = "Type or paste your ${coin_abbr} address here. {{if coin_prefix}}Starts with (${coin_prefix}){{/if}}";
+			</script>
 		</div>
 		
 		<!-- how to get a new wallet address -->
@@ -191,6 +197,7 @@
 	<script src="static/lib/astimodaler/astimodaler.js"></script>
 	<script src="static/lib/astinotifier/astinotifier.js"></script>
 	<script src="static/lib/jquery.animatecss.js"></script>
+	<script src="static/lib/jquery.tmpl.min.js"></script>
 	<script src="static/js/shared.js"></script>
 	<script src="static/js/firstrun.js"></script>
 	<script type="text/javascript">
