@@ -489,6 +489,7 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	err = gui.miner.WriteConfig(
 		poolInfo.Config,
 		gui.config.Address,
+		gui.config.CoinAlgo,
 		miner.ProcessingConfig{
 			Threads:  newConfig.Threads,
 			MaxUsage: newConfig.MaxCPU,

@@ -79,6 +79,7 @@ func NewXmrStak(config Config) (*XmrStak, error) {
 func (miner *XmrStak) WriteConfig(
 	poolEndpoint string,
 	walletAddress string,
+	coinAlgorithm string,
 	processingConfig ProcessingConfig) error {
 
 	// For xmr-stak, we assume some values for now. I'll extend this in
@@ -93,7 +94,7 @@ func (miner *XmrStak) WriteConfig(
 
 	err = ioutil.WriteFile(
 		filepath.Join(miner.Base.executablePath, "pools.txt"),
-		[]byte(miner.buildPoolConfig(poolEndpoint, walletAddress)),
+		[]byte(miner.buildPoolConfig(poolEndpoint, walletAddress, coinAlgorithm)),
 		0644)
 	if err != nil {
 		return err
@@ -397,14 +398,15 @@ func (miner *XmrStak) defaultConfig() string {
 // parser which is why I'm doing this as text or templates
 func (miner *XmrStak) buildPoolConfig(
 	poolEndpoint string,
-	walletAddress string) string {
+	walletAddress string,
+	coinAlgorithm string) string {
 
 	return `
 "pool_list" :
 [
 	{"pool_address" : "` + poolEndpoint + `", "wallet_address" : "` + walletAddress + `", "rig_id" : "", "pool_password" : "BLOC GUI Miner", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
 ],
-"currency" : "cryptonight_haven",
+"currency" : "` + coinAlgorithm + `",
 		`
 }
 

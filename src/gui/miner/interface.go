@@ -12,6 +12,7 @@ type Miner interface {
 	WriteConfig(
 		poolEndpoint string,
 		walletAddress string,
+		coinAlgorithm string,
 		processingConfig ProcessingConfig) error
 	// GetProcessingConfig returns the current miner processing config
 	// TODO: Currently only CPU threads, extend this to full CPU/GPU config

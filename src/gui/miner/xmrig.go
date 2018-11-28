@@ -159,6 +159,7 @@ func NewXmrig(config Config) (*Xmrig, error) {
 func (miner *Xmrig) WriteConfig(
 	poolEndpoint string,
 	walletAddress string,
+	coinAlgorithm string,
 	processingConfig ProcessingConfig) error {
 
 	var err error
