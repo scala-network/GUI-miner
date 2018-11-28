@@ -277,6 +277,19 @@ func (gui *GUI) handleElectronCommands(
 	// pool-list requests the recommended pool list from the miner API
 	// and returns the rendered HTML
 	case "pool-list":
+		var newConfig frontendConfig
+		err := json.Unmarshal(command.Payload, &newConfig)
+		if err != nil {
+			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
+				Data: fmt.Sprintf("Unable to fetch pool list from API."+
+					"Internal error."+
+					"<br/>The error was '%s'", err),
+			})
+			gui.logger.Fatalf("Unable to fetch pool list: '%s'", err)
+		}
+
+		gui.config.CoinType = newConfig.CoinType
+
 		// Grab the pool list and send that to the GUI as well
 		poolJSONs, err := gui.GetPoolList()
 		if err != nil {
@@ -289,7 +302,7 @@ func (gui *GUI) handleElectronCommands(
 			time.Sleep(time.Second * 15)
 			gui.logger.Fatalf("Unable to fetch pool list: '%s'", err)
 		}
-		poolTemplate, err := gui.GetPoolTemplate(false)
+		poolTemplate, err := gui.GetPoolTemplate()
 		if err != nil {
 			log.Fatalf("Unable to load pool template: '%s'", err)
 		}

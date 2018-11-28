@@ -50,7 +50,7 @@ let shared = {
 			if (address.match(regexp)) {
 				return true;
 			}
-		} else if (coin_type == 'xmr') {
+		} else if (coin_type == 'monero') {
 			// 1. 95 chars for address
 			// 2. address always starts with 4
 			// 3. second character can only be a number (0-9), or letters A or B
@@ -59,7 +59,7 @@ let shared = {
 			if (address.substring(0, 1) == '4' && address.match(regexp)) {
 				return true;
 			}
-		} else if (coin_type == 'xhv') {
+		} else if (coin_type == 'haven') {
 			// 1. 79 chars for address
 			// 2. first 3 chars are hvx
 			// ex: hvxyDX9mqBNbQ6ojRrZZYcNPSTGcxtxQ4Ws6mNm6Ag7NTciArFb71HHL8HbACGpMu3iTc42F3YQNj4r
@@ -67,7 +67,7 @@ let shared = {
 			if (address.match(regexp)) {
 				return true;
 			}
-		} else if (coin_type == 'trtl') {
+		} else if (coin_type == 'turtlecoin') {
 			// 1. 99 chars for address
 			// 2. first 3 chars are TRTL
 			// ex: TRTLv3GvjehhjeYnctiWQx6MRtgWQKURPWfocps8XuMnL9XXgF2GaYgX9vamnUcG35BkQy6VfwUy5CsV9YNomioPGGyVhM8VgAb
@@ -106,13 +106,13 @@ let shared = {
 	},
 	getCoinData: function(coin_type) {
 		let data = {coin_abbr: 'BLOC', coin_prefix: 'abLoc'};
-		if (coin_type == 'xmr') {
+		if (coin_type == 'monero') {
 			data.coin_abbr = 'XMR';
 			data.coin_prefix = '';
-		} else if (coin_type == 'xhv') {
+		} else if (coin_type == 'haven') {
 			data.coin_abbr = 'XHV';
 			data.coin_prefix = 'hvx';
-		} else if (coin_type == 'trtl') {
+		} else if (coin_type == 'turtlecoin') {
 			data.coin_abbr = 'TRTL';
 			data.coin_prefix = 'TRTL';
 		}

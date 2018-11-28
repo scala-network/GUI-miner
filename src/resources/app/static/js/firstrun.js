@@ -54,7 +54,10 @@ let firstrun = {
 			if (id == 'select-pool') {
 				asticode.loader.show();
 				// Return the pool list for the GUI miner
-				astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
+				var payloadData = {
+					coin_type: firstrun.coin_type
+				};
+				astilectron.sendMessage({name: "pool-list", payload: payloadData}, function(message) {
 					$("#pool-list").mCustomScrollbar("destroy");
 					$('#pool-list').html(message.payload);
 					asticode.loader.hide();

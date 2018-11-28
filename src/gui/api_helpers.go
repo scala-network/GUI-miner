@@ -87,7 +87,7 @@ func (gui *GUI) GetStats(
 		return "", err
 	}
 
-	poolTemplate, err := gui.GetPoolTemplate(true)
+	poolTemplate, err := gui.GetPoolTemplate()
 	if err != nil {
 		log.Fatalf("Unable to load pool template: '%s'", err)
 	}

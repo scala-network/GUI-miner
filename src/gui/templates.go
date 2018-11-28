@@ -8,14 +8,14 @@ import "html/template"
 */
 
 // GetPoolTemplate returns the template for rendering a pool block
-func (gui *GUI) GetPoolTemplate(withChangeOption bool) (*template.Template, error) {
-	// var changeOption string
-	// if withChangeOption == true {
-		// changeOption = `<a href="#" id="change_pool" class="info-block dull">Change</a>`
-	// }
+func (gui *GUI) GetPoolTemplate() (*template.Template, error) {
+	var poolType string
+	if gui.config.CoinType == "bloc" {
+		poolType = `<span>({{ .APIType }})</span>`
+	}
 	temp, err := template.New("pool").Parse(`
 	<div class="table-body" data-id="{{ .ID }}">
-		<div class="table-col text-left">{{ .URL }} <span>({{ .APIType }})</span></div>
+		<div class="table-col text-left">{{ .URL }} ` + poolType + `</span></div>
 		<div class="table-col opacity">{{ .Hashrate }}</div>
 		<div class="table-col opacity">{{ .Miners }}</div>
 		<div class="table-col opacity">{{ .Fee }}</div>
