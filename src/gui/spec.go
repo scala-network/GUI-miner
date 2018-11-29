@@ -62,6 +62,8 @@ type PoolData struct {
 // trading and selected mining pool
 type GlobalStats struct {
 	Pool        PoolData `json:"pool"`
+	Ticker      string   `json:"abbreviation"`
+	Supply      string   `json:"maximum_supply"`
 	Circulation string   `json:"circulation"`
 	LastBlock   struct {
 		ID         int    `json:"id"`

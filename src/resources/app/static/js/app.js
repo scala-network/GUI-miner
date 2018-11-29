@@ -29,6 +29,8 @@ let app = {
 					break;
 				case "network_stats":
 					console.log('[' + new Date().toUTCString() + '] ', "network_stats", parsed);
+					$('#abbreviation').html(parsed.abbreviation);
+					$('#supply').html(parsed.maximum_supply);
 					$('#circulation').html(parsed.circulation);
 					$('#market_cap').html(parsed.market_cap);
 					$('#network_hashrate').html(parsed.hashrate);
