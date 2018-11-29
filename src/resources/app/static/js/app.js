@@ -39,12 +39,24 @@ let app = {
 					$('#pool_hashrate').html(parsed.pool.hashrate);
 					$('#pool_miners').html(parsed.pool.miners);
 					$('#pool_last_block').html(parsed.pool.last_block);
-					$('#trading_volume').html(parsed.volume + ' BTC');
 					$('#record_volume').html(parsed.records.volume + ' BTC');
 					$('#record_price').html(parsed.records.price + ' BTC');
-					$('#price_stex').html(parsed.price_stex + ' BTC');
-					$('#price_tradeogre').html(parsed.price_tradeogre + ' BTC');
 					$('#pool-address').html('<a href="' + parsed.pool.url + '">' + parsed.pool.url + '</a>').data('id', parsed.pool.id);
+
+					// Build prices
+					let table = '<tbody>';
+					table += '<tr>\
+						<td>Volume today</td>\
+						<td>' + parsed.volume + ' BTC</td>\
+					</tr>';
+					parsed.prices.forEach(function (item) {
+						table += '<tr>\
+							<td>' + item.name + '</td>\
+							<td>' + item.value + ' BTC</td>\
+						</tr>';
+					});
+					table += '</tbody>';
+					$('#exchanges-price').html(table);
 
 					app.networkStatsOnce = true;
 					if (!app.minerAndNetworkStatsDone && app.minerStatsOnce) {

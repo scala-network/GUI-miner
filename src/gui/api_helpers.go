@@ -14,6 +14,9 @@ import (
 
 // GetPoolList returns the list of pools available to the GUI miner
 func (gui *GUI) GetPoolList() ([]PoolData, error) {
+	// gui.logger.Info("GetPoolList")
+	// gui.logger.Info(fmt.Sprintf("%s/pool-list?allowed=true&coin=%s", gui.config.APIEndpoint, gui.config.CoinType))
+
 	var pools []PoolData
 	resp, err := http.Get(fmt.Sprintf("%s/pool-list?allowed=true&coin=%s", gui.config.APIEndpoint, gui.config.CoinType))
 	if err != nil {
@@ -29,6 +32,9 @@ func (gui *GUI) GetPoolList() ([]PoolData, error) {
 
 // GetPool returns a single pool's information
 func (gui *GUI) GetPool(id int) (PoolData, error) {
+	// gui.logger.Info("GetPool")
+	// gui.logger.Info(fmt.Sprintf("%s/pool/%d?coin=%s", gui.config.APIEndpoint, id, gui.config.CoinType))
+
 	var pool PoolData
 	resp, err := http.Get(fmt.Sprintf("%s/pool/%d?coin=%s", gui.config.APIEndpoint, id, gui.config.CoinType))
 	if err != nil {
@@ -60,9 +66,12 @@ func (gui *GUI) SaveConfig(config Config) error {
 // GetStats returns stats for the interface. It requires the miner's
 // hashrate to calculate BLOC per dat
 func (gui *GUI) GetStats(
+
 	poolID int,
 	hashrate float64,
 	mid string) (string, error) {
+	// gui.logger.Info("GetStats")
+	// gui.logger.Info(fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s&coin=%s", gui.config.APIEndpoint, poolID, hashrate, mid, gui.config.CoinType))
 
 	if mid == "" || poolID == 0 {
 		return "", errors.New("No data yet")
@@ -115,6 +124,9 @@ func (gui *GUI) GetStats(
 
 // GetAnnouncement returns the announcement if available
 func (gui *GUI) GetAnnouncement() (Announcement, error) {
+	// gui.logger.Info("GetAnnouncement")
+	// gui.logger.Info(fmt.Sprintf("%s/announcement?coin=%s", gui.config.APIEndpoint, gui.config.CoinType))
+
 	var ann Announcement
 	resp, err := http.Get(fmt.Sprintf("%s/announcement?coin=%s", gui.config.APIEndpoint, gui.config.CoinType))
 	if err != nil {
@@ -125,7 +137,7 @@ func (gui *GUI) GetAnnouncement() (Announcement, error) {
 		return ann, err
 	}
 
-	// Format tje date string into soemthing we can use
+	// Format the date string into something we can use
 	ann.Date, err = time.Parse("2006-01-02 15:04:05", ann.DateString)
 	if err != nil {
 		// To have the date not be screwed on the interface, just set it to now

@@ -73,10 +73,16 @@ type GlobalStats struct {
 	} `json:"last_block"`
 	Difficulty      string `json:"difficulty"`
 	Height          string `json:"height"`
-	VolumeStex      string `json:"volume_stex"`
-	PriceStex       string `json:"price_stex"`
-	VolumeTradeogre string `json:"volume_tradeogre"`
-	PriceTradeogre  string `json:"price_tradeogre"`
+	Volumes         []struct {
+		Name  string `json:"name"`
+		Value string `json:"value"`
+		Unit  string `json:"unit"`
+	} `json:"volumes"`
+	Prices         []struct {
+		Name  string `json:"name"`
+		Value string `json:"value"`
+		Unit  string `json:"unit"`
+	} `json:"prices"`
 	Volume          string `json:"volume"`
 	Price           string `json:"price"`
 	MarketCap       string `json:"market_cap"`
