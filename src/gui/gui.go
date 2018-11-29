@@ -384,6 +384,22 @@ func (gui *GUI) handleElectronCommands(
 		go gui.updateNetworkStats()
 
 		return "Ok", nil
+
+	// config-file is sent before any other command from the index.html
+	case "config-file":
+		gui.logger.Info("Sending config to frontend")
+		currentConfig := frontendConfig{
+			CoinType: gui.config.CoinType,
+			CoinAlgo: gui.config.CoinAlgo,
+		}
+
+		dataBytes, err := json.Marshal(currentConfig)
+		if err != nil {
+			gui.logger.Errorf("Unable to send config to front-end: %s", err)
+			return "", nil
+		}
+		return string(dataBytes), nil
+
 	// miner-start is sent after configuration or when the user
 	// clicks 'start mining'
 	case "miner-start":
