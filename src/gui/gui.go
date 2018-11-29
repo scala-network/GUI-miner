@@ -384,13 +384,13 @@ func (gui *GUI) handleElectronCommands(
 		go gui.updateNetworkStats()
 
 		return "Ok", nil
-	// miner_start is sent after configuration or when the user
+	// miner-start is sent after configuration or when the user
 	// clicks 'start mining'
-	case "miner_start":
+	case "miner-start":
 		gui.startMiner()
 
-	// miner_stop is sent whenever the user clicks 'stop mining'
-	case "miner_stop":
+	// miner-stop is sent whenever the user clicks 'stop mining'
+	case "miner-stop":
 		err := gui.stopMiner()
 		if err != nil {
 			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{

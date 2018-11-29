@@ -112,13 +112,13 @@
 						</table>
 					</div>
 					<div class="miner-box downloads">
-						<div class="text-title">Bloc Applications</div>
+						<div class="text-title" id="download-title"></div>
 
 						<table class="table table-condensed">
 							<tbody>
 								<tr>
-									<td><a href="https://bloc.money/download">Download page</a></td>
-									<td><a href="https://bloc.money/download" class="pull-right"><img src="static/img/miner/download-icon.png"></a></td>
+									<td><a href="" id="download-title">Download page</a></td>
+									<td><a href="" class="pull-right" id="download-link"><img src="static/img/miner/download-icon.png"></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -129,7 +129,7 @@
 					<div class="miner-box top-middle">
 						<div class="row">
 							<div class="col-xs-4">
-								<div class="logo"><img src="static/img/miner/miner-big-logo.png"></div>
+								<div class="logo" id="miner-middle-logo"></div>
 							</div>
 							<div class="col-xs-4">
 								<div class="hashrate" id="miner_hashrate">0.00 H/s</div>
@@ -169,7 +169,7 @@
 								<div class="clearfix"></div>
 								<div class="estimated text-center">
 									<span>You are mining an estimated</span>
-									<span id="miner_payout">0 BLOC</span> / day
+									<span id="miner_payout">0</span> <span id="miner_coin">BLOC</span> / day
 								</div>
 							</div>
 						</div>
@@ -225,9 +225,10 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="miner-box social-network">
-						<div class="text-title">Social Network</div>
+						<div class="text-title" id="social-text"></div>
 
-						<ul class="list-unstyled">
+						<ul class="list-unstyled" id="social-links">
+							<!--
 							<li><a href="https://bloc.money/"><img src="static/img/miner/network_icon_website.png"></a></li>
 							<li><a href="https://discord.gg/5Buudya"><img src="static/img/miner/network_icon_discord.png"></a></li>
 							<li><a href="https://t.me/bloc_money"><img src="static/img/miner/network_icon_telegram.png"></a></li>
@@ -238,13 +239,15 @@
 							<li><a href="https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA"><img src="static/img/miner/network_icon_yuotube.png"></a></li>
 							<li><a href="https://www.facebook.com/Blocmoney-383098922176113"><img src="static/img/miner/network_icon_facbook.png"></a></li>
 							<li><a href="https://www.instagram.com/bloc.money"><img src="static/img/miner/network_icon_instgram.png"></a></li>
+							-->
 						</ul>
 						<div class="clearfix"></div>
 					</div>
 					<div class="miner-box bloc-network">
-						<div class="text-title">The BLOC Network</div>
+						<div class="text-title" id="network-text"></div>
 
-						<ul class="list-unstyled">
+						<ul class="list-unstyled" id="network-links">
+							<!--
 							<li><a href="https://bloc.money/">- Official website</a></li>
 							<li><a href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8">- iPhone app</a></li>
 							<li><a href="https://bloc-explorer.com/">- Bloc Explorer</a></li>
@@ -258,6 +261,7 @@
 							<li><a href="https://t.me/bloc_explorer_bot">- Telegram explorer</a></li>
 							<li><a href="https://paychange.com/">- PayChange</a></li>
 							<li><a href="https://traakx.com/">- Traakx</a></li>
+							-->
 						</ul>
 						<div class="clearfix"></div>
 					</div>
