@@ -551,19 +551,19 @@ body.miner .miner-bg {
 body.miner .container {
 	padding-top: 16px;
 }
-body.miner > .container .row > .col-xs-3,
-body.miner > .container .row > .col-xs-2,
-body.miner > .container .row > .col-xs-7 {
+body.miner > .container .actual-miner .row > .col-xs-3,
+body.miner > .container .actual-miner .row > .col-xs-2,
+body.miner > .container .actual-miner .row > .col-xs-7 {
 	padding-right: 8px;
 	padding-left: 8px;
 }
-body.miner > .container .row > .col-xs-3 {
+body.miner > .container .actual-miner .row > .col-xs-3 {
 	width: 22%; /* from 25% */
 }
-body.miner > .container .row > .col-xs-7 {
+body.miner > .container .actual-miner .row > .col-xs-7 {
 	width: 60%; /* from 58.33333333% */
 }
-body.miner > .container .row > .col-xs-2 {
+body.miner > .container .actual-miner .row > .col-xs-2 {
 	width: 18%; /* from 16.66666667% */
 }
 body.miner table {
