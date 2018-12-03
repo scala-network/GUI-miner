@@ -37,7 +37,7 @@ let app = {
 					$('#network_difficulty').html(parsed.difficulty);
 					$('#network_height').html(parsed.height);
 					$('#price').html(parsed.price + ' BTC');
-					$('#miner_payout').html(parsed.bloc_per_day);
+					$('#miner_payout').html(parsed.coins_per_day);
 					$('#pool_hashrate').html(parsed.pool.hashrate);
 					$('#pool_miners').html(parsed.pool.miners);
 					$('#pool_last_block').html(parsed.pool.last_block);
@@ -194,6 +194,8 @@ let app = {
 				var configData = {
 					address: $('#settings_mining_address').val(),
 					pool: $('#pool-list').find('.selected').data('id'),
+					coin_type: app.coin_type,
+					coin_algo: app.coin_algo,
 					threads: parseInt($('#cpu-cores').dropselect('value')),
 					max_cpu: parseInt($('#cpu-max').dropselect('value'))
 				};
@@ -272,7 +274,10 @@ let app = {
 			$('#cpu-max').dropselect('select', parsed.max_usage);
 
 			// Return the pool list for the GUI miner
-			astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {
+			var payloadData = {
+				coin_type: app.coin_type
+			};
+			astilectron.sendMessage({name: "pool-list", payload: payloadData}, function(message) {
 				$("#pool-list").mCustomScrollbar("destroy");
 				$('#pool-list').html(message.payload);
 				if (typeof cb === 'function') cb();

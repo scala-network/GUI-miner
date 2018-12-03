@@ -92,7 +92,7 @@ type GlobalStats struct {
 		Price  string `json:"price"`
 		Volume string `json:"volume"`
 	} `json:"records"`
-	BlocPerDay string `json:"bloc_per_day"`
+	CoinsPerDay string `json:"coins_per_day"`
 	Hashrate  string `json:"hashrate"`
 	// PoolHTML is injected before sending the update to the front-end. Avoids
 	// having to send extra packets
