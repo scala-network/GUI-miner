@@ -1,0 +1,91 @@
+{
+  "abbr": {
+    "bloc": "BLOC",
+    "turtlecoin": "TRTL"
+  },
+  "mainBg": {
+    "bloc": {
+      "image": "static/img/bg-miner-mining.png", 
+      "color": "#001b45"
+    },
+    "turtlecoin": {
+      "image": "static/img/turtlecoin/bg-miner-mining.png", 
+      "color": "#053F04"
+    }
+  },
+  "logo": {
+    "bloc": "static/img/miner/miner-big-logo.png",
+    "turtlecoin": "static/img/turtlecoin/logo.png"
+  },
+  "downloadPage": {
+      "bloc": {
+        "title": "Bloc Applications", 
+        "link": "https://bloc.money/download"
+      },
+      "turtlecoin": {
+        "title": "Turtlecoin Applications", 
+        "link": "https://github.com/turtlecoin/turtlecoin/releases/latest"
+      }
+  },
+  "socialLinks": {
+    "bloc": {
+      "title": "Social Network", 
+      "links": [
+        {"link": "https://bloc.money/", "img": "static/img/miner/network_icon_website.png"},
+        {"link": "https://discord.gg/5Buudya", "img": "static/img/miner/network_icon_discord.png"},
+        {"link": "https://t.me/bloc_money", "img": "static/img/miner/network_icon_telegram.png"},
+        {"link": "https://bitcointalk.org/index.php?topic=4108831.0", "img": "static/img/miner/network_icon_bitcointalk.png"},
+        {"link": "https://github.com/furiousteam", "img": "static/img/miner/network_icon_github.png"},
+        {"link": "https://twitter.com/bloc_money", "img": "static/img/miner/network_icon_twatter.png"},
+        {"link": "https://medium.com/@bloc.money", "img": "static/img/miner/network_icon_medium.png"},
+        {"link": "https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA", "img": "static/img/miner/network_icon_yuotube.png"},
+        {"link": "https://www.facebook.com/Blocmoney-383098922176113", "img": "static/img/miner/network_icon_facbook.png"},
+        {"link": "https://www.instagram.com/bloc.money", "img": "static/img/miner/network_icon_instgram.png"}
+      ]
+    },
+    "turtlecoin": {
+      "title": "Social Network", 
+      "links": [
+        {"link": "https://twitter.com/_turtlecoin", "img": "static/img/miner/network_icon_twatter.png"},
+        {"link": "http://chat.turtlecoin.lol/", "img": "static/img/miner/network_icon_discord.png"},
+        {"link": "https://github.com/turtlecoin", "img": "static/img/miner/network_icon_github.png"},
+        {"link": "https://www.facebook.com/trtlcoin/", "img": "static/img/miner/network_icon_facbook.png"},
+        {"link": "https://www.instagram.com/_turtlecoin/", "img": "static/img/miner/network_icon_instgram.png"},
+        {"link": "https://www.reddit.com/r/TRTL/", "img": "static/img/miner/network_icon_website.png"}
+      ]
+    }
+  },
+  "networkLinks": {
+    "bloc": {
+      "title": "The BLOC Network", 
+      "links": [
+        {"link": "https://bloc.money/", "text": "- Official website"},
+        {"link": "https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8", "text": "- iPhone app"},
+        {"link": "https://bloc-explorer.com/", "text": "- Bloc Explorer"},
+        {"link": "https://bloc-developer.com/", "text": "- Bloc Developper"},
+        {"link": "https://bloc-mining.com/", "text": "- Bloc Web Mining"},
+        {"link": "https://bloc-mining.eu/", "text": "- Bloc Mining EU"},
+        {"link": "https://bloc-mining.us/", "text": "- Bloc Mining US"},
+        {"link": "https://bloc-mining.asia/", "text": "- Bloc Mining ASIA"},
+        {"link": "https://bloc.cool/", "text": "- Bloc Cool"},
+        {"link": "https://t.me/bloc_wallet_bot", "text": "- Telegram wallet"},
+        {"link": "https://t.me/bloc_explorer_bot", "text": "- Telegram explorer"},
+        {"link": "https://paychange.com/", "text": "- PayChange"},
+        {"link": "https://traakx.com/", "text": "- Traakx"}
+      ]
+    },
+    "turtlecoin": {
+      "title": "The TRTL Network", 
+      "links": [
+        {"link": "https://turtlecoin.lol", "text": "- Official Website"},
+        {"link": "https://turtlewallet.lol", "text": "- Turtle Wallet"},
+        {"link": "https://trtl.services", "text": "- Turtle Services"},
+        {"link": "https://explorer.turtlepay.io", "text": "- Turtle Explorer"},
+        {"link": "https://explorer.turtlepay.io/pools.html", "text": "- Turtle Pools"},
+        {"link": "https://turtlepay.io", "text": "- TurtlePay"},
+        {"link": "http://wiki.turtlecoin.lol", "text": "- Turtle Wiki"},
+        {"link": "https://medium.com/@turtlecoin", "text": "- Developer Blog"}
+      ]
+    }
+  }
+}
