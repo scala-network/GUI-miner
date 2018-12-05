@@ -63,6 +63,28 @@ func (gui *GUI) SaveConfig(config Config) error {
 	return nil
 }
 
+// GetCoinContent returns the content for all coins
+func (gui *GUI) GetCoinContentJson() (string, error) {
+	resp, err := http.Get("https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/original-miners/coins/content.json")
+	if err != nil {
+		return "", err
+	}
+	statBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	var content coinsContentJson
+	err = json.Unmarshal(statBytes, &content)
+	if err != nil {
+		return "", err
+	}
+	statBytes, err = json.Marshal(&content)
+	if err != nil {
+		return "", err
+	}
+	return string(statBytes), nil
+}
+
 // GetStats returns stats for the interface. It requires the miner's
 // hashrate to calculate BLOC per dat
 func (gui *GUI) GetStats(

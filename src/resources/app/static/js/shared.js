@@ -103,19 +103,5 @@ let shared = {
 	},
 	isMac: function() {
 		return window.navigator.platform.toLowerCase().includes("mac");
-	},
-	getCoinData: function(coin_type) {
-		let data = {coin_abbr: 'BLOC', coin_prefix: 'abLoc'};
-		if (coin_type == 'monero') {
-			data.coin_abbr = 'XMR';
-			data.coin_prefix = '';
-		} else if (coin_type == 'haven') {
-			data.coin_abbr = 'XHV';
-			data.coin_prefix = 'hvx';
-		} else if (coin_type == 'turtlecoin') {
-			data.coin_abbr = 'TRTL';
-			data.coin_prefix = 'TRTL';
-		}
-		return data;
 	}
 }

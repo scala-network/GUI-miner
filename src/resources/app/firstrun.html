@@ -38,7 +38,7 @@
 			<div class="wallet-bg"><a href="#" data-target="select-wallet">I DO NOT HAVE A BLOC WALLET ADDRESS</a></div>
 			<div class="wallet-bg last"><a href="#" data-target="other-currencies">I WANT TO MINE OTHER CRYPTOCURRENCIES</a></div>
 			<div class="wallet-note">If you do not have a BLOC wallet address, you just need to download one of our several<br />
-			wallet applications. Click on the button above to see our numerous options.</div>
+			wallet applications. Click on "I DO NOT HAVE A BLOC WALLET ADDRESS" above to see our numerous options.</div>
 			<div class="wallet-tip">TIPS : The main purpose of a wallet is to generate your personnal BLOC address to send<br />
 			and receive BLOC money to other people or exchanges. It's a kind of bank account, but way more secure.<br />
 			It is safe to share your BLOC wallet address.</div>
@@ -48,12 +48,28 @@
 		<div class="main-section hidden other-currencies text-center" id="other-currencies">
 			<img src="static/img/miner-setup-logo.png"><br />
 			<div class="currencies-title">CHOOSE ANOTHER CURRENCY TO MINE</div>
-			<div class="currencies-text">Besides BLOC, you can mine Monero (XMR), Haven (XHV), TurtleCoin (TRTL) with this miner.</div>
-			<div class="currency-bg first"><a href="#" class="currency-btn" data-coin_type="monero" data-coin_algo="cryptonight">Monero (XMR)</a></div>
-			<div class="currency-bg"><a href="#" class="currency-btn" data-coin_type="haven" data-coin_algo="cryptonight_haven">Haven (XHV)</a></div>
-			<div class="currency-bg last"><a href="#" class="currency-btn" data-coin_type="turtlecoin" data-coin_algo="cryptonight_lite_v7">TurtleCoin (TRTL)</a></div>
+			<div class="currencies-text" id="coins-title"><!--Besides BLOC, you can mine Monero (XMR), Haven (XHV), TurtleCoin (TRTL) with this miner.--></div>
+			<div id="currencies-selector">
+				<!--
+				<div class="currency-bg first"><a href="#" class="currency-btn" data-coin_type="monero" data-coin_algo="cryptonight">Monero (XMR)</a></div>
+				<div class="currency-bg"><a href="#" class="currency-btn" data-coin_type="haven" data-coin_algo="cryptonight_haven">Haven (XHV)</a></div>
+				<div class="currency-bg last"><a href="#" class="currency-btn" data-coin_type="turtlecoin" data-coin_algo="cryptonight_lite_v7">TurtleCoin (TRTL)</a></div>
+				-->
+			</div>
 			<a href="#" class="hidden" data-target="miner-address" id="other-currencies-next-step"></a>
 			<div class="currencies-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
+			<script type="text/x-tmpl" id="tmpl-coins-title">
+			Besides BLOC, you can mine 
+			{% for (var i = 0; i < o.length; i++) { %}
+				{%=o[i].name%} [{%=o[i].abbr%}] {% if (i != o.length - 1) { %},{% } %}
+			{% } %}
+			with this miner.
+			</script>
+			<script type="text/x-tmpl" id="tmpl-coins">
+			{% for (var i=0; i<o.length; i++) { %}
+				<div class="currency-bg"><a href="#" class="currency-btn" data-coin_type="{%=o[i].coin_type%}" data-coin_algo="{%=o[i].coin_algo%}">{%=o[i].name%} ({%=o[i].abbr%})</a></div>
+			{% } %}
+			</script>
 		</div>
 		
 		<!-- insert existing wallet address -->
@@ -68,8 +84,13 @@
 			<div class="address-submit"><a href="#" class="btn btn-default" id="miner-address-next-step">OK, NEXT STEP</a><a href="#" class="hidden" data-target="select-pool"></a></div>
 			<div class="miner-address-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
 			<script>
-			var miner_address_text = "This is your personnal ${coin_abbr} address from you previously created wallet. {{if coin_prefix}}It must start with the characters <span>${coin_prefix}</span>{{/if}}<br />Once you start mining with a wallet address any coins and shares earned will be under that wallet. The address you are going to receive your payments.";
 			var miner_address_input = "Type or paste your ${coin_abbr} address here. {{if coin_prefix}}Starts with (${coin_prefix}){{/if}}";
+			</script>
+			<script type="text/x-tmpl" id="tmpl-miner-address-text">
+			This is your personnal <span>{%=o.coin_name%}</span> address from you previously created wallet. {% if (o.coin_prefix) { %}It must start with the characters <span>{%=o.coin_prefix%}</span>{% } %}<br />Once you start mining with a wallet address any coins and shares earned will be under that wallet.<br />The address you are going to receive your payments is:
+			</script>
+			<script type="text/x-tmpl" id="tmpl-miner-address-input">
+			Type or paste your {%=o.coin_abbr%} address here. {% if (o.coin_prefix) { %}Starts with ({%=o.coin_prefix%}){% } %}
 			</script>
 		</div>
 		
@@ -79,10 +100,12 @@
 			<div class="select-wallet-title">SELECT A WALLET TYPE</div>
 			
 			<div class="row">
+				<!--
 				<div class="col-xs-4">
 					<div class="select-wallet-col-title"><a href="https://bloc.money/download">PAPER WALLET</a></div>
 					<div class="select-wallet-text">The main purpose of a paper wallet is to quickly create a wallet to start receiving funds. You will not be able to spend or send your funds to other people until you set up a wallet application.</div>
 				</div>
+				-->
 				<div class="col-xs-4">
 					<div class="select-wallet-col-title"><a href="https://bloc.money/download">CLI WALLET</a></div>
 					<div class="select-wallet-text">The CLI Wallet, called BLOCWallet, is a multi-platform program (Win/Linux/Mac) that requires you to enter commands for it to work and you cannot use your mouse. It is text only application that does not have a graphical interface. However, it is currently the most stable and gets the newest updates first.</div>
@@ -91,14 +114,14 @@
 					<div class="select-wallet-col-title"><a href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8">IPHONE WALLET</a></div>
 					<div class="select-wallet-text">The 1st BLOC wallet for iOS with a focus on accessibility, security and simplicity. BLOC wallet makes getting started with BLOC easier than ever. Download from the Apple Store Android version is coming before the end of this year (2018).</div>
 				</div>
-			</div>
-			
-			<div class="row">
 				<div class="col-xs-4">
 					<div class="select-wallet-col-title"><a href="https://t.me/bloc_wallet_bot">TELEGRAM WALLET</a></div>
 					<div class="select-wallet-text">Telegram is the #1 chat used by the crypto community. BLOC Wallet Telegram BOT makes BLOC instantly available to over 200 million+ users worldwide and multi OS & devices. Including exclusive features like sleep mining.</div>
 				</div>
-				<div class="col-xs-4">
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-4 col-xs-offset-4">
 					<div class="select-wallet-col-title"><a href="https://bloc.money/download">GUI WALLET</a></div>
 					<div class="select-wallet-text">GUI Stands for Graphical User Interface. It makes it easy for you to use BLOC with a friendly user interface. BLOC R0C GUI wallet makes getting started with BLOC on desktop easier than ever. Available for Windows, Mac OS and Linux.</div>
 				</div>
@@ -197,7 +220,7 @@
 	<script src="static/lib/astimodaler/astimodaler.js"></script>
 	<script src="static/lib/astinotifier/astinotifier.js"></script>
 	<script src="static/lib/jquery.animatecss.js"></script>
-	<script src="static/lib/jquery.tmpl.min.js"></script>
+	<script src="static/lib/tmpl.js"></script>
 	<script src="static/js/shared.js"></script>
 	<script src="static/js/firstrun.js"></script>
 	<script type="text/javascript">

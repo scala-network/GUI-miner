@@ -348,6 +348,17 @@ func (gui *GUI) handleElectronCommands(
 		}
 		return string(configBytes), nil
 
+	// coins-content-json is called to get the content for different coins
+	case "coins-content-json":
+		gui.logger.Info("Getting coins content.json")
+
+		dataBytes, err := gui.GetCoinContentJson()
+		if err != nil {
+			gui.logger.Errorf("Unable to get coins content.json: %s", err)
+			return "", nil
+		}
+		return string(dataBytes), nil
+
 	// configure is sent after the firstrun setup has been completed
 	case "configure":
 		// HACK: Adding a slight delay before switching to the mining dashboard
