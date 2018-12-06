@@ -1,5 +1,5 @@
 /*
-  shared.js contains functions used by both firstrun and app
+  shared.js contains functions used by both firstrun.js and app.js
  */
 
 let shared = {
@@ -42,43 +42,39 @@ let shared = {
 	},
 	// check if the given address is a valid BLOC wallet address
 	validateWalletAddress: function(address, coin_type) {
-		if (coin_type == 'bloc') {
-			// 1. 99 chars for standard address
-			// 2. 187 chars for address with integrated payment id
-			// ex: abLoc5jeufY8yWkZgjDJnP6DuuhyGE3jb5F6kmKKqqynhbUDgfvvC2FjdP5DjjnoW2R9aecMDETTbdMuFNFzHRWvGNkzHGKHMT9
-			var regexp = /^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$/g;
-			if (address.match(regexp)) {
-				return true;
-			}
-		} else if (coin_type == 'monero') {
-			// 1. 95 chars for address
-			// 2. address always starts with 4
-			// 3. second character can only be a number (0-9), or letters A or B
-			// ex: 4581HhZkQHgZrZjKeCfCJxZff9E3xCgHGF25zABZz7oR71TnbbgiS7sK9jveE6Dx6uMs2LwszDuvQJgRZQotdpHt1fTdDhk
-			var regexp = /^4([0-9A-B])([a-zA-Z0-9]{93})$/g;
-			if (address.substring(0, 1) == '4' && address.match(regexp)) {
-				return true;
-			}
-		} else if (coin_type == 'haven') {
-			// 1. 79 chars for address
-			// 2. first 3 chars are hvx
-			// ex: hvxyDX9mqBNbQ6ojRrZZYcNPSTGcxtxQ4Ws6mNm6Ag7NTciArFb71HHL8HbACGpMu3iTc42F3YQNj4r
-			var regexp = /^hvx([a-zA-Z0-9]{76})$/g;
-			if (address.match(regexp)) {
-				return true;
-			}
-		} else if (coin_type == 'turtlecoin') {
-			// 1. 99 chars for address
-			// 2. first 3 chars are TRTL
-			// ex: TRTLv3GvjehhjeYnctiWQx6MRtgWQKURPWfocps8XuMnL9XXgF2GaYgX9vamnUcG35BkQy6VfwUy5CsV9YNomioPGGyVhM8VgAb
-			var regexp = /^TRTL([a-zA-Z0-9]{95})$/g;
-			if (address.match(regexp)) {
-				return true;
-			}
+		// bloc
+		// 1. 99 chars for standard address
+		// 2. 187 chars for address with integrated payment id
+		// ex: abLoc5jeufY8yWkZgjDJnP6DuuhyGE3jb5F6kmKKqqynhbUDgfvvC2FjdP5DjjnoW2R9aecMDETTbdMuFNFzHRWvGNkzHGKHMT9
+		// /^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$/g
+
+		// turtlecoin
+		// 1. 99 chars for address
+		// 2. first 3 chars are TRTL
+		// ex: TRTLv3GvjehhjeYnctiWQx6MRtgWQKURPWfocps8XuMnL9XXgF2GaYgX9vamnUcG35BkQy6VfwUy5CsV9YNomioPGGyVhM8VgAb
+		// /^TRTL([a-zA-Z0-9]{95})$/g
+
+		// monero
+		// 1. 95 chars for address
+		// 2. address always starts with 4
+		// 3. second character can only be a number (0-9), or letters A or B
+		// ex: 4581HhZkQHgZrZjKeCfCJxZff9E3xCgHGF25zABZz7oR71TnbbgiS7sK9jveE6Dx6uMs2LwszDuvQJgRZQotdpHt1fTdDhk
+		// /^4([0-9A-B])([a-zA-Z0-9]{93})$/g
+
+		// haven
+		// 1. 79 chars for address
+		// 2. first 3 chars are hvx
+		// ex: hvxyDX9mqBNbQ6ojRrZZYcNPSTGcxtxQ4Ws6mNm6Ag7NTciArFb71HHL8HbACGpMu3iTc42F3YQNj4r
+		// /^hvx([a-zA-Z0-9]{76})$/g
+
+		var re = new RegExp(firstrun.coinsContent.address_validation[coin_type], 'g');
+		if (re.exec(address)) {
+			return true;
 		}
 		return false;
 	},
-	// bindExternalLinks ensures external links are opened outside of Electron
+	// bindExternalLinks ensures external links are opened
+	// outside of Electron
 	bindExternalLinks: function() {
 		var shell = require('electron').shell;
 		$(document).on('click', 'a[href^="http"]', function(event) {
@@ -95,8 +91,8 @@ let shared = {
 			var id = $(this).data('target');
 			$('#' + id).removeClass('hidden');
 		});
-		// This stops electron from updating the window title when a link
-		// is clicked
+		// This stops electron from updating the window title
+		// when a link is clicked
 		$(document).on('click', 'a[href^="#"]', function(event) {
 			event.preventDefault();
 		});

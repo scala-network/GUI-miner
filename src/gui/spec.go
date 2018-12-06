@@ -42,19 +42,18 @@ type frontendConfig struct {
 // coinsContentJson is received from github "BLOC-GUI-Miner/coins/content.json"
 type coinsContentJson struct {
 	Coins []struct {
-		Name          string `json:"name"`
-		Abbr          string `json:"abbr"`
-		CoinType      string `json:"coin_type"`
-		CoinAlgo      string `json:"coin_algo"`
+		CoinType string `json:"coin_type"`
+		CoinAlgo string `json:"coin_algo"`
 	} `json:"coins"`
-	Abbr2         map[string]interface{} `json:"abbr"`
-	AddressPrefix map[string]interface{} `json:"address_prefix"`
-	Names         map[string]interface{} `json:"names"`
-	MainBg        map[string]interface{} `json:"mainBg"`
-	Logo          map[string]interface{} `json:"logo"`
-	DownloadPage  map[string]interface{} `json:"downloadPage"`
-	SocialLinks   map[string]interface{} `json:"socialLinks"`
-	NetworkLinks  map[string]interface{} `json:"networkLinks"`
+	Names             map[string]interface{} `json:"names"`
+	Abbr2             map[string]interface{} `json:"abbr"`
+	AddressPrefix     map[string]interface{} `json:"address_prefix"`
+	AddressValidation map[string]interface{} `json:"address_validation"`
+	MainBg            map[string]interface{} `json:"mainBg"`
+	Logo              map[string]interface{} `json:"logo"`
+	DownloadPage      map[string]interface{} `json:"downloadPage"`
+	SocialLinks       map[string]interface{} `json:"socialLinks"`
+	NetworkLinks      map[string]interface{} `json:"networkLinks"`
 }
 
 // PoolData contains the parsed JSON data from the pool list

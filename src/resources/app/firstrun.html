@@ -83,9 +83,6 @@
 			</div>
 			<div class="address-submit"><a href="#" class="btn btn-default" id="miner-address-next-step">OK, NEXT STEP</a><a href="#" class="hidden" data-target="select-pool"></a></div>
 			<div class="miner-address-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
-			<script>
-			var miner_address_input = "Type or paste your ${coin_abbr} address here. {{if coin_prefix}}Starts with (${coin_prefix}){{/if}}";
-			</script>
 			<script type="text/x-tmpl" id="tmpl-miner-address-text">
 			This is your personnal <span>{%=o.coin_name%}</span> address from you previously created wallet. {% if (o.coin_prefix) { %}It must start with the characters <span>{%=o.coin_prefix%}</span>{% } %}<br />Once you start mining with a wallet address any coins and shares earned will be under that wallet.<br />The address you are going to receive your payments is:
 			</script>
@@ -106,13 +103,13 @@
 					<div class="select-wallet-text">The main purpose of a paper wallet is to quickly create a wallet to start receiving funds. You will not be able to spend or send your funds to other people until you set up a wallet application.</div>
 				</div>
 				-->
-				<div class="col-xs-4">
-					<div class="select-wallet-col-title"><a href="https://bloc.money/download">CLI WALLET</a></div>
-					<div class="select-wallet-text">The CLI Wallet, called BLOCWallet, is a multi-platform program (Win/Linux/Mac) that requires you to enter commands for it to work and you cannot use your mouse. It is text only application that does not have a graphical interface. However, it is currently the most stable and gets the newest updates first.</div>
+				<div class="col-xs-4 col-xs-offset-4">
+					<div class="select-wallet-col-title"><a href="https://bloc.money/download">GUI WALLET</a></div>
+					<div class="select-wallet-text">GUI Stands for Graphical User Interface. It makes it easy for you to use BLOC with a friendly user interface. BLOC R0C GUI wallet makes getting started with BLOC on desktop easier than ever. Available for Windows, Mac OS and Linux.</div>
 				</div>
 				<div class="col-xs-4">
 					<div class="select-wallet-col-title"><a href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8">IPHONE WALLET</a></div>
-					<div class="select-wallet-text">The 1st BLOC wallet for iOS with a focus on accessibility, security and simplicity. BLOC wallet makes getting started with BLOC easier than ever. Download from the Apple Store Android version is coming before the end of this year (2018).</div>
+					<div class="select-wallet-text">The 1st BLOC wallet for iOS with a focus on accessibility, security and simplicity. BLOC wallet makes getting started with BLOC easier than ever. Download from the Apple Store. Android version is coming before the end of this year (2018).</div>
 				</div>
 				<div class="col-xs-4">
 					<div class="select-wallet-col-title"><a href="https://t.me/bloc_wallet_bot">TELEGRAM WALLET</a></div>
@@ -121,9 +118,9 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-xs-4 col-xs-offset-4">
-					<div class="select-wallet-col-title"><a href="https://bloc.money/download">GUI WALLET</a></div>
-					<div class="select-wallet-text">GUI Stands for Graphical User Interface. It makes it easy for you to use BLOC with a friendly user interface. BLOC R0C GUI wallet makes getting started with BLOC on desktop easier than ever. Available for Windows, Mac OS and Linux.</div>
+				<div class="col-xs-4">
+					<div class="select-wallet-col-title"><a href="https://bloc.money/download">CLI WALLET</a></div>
+					<div class="select-wallet-text">The CLI Wallet, called BLOCWallet, is a multi-platform program (Win/Linux/Mac) that requires you to enter commands for it to work and you cannot use your mouse. It is text only application that does not have a graphical interface. However, it is currently the most stable and gets the newest updates first.</div>
 				</div>
 			</div>
 
@@ -210,8 +207,8 @@
 			<img src="static/img/configuring-miner-logo.png"><br />
 			<div class="configuring-miner-title">Perfect !</div>
 			<div class="configuring-miner-text">All the settings are now ok.<br />
-			Auto-detecting your hardware...
-			Tuning everything for you... <br />
+			Auto-detecting your hardware...<br />
+			Tuning everything for you...<br />
 			Enjoy mining with BLOC.</div>
 		</div>
 	</div>

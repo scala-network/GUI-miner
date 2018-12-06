@@ -39,7 +39,9 @@ let firstrun = {
 			// overide the firstrun
 			var configData = {
 				address: 'abLoc...',
-				pool: 1
+				pool: 1,
+				coin_type: 'bloc',
+				coin_algo: 'cryptonight_haven'
 			};
 			astilectron.sendMessage({name: "configure", payload: configData}, function(message) {
 				document.location = 'index.html';
@@ -104,8 +106,13 @@ let firstrun = {
 			}
 			// render the other coins that can be mined
 			if (id == 'other-currencies') {
-				var coins = firstrun.coinsContent.coins.filter(function(el) {
+				var coins = firstrun.coinsContent.coins.filter(function(el) { // remove bloc
 					return el.coin_type !== 'bloc';
+				});
+				coins = coins.map(function(el) { // add name and abbr keys
+					el.name = firstrun.coinsContent.names[el.coin_type];
+					el.abbr = firstrun.coinsContent.abbr[el.coin_type];
+					return el;
 				});
 				var html = $.fn.tmpl("tmpl-coins-title", coins);
 				$('#coins-title').html(html);
