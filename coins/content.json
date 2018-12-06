@@ -1,14 +1,10 @@
 {
   "coins": [
     {
-      "name": "BLOC",
-      "abbr": "BLOC",
       "coin_type": "bloc",
       "coin_algo": "cryptonight_haven"
     },
     {
-      "name": "TurtleCoin",
-      "abbr": "TRTL",
       "coin_type": "turtlecoin",
       "coin_algo": "cryptonight_lite_v7"
     }
@@ -16,6 +12,10 @@
   "abbr": {
     "bloc": "BLOC",
     "turtlecoin": "TRTL"
+  },
+  "names": {
+    "bloc": "BLOC",
+    "turtlecoin": "TurtleCoin"
   },
   "mainBg": {
     "bloc": {
