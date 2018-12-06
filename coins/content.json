@@ -9,13 +9,21 @@
       "coin_algo": "cryptonight_lite_v7"
     }
   ],
+  "names": {
+    "bloc": "BLOC",
+    "turtlecoin": "TurtleCoin"
+  },
   "abbr": {
     "bloc": "BLOC",
     "turtlecoin": "TRTL"
   },
-  "names": {
-    "bloc": "BLOC",
-    "turtlecoin": "TurtleCoin"
+  "address_prefix": {
+    "bloc": "abLoc",
+    "turtlecoin": "TRTL"
+  },
+  "address_validation": {
+    "bloc": "^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$",
+    "turtlecoin": "^TRTL([a-zA-Z0-9]{95})$"
   },
   "mainBg": {
     "bloc": {
