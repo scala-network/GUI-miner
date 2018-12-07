@@ -28,7 +28,7 @@
   "mainBackground": {
     "bloc": {
       "image": "static/img/bg-miner-mining.png", 
-      "color": "#ffffff"
+      "color": "#001b45"
     },
     "turtlecoin": {
       "image": "static/img/turtlecoin/bg-miner-mining.png", 
@@ -41,7 +41,7 @@
   },
   "boxColor": {
     "bloc": "#090a31",
-    "turtlecoin": "#ffffff"
+    "turtlecoin": "#09310c"
   },
   "boxBorder": {
     "bloc": "#222",
