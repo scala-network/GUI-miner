@@ -43,6 +43,10 @@
     "bloc": "#090a31",
     "turtlecoin": "#053F04"
   },
+  "boxBorder": {
+    "bloc": "#222",
+    "turtlecoin": "#222"
+  },
   "logo": {
     "bloc": "static/img/miner/miner-big-logo.png",
     "turtlecoin": "static/img/turtlecoin/logo.png"
