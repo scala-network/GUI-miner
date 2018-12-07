@@ -28,20 +28,20 @@
   "mainBackground": {
     "bloc": {
       "image": "static/img/bg-miner-mining.png", 
-      "color": "#001b45"
+      "color": "#ffffff"
     },
     "turtlecoin": {
       "image": "static/img/turtlecoin/bg-miner-mining.png", 
-      "color": "#053F04"
+      "color": "#ffffff"
     }
   },
   "textColor": {
     "bloc": "#ffed00",
-    "turtlecoin": "#b0ff00"
+    "turtlecoin": "#00ff00"
   },
   "boxColor": {
     "bloc": "#090a31",
-    "turtlecoin": "#053F04"
+    "turtlecoin": "#ffffff"
   },
   "boxBorder": {
     "bloc": "#222",
@@ -53,7 +53,7 @@
   },
   "downloadPage": {
       "bloc": {
-        "title": "Bloc Applications", 
+        "title": "BLOC Applications", 
         "link": "https://bloc.money/download"
       },
       "turtlecoin": {
