@@ -35,6 +35,14 @@
       "color": "#053F04"
     }
   },
+  "textColor": {
+    "bloc": "#ffed00",
+    "turtlecoin": "#053F04"
+  },
+  "boxColor": {
+    "bloc": "#090a31",
+    "turtlecoin": "#053F04"
+  },
   "logo": {
     "bloc": "static/img/miner/miner-big-logo.png",
     "turtlecoin": "static/img/turtlecoin/logo.png"
