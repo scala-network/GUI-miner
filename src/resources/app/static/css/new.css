@@ -623,6 +623,7 @@ body.miner .miner-box.top-middle .no-opacity {
 }
 body.miner .miner-box.top-middle .estimated {
 	background-color: #1a2449;
+	border: 1px #1a2449 solid;
 	border-radius: 5px;
 	padding: 16px;
 	margin-bottom: 20px;
@@ -966,6 +967,7 @@ body.miner .miner-box .loading-settings.done span {
 	top: 42px;
 	left: 18px;
 	background-color: #01072fcc;
+	border: 1px #01072fcc solid;
 	border-radius: 3px;
 }
 .miner-settings .miner-settings-back a {
@@ -1121,6 +1123,7 @@ body.miner .miner-box .loading-settings.done span {
 	top: 42px;
 	left: 18px;
 	background-color: #01072fcc;
+	border: 1px #01072fcc solid;
 	border-radius: 3px;
 }
 .whatsnext .whatsnext-back a {

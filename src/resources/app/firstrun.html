@@ -61,13 +61,13 @@
 			<script type="text/x-tmpl" id="tmpl-coins-title">
 			Besides BLOC, you can mine 
 			{% for (var i = 0; i < o.length; i++) { %}
-				{%=o[i].name%} [{%=o[i].abbr%}] {% if (i != o.length - 1) { %},{% } %}
+				{%=o[i].name%} [{%=o[i].abbreviation%}] {% if (i != o.length - 1) { %},{% } %}
 			{% } %}
 			with this miner.
 			</script>
 			<script type="text/x-tmpl" id="tmpl-coins">
 			{% for (var i=0; i<o.length; i++) { %}
-				<div class="currency-bg"><a href="#" class="currency-btn" data-coin_type="{%=o[i].coin_type%}" data-coin_algo="{%=o[i].coin_algo%}">{%=o[i].name%} ({%=o[i].abbr%})</a></div>
+				<div class="currency-bg"><a href="#" class="currency-btn" data-coin_type="{%=o[i].coin_type%}" data-coin_algo="{%=o[i].coin_algo%}">{%=o[i].name%} ({%=o[i].abbreviation%})</a></div>
 			{% } %}
 			</script>
 		</div>
@@ -209,7 +209,7 @@
 			<div class="configuring-miner-text">All the settings are now ok.<br />
 			Auto-detecting your hardware...<br />
 			Tuning everything for you...<br />
-			Enjoy mining with BLOC.</div>
+			Enjoy mining with BLOC GUI Miner.</div>
 		</div>
 	</div>
 	<script src="static/lib/bootstrap/js/bootstrap.min.js"></script>

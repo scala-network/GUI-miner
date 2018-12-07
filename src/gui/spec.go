@@ -46,14 +46,18 @@ type coinsContentJson struct {
 		CoinAlgo string `json:"coin_algo"`
 	} `json:"coins"`
 	Names             map[string]interface{} `json:"names"`
-	Abbr2             map[string]interface{} `json:"abbr"`
-	AddressPrefix     map[string]interface{} `json:"address_prefix"`
-	AddressValidation map[string]interface{} `json:"address_validation"`
-	MainBg            map[string]interface{} `json:"mainBg"`
+	Abbr2             map[string]interface{} `json:"abbreviation"`
+	AddressPrefix     map[string]interface{} `json:"addressPrefix"`
+	AddressValidation map[string]interface{} `json:"addressValidation"`
+	MainBg            map[string]interface{} `json:"mainBackground"`
+	TextColor         map[string]interface{} `json:"textColor"`
+	BoxColor          map[string]interface{} `json:"boxColor"`
+	BoxBorder         map[string]interface{} `json:"boxBorder"`
 	Logo              map[string]interface{} `json:"logo"`
 	DownloadPage      map[string]interface{} `json:"downloadPage"`
 	SocialLinks       map[string]interface{} `json:"socialLinks"`
 	NetworkLinks      map[string]interface{} `json:"networkLinks"`
+	HelpText          map[string]interface{} `json:"helpText"`
 }
 
 // PoolData contains the parsed JSON data from the pool list

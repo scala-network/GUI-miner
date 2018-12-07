@@ -8,16 +8,41 @@ let app = {
 		asticode.notifier.init();
 
 		shared.bindExternalLinks();
-		app.setupChart();
 
 		shared.bindTargetLinks();
 		shared.extraFunctions();
 
 		// Wait for the ready signal
 		document.addEventListener('astilectron-ready', function() {
-			app.bindEvents();
-			app.listen();
+			// Get the coins json and cache it locally
+			astilectron.sendMessage({
+				name: "coins-content-json",
+				payload: ""
+			}, function(message) {
+				var parsed = $.parseJSON(message.payload);
+				console.log('[' + new Date().toUTCString() + '] ', "coins-content-json", parsed);
+				app.coinsContent = parsed;
+
+				app.bindEvents();
+				app.listen();
+
+				// Get the configuration settings
+				astilectron.sendMessage({
+					name: "config-file",
+					payload: ""
+				}, function(message) {
+					var parsed = $.parseJSON(message.payload);
+					console.log('[' + new Date().toUTCString() + '] ', "config-file", parsed);
+					app.coin_type = parsed.coin_type;
+					app.coin_algo = parsed.coin_algo;
+					app.populateMainUI();
+				});
+			});
 		});
+
+		// disable escaping of html
+		$.fn.tmpl.encReg = /[\x00]/g
+		$.fn.tmpl.encMap = {};
 	},
 	listen: function() {
 		var errorCount = 0;
@@ -43,7 +68,7 @@ let app = {
 					$('#pool_last_block').html(parsed.pool.last_block);
 					$('#record_volume').html(parsed.records.volume + ' BTC');
 					$('#record_price').html(parsed.records.price + ' BTC');
-					$('#pool-address').html('<a href="' + parsed.pool.url + '">' + parsed.pool.url + '</a>').data('id', parsed.pool.id);
+					$('#pool-address').html('<a href="' + parsed.pool.url + '" class="text-color">' + parsed.pool.url + '</a>').data('id', parsed.pool.id);
 
 					// Build prices
 					let table = '<tbody>';
@@ -108,6 +133,41 @@ let app = {
 			}
 		});
 	},
+	// Change colors based on selected coin
+	changeColors: function() {
+		const textColor = app.coinsContent.textColor[app.coin_type];
+		const boxColor = app.coinsContent.boxColor[app.coin_type];
+		const boxBorder = app.coinsContent.boxBorder[app.coin_type];
+
+		// change colors
+		$('.text-color').css('color', textColor);
+		$('body.miner .miner-box').css('background-color', boxColor + 'cc');
+		$('body.miner .miner-box.top-middle .estimated')
+			.css('background-color', boxColor)
+			.css('border-color', boxBorder);
+		$('body.miner .miner-box .change-pool .btn')
+			.css('color', textColor)
+			.css('background-color', boxColor + 'cc')
+			.css('border-color', boxBorder);
+
+		$('.miner-settings .miner-settings-submit .btn')
+			.css('color', textColor)
+			.css('background-color', boxColor + 'cc')
+			.css('border-color', boxBorder);
+		$('.miner-settings .miner-settings-cpus').css('background-color', boxColor + 'ff');
+		$('.miner-settings .address-input').css('background-color', boxColor + 'ff');
+		$('.miner-settings .dropdown-toggle')
+			.css('background-color', boxColor + 'ff')
+			.css('border-color', boxBorder);
+		$('.miner-settings .miner-settings-back')
+			.css('background-color', boxColor + 'cc')
+			.css('border-color', boxBorder);
+
+		$('.whatsnext .whatsnext-box').css('background-color', boxColor + '99');
+		$('.whatsnext .whatsnext-back')
+			.css('background-color', boxColor + 'cc')
+			.css('border-color', boxBorder);
+	},
 	// Bind to UI events using jQuery
 	bindEvents: function() {
 		// Functionality based on which page slide is loaded
@@ -135,6 +195,12 @@ let app = {
 						}
 					});
 				});
+			}
+			if (id == 'whatsnext') {
+				let html;
+				html = $.fn.tmpl("tmpl-help-content", app.coinsContent.helpText[app.coin_type].boxes);
+				$('#help-content').html(html);
+				app.changeColors();
 			}
 		});
 
@@ -205,54 +271,37 @@ let app = {
 				});
 			});
 		});
-
-		// Get the configuration settings
-		astilectron.sendMessage({
-			name: "config-file",
-			payload: ""
-		}, function(message) {
-			var parsed = $.parseJSON(message.payload);
-			console.log('[' + new Date().toUTCString() + '] ', "config-file", parsed);
-			if (app.coin_type != parsed.coin_type || app.coin_algo != parsed.coin_algo) {
-				app.coin_type = parsed.coin_type;
-				app.coin_algo = parsed.coin_algo;
-				app.populateMainUI();
-			}
-		});
 	},
 	// Change the UI based on the selected coin
 	populateMainUI: function() {
-		if (typeof app.UI.networkLinks[app.coin_type] !== 'undefined') {
-			// Background
-			const bg_img = app.UI.mainBg[app.coin_type].image;
-			const bg_color = app.UI.mainBg[app.coin_type].color;
-			$('body').css('background-image', 'url(' + bg_img + ')').css('background-color', bg_color);
+		app.setupChart();
 
-			// Logo
-			const img = $('<img/>').attr('src', app.UI.logo[app.coin_type]);
-			$('#miner-middle-logo').html(img);
+		let html;
 
-			// Network links
-			$('#network-text').html(app.UI.networkLinks[app.coin_type].title);
-			let html_nt = '';
-			app.UI.networkLinks[app.coin_type].links.forEach(function (item) {
-				html_nt += '<li><a href="' + item.link + '">' + item.text + '</a></li>';
-			});
-			$('#network-links').html(html_nt);
+		// Background
+		$('body')
+			.css('background-image', 'url(' + app.coinsContent.mainBackground[app.coin_type].image + ')')
+			.css('background-color', app.coinsContent.mainBackground[app.coin_type].color);
 
-			// Social links
-			$('#social-text').html(app.UI.socialLinks[app.coin_type].title);
-			let html_sl = '';
-			app.UI.socialLinks[app.coin_type].links.forEach(function (item) {
-				html_sl += '<li><a href="' + item.link + '"><img src="' + item.img + '"></a></li>';
-			});
-			$('#social-links').html(html_sl);
+		// Logo
+		$('#miner-middle-logo').html(
+			$('<img/>').attr('src', app.coinsContent.logo[app.coin_type])
+		);
 
-			// Various replacements
-			$('#miner_coin').text(app.UI.abbr[app.coin_type]);
-			$('#download-title').text(app.UI.downloadPage[app.coin_type].title);
-			$('#download-link').attr('href', app.UI.downloadPage[app.coin_type].link);
-		}
+		// Network links
+		html = $.fn.tmpl("tmpl-network-links", app.coinsContent.networkLinks[app.coin_type]);
+		$('#network-links').html(html);
+
+		// Social links
+		html = $.fn.tmpl("tmpl-social-links", app.coinsContent.socialLinks[app.coin_type]);
+		$('#social-links').html(html);
+
+		// Various replacements
+		$('#miner_coin').text(app.coinsContent.abbreviation[app.coin_type]);
+		$('#download-title').text(app.coinsContent.downloadPage[app.coin_type].title);
+		$('#download-link').attr('href', app.coinsContent.downloadPage[app.coin_type].link);
+
+		app.changeColors();
 	},
 	loadSettings: function(cb) {
 		// Get the current miner processing config
@@ -304,8 +353,10 @@ let app = {
 				datasets: [{
 					label: 'H/s',
 					data: [0,0,0,0,0,0],
-					backgroundColor: ['rgba(13, 17, 45, 1.0)'],
-					borderColor: ['rgba(232,212,0,9)'],
+					// backgroundColor: ['rgba(13, 17, 45, 1.0)'],
+					backgroundColor: [app.coinsContent.boxColor[app.coin_type]],
+					// borderColor: ['rgba(232,212,0,9)'],
+					borderColor: [app.coinsContent.textColor[app.coin_type]],
 					borderWidth: 1,
 				}]
 			},
@@ -348,83 +399,5 @@ let app = {
 	networkStatsOnce: false,
 	minerStatsOnce: false,
 	minerAndNetworkStatsDone: false,
-	UI: {
-		abbr: {
-			"bloc": "BLOC",
-			"turtlecoin": "TRTL"
-		},
-		mainBg: {
-			"bloc": {
-				"image": "static/img/bg-miner-mining.png", 
-				"color": "#001b45"
-			},
-			"turtlecoin": {
-				"image": "static/img/turtlecoin/bg-miner-mining.png", 
-				"color": "#053F04"
-			}
-		},
-		logo: {
-			"bloc": "static/img/miner/miner-big-logo.png",
-			"turtlecoin": "static/img/turtlecoin/logo.png"
-		},
-		downloadPage: {
-			"bloc": {
-				'title': 'Bloc Applications', 
-				'link': "https://bloc.money/download"
-			},
-			"turtlecoin": {
-				'title': 'Turtlecoin Applications', 
-				'link': "https://github.com/turtlecoin/turtlecoin/releases/latest"
-			}
-		},
-		socialLinks: {
-			"bloc": {"title": "Social Network", "links": [
-				{"link": "https://bloc.money/", "img": "static/img/miner/network_icon_website.png"},
-				{"link": "https://discord.gg/5Buudya", "img": "static/img/miner/network_icon_discord.png"},
-				{"link": "https://t.me/bloc_money", "img": "static/img/miner/network_icon_telegram.png"},
-				{"link": "https://bitcointalk.org/index.php?topic=4108831.0", "img": "static/img/miner/network_icon_bitcointalk.png"},
-				{"link": "https://github.com/furiousteam", "img": "static/img/miner/network_icon_github.png"},
-				{"link": "https://twitter.com/bloc_money", "img": "static/img/miner/network_icon_twatter.png"},
-				{"link": "https://medium.com/@bloc.money", "img": "static/img/miner/network_icon_medium.png"},
-				{"link": "https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA", "img": "static/img/miner/network_icon_yuotube.png"},
-				{"link": "https://www.facebook.com/Blocmoney-383098922176113", "img": "static/img/miner/network_icon_facbook.png"},
-				{"link": "https://www.instagram.com/bloc.money", "img": "static/img/miner/network_icon_instgram.png"}
-			]},
-			"turtlecoin": {"title": "Social Network", "links": [
-				{"link": "https://twitter.com/_turtlecoin", "img": "static/img/miner/network_icon_twatter.png"},
-				{"link": "http://chat.turtlecoin.lol/", "img": "static/img/miner/network_icon_discord.png"},
-				{"link": "https://github.com/turtlecoin", "img": "static/img/miner/network_icon_github.png"},
-				{"link": "https://www.facebook.com/trtlcoin/", "img": "static/img/miner/network_icon_facbook.png"},
-				{"link": "https://www.instagram.com/_turtlecoin/", "img": "static/img/miner/network_icon_instgram.png"},
-				{"link": "https://www.reddit.com/r/TRTL/", "img": "static/img/miner/network_icon_website.png"}
-			]}
-		},
-		networkLinks: {
-			"bloc": {"title": "The BLOC Network", "links": [
-				{"link": "https://bloc.money/", "text": "- Official website"},
-				{"link": "https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8", "text": "- iPhone app"},
-				{"link": "https://bloc-explorer.com/", "text": "- Bloc Explorer"},
-				{"link": "https://bloc-developer.com/", "text": "- Bloc Developper"},
-				{"link": "https://bloc-mining.com/", "text": "- Bloc Web Mining"},
-				{"link": "https://bloc-mining.eu/", "text": "- Bloc Mining EU"},
-				{"link": "https://bloc-mining.us/", "text": "- Bloc Mining US"},
-				{"link": "https://bloc-mining.asia/", "text": "- Bloc Mining ASIA"},
-				{"link": "https://bloc.cool/", "text": "- Bloc Cool"},
-				{"link": "https://t.me/bloc_wallet_bot", "text": "- Telegram wallet"},
-				{"link": "https://t.me/bloc_explorer_bot", "text": "- Telegram explorer"},
-				{"link": "https://paychange.com/", "text": "- PayChange"},
-				{"link": "https://traakx.com/", "text": "- Traakx"}
-			]},
-			"turtlecoin": {"title": "The TRTL Network", "links": [
-				{"link": "https://turtlecoin.lol", "text": "- Official Website"},
-				{"link": "https://turtlewallet.lol", "text": "- Turtle Wallet"},
-				{"link": "https://trtl.services", "text": "- Turtle Services"},
-				{"link": "https://explorer.turtlepay.io", "text": "- Turtle Explorer"},
-				{"link": "https://explorer.turtlepay.io/pools.html", "text": "- Turtle Pools"},
-				{"link": "https://turtlepay.io", "text": "- TurtlePay"},
-				{"link": "http://wiki.turtlecoin.lol", "text": "- Turtle Wiki"},
-				{"link": "https://medium.com/@turtlecoin", "text": "- Developer Blog"}
-			]}
-		}
-	}
+	coinsContent: {}
 }

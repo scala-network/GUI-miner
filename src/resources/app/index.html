@@ -25,7 +25,7 @@
 				<div class="col-xs-3 first-col">
 					<div class="miner-box information">
 						<div class="img pull-right"><img src="static/img/miner/btc-icon.png"></div>
-						<div class="text-title">Information</div>
+						<div class="text-title text-color">Information</div>
 
 						<table class="table table-condensed">
 							<tbody>
@@ -54,7 +54,7 @@
 					</div>
 					<div class="miner-box network">
 						<div class="img pull-right"><img src="static/img/miner/network-icon.png"></div>
-						<div class="text-title">Network</div>
+						<div class="text-title text-color">Network</div>
 
 						<table class="table table-condensed">
 							<tbody>
@@ -75,7 +75,7 @@
 					</div>
 					<div class="miner-box exchanges">
 						<div class="img pull-right"><img src="static/img/miner/exchanges-icon.png"></div>
-						<div class="text-title">Exchanges</div>
+						<div class="text-title text-color">Exchanges</div>
 
 						<table class="table table-condensed" id="exchanges-price">
 							<tbody>
@@ -88,7 +88,7 @@
 					</div>
 					<div class="miner-box all-time-high">
 						<div class="img pull-right"><img src="static/img/miner/all-time-high-icon.png"></div>
-						<div class="text-title">All time high</div>
+						<div class="text-title text-color">All time high</div>
 
 						<table class="table table-condensed">
 							<tbody>
@@ -104,7 +104,7 @@
 						</table>
 					</div>
 					<div class="miner-box downloads">
-						<div class="text-title" id="download-title"></div>
+						<div class="text-title text-color" id="download-title"></div>
 
 						<table class="table table-condensed">
 							<tbody>
@@ -124,7 +124,7 @@
 								<div class="logo" id="miner-middle-logo"></div>
 							</div>
 							<div class="col-xs-4">
-								<div class="hashrate" id="miner_hashrate">0.00 H/s</div>
+								<div class="hashrate text-color" id="miner_hashrate">0.00 H/s</div>
 								
 								<table class="table table-condensed">
 									<tbody>
@@ -205,7 +205,7 @@
 				</div>
 				<div class="col-xs-2">
 					<div class="miner-box settings">
-						<div class="text-title">Settings</div>
+						<div class="text-title text-color">Settings</div>
 
 						<ul class="list-unstyled">
 							<li class="loading-settings" id="loading-settings">
@@ -216,11 +216,10 @@
 						</ul>
 						<div class="clearfix"></div>
 					</div>
-					<div class="miner-box social-network">
+					<div class="miner-box social-network" id="social-links">
+						<!--
 						<div class="text-title" id="social-text"></div>
-
-						<ul class="list-unstyled" id="social-links">
-							<!--
+						<ul class="list-unstyled">
 							<li><a href="https://bloc.money/"><img src="static/img/miner/network_icon_website.png"></a></li>
 							<li><a href="https://discord.gg/5Buudya"><img src="static/img/miner/network_icon_discord.png"></a></li>
 							<li><a href="https://t.me/bloc_money"><img src="static/img/miner/network_icon_telegram.png"></a></li>
@@ -231,15 +230,23 @@
 							<li><a href="https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA"><img src="static/img/miner/network_icon_yuotube.png"></a></li>
 							<li><a href="https://www.facebook.com/Blocmoney-383098922176113"><img src="static/img/miner/network_icon_facbook.png"></a></li>
 							<li><a href="https://www.instagram.com/bloc.money"><img src="static/img/miner/network_icon_instgram.png"></a></li>
-							-->
 						</ul>
 						<div class="clearfix"></div>
+						-->
 					</div>
-					<div class="miner-box bloc-network">
+					<script type="text/x-tmpl" id="tmpl-social-links">
+					<div class="text-title text-color">{%=o.title%}</div>
+					<ul class="list-unstyled">
+					{% for (var i = 0; i < o.links.length; i++) { %}
+						<li><a href="{%=o.links[i].link%}"><img src="{%=o.links[i].img%}"></a></li>
+					{% } %}
+					</ul>
+					<div class="clearfix"></div>
+					</script>
+					<div class="miner-box bloc-network" id="network-links">
+						<!--
 						<div class="text-title" id="network-text"></div>
-
 						<ul class="list-unstyled" id="network-links">
-							<!--
 							<li><a href="https://bloc.money/">- Official website</a></li>
 							<li><a href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8">- iPhone app</a></li>
 							<li><a href="https://bloc-explorer.com/">- Bloc Explorer</a></li>
@@ -253,10 +260,17 @@
 							<li><a href="https://t.me/bloc_explorer_bot">- Telegram explorer</a></li>
 							<li><a href="https://paychange.com/">- PayChange</a></li>
 							<li><a href="https://traakx.com/">- Traakx</a></li>
-							-->
 						</ul>
-						<div class="clearfix"></div>
+						-->
 					</div>
+					<script type="text/x-tmpl" id="tmpl-network-links">
+					<div class="text-title text-color">{%=o.title%}</div>
+					<ul class="list-unstyled">
+					{% for (var i = 0; i < o.links.length; i++) { %}
+						<li><a href="{%=o.links[i].link%}">{%=o.links[i].text%}</a></li>
+					{% } %}
+					</ul>
+					</script>
 				</div>
 			</div>
 		</div>
@@ -303,7 +317,11 @@
 
 			<div class="address-input">
 				<input type="text" name="" value="" placeholder="Type or paste your BLOC address here" class="text-center" id="settings_mining_address" />
-				<div class="text">YOUR BLOC ADDRESS</div>
+				<div class="text" id="settings-input-text">YOUR BLOC ADDRESS</div>
+				<script type="text/x-tmpl" id="tmpl-settings-input-text">
+				YOUR {%=o.name%} ADDRESS
+				</div>
+				</script>
 			</div>
 
 			<div class="table-container">
@@ -375,8 +393,10 @@
 		<div class="main-section hidden whatsnext text-center" id="whatsnext">
 			<div class="whatsnext-title">Ok, i am mining, what’s next ?</div>
 			<div class="whatsnext-text">You want to go further? this is a non exhaustive list of what you can do.</div>
-			
-			<div class="row firstrow fivecolumns">
+
+			<div id="help-content">
+			<!--
+			<div class="row firstrow fivecolumns" id="help-content">
 				<div class="col-xs-2">
 					<div class="whatsnext-box">
 						<img src="static/img/whatsnext/img-01.png">
@@ -436,7 +456,6 @@
 						<div class="text">Join our <a href="https://t.me/bloc_money">Telegram</a> chanel or our <a href="https://discord.gg/5Buudya">discord</a>. We and the community will be happy to help you.</div>
 					</div>
 				</div>
-				<!--
 				<div class="col-xs-2">
 					<div class="whatsnext-box">
 						<img src="static/img/whatsnext/img-09.png">
@@ -444,7 +463,6 @@
 						<div class="text">Discover our <a href="#">official shop</a> where you can buy cryptorelated products with your BLOC but also all the goodies made with love by our team for the BLOC. MONEY.</div>
 					</div>
 				</div>
-				-->
 				<div class="col-xs-2">
 					<div class="whatsnext-box">
 						<img src="static/img/whatsnext/img-10.png">
@@ -453,8 +471,24 @@
 					</div>
 				</div>
 			</div>
+			-->
+			</div>
+			<script type="text/x-tmpl" id="tmpl-help-content">
+			<div class="row firstrow fivecolumns">
+			{% for (var i = 0; i < o.length; i++) { %}
+				{% if (i > 0 && i % 5 == 0) { %}</div><div class="row fivecolumns">{% } %}
+				<div class="col-xs-2">
+					<div class="whatsnext-box">
+						<img src="{%=o[i].icon%}">
+						<div class="title text-color">{%=o[i].title%}</div>
+						<div class="text">{%=o[i].text%}</div>
+					</div>
+				</div>
+			{% } %}
+			</div>
+			</script>
 
-			<div class="whatsnext-back"><a href="#" data-target="actual-miner"><---- BACK</a></div>
+			<div class="whatsnext-back"><a href="#" data-target="actual-miner" class="text-color"><---- BACK</a></div>
 		</div>
 	</div>
 	<script src="static/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -464,6 +498,7 @@
 	<script src="static/lib/chart.bundle.min.js"></script>
 	<script src="static/lib/jquery.animatecss.js"></script>
 	<script src="static/lib/jquery.dropselect.js"></script>
+	<script src="static/lib/tmpl.js"></script>
 	<script src="static/js/shared.js"></script>
 	<script src="static/js/app.js"></script>
 	<script type="text/javascript">

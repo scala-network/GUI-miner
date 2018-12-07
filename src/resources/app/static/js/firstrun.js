@@ -23,7 +23,7 @@ let firstrun = {
 				$('#miner_path').html(message.payload);
 			});
 
-			// Get the coins json an cache it locally
+			// Get the coins json and cache it locally
 			astilectron.sendMessage({
 				name: "coins-content-json",
 				payload: ""
@@ -109,14 +109,15 @@ let firstrun = {
 				var coins = firstrun.coinsContent.coins.filter(function(el) { // remove bloc
 					return el.coin_type !== 'bloc';
 				});
-				coins = coins.map(function(el) { // add name and abbr keys
+				coins = coins.map(function(el) { // add name and abbreviation keys
 					el.name = firstrun.coinsContent.names[el.coin_type];
-					el.abbr = firstrun.coinsContent.abbr[el.coin_type];
+					el.abbreviation = firstrun.coinsContent.abbreviation[el.coin_type];
 					return el;
 				});
-				var html = $.fn.tmpl("tmpl-coins-title", coins);
+				let html;
+				html = $.fn.tmpl("tmpl-coins-title", coins);
 				$('#coins-title').html(html);
-				var html = $.fn.tmpl("tmpl-coins", coins);
+				html = $.fn.tmpl("tmpl-coins", coins);
 				$('#currencies-selector').html(html);
 
 				// Events to mine other currencies buttons
@@ -133,15 +134,16 @@ let firstrun = {
 				var mac = $('#miner-address-content');
 				let data = {
 					coin_name: firstrun.coinsContent.names[firstrun.coin_type],
-					coin_abbr: firstrun.coinsContent.abbr[firstrun.coin_type],
-					coin_prefix: firstrun.coinsContent.address_prefix[firstrun.coin_type]
+					coin_abbr: firstrun.coinsContent.abbreviation[firstrun.coin_type],
+					coin_prefix: firstrun.coinsContent.addressPrefix[firstrun.coin_type]
 				};
 
 				// replace text vars
-				var html = $.fn.tmpl("tmpl-miner-address-text", data);
+				let html;
+				html = $.fn.tmpl("tmpl-miner-address-text", data);
 				mac.find('.address-text').html(html);
 				// replace input vars
-				var html = $.fn.tmpl("tmpl-miner-address-input", data);
+				html = $.fn.tmpl("tmpl-miner-address-input", data);
 				mac.find('.address-input input').attr('placeholder', html);
 			}
 		});

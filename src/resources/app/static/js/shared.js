@@ -67,7 +67,7 @@ let shared = {
 		// ex: hvxyDX9mqBNbQ6ojRrZZYcNPSTGcxtxQ4Ws6mNm6Ag7NTciArFb71HHL8HbACGpMu3iTc42F3YQNj4r
 		// /^hvx([a-zA-Z0-9]{76})$/g
 
-		var re = new RegExp(firstrun.coinsContent.address_validation[coin_type], 'g');
+		var re = new RegExp(firstrun.coinsContent.addressValidation[coin_type], 'g');
 		if (re.exec(address)) {
 			return true;
 		}
