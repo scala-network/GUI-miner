@@ -32,7 +32,7 @@
     },
     "turtlecoin": {
       "image": "static/img/turtlecoin/bg-miner-mining.png", 
-      "color": "#ffffff"
+      "color": "#004502"
     }
   },
   "textColor": {
@@ -41,7 +41,7 @@
   },
   "boxColor": {
     "bloc": "#090a31",
-    "turtlecoin": "#09310c"
+    "turtlecoin": "#021203"
   },
   "boxBorder": {
     "bloc": "#222",
