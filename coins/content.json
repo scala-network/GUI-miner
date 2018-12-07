@@ -13,19 +13,19 @@
     "bloc": "BLOC",
     "turtlecoin": "TurtleCoin"
   },
-  "abbr": {
+  "abbreviation": {
     "bloc": "BLOC",
     "turtlecoin": "TRTL"
   },
-  "address_prefix": {
+  "addressPrefix": {
     "bloc": "abLoc",
     "turtlecoin": "TRTL"
   },
-  "address_validation": {
+  "addressValidation": {
     "bloc": "^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$",
     "turtlecoin": "^TRTL([a-zA-Z0-9]{95})$"
   },
-  "mainBg": {
+  "mainBackground": {
     "bloc": {
       "image": "static/img/bg-miner-mining.png", 
       "color": "#001b45"
