@@ -95,13 +95,11 @@
         {"link": "https://bloc.money/", "text": "- Official website"},
         {"link": "https://wiki.bloc.money", "text": "- BLOC Wiki"},
         {"link": "https://bloc.money/ecosystem", "text": "- BLOC Ecosystem"},
-        {"link": "https://bloc-explorer.com/", "text": "- BLOC Explorer"},
         {"link": "https://bloc-developer.com/", "text": "- BLOC for Developpers"},
         {"link": "https://bloc-mining.com/", "text": "- BLOC Web Mining"},
-        {"link": "https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8", "text": "- iPhone & iPad app"},
+        {"link": "https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8", "text": "- iPhone & iPad BLOC Wallet"},
         {"link": "https://t.me/bloc_wallet_bot", "text": "- BLOC Telegram wallet"},
-        {"link": "https://paychange.com/", "text": "- PayChange"},
-        {"link": "https://traakx.com/", "text": "- Traakx"}
+        {"link": "https://dashboard.bloc.money/", "text": "- BLOC Dashboard"}
       ]
     },
     "turtlecoin": {
