@@ -774,6 +774,19 @@ body.miner .miner-box.bloc-network ul {
 	margin: 0;
 }
 
+body.miner .miner-box.bloc-powered a,
+body.miner .miner-box.bloc-powered a:hover {
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	color: #fff;
+	opacity: .8;
+	text-decoration: none;
+}
+body.miner .miner-box.bloc-powered ul {
+	margin: 0;
+}
+
 body.miner .miner-box .loading-settings {
 	position: relative;
 }
