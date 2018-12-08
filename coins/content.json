@@ -7,23 +7,31 @@
     {
       "coin_type": "turtlecoin",
       "coin_algo": "cryptonight_lite_v7"
+    },
+    {
+      "coin_type": "ryo",
+      "coin_algo": "ryo"
     }
   ],
   "names": {
     "bloc": "BLOC",
-    "turtlecoin": "TurtleCoin"
+    "turtlecoin": "TurtleCoin",
+    "ryo": "RYO"
   },
   "abbreviation": {
     "bloc": "BLOC",
-    "turtlecoin": "TRTL"
+    "turtlecoin": "TRTL",
+    "ryo": "RYO"
   },
   "addressPrefix": {
     "bloc": "abLoc",
-    "turtlecoin": "TRTL"
+    "turtlecoin": "TRTL",
+    "ryo": "RYoL"
   },
   "addressValidation": {
     "bloc": "^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$",
-    "turtlecoin": "^TRTL([a-zA-Z0-9]{95})$"
+    "turtlecoin": "^TRTL([a-zA-Z0-9]{95})$",
+    "ryo": "^RYoL([a-zA-Z0-9]{95})$"
   },
   "mainBackground": {
     "bloc": {
@@ -33,23 +41,31 @@
     "turtlecoin": {
       "image": "static/img/turtlecoin/bg-miner-mining.png", 
       "color": "#004502"
+    },
+    "ryo": {
+      "image": "static/img/RYO/bg-miner-mining.png", 
+      "color": "#a5a5a5"
     }
   },
   "textColor": {
     "bloc": "#ffed00",
-    "turtlecoin": "#00ff00"
+    "turtlecoin": "#00ff00",
+    "ryo": "#339bd1"
   },
   "boxColor": {
     "bloc": "#090a31",
-    "turtlecoin": "#021203"
+    "turtlecoin": "#021203",
+    "ryo": "#002245"
   },
   "boxBorder": {
     "bloc": "#222",
-    "turtlecoin": "#222"
+    "turtlecoin": "#222",
+    "ryo": "#222"
   },
   "logo": {
     "bloc": "static/img/miner/miner-big-logo.png",
-    "turtlecoin": "static/img/turtlecoin/logo.png"
+    "turtlecoin": "static/img/turtlecoin/logo.png",
+    "ryo": "static/img/RYO/logo.png"
   },
   "downloadPage": {
       "bloc": {
@@ -59,6 +75,10 @@
       "turtlecoin": {
         "title": "Turtlecoin Applications", 
         "link": "https://github.com/turtlecoin/turtlecoin/releases/latest"
+      },
+      "ryo": {
+        "title": "RYO Applications", 
+        "link": "https://github.com/ryo-currency/ryo-currency/releases/latest"
       }
   },
   "socialLinks": {
@@ -85,6 +105,19 @@
         {"link": "https://www.facebook.com/trtlcoin/", "img": "static/img/miner/network_icon_facbook.png"},
         {"link": "https://www.instagram.com/_turtlecoin/", "img": "static/img/miner/network_icon_instgram.png"},
         {"link": "https://www.reddit.com/r/TRTL/", "img": "static/img/miner/network_icon_website.png"}
+      ]
+    },
+	"ryo": {
+      "title": "Social Network", 
+      "links": [
+        {"link": "https://discord.gg/GFQmFtx", "img": "static/img/miner/network_icon_discord.png"},
+	      {"link": "https://t.me/ryocurrency", "img": "static/img/miner/network_icon_telegram.png"},
+	      {"link": "https://bitcointalk.org/index.php?topic=4413010.0", "img": "static/img/miner/network_icon_bitcointalk.png"},
+	      {"link": "https://github.com/ryo-currency", "img": "static/img/miner/network_icon_github.png"},
+	      {"link": "https://twitter.com/RyocurrencyO", "img": "static/img/miner/network_icon_twatter.png"},
+	      {"link": "https://medium.com/@ryo.currency", "img": "static/img/miner/network_icon_medium.png"},
+	      {"link": "https://www.facebook.com/RyoCurrency/", "img": "static/img/miner/network_icon_facbook.png"},
+	      {"link": "https://www.reddit.com/r/ryocurrency/", "img": "static/img/miner/network_icon_website.png"}
       ]
     }
   },
@@ -114,6 +147,19 @@
         {"link": "http://wiki.turtlecoin.lol", "text": "- Turtle Wiki"},
         {"link": "https://medium.com/@turtlecoin", "text": "- Developer Blog"}
       ]
+    },
+	"ryo": {
+      "title": "The RYO Network", 
+      "links": [
+      {"link": "https://ryo-currency.com", "text": "- Official Website"},
+      {"link": "https://ryo-currency.com/#downloads", "text": "- Downloads Wallet"},
+      {"link": "https://explorer.ryo-currency.com/", "text": "- Block Explorer"},
+      {"link": "https://pools.ryoblocks.com/", "text": "- Mining Pools"},
+      {"link": "https://store.ryoblocks.com/", "text": "- Official RYO store"},
+      {"link": "https://medium.com/@ryo.currency", "text": "- RYO Blog"},
+      {"link": "https://www.youtube.com/watch?v=6WvW-cjDkhM&t=", "text": "- Tutorials"},
+      {"link": "https://ryo-currency.com/faq/", "text": "- FAQ"}
+      ]
     }
   },
   "helpText": {
@@ -123,7 +169,7 @@
         {"icon": "static/img/whatsnext/img-02.png", "title": "Learn more about BLOC", "text": "<a href=\"https://bloc.money/\">BLOC</a> is a fast, easy to use and private decentralized cryptocurrency. Send money spacewide, worldwide or locally, immediately and without costly intermediaries using the blockchain technology."},
         {"icon": "static/img/whatsnext/img-03.png", "title": "Everything BLOC in one place", "text": "Affiliation, Airdrop missions, all the latest informations about BLOC concentrated in one place to make it easier. Discover the <a href=\"https://dashboard.bloc.money/\">BLOC Dashboard</a>"},
         {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "BLOC is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://t.me/bloc_money\">Telegram Chanel</a> and <a href=\"https://discord.gg/5Buudya\">Discord</a>."},
-        {"icon": "static/img/whatsnext/img-05.png", "title": "Trading BLOC on exchange", "text": "Buy and Sell BLOC on one of two official exchanges: <ul class=\"list-unstyled\"><li><a href=\"https://app.stex.com/en/basic-trade/pair/BTC/BLOC/30\">- Stex</a></li><li><a href=\"https://tradeogre.com/exchange/BTC-BLOC\">- TradeOgre</a></li></ul>"},
+        {"icon": "static/img/whatsnext/img-05.png", "title": "Trading BLOC on exchange", "text": "Buy and Sell BLOC on one of two official exchange: <ul class=\"list-unstyled\"><li><a href=\"https://app.stex.com/en/basic-trade/pair/BTC/BLOC/30\">- Stex</a></li><li><a href=\"https://tradeogre.com/exchange/BTC-BLOC\">- TradeOgre</a></li></ul>"},
         {"icon": "static/img/whatsnext/img-06.png", "title": "Follow BLOC on social media", "text": "We are updating all our social network regulary, the best way to stay updated with BLOC is to follow us on <a href=\"https://medium.com/@bloc.money\">Medium</a>, <a href=\"https://twitter.com/bloc_money\">Twitter</a>, <a href=\"https://www.facebook.com/Blocmoney-383098922176113\">Facebook</a>, <a href=\"https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA\">Youtube</a> and <a href=\"https://www.instagram.com/bloc.money/\">Instagram</a>"},
         {"icon": "static/img/whatsnext/img-07.png", "title": "Download BLOC iPhone & iPad application", "text": "Introducing the first <a href=\"https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8\">BLOC Wallet for iOS</a> with a focus on accessibility, security and simplicity. BLOC Wallet makes getting started with BLOC easier than ever."},
         {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about BLOC, we recommend starting by visiting the official <a href=\"https://bloc.money\">BLOC.MONEY</a> website but also the <a href=\"https://wiki.bloc.money\">BLOC Wiki</a> where you can read precious informations. You can also join <a href=\"https://discord.gg/5Buudya\">BLOC Discord</a>. We and the community will be happy to help you."},
@@ -137,10 +183,21 @@
         {"icon": "static/img/whatsnext/img-02.png", "title": "Learn more about Turtlecoin", "text": "<a href=\"https://turtlecoin.lol/\">TurtleCoin</a> is a fast, easy and private cryptocurrency which allows you to send money to friends and businesses."},
         {"icon": "static/img/whatsnext/img-03.png", "title": "TurtleCoin as a Service", "text": "Build on-chain apps in an easy, fun and fast way on the TRTL Network. Integrate <a href=\"https://trtl.services/\">TRTL Services</a> easily with your application or game with our RESTful API and push notfication system."},
         {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "TurtleCoin is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://www.reddit.com/r/TRTL/\">Subreddit</a> and <a href=\"http://chat.turtlecoin.lol/\">Discord</a>. Join us and let's talk!"},
-        {"icon": "static/img/whatsnext/img-05.png", "title": "Buy and sell TRTL on exchange", "text": "Buy and Sell TurtleCoin on one of the three official exchanges: <ul class=\"list-unstyled\"><li><a href=\"https://bilaxy.com/exchange#symbol=117\">- Bilaxy</a></li><a href=\"https://tradesatoshi.com/Exchange?market=TRTL_BTC\">- Trade Satoshi</a></li><li><a href=\"https://tradeogre.com/exchange/BTC-TRTL\">- TradeOgre</a></li></ul>"},
+        {"icon": "static/img/whatsnext/img-05.png", "title": "Buy and sell TRTL on exchange", "text": "Buy and Sell TurtleCoin on one of the three official exchange: <ul class=\"list-unstyled\"><li><a href=\"https://bilaxy.com/exchange#symbol=117\">- Bilaxy</a></li><a href=\"https://tradesatoshi.com/Exchange?market=TRTL_BTC\">- Trade Satoshi</a></li><li><a href=\"https://tradeogre.com/exchange/BTC-TRTL\">- TradeOgre</a></li></ul>"},
         {"icon": "static/img/whatsnext/img-06.png", "title": "Follow TurtleCoin on social media", "text": "We are updating all our social network regulary, the best way to stay updated with TurtleCoin is to follow us on <a href=\"https://medium.com/@turtlecoin\">Medium</a>, <a href=\"https://twitter.com/_turtlecoin\">Twitter</a>, <a href=\"https://www.facebook.com/trtlcoin/\">Facebook Group</a> and <a href=\"https://www.instagram.com/_turtlecoin/\">Instagram</a>"},
         {"icon": "static/img/whatsnext/img-04.png", "title": "Fun, Fast, & Easy Crypto Payments", "text": "The goal of the <a href=\"https://turtlepay.io\">TurtlePay™ project</a> is to provide an easy to use, integrate, and maintain Payment Gateway for the TurtleCoin™ network."},
         {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about TurtleCoin, we recommend starting with the TurtleCoin website but also the <a href=\"https://github.com/turtlecoin/\">TurtleCoin GitHub</a> where you can find precious informations. "}
+      ]
+    },
+    "ryo": {
+      "boxes": [
+        {"icon": "static/img/whatsnext/img-01.png", "title": "Visit your mining pool to know more", "text": "You get paid out based upon what the pool sets the min payout amount. A pool's min payout amount can vary from pool to pool. Click on the pool link to visit their website."},
+        {"icon": "static/img/whatsnext/img-02.png", "title": "Learn more about RYO", "text": "<a href=\"https://ryo-currency.com/\">RYO</a> allows you to use a new ghost address for every transaction you receive. Never receive coins with the same address twice, even further reducing the astronomically tiny chance of you and your transactions to be traced."},
+        {"icon": "static/img/whatsnext/img-03.png", "title": "Academic Study", "text": "RYO, as a fork from Monero which itself was initially based on the CryptoNote protocol, inherits all whitepapers and academic studies from CryptoNote and Monero Research Lab. Additionally, Ryo has pioneered technologies such as Cryptonight-Heavy, which have been used by numerous other Monero forks."},
+        {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "RYO is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://t.me/ryocurrency\">Telegram Group</a> and <a href=\"https://discord.gg/GFQmFtx\">Discord</a>."},
+        {"icon": "static/img/whatsnext/img-05.png", "title": "Trading RYO on exchange", "text": "Buy and Sell RYO on one of the official exchange: <ul class=\"list-unstyled\"><li><a href=\"https://www.cryptopia.co.nz/Exchange/?market=RYO_BTC\">- Cryptopia</a></li><li><a href=\"https://tradeogre.com/exchange/BTC-RYO\">- TradeOgre</a></li><li><a href=\"https://kompler.exchange/#/markets/BTC/RYO\">- Kompler</a></li></ul>"},
+        {"icon": "static/img/whatsnext/img-06.png", "title": "Follow RYO on social media", "text": "We are updating all our social network regulary, the best way to stay updated with RYO is to follow us on <a href=\"https://medium.com/@ryo.currency\">Medium</a>, <a href=\"https://twitter.com/RyocurrencyO\">Twitter</a>, <a href=\"https://www.facebook.com/RyoCurrency/\">Facebook</a> and <a href=\"https://www.reddit.com/r/ryocurrency/\">Reddit</a>"},
+        {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about RYO, we recommend starting by visiting the official <a href=\"https://ryo-currency.com\">RYO website</a> but also the <a href=\"https://ryo-currency.com/faq/\">RYO FAQ</a> where you can read precious informations. You can also join <a href=\"https://discord.gg/GFQmFtx\">RYO Discord</a>. We and the community will be happy to help you."}
       ]
     }
   }
