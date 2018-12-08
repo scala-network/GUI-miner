@@ -767,7 +767,7 @@ body.miner .miner-box.bloc-network a:hover {
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
 	color: #fff;
-	opacity: 1;
+	opacity: .8;
 	text-decoration: none;
 }
 body.miner .miner-box.bloc-network ul {
@@ -1102,7 +1102,7 @@ body.miner .miner-box .loading-settings.done span {
 }
 .whatsnext .whatsnext-box a,
 .whatsnext .whatsnext-box a:hover {
-	color: #ffed00;
+	color: #e4d400;
 }
 .whatsnext .whatsnext-box .title {
 	font-size: 16px;
@@ -1115,7 +1115,7 @@ body.miner .miner-box .loading-settings.done span {
 	font-size: 15px;
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
-	opacity: 1;
+	opacity: .8;
 	color: #fff;
 }
 .whatsnext .whatsnext-back {
