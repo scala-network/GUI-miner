@@ -575,7 +575,7 @@ body.miner table td {
 	font-family: 'Roboto Condensed';
 	font-weight: 300;
 	color: #fff;
-	opacity: .5;
+	opacity: 1;
 	padding: 1px 10px;
 }
 body.miner .first-col table td:first-child {
@@ -596,7 +596,7 @@ body.miner .text-title {
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
 	color: #ffed00;
-	opacity: .5;
+	opacity: 1;
 	margin-bottom: 5px;
 }
 
@@ -648,7 +648,7 @@ body.miner .miner-box.top-middle .estimated span:first-child {
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
 	color: #fff;
-	opacity: .5;
+	opacity: 1;
 }
 body.miner .actual-miner .chart {
 	margin-top: 20px;
