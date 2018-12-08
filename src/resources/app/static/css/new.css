@@ -525,7 +525,7 @@ body.miner .miner-bg {
 	font-weight: 400;
 	color: #ffed00;
 	padding: 10px 20px;
-	opacity: .6;
+	opacity: 1;
 	text-decoration: none;
 }
 .select-pool .pool-submit .btn {
@@ -716,7 +716,7 @@ body.miner .miner-box .dash-title {
 	font-family: 'Roboto Condensed';
 	font-weight: 300;
 	color: #fff;
-	opacity: .5;
+	opacity: 1;
 	margin-bottom: 12px;
 }
 body.miner .miner-box .change-pool .btn {
@@ -740,7 +740,7 @@ body.miner .miner-box .pool-stats td {
 	padding: 0;
 }
 body.miner .miner-box .pool-stats td.opacity {
-	opacity: 0.5;
+	opacity: 1;
 }
 body.miner .miner-box.settings ul {
 	margin: 0;
@@ -767,7 +767,7 @@ body.miner .miner-box.bloc-network a:hover {
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
 	color: #fff;
-	opacity: .5;
+	opacity: 1;
 	text-decoration: none;
 }
 body.miner .miner-box.bloc-network ul {
@@ -976,7 +976,7 @@ body.miner .miner-box .loading-settings.done span {
 	font-weight: 400;
 	color: #ffed00;
 	padding: 10px 20px;
-	opacity: .6;
+	opacity: 1;
 	text-decoration: none;
 }
 .miner-settings .miner-settings-submit .btn {
@@ -1102,7 +1102,7 @@ body.miner .miner-box .loading-settings.done span {
 }
 .whatsnext .whatsnext-box a,
 .whatsnext .whatsnext-box a:hover {
-	color: #a59a1f;
+	color: #ffed00;
 }
 .whatsnext .whatsnext-box .title {
 	font-size: 16px;
@@ -1115,7 +1115,7 @@ body.miner .miner-box .loading-settings.done span {
 	font-size: 15px;
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
-	opacity: .5;
+	opacity: 1;
 	color: #fff;
 }
 .whatsnext .whatsnext-back {
@@ -1132,7 +1132,7 @@ body.miner .miner-box .loading-settings.done span {
 	font-weight: 400;
 	color: #ffed00;
 	padding: 10px 20px;
-	opacity: .6;
+	opacity: 1;
 	text-decoration: none;
 }
 @media (min-width: 768px){
