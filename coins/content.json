@@ -65,7 +65,6 @@
     "bloc": {
       "title": "Social Network", 
       "links": [
-        {"link": "https://bloc.money/", "img": "static/img/miner/network_icon_website.png"},
         {"link": "https://discord.gg/5Buudya", "img": "static/img/miner/network_icon_discord.png"},
         {"link": "https://t.me/bloc_money", "img": "static/img/miner/network_icon_telegram.png"},
         {"link": "https://bitcointalk.org/index.php?topic=4108831.0", "img": "static/img/miner/network_icon_bitcointalk.png"},
@@ -94,16 +93,13 @@
       "title": "The BLOC Network", 
       "links": [
         {"link": "https://bloc.money/", "text": "- Official website"},
-        {"link": "https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8", "text": "- iPhone app"},
-        {"link": "https://bloc-explorer.com/", "text": "- Bloc Explorer"},
-        {"link": "https://bloc-developer.com/", "text": "- Bloc Developper"},
-        {"link": "https://bloc-mining.com/", "text": "- Bloc Web Mining"},
-        {"link": "https://bloc-mining.eu/", "text": "- Bloc Mining EU"},
-        {"link": "https://bloc-mining.us/", "text": "- Bloc Mining US"},
-        {"link": "https://bloc-mining.asia/", "text": "- Bloc Mining ASIA"},
-        {"link": "https://bloc.cool/", "text": "- Bloc Cool"},
-        {"link": "https://t.me/bloc_wallet_bot", "text": "- Telegram wallet"},
-        {"link": "https://t.me/bloc_explorer_bot", "text": "- Telegram explorer"},
+        {"link": "https://wiki.bloc.money", "text": "- BLOC Wiki"},
+        {"link": "https://bloc.money/ecosystem", "text": "- BLOC Ecosystem"},
+        {"link": "https://bloc-explorer.com/", "text": "- BLOC Explorer"},
+        {"link": "https://bloc-developer.com/", "text": "- BLOC for Developpers"},
+        {"link": "https://bloc-mining.com/", "text": "- BLOC Web Mining"},
+        {"link": "https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8", "text": "- iPhone & iPad app"},
+        {"link": "https://t.me/bloc_wallet_bot", "text": "- BLOC Telegram wallet"},
         {"link": "https://paychange.com/", "text": "- PayChange"},
         {"link": "https://traakx.com/", "text": "- Traakx"}
       ]
@@ -132,7 +128,7 @@
         {"icon": "static/img/whatsnext/img-05.png", "title": "Trading BLOC on exchange", "text": "Buy and Sell BLOC on one of two official exchanges: <ul class=\"list-unstyled\"><li><a href=\"https://app.stex.com/en/basic-trade/pair/BTC/BLOC/30\">- Stex</a></li><li><a href=\"https://tradeogre.com/exchange/BTC-BLOC\">- TradeOgre</a></li></ul>"},
         {"icon": "static/img/whatsnext/img-06.png", "title": "Follow BLOC on social media", "text": "We are updating all our social network regulary, the best way to stay updated with BLOC is to follow us on <a href=\"https://medium.com/@bloc.money\">Medium</a>, <a href=\"https://twitter.com/bloc_money\">Twitter</a>, <a href=\"https://www.facebook.com/Blocmoney-383098922176113\">Facebook</a>, <a href=\"https://www.youtube.com/channel/UCdvnEPWhqGtZUEx3EFBrXvA\">Youtube</a> and <a href=\"https://www.instagram.com/bloc.money/\">Instagram</a>"},
         {"icon": "static/img/whatsnext/img-07.png", "title": "Download BLOC iPhone & iPad application", "text": "Introducing the first <a href=\"https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8\">BLOC Wallet for iOS</a> with a focus on accessibility, security and simplicity. BLOC Wallet makes getting started with BLOC easier than ever."},
-        {"icon": "static/img/whatsnext/img-08.png", "title": "Do you need more help ?", "text": "If this is your first time hearing about BLOC, we recommend starting by visiting the official <a href=\"https://bloc.money\">BLOC.MONEY</a> website but also the <a href=\"https://wiki.bloc.money\">BLOC Wiki</a> where you can read precious informations. You can also join <a href=\"https://discord.gg/5Buudya\">BLOC Discord</a>. We and the community will be happy to help you."},
+        {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about BLOC, we recommend starting by visiting the official <a href=\"https://bloc.money\">BLOC.MONEY</a> website but also the <a href=\"https://wiki.bloc.money\">BLOC Wiki</a> where you can read precious informations. You can also join <a href=\"https://discord.gg/5Buudya\">BLOC Discord</a>. We and the community will be happy to help you."},
         {"icon": "static/img/whatsnext/img-10.png", "title": "Don't forget to sleep mine !", "text": "An easy way to mine BLOC with your smartphone and make a passive income while you are sleeping! <a href=\"https://www.youtube.com/watch?v=WGVfNRHJ3ac\">Watch the video</a> and <a href=\"https://wiki.bloc.money/mining/mobile-mining/sleep-mining/\">start sleep mining today!</a>"},
         {"icon": "static/img/whatsnext/img-09.png", "title": "BLOC Ecosystem", "text": "One of our main goal is to provide a cryptocurrency which is safe, easy to use and attractive combined with a <a href=\"https://bloc.money/ecosystem\">powerful ecosystem</a> for users, to benefits advantages from multiple type of industries like never done before."}
       ]
@@ -146,7 +142,7 @@
         {"icon": "static/img/whatsnext/img-05.png", "title": "Buy and sell TRTL on exchange", "text": "Buy and Sell TurtleCoin on one of the three official exchanges: <ul class=\"list-unstyled\"><li><a href=\"https://bilaxy.com/exchange#symbol=117\">- Bilaxy</a></li><a href=\"https://tradesatoshi.com/Exchange?market=TRTL_BTC\">- Trade Satoshi</a></li><li><a href=\"https://tradeogre.com/exchange/BTC-TRTL\">- TradeOgre</a></li></ul>"},
         {"icon": "static/img/whatsnext/img-06.png", "title": "Follow TurtleCoin on social media", "text": "We are updating all our social network regulary, the best way to stay updated with TurtleCoin is to follow us on <a href=\"https://medium.com/@turtlecoin\">Medium</a>, <a href=\"https://twitter.com/_turtlecoin\">Twitter</a>, <a href=\"https://www.facebook.com/trtlcoin/\">Facebook Group</a> and <a href=\"https://www.instagram.com/_turtlecoin/\">Instagram</a>"},
         {"icon": "static/img/whatsnext/img-04.png", "title": "Fun, Fast, & Easy Crypto Payments", "text": "The goal of the <a href=\"https://turtlepay.io\">TurtlePay™ project</a> is to provide an easy to use, integrate, and maintain Payment Gateway for the TurtleCoin™ network."},
-        {"icon": "static/img/whatsnext/img-08.png", "title": "Do you need more help ?", "text": "If this is your first time hearing about TurtleCoin, we recommend starting with the TurtleCoin website but also the <a href=\"https://github.com/turtlecoin/\">TurtleCoin GitHub</a> where you can find precious informations. "}
+        {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about TurtleCoin, we recommend starting with the TurtleCoin website but also the <a href=\"https://github.com/turtlecoin/\">TurtleCoin GitHub</a> where you can find precious informations. "}
       ]
     }
   }
