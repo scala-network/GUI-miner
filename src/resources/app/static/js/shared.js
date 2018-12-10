@@ -41,7 +41,7 @@ let shared = {
 		};
 	},
 	// check if the given address is a valid BLOC wallet address
-	validateWalletAddress: function(address, coin_type) {
+	validateWalletAddress: function(address, validation, coin_type) {
 		// bloc
 		// 1. 99 chars for standard address
 		// 2. 187 chars for address with integrated payment id
@@ -67,7 +67,7 @@ let shared = {
 		// ex: hvxyDX9mqBNbQ6ojRrZZYcNPSTGcxtxQ4Ws6mNm6Ag7NTciArFb71HHL8HbACGpMu3iTc42F3YQNj4r
 		// /^hvx([a-zA-Z0-9]{76})$/g
 
-		var re = new RegExp(firstrun.coinsContent.addressValidation[coin_type], 'g');
+		var re = new RegExp(validation[coin_type], 'g');
 		if (re.exec(address)) {
 			return true;
 		}

@@ -171,7 +171,7 @@ let firstrun = {
 			var address = $('#miner-address-input').val().trim();
 			if (address == '') {
 				asticode.notifier.error('You must enter your address');
-			} else if (!shared.validateWalletAddress(address, firstrun.coin_type)) {
+			} else if (!shared.validateWalletAddress(address, firstrun.coinsContent.addressValidation, firstrun.coin_type)) {
 				asticode.notifier.error("Please enter a valid wallet address");
 			} else {
 				$(this).next().trigger('click');

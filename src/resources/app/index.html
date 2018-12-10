@@ -25,7 +25,7 @@
 				<div class="col-xs-3 first-col">
 					<div class="miner-box information">
 						<div class="img pull-right"><img src="static/img/miner/btc-icon.png"></div>
-						<div class="text-title text-color">Informations</div>
+						<div class="text-title text-color">Information</div>
 
 						<table class="table table-condensed">
 							<tbody>
@@ -177,7 +177,7 @@
 							<div class="miner-box middle-middle">
 								<div class="change-pool pull-right"><a href="#" class="btn btn-default" data-target="miner-settings">Change</a></div>
 								<div class="dash-title opacity">---> YOUR POOL</div>
-								<div class="pool-address" id="pool-address" data-id="0">Updating...</div>
+								<div class="pool-address" id="pool-address">Updating...</div>
 								<div class="pool-stats">
 									<table class="table table-condensed">
 										<tbody>
@@ -216,6 +216,7 @@
 						</ul>
 						<div class="clearfix"></div>
 					</div>
+
 					<div class="miner-box social-network" id="social-links">
 						<!--
 						<div class="text-title" id="social-text"></div>
@@ -243,6 +244,7 @@
 					</ul>
 					<div class="clearfix"></div>
 					</script>
+
 					<div class="miner-box bloc-network" id="network-links">
 						<!--
 						<div class="text-title" id="network-text"></div>
@@ -271,14 +273,24 @@
 					{% } %}
 					</ul>
 					</script>
-					<div class="miner-box bloc-powered">
+
+					<div class="miner-box bloc-powered" style="display: none" id="powered-by-links">
+						<!--
 						<div class="text-title">BLOC GUI Miner®</div>
 						<ul class="list-unstyled">
 							<li><a href="https://bloc.money">- Visit our webite</a></li>
 							<li><a href="https://github.com/furiousteam/BLOC-GUI-Miner">- Contribute to this project</a></li>
 						</ul>
-						<div class="clearfix"></div>
+						-->
 					</div>
+					<script type="text/x-tmpl" id="tmpl-powered-by-links">
+					<div class="text-title text-color">{%=o.title%}</div>
+					<ul class="list-unstyled">
+					{% for (var i = 0; i < o.links.length; i++) { %}
+						<li><a href="{%=o.links[i].link%}">{%=o.links[i].text%}</a></li>
+					{% } %}
+					</ul>
+					</script>
 				</div>
 			</div>
 		</div>
@@ -322,6 +334,21 @@
 				</div>
 				<div class="text">Lower values will ensure your computer stays usable while mining.</div>
 			</div>
+
+			<div class="miner-settings-coins" id="miner-settings-coins">
+			</div>
+			<script type="text/x-tmpl" id="tmpl-miner-settings-coins">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="settings-coins">
+					<span>{%=o.selected%}</span> <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" id="settings-coins-values">
+					{% for (var i = 0; i < o.coins.length; i++) { %}
+						<li><a href="#" data-value="{%=o.coins[i].coin_type%}">{%=o.coins[i].name%}</a></li>
+					{% } %}
+				</ul>
+			</div>
+			</script>
 
 			<div class="address-input">
 				<input type="text" name="" value="" placeholder="Type or paste your BLOC address here" class="text-center" id="settings_mining_address" />
@@ -399,7 +426,7 @@
 
 		<!-- the miner whatsnext -->
 		<div class="main-section hidden whatsnext text-center" id="whatsnext">
-			<div class="whatsnext-title">Ok, i am mining, what’s next ?</div>
+			<div class="whatsnext-title">Ok, i am mining, what's next ?</div>
 			<div class="whatsnext-text">You want to go further? this is a non exhaustive list of what you can do.</div>
 
 			<div id="help-content">

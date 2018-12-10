@@ -34,6 +34,7 @@ let app = {
 					var parsed = $.parseJSON(message.payload);
 					console.log('[' + new Date().toUTCString() + '] ', "config-file", parsed);
 					app.coin_type = parsed.coin_type;
+					app.prev_coin_type = app.coin_type;
 					app.coin_algo = parsed.coin_algo;
 					app.populateMainUI();
 				});
@@ -68,7 +69,9 @@ let app = {
 					$('#pool_last_block').html(parsed.pool.last_block);
 					$('#record_volume').html(parsed.records.volume + ' BTC');
 					$('#record_price').html(parsed.records.price + ' BTC');
-					$('#pool-address').html('<a href="' + parsed.pool.url + '" class="text-color">' + parsed.pool.url + '</a>').data('id', parsed.pool.id);
+					$('#pool-address')
+						.html('<a href="' + parsed.pool.url + '" class="text-color">' + parsed.pool.url + '</a>')
+						.find('a').css('color', app.coinsContent.textColor[app.coin_type]);
 
 					// Build prices
 					let table = '<tbody>';
@@ -84,6 +87,8 @@ let app = {
 					});
 					table += '</tbody>';
 					$('#exchanges-price').html(table);
+
+					app.selected_pool = parsed.pool.id;
 
 					app.networkStatsOnce = true;
 					if (!app.minerAndNetworkStatsDone && app.minerStatsOnce) {
@@ -149,6 +154,7 @@ let app = {
 			.css('color', textColor)
 			.css('background-color', boxColor + 'cc')
 			.css('border-color', boxBorder);
+		$('body.miner .miner-box .pool-address a').css('color', textColor);
 
 		$('.miner-settings .miner-settings-submit .btn')
 			.css('color', textColor)
@@ -162,8 +168,12 @@ let app = {
 		$('.miner-settings .miner-settings-back')
 			.css('background-color', boxColor + 'cc')
 			.css('border-color', boxBorder);
+		$('.miner-settings .miner-settings-back a').css('color', textColor);
+
+		$('.miner-settings .miner-settings-coins').css('background-color', boxColor + 'ff');
 
 		$('.whatsnext .whatsnext-box').css('background-color', boxColor + '99');
+		$('.whatsnext .whatsnext-box a').css('color', textColor);
 		$('.whatsnext .whatsnext-back')
 			.css('background-color', boxColor + 'cc')
 			.css('border-color', boxBorder);
@@ -174,27 +184,7 @@ let app = {
 		$(document).on('click', '[data-target]', function() {
 			var id = $(this).data('target');
 			if (id == 'miner-settings') {
-				app.loadSettings(function() {
-					$("#pool-list").mCustomScrollbar({
-						theme:"rounded-dots",
-						scrollInertia:400
-					});
-
-					$('div.table-body').off('click').on('click', function() {
-						$(this).parent().find('.table-body').removeClass('selected');
-						$(this).addClass('selected');
-					});
-
-					// Select the pool we are currently using
-					var curr_pool_id = $('#pool-address').data('id');
-					$('#pool-list').find('.table-body').each(function() {
-						var id = $(this).data('id');
-						if (id == curr_pool_id) {
-							$(this).trigger('click');
-							return false;
-						}
-					});
-				});
+				app.loadSettings();
 			}
 			if (id == 'whatsnext') {
 				let html;
@@ -248,7 +238,24 @@ let app = {
 		$('#on-off-switch').trigger('click');
 
 		// Save miner settings button
-		$('#save-miner-settings').on('click', function() {
+		$('#save-miner-settings').on('click', function(event) {
+			event.preventDefault();
+
+			asticode.notifier.close();
+			var address = $('#settings_mining_address').val().trim();
+			if (address == '') {
+				asticode.notifier.error('You must enter your address');
+				return;
+			} else if (!shared.validateWalletAddress(address, app.coinsContent.addressValidation, app.coin_type)) {
+				asticode.notifier.error("Please enter a valid wallet address");
+				return;
+			}
+
+			if (app.selected_pool == 0) {
+				asticode.notifier.error('You must choose one of the pools');
+				return;
+			}
+
 			asticode.loader.show();
 
 			// Stop the miner first
@@ -258,8 +265,8 @@ let app = {
 			}, function(message) {
 				// Save the miner settings
 				var configData = {
-					address: $('#settings_mining_address').val(),
-					pool: $('#pool-list').find('.selected').data('id'),
+					address: $('#settings_mining_address').val().trim(),
+					pool: app.selected_pool,
 					coin_type: app.coin_type,
 					coin_algo: app.coin_algo,
 					threads: parseInt($('#cpu-cores').dropselect('value')),
@@ -301,20 +308,26 @@ let app = {
 		$('#download-title').text(app.coinsContent.downloadPage[app.coin_type].title);
 		$('#download-link').attr('href', app.coinsContent.downloadPage[app.coin_type].link);
 
+		// Powered-by links
+		html = $.fn.tmpl("tmpl-powered-by-links", app.coinsContent.poweredByLinks);
+		$('#powered-by-links').html(html).show();
+
 		app.changeColors();
 	},
-	loadSettings: function(cb) {
+	loadSettings: function() {
 		// Get the current miner processing config
 		astilectron.sendMessage({name: "get-processing-config", payload: ""}, function(message) {
 			var parsed = $.parseJSON(message.payload);
 			console.log('[' + new Date().toUTCString() + '] ', "get-processing-config", parsed);
 
+			let html;
+
 			// Populate the number of cores
-			var threadOptions = "";
-			for (var i = 1; i <= parsed.max_threads; i++) {
-				threadOptions += '<li><a href="#" data-value="' + i + '"><b>' + i + ' CPU</b> CORE</a></li>';
+			html = "";
+			for (let i = 1; i <= parsed.max_threads; i++) {
+				html += '<li><a href="#" data-value="' + i + '"><b>' + i + ' CPU</b> CORE</a></li>';
 			}
-			$('#cpu-cores-values').html(threadOptions);
+			$('#cpu-cores-values').html(html);
 			$('#cpu-cores').dropselect(); // re-initialize
 			$('#cpu-cores').dropselect('select', parsed.threads);
 
@@ -322,15 +335,74 @@ let app = {
 			$('#cpu-max').dropselect(); // re-initialize
 			$('#cpu-max').dropselect('select', parsed.max_usage);
 
-			// Return the pool list for the GUI miner
-			var payloadData = {
-				coin_type: app.coin_type
+			// Populate the coins
+			let coins = {
+				'selected': app.coinsContent.names[app.coin_type]
 			};
-			astilectron.sendMessage({name: "pool-list", payload: payloadData}, function(message) {
-				$("#pool-list").mCustomScrollbar("destroy");
-				$('#pool-list').html(message.payload);
-				if (typeof cb === 'function') cb();
+			coins.coins = app.coinsContent.coins.map(function(el) { // add name and abbreviation keys
+				el.name = app.coinsContent.names[el.coin_type];
+				return el;
 			});
+			html = $.fn.tmpl("tmpl-miner-settings-coins", coins);
+			$('#miner-settings-coins').html(html);
+
+			// Enable the dropselect
+			$('#settings-coins').dropselect(); // re-initialize
+			$('#settings-coins').dropselect('change', function() {
+				asticode.loader.show();
+
+				// Change coin_type/coin_algo
+				const sel_coin_type = $('#settings-coins').dropselect('value'); // Selected coin_type
+				let curr_coin = app.coinsContent.coins.filter(function(el) { // add name and abbreviation keys
+					return el.coin_type == sel_coin_type;
+				});
+
+				app.prev_coin_type = app.coin_type;
+				app.coin_type = sel_coin_type;
+				app.coin_algo = curr_coin[0].coin_algo;
+
+				// The coin has changed, reload the pools
+				app._loadPoolsInSettings(function() {
+					asticode.loader.hide();
+				});
+			});
+
+			app._loadPoolsInSettings();
+		});
+	},
+	_loadPoolsInSettings: function(cb) {
+		if (app.prev_coin_type != app.coin_type) {
+			app.selected_pool = 0;
+		}
+
+		// Populates the pool list in the settings
+		var payloadData = {
+			coin_type: app.coin_type
+		};
+		astilectron.sendMessage({name: "pool-list", payload: payloadData}, function(message) {
+			$("#pool-list").mCustomScrollbar("destroy");
+			$('#pool-list').html(message.payload);
+			$("#pool-list").mCustomScrollbar({
+				theme:"rounded-dots",
+				scrollInertia:400
+			});
+
+			$('div.table-body').off('click').on('click', function() {
+				$(this).parent().find('.table-body').removeClass('selected');
+				$(this).addClass('selected');
+				app.selected_pool = parseInt($(this).data('id'));
+			});
+
+			// Select the pool we are currently using
+			$('#pool-list').find('.table-body').each(function() {
+				var id = $(this).data('id');
+				if (id == app.selected_pool) {
+					$(this).trigger('click');
+					return false;
+				}
+			});
+
+			if (typeof cb === 'function') cb();
 		});
 	},
 	resetMinerStats: function() {
@@ -393,8 +465,10 @@ let app = {
 	enableSettingsButton: function() {
 		$('#loading-settings').addClass('done');
 	},
+	prev_coin_type: '',
 	coin_type: '',
 	coin_algo: '',
+	selected_pool: 0,
 	populatedAddress: false,
 	networkStatsOnce: false,
 	minerStatsOnce: false,

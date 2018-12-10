@@ -19,8 +19,9 @@ $.fn.extend({
             case undefined:
             case '':
 				return this.each(function() {
-					var button_text = $(this).find('span').first();
-					var dropdown_menu = $(this).parent().find('.dropdown-menu');
+					var el = $(this);
+					var button_text = el.find('span').first();
+					var dropdown_menu = el.parent().find('.dropdown-menu');
 					var dropdown_links = dropdown_menu.find('a');
 
 					// make the dropdown behave like a normal select
@@ -28,6 +29,7 @@ $.fn.extend({
 						dropdown_links.removeClass('selected');
 						$(this).addClass('selected');
 						button_text.html($(this).html());
+						el.trigger('dropdown-event');
 					});
 
 					// make the first value selected if no value is actually selected
@@ -46,6 +48,13 @@ $.fn.extend({
             case 'value':
 				var dropdown_menu = $(this).parent().find('.dropdown-menu');
 				return dropdown_menu.find('a.selected').data('value');
+
+            // Callback function when the select changes its value
+            case 'change':
+				if (typeof param == 'function') {
+					this.on('dropdown-event', param);
+				}
+				return this;
         }
     }
 });

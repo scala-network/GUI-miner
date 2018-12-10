@@ -58,6 +58,7 @@ type coinsContentJson struct {
 	SocialLinks       map[string]interface{} `json:"socialLinks"`
 	NetworkLinks      map[string]interface{} `json:"networkLinks"`
 	HelpText          map[string]interface{} `json:"helpText"`
+	PoweredByLinks    map[string]interface{} `json:"poweredByLinks"`
 }
 
 // PoolData contains the parsed JSON data from the pool list
