@@ -107,17 +107,17 @@
         {"link": "https://www.reddit.com/r/TRTL/", "img": "static/img/miner/network_icon_website.png"}
       ]
     },
-	"ryo": {
+    "ryo": {
       "title": "Social Network", 
       "links": [
         {"link": "https://discord.gg/GFQmFtx", "img": "static/img/miner/network_icon_discord.png"},
-	      {"link": "https://t.me/ryocurrency", "img": "static/img/miner/network_icon_telegram.png"},
-	      {"link": "https://bitcointalk.org/index.php?topic=4413010.0", "img": "static/img/miner/network_icon_bitcointalk.png"},
-	      {"link": "https://github.com/ryo-currency", "img": "static/img/miner/network_icon_github.png"},
-	      {"link": "https://twitter.com/RyocurrencyO", "img": "static/img/miner/network_icon_twatter.png"},
-	      {"link": "https://medium.com/@ryo.currency", "img": "static/img/miner/network_icon_medium.png"},
-	      {"link": "https://www.facebook.com/RyoCurrency/", "img": "static/img/miner/network_icon_facbook.png"},
-	      {"link": "https://www.reddit.com/r/ryocurrency/", "img": "static/img/miner/network_icon_website.png"}
+        {"link": "https://t.me/ryocurrency", "img": "static/img/miner/network_icon_telegram.png"},
+        {"link": "https://bitcointalk.org/index.php?topic=4413010.0", "img": "static/img/miner/network_icon_bitcointalk.png"},
+        {"link": "https://github.com/ryo-currency", "img": "static/img/miner/network_icon_github.png"},
+        {"link": "https://twitter.com/RyocurrencyO", "img": "static/img/miner/network_icon_twatter.png"},
+        {"link": "https://medium.com/@ryo.currency", "img": "static/img/miner/network_icon_medium.png"},
+        {"link": "https://www.facebook.com/RyoCurrency/", "img": "static/img/miner/network_icon_facbook.png"},
+        {"link": "https://www.reddit.com/r/ryocurrency/", "img": "static/img/miner/network_icon_website.png"}
       ]
     }
   },
@@ -148,17 +148,17 @@
         {"link": "https://medium.com/@turtlecoin", "text": "- Developer Blog"}
       ]
     },
-	"ryo": {
+    "ryo": {
       "title": "The RYO Network", 
       "links": [
-      {"link": "https://ryo-currency.com", "text": "- Official Website"},
-      {"link": "https://ryo-currency.com/#downloads", "text": "- Downloads Wallet"},
-      {"link": "https://explorer.ryo-currency.com/", "text": "- Block Explorer"},
-      {"link": "https://pools.ryoblocks.com/", "text": "- Mining Pools"},
-      {"link": "https://store.ryoblocks.com/", "text": "- Official RYO store"},
-      {"link": "https://medium.com/@ryo.currency", "text": "- RYO Blog"},
-      {"link": "https://www.youtube.com/watch?v=6WvW-cjDkhM&t=", "text": "- Tutorials"},
-      {"link": "https://ryo-currency.com/faq/", "text": "- FAQ"}
+        {"link": "https://ryo-currency.com", "text": "- Official Website"},
+        {"link": "https://ryo-currency.com/#downloads", "text": "- Downloads Wallet"},
+        {"link": "https://explorer.ryo-currency.com/", "text": "- Block Explorer"},
+        {"link": "https://pools.ryoblocks.com/", "text": "- Mining Pools"},
+        {"link": "https://store.ryoblocks.com/", "text": "- Official RYO store"},
+        {"link": "https://medium.com/@ryo.currency", "text": "- RYO Blog"},
+        {"link": "https://www.youtube.com/watch?v=6WvW-cjDkhM&t=", "text": "- Tutorials"},
+        {"link": "https://ryo-currency.com/faq/", "text": "- FAQ"}
       ]
     }
   },
@@ -200,5 +200,12 @@
         {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about RYO, we recommend starting by visiting the official <a href=\"https://ryo-currency.com\">RYO website</a> but also the <a href=\"https://ryo-currency.com/faq/\">RYO FAQ</a> where you can read precious informations. You can also join <a href=\"https://discord.gg/GFQmFtx\">RYO Discord</a>. We and the community will be happy to help you."}
       ]
     }
+  },
+  "poweredByLinks": {
+      "title": "BLOC GUI Miner&reg;", 
+      "links": [
+        {"link": "https://bloc.money", "text": "- Visit our webite"},
+        {"link": "https://github.com/furiousteam/BLOC-GUI-Miner", "text": "- Contribute to this project"}
+      ]
   }
 }
