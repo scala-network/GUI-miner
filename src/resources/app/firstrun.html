@@ -37,17 +37,17 @@
 			<div class="wallet-bg first"><a href="#" data-target="miner-address">I ALREADY HAVE A BLOC WALLET ADDRESS</a></div>
 			<div class="wallet-bg"><a href="#" data-target="select-wallet">I DO NOT HAVE A BLOC WALLET ADDRESS</a></div>
 			<div class="wallet-bg last"><a href="#" data-target="other-currencies">I WANT TO MINE OTHER CRYPTOCURRENCIES</a></div>
-			<div class="wallet-note">If you do not have a BLOC wallet address, you just need to download one of our several<br />
-			wallet applications. Click on "I DO NOT HAVE A BLOC WALLET ADDRESS" above to see our numerous options.</div>
-			<div class="wallet-tip">TIPS : The main purpose of a wallet is to generate your personnal BLOC address to send<br />
-			and receive BLOC money to other people or exchanges. It's a kind of bank account, but way more secure.<br />
+			<div class="wallet-note">BLOC GUI Miner is a beautiful, easy to use, Graphical User interface for mining cryptocurrencies based on Cryptonote.<br />
+			If this is your first time hearing about BLOC, we recommend starting by visiting the <a href="https://bloc.money" target="_blank">BLOC.MONEY</a>website.</div>
+			<div class="wallet-tip">TIPS : Click to find out how you can create your BLOC wallet to send<br />
+			and receive BLOC money to friends or businesses. It's a kind of bank account, but way more secure.<br />
 			It is safe to share your BLOC wallet address.</div>
 		</div>
 		
 		<!-- choose another currency to mine -->
 		<div class="main-section hidden other-currencies text-center" id="other-currencies">
 			<img src="static/img/miner-setup-logo.png"><br />
-			<div class="currencies-title">CHOOSE ANOTHER CURRENCY TO MINE</div>
+			<div class="currencies-title">MINE ANOTHER CRYPTOCURRENCY</div>
 			<div class="currencies-text" id="coins-title"><!--Besides BLOC, you can mine Monero (XMR), Haven (XHV), TurtleCoin (TRTL) with this miner.--></div>
 			<div id="currencies-selector">
 				<!--
@@ -64,6 +64,7 @@
 				{%=o[i].name%} [{%=o[i].abbreviation%}] {% if (i != o.length - 1) { %},{% } %}
 			{% } %}
 			with this miner.
+			You can also participate to this project or add your own cryptocurrency into the BLOC GUI Miner. Click here to find out how.
 			</script>
 			<script type="text/x-tmpl" id="tmpl-coins">
 			{% for (var i = 0; i < o.length; i++) { %}
@@ -75,7 +76,7 @@
 		<!-- insert existing wallet address -->
 		<div class="main-section hidden miner-address text-center" id="miner-address">
 			<img src="static/img/miner-setup-logo.png"><br />
-			<div class="address-title">ADDRESS SETUP</div>
+			<div class="address-title">WALLET ADDRESS SETUP</div>
 			<div id="miner-address-content">
 				<div class="address-text">This is your personnal BLOC address from you previously created wallet. It must start with the characters <span>abLoc</span><br />
 				Once you start mining with a wallet address any coins and shares earned will be under that wallet. The address you are going to receive your payments.</div>
@@ -84,7 +85,7 @@
 			<div class="address-submit"><a href="#" class="btn btn-default" id="miner-address-next-step">OK, NEXT STEP</a><a href="#" class="hidden" data-target="select-pool"></a></div>
 			<div class="miner-address-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
 			<script type="text/x-tmpl" id="tmpl-miner-address-text">
-			This is your personnal <span>{%=o.coin_name%}</span> address from you previously created wallet. {% if (o.coin_prefix) { %}It must start with the characters <span>{%=o.coin_prefix%}</span>{% } %}<br />Once you start mining with a wallet address any coins and shares earned will be under that wallet.<br />The address you are going to receive your payments is:
+			This is your personnal <span>{%=o.coin_name%}</span> address from you previously created wallet. {% if (o.coin_prefix) { %}It must start with the characters <span>{%=o.coin_prefix%}</span>{% } %}<br />Once you start mining with a wallet address any coins and shares earned will be sent to that wallet.<br />The wallet address you are going to receive your payments is:
 			</script>
 			<script type="text/x-tmpl" id="tmpl-miner-address-input">
 			Type or paste your {%=o.coin_abbr%} address here. {% if (o.coin_prefix) { %}Starts with ({%=o.coin_prefix%}){% } %}
@@ -105,7 +106,7 @@
 				-->
 				<div class="col-xs-4">
 					<div class="select-wallet-col-title"><a href="https://bloc.money/download">GUI WALLET</a></div>
-					<div class="select-wallet-text">GUI Stands for Graphical User Interface. It makes it easy for you to use BLOC with a friendly user interface. BLOC R0C GUI wallet makes getting started with BLOC on desktop easier than ever. Available for Windows, Mac OS and Linux.</div>
+					<div class="select-wallet-text">GUI Stands for Graphical User Interface. It makes it easy for you to use BLOC with a friendly user interface. BLOC GUI Wallet makes getting started with BLOC on desktop easier than ever. Available for Windows, Mac OS and Linux.</div>
 				</div>
 				<div class="col-xs-4">
 					<div class="select-wallet-col-title"><a href="https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8">IPHONE WALLET</a></div>
@@ -120,7 +121,7 @@
 			<div class="row">
 				<div class="col-xs-4 col-xs-offset-4">
 					<div class="select-wallet-col-title"><a href="https://bloc.money/download">CLI WALLET</a></div>
-					<div class="select-wallet-text">The CLI Wallet, called BLOCWallet, is a multi-platform program (Win/Linux/Mac) that requires you to enter commands for it to work and you cannot use your mouse. It is text only application that does not have a graphical interface. However, it is currently the most stable and gets the newest updates first.</div>
+					<div class="select-wallet-text">The CLI Wallet, called BLOCWallet, is a multi-platform program (Win/Linux/Mac) that requires you to enter commands and you cannot use your mouse. It is text only application that does not have a graphical interface. However, it is currently the most stable and gets the newest updates first.</div>
 				</div>
 			</div>
 
@@ -132,7 +133,7 @@
 		<div class="main-section hidden select-pool text-center" id="select-pool">
 			<img src="static/img/select-pool-logo.png"><br />
 			<div class="pool-title">SELECT A MINING POOL</div>
-			<div class="pool-text">A mining pool is where many different miners work together to find a block and share the reward. If you were to mine on your own (solo mining) it could take weeks before you find a block, (if you find a block). The community has set up a selection of Official and Community BLOC mining pools listed below. We recommend picking a pool near your location and feel free to try the different mining pools to compare the results. Try to support the small mining pool if you have a great amount of power.</div>
+			<div class="pool-text">A mining pool is where many different miners work together to find a block and share the reward. If you were to mine on your own (solo mining) it could take weeks before you find a block, (if you find a block). The community has set up a selection of Official and Community mining pools listed below. We recommend picking a pool near your location and feel free to try the different mining pools to compare the results. Try to support the small mining pool if you have a great amount of power.</div>
 
 			<div class="table-container">
 				<div class="table-head">
@@ -209,6 +210,7 @@
 			<div class="configuring-miner-text">All the settings are now ok.<br />
 			Auto-detecting your hardware...<br />
 			Tuning everything for you...<br />
+			Connecting to your favorite cryptocurrency...<br />
 			Enjoy mining with BLOC GUI Miner.</div>
 		</div>
 	</div>
