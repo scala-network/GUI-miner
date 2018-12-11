@@ -57,7 +57,7 @@ We currently support two very popular miner backends:
 
 ## Tutorial
 
-Make sure to check the complete tutorial: [How to use BLOC GUI Miner](https://github.com/fireice-uk/xmr-stak) from the **BLOC Wiki** for the complete instructions how to use this software.
+Make sure to check the complete tutorial: [How to use BLOC GUI Miner](https://wiki.bloc.money/mining/bloc-gui-miner/) available from the **BLOC Wiki**.
 
 ## Downloads Binaries
 
@@ -185,7 +185,7 @@ before you start the GUI-miner, make sure you have copied the binaries of [xmrig
 
 ## **Contribute**
 
-If you have an issue not listed here or if you would like to add a new feature to the BLOC GUI Miner please [submit a pull request](https://github.com/furiousteam/BLOC-GUI-Miner/compare) or log a new issue, alternatively, you can [contact us](https://wiki.bloc.money/about/community/)
+If you have an issue not listed here or if you would like to add a new feature to the **BLOC GUI Miner** please [submit a pull request](https://github.com/furiousteam/BLOC-GUI-Miner/compare) or log a new issue, alternatively, you can [contact us](https://wiki.bloc.money/about/community/)
 
 
 [![BLOC](DOCS/images/bloc-logo-intro.png)](https://bloc.money)
