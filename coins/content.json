@@ -23,11 +23,6 @@
     "turtlecoin": "TRTL",
     "ryo": "RYO"
   },
-  "coinGecko": {
-    "bloc": "https://www.coingecko.com/en/coins/bloc-money",
-    "turtlecoin": "https://www.coingecko.com/en/coins/turtlecoin",
-    "ryo": "https://www.coingecko.com/en/coins/ryo-currency"
-  },
   "addressPrefix": {
     "bloc": "abLoc",
     "turtlecoin": "TRTL",
@@ -85,6 +80,11 @@
         "title": "RYO Applications", 
         "link": "https://github.com/ryo-currency/ryo-currency/releases/latest"
       }
+  },
+  "coinGeckoLinks": {
+    "bloc": "https://www.coingecko.com/en/coins/bloc-money",
+    "turtlecoin": "https://www.coingecko.com/en/coins/turtlecoin",
+    "ryo": "https://www.coingecko.com/en/coins/ryo-currency"
   },
   "socialLinks": {
     "bloc": {
