@@ -10,8 +10,6 @@ BLOC GUI Miner support two very popular miner backends: [XMR-STAK](https://githu
 
 BLOC GUI Miner comes with XMR-STAK already built-in, including configuration files for CPU and GPU mining in most of the cases.
 
-![Screenshot](DOCS/images/BLOC-GUI-Miner-v0.0.1-BETA.jpg "Screenshot")
-
 ## **Supported Cryptocurrency**
 
 Since the last update v0.0.2 we have added the possibility for everyone to add their own cryptocurrency to the BLOC GUI Miner as long as it is supported by XMR-STAK. Curently we support :
@@ -24,23 +22,27 @@ If you would like to contribute to this project by adding or editing a mining po
 
 ## BLOC Mining
 
+[BLOC.MONEY](https://bloc.money) is a fast, easy to use and private decentralized cryptocurrency. Send money spacewide, worldwide or locally, immediately and without costly intermediaries using the blockchain technology.
+
 *Overview:*
 
 [![BLOC GUI Miner Mining BLOC](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/bloc-mining.png)](https://wiki.bloc.money/mining/bloc-gui-miner/)
 
 *Help:*
 
-[![BLOC GUI Miner Help](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/bloc-mining.png)](https://wiki.bloc.money/mining/bloc-gui-miner/)
+[![BLOC GUI Miner Help](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/bloc-help.png)](https://wiki.bloc.money/mining/bloc-gui-miner/)
 
 ## TurtleCoin Mining
 
+[TurtleCoin](https://github.com/turtlecoin/turtlecoin) is a fast, easy and private cryptocurrency which allows you to send money to friends and businesses.
+
 *Overview:*
 
-[![BLOC GUI Miner Mining TurtleCoin](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/mining-turtlecoin.png)](https://wiki.bloc.money/mining/bloc-gui-miner/)
+[![BLOC GUI Miner Mining TurtleCoin](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/mining-turtlecoin.png)](https://wiki.bloc.money/mining/bloc-gui-miner/#mining-turtlecoin-trtl)
 
 *Mining Pools:*
 
-[![BLOC GUI Miner TurtleCoin Help](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/trtl-settings.png)](https://wiki.bloc.money/mining/bloc-gui-miner/)
+[![BLOC GUI Miner TurtleCoin Help](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/trtl-settings.png)](https://wiki.bloc.money/mining/bloc-gui-miner/#mining-turtlecoin-trtl)
 
 ## Downloads Binaries
 
