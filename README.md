@@ -4,11 +4,15 @@
 
 It is aimed at getting people that have never tried mining before with a focus on accessibility, security and simplicity.
 
+![BLOC GUI Miner Intro](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-MINER-1.png)
+
 BLOC GUI miner makes getting started with cryptocurrencies mining easier than ever.
 
 BLOC GUI Miner support two very popular miner backends: [XMR-STAK](https://github.com/fireice-uk/xmr-stak) and [XMRIG](https://github.com/xmrig/xmrig)
 
 BLOC GUI Miner comes with XMR-STAK already built-in, including configuration files for CPU and GPU mining in most of the cases.
+
+![BLOC GUI Miner Intro](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-MINER-7.png)
 
 ## **Supported Cryptocurrency**
 
@@ -44,13 +48,6 @@ If you would like to contribute to this project by adding or editing a mining po
 
 [![BLOC GUI Miner TurtleCoin Help](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/trtl-settings.png)](https://wiki.bloc.money/mining/bloc-gui-miner/#mining-turtlecoin-trtl)
 
-## Downloads Binaries
-
-Make sure to disable your antivirus as XMR-STAK will be detected as a virus and for this reason it the BLOC GUI Miner zip file will be deleted.
-
-- Download and install BLOC GUI Miner for [Windows, Mac and Linux](https://github.com/furiousteam/GUI-miner/releases/latest) from GitHub
-- From the [Download Area](https://bloc.money/download) of BLOC.MONEY
-
 ## Supported Miners
 
 We currently support two very popular miner backends:
@@ -61,6 +58,13 @@ We currently support two very popular miner backends:
 ## Tutorial
 
 Make sure to check the complete tutorial: [How to use BLOC GUI Miner](https://github.com/fireice-uk/xmr-stak) from the **BLOC Wiki** for the complete instructions how to use this software.
+
+## Downloads Binaries
+
+Make sure to disable your antivirus as XMR-STAK will be detected as a virus and for this reason it the BLOC GUI Miner zip file will be deleted.
+
+- Download and install BLOC GUI Miner for [Windows, Mac and Linux](https://github.com/furiousteam/GUI-miner/releases/latest) from GitHub
+- From the [Download Area](https://bloc.money/download) of BLOC.MONEY
 
 ## Compiling on Linux (Ubuntu)
 
