@@ -124,6 +124,13 @@ body.miner .miner-bg {
 	margin-bottom: 40px;
 	opacity: .55;
 }
+.other-currencies .currencies-text a,
+.other-currencies .currencies-text a:hover {
+	color: #ffed00;
+	text-decoration: none;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+}
 .other-currencies .currency-bg {
 	width: 416px;
 	margin: 0 auto 15px auto;
@@ -207,6 +214,13 @@ body.miner .miner-bg {
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
 	margin-bottom: 14px;
+}
+.choose-wallet .wallet-note a,
+.choose-wallet .wallet-note a:hover {
+	color: #ffed00;
+	text-decoration: none;
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
 }
 .choose-wallet .wallet-tip {
 	font-size: 16px;
@@ -836,6 +850,11 @@ body.miner .miner-box .loading-settings.done span {
 	font-style: italic;
 	color: #fff;
 	opacity: .5;
+}
+.miner-settings .miner-settings-coins {
+	background-color: #04072777;
+	padding: 13px 0;
+	margin-bottom: 14px;
 }
 .miner-settings .dropdown-toggle {
 	background-color: #040727aa;

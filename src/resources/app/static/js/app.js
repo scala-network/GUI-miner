@@ -88,7 +88,10 @@ let app = {
 					table += '</tbody>';
 					$('#exchanges-price').html(table);
 
-					app.selected_pool = parsed.pool.id;
+					if (!app.selectedPoolOnce) {
+						app.selected_pool = parsed.pool.id;
+						app.selectedPoolOnce = true;
+					}
 
 					app.networkStatsOnce = true;
 					if (!app.minerAndNetworkStatsDone && app.minerStatsOnce) {
@@ -312,6 +315,9 @@ let app = {
 		html = $.fn.tmpl("tmpl-powered-by-links", app.coinsContent.poweredByLinks);
 		$('#powered-by-links').html(html).show();
 
+		// CoinGecko links
+		$('#coingecko-link').attr('href', app.coinsContent.coinGeckoLinks[app.coin_type]);
+
 		app.changeColors();
 	},
 	loadSettings: function() {
@@ -371,10 +377,6 @@ let app = {
 		});
 	},
 	_loadPoolsInSettings: function(cb) {
-		if (app.prev_coin_type != app.coin_type) {
-			app.selected_pool = 0;
-		}
-
 		// Populates the pool list in the settings
 		var payloadData = {
 			coin_type: app.coin_type
@@ -386,6 +388,8 @@ let app = {
 				theme:"rounded-dots",
 				scrollInertia:400
 			});
+
+			app.selected_pool = 0;
 
 			$('div.table-body').off('click').on('click', function() {
 				$(this).parent().find('.table-body').removeClass('selected');
@@ -472,6 +476,7 @@ let app = {
 	populatedAddress: false,
 	networkStatsOnce: false,
 	minerStatsOnce: false,
+	selectedPoolOnce: false,
 	minerAndNetworkStatsDone: false,
 	coinsContent: {}
 }

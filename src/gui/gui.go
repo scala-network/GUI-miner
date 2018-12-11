@@ -27,6 +27,8 @@ type GUI struct {
 	astilectronOptions bootstrap.Options
 	// config for the miner
 	config *Config
+	// this set the miner in debug mode
+	inDebugMode bool
 	// miner is the selected miner backend as chosen by the user
 	miner miner.Miner
 	// logger logs to stdout
@@ -66,6 +68,7 @@ func New(
 	gui := GUI{
 		config:       config,
 		workingDir:   workingDir,
+		inDebugMode:  isDebug,
 		annProcessed: make(map[int]bool),
 	}
 
@@ -101,18 +104,24 @@ func New(
 	logrus.SetOutput(os.Stdout)
 
 	// Create the window options
+	var winHeight int
+	if gui.inDebugMode {
+		winHeight = 1000
+	} else {
+		winHeight = 745
+	}
 	windowOptions := astilectron.WindowOptions{
 		Frame:           astilectron.PtrBool(true),
 		BackgroundColor: astilectron.PtrStr("#001B45"),
 		Center:          astilectron.PtrBool(true),
-		Height:          astilectron.PtrInt(745),
+		Height:          astilectron.PtrInt(winHeight),
 		MinHeight:       astilectron.PtrInt(500),
 		Width:           astilectron.PtrInt(1220),
 		MinWidth:        astilectron.PtrInt(1220),
 		MaxWidth:        astilectron.PtrInt(1500),
 	}
 
-	if isDebug {
+	if gui.inDebugMode {
 		logrus.SetLevel(logrus.DebugLevel)
 		debugLog, err := os.OpenFile(
 			filepath.Join(gui.workingDir, "debug.log"),
@@ -156,7 +165,7 @@ func New(
 			},
 		})
 
-		windowOptions.Frame = astilectron.PtrBool(isDebug)
+		windowOptions.Frame = astilectron.PtrBool(gui.inDebugMode)
 		windowOptions.TitleBarStyle = astilectron.PtrStr("hidden")
 	}
 
@@ -167,7 +176,7 @@ func New(
 	})
 
 	gui.astilectronOptions = bootstrap.Options{
-		Debug:         isDebug,
+		Debug:         gui.inDebugMode,
 		Asset:         asset,
 		RestoreAssets: restoreAssets,
 		Windows: []*bootstrap.Window{{
@@ -216,7 +225,9 @@ func New(
 			// Check for any initial announcement
 			//gui.checkAnnouncement()
 			// uncomment this to have development tools opened when the app is built
-			//gui.window.OpenDevTools()
+			if gui.inDebugMode {
+				gui.window.OpenDevTools()
+			}
 			return nil
 		},
 	}

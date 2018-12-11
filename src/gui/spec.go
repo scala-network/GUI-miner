@@ -47,6 +47,7 @@ type coinsContentJson struct {
 	} `json:"coins"`
 	Names             map[string]interface{} `json:"names"`
 	Abbr2             map[string]interface{} `json:"abbreviation"`
+	CoinGeckoLinks    map[string]interface{} `json:"coinGeckoLinks"`
 	AddressPrefix     map[string]interface{} `json:"addressPrefix"`
 	AddressValidation map[string]interface{} `json:"addressValidation"`
 	MainBg            map[string]interface{} `json:"mainBackground"`
