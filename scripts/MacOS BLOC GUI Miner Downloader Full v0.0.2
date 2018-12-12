@@ -1,0 +1,11 @@
+#!/bin/sh
+VER="0.0.2"
+echo "Downloading BLOC GUI Miner v$VER..."
+WD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+mkdir $WD/'BLOC GUI Miner v'$VER
+curl -# https://bloc.money/files/BLOC-GUI-Miner/BLOC-GUI-Miner-v0.0.2-macOS-xmrstak.tar.gz | tar -zxf - -C $WD/'BLOC GUI Miner v'$VER
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+brew install libmicrohttpd
+echo "BLOC GUI Miner v$VER downloaded"
+echo "Open $WD/BLOC GUI Miner v$VER and double-click the App package to start the miner"
+echo "You can close this window"

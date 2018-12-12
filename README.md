@@ -22,6 +22,8 @@ Since the last update v0.0.2 we have added the possibility for everyone to add t
 - [TurtleCoin](https://turtlecoin.lol) **(TRTL)**
 - [RYO](https://ryo-currency.com) **(RYO)**
 
+## Add/Edit a coin or pool
+
 If you would like to contribute to this project by adding or editing a mining pool but also to add a new cryptonote currency please checkout the [instruction available](https://github.com/furiousteam/BLOC-GUI-Miner/tree/original-miners/coins).
 
 ## BLOC Mining
@@ -52,7 +54,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 We currently support two very popular miner backends:
 
-1. [xmr-stak](https://github.com/fireice-uk/xmr-stak) **v2.6.0**
+1. [xmr-stak](https://github.com/fireice-uk/xmr-stak) **v2.7.1**
 2. [xmrig](https://github.com/xmrig/xmrig) **v2.8.3** (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet tested
 
 ## Tutorial
