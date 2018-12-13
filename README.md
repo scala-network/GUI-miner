@@ -24,7 +24,7 @@ Since the last update v0.0.2 we have added the possibility for everyone to add t
 
 ## Add/Edit a coin or pool
 
-If you would like to contribute to this project by adding or editing a mining pool but also to add a new cryptonote currency please checkout the [instruction available](https://github.com/furiousteam/BLOC-GUI-Miner/tree/original-miners/coins).
+If you would like to contribute to this project by adding or editing a mining pool but also to add a new cryptonote currency please checkout the [instruction available](https://github.com/furiousteam/BLOC-GUI-Miner/tree/master/coins).
 
 ## BLOC Mining
 
