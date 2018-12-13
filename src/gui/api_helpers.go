@@ -65,7 +65,7 @@ func (gui *GUI) SaveConfig(config Config) error {
 
 // GetCoinContent returns the content for all coins
 func (gui *GUI) GetCoinContentJson() (string, error) {
-	resp, err := http.Get("https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/original-miners/coins/content.json")
+	resp, err := http.Get("https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/coins/content.json")
 	if err != nil {
 		return "", err
 	}
