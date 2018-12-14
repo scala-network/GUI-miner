@@ -60,11 +60,11 @@ BLOC GUI Miner comes with **XMR-STAK** and **XMRIG** already built-in, including
 
 Make sure to check the guides how to use:
 
-- [What is the BLOC GUI Miner ?](https://wiki.bloc.money/mining/bloc-gui-miner/)
+- [What is BLOC GUI Miner ?](https://wiki.bloc.money/mining/bloc-gui-miner/)
 - [How to install on Windows](https://wiki.bloc.money/mining/bloc-gui-miner-using/#windows)
 - [How to install on macOS](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mac-os)
 - [How to install on Linux](https://wiki.bloc.money/mining/bloc-gui-miner-using/#linux)
-- [How to use the BLOC GUI Miner to mine BLOC](https://wiki.bloc.money/mining/bloc-gui-miner-using/#start-mining)
+- [How to use BLOC GUI Miner to mine BLOC](https://wiki.bloc.money/mining/bloc-gui-miner-using/#start-mining)
 - [How to mine TurtleCoin](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
 
 ## **Downloads Binaries**
