@@ -13,12 +13,12 @@
       "coin_algo": "ryo"
     }
   ],
-  "xmrig_algo": {
+  "xmrigAlgo": {
     "bloc": "cryptonight-heavy",
     "turtlecoin": "cryptonight-lite",
     "ryo": "cryptonight-heavy"
   },
-  "xmrig_variant": {
+  "xmrigVariant": {
     "bloc": "xhv",
     "turtlecoin": "1",
     "ryo": "1"
