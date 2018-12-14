@@ -189,6 +189,7 @@ before you start the GUI-miner, make sure you have copied the binaries of [xmrig
 
 - [Fireice](https://github.com/fireice-uk/xmr-stak) for his precious help
 - [Stellite](https://github.com/stellitecoin/GUI-miner) for creating the 1st version of this GUI miner
+- [TurtleCoin](https://github.com/turtlecoin/turtlecoin) for pushing the limits of Cryptonote
 - [BLOC Developers](https://github.com/furiousteam/BLOC) for the great work
 
 ## **Contribute**
