@@ -1,6 +1,11 @@
 /*
   This handles the initial user setup
  */
+const default_coin_type = 'bloc';
+const default_coin_algo = 'cryptonight_haven';
+const default_xmrig_algo = 'cryptonight-heavy';
+const default_xmrig_variant = 'xhv';
+
 let firstrun = {
 	init: function() {
 		asticode.loader.init();
@@ -95,11 +100,14 @@ let firstrun = {
 				// Send the configuration to Go backend,
 				// then wait for Go's OK to continue
 				var configData = {
-					address: $('#miner-address-input').val().trim(),
-					pool: $('#pool-list').find('.table-body.selected').data('id'),
-					coin_type: firstrun.coin_type,
-					coin_algo: firstrun.coin_algo
+					address:       $('#miner-address-input').val().trim(),
+					pool:          $('#pool-list').find('.table-body.selected').data('id'),
+					coin_type:     firstrun.coin_type,
+					coin_algo:     firstrun.coin_algo,
+					xmrig_algo:    firstrun.xmrig_algo,
+					xmrig_variant: firstrun.xmrig_variant.toString()
 				};
+				console.log('[' + new Date().toUTCString() + '] ', "configuring", configData);
 				astilectron.sendMessage({name: "configure", payload: configData}, function(message) {
 					document.location = 'index.html';
 				});
@@ -110,8 +118,10 @@ let firstrun = {
 					return el.coin_type !== 'bloc';
 				});
 				coins = coins.map(function(el) { // add name and abbreviation keys
-					el.name = firstrun.coinsContent.names[el.coin_type];
-					el.abbreviation = firstrun.coinsContent.abbreviation[el.coin_type];
+					el.name          = firstrun.coinsContent.names[el.coin_type];
+					el.abbreviation  = firstrun.coinsContent.abbreviation[el.coin_type];
+					el.xmrig_algo    = firstrun.coinsContent.xmrigAlgo[el.coin_type];
+					el.xmrig_variant = firstrun.coinsContent.xmrigVariant[el.coin_type];
 					return el;
 				});
 				let html;
@@ -123,8 +133,10 @@ let firstrun = {
 				// Events to mine other currencies buttons
 				var cb = $('#other-currencies .currency-btn');
 				cb.off('click').on('click', function(event) {
-					firstrun.coin_type = $(this).data('coin_type');
-					firstrun.coin_algo = $(this).data('coin_algo');
+					firstrun.coin_type =     $(this).data('coin_type');
+					firstrun.coin_algo =     $(this).data('coin_algo');
+					firstrun.xmrig_algo =    $(this).data('xmrig_algo');
+					firstrun.xmrig_variant = $(this).data('xmrig_variant');
 					$('#other-currencies-next-step').trigger('click');
 				});
 			}
@@ -133,8 +145,8 @@ let firstrun = {
 				// setup
 				var mac = $('#miner-address-content');
 				let data = {
-					coin_name: firstrun.coinsContent.names[firstrun.coin_type],
-					coin_abbr: firstrun.coinsContent.abbreviation[firstrun.coin_type],
+					coin_name:   firstrun.coinsContent.names[firstrun.coin_type],
+					coin_abbr:   firstrun.coinsContent.abbreviation[firstrun.coin_type],
 					coin_prefix: firstrun.coinsContent.addressPrefix[firstrun.coin_type]
 				};
 
@@ -149,8 +161,10 @@ let firstrun = {
 		});
 		// If i've clicked "i already have a wallet" button, reset to BLOC
 		$('#choose-wallet a[data-target="miner-address"]').on('click', function(event) {
-			firstrun.coin_type = 'bloc';
-			firstrun.coin_algo = 'cryptonight_haven';
+			firstrun.coin_type     = default_coin_type;
+			firstrun.coin_algo     = default_coin_algo;
+			firstrun.xmrig_algo    = default_xmrig_algo;
+			firstrun.xmrig_variant = default_xmrig_variant;
 		});
 
 		// Pool list validation
@@ -178,8 +192,10 @@ let firstrun = {
 			}
 		});
 	},
-	coin_type: 'bloc',
-	coin_algo: 'cryptonight_haven',
+	coin_type: default_coin_type,
+	coin_algo: default_coin_algo,
+	xmrig_algo: default_xmrig_algo,
+	xmrig_variant: default_xmrig_variant,
 	selected_pool: 0,
 	coinsContent: {}
 };

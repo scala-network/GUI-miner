@@ -13,6 +13,8 @@ type Miner interface {
 		poolEndpoint string,
 		walletAddress string,
 		coinAlgorithm string,
+		XmrigAlgo string, // This should not be here, because it's specific to 1 miner alone
+		XmrigVariant string, // This should not be here, because it's specific to 1 miner alone
 		processingConfig ProcessingConfig) error
 	// GetProcessingConfig returns the current miner processing config
 	// TODO: Currently only CPU threads, extend this to full CPU/GPU config

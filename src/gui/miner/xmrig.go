@@ -160,6 +160,8 @@ func (miner *Xmrig) WriteConfig(
 	poolEndpoint string,
 	walletAddress string,
 	coinAlgorithm string,
+	XmrigAlgo string,
+	XmrigVariant string,
 	processingConfig ProcessingConfig) error {
 
 	var err error
@@ -167,7 +169,9 @@ func (miner *Xmrig) WriteConfig(
 	if miner.isGPU {
 		defaultConfig := miner.createGPUConfig(
 			poolEndpoint,
-			walletAddress)
+			walletAddress,
+			XmrigAlgo,
+			XmrigVariant)
 		configBytes, err = json.Marshal(defaultConfig)
 		if err != nil {
 			return err
@@ -176,6 +180,8 @@ func (miner *Xmrig) WriteConfig(
 		defaultConfig := miner.createConfig(
 			poolEndpoint,
 			walletAddress,
+			XmrigAlgo,
+			XmrigVariant,
 			processingConfig)
 		configBytes, err = json.Marshal(defaultConfig)
 		if err != nil {
@@ -325,6 +331,8 @@ func (miner *Xmrig) GetStats() (Stats, error) {
 func (miner *Xmrig) createConfig(
 	poolEndpoint string,
 	walletAddress string,
+	XmrigAlgo string,
+	XmrigVariant string,
 	processingConfig ProcessingConfig) XmrigConfig {
 
 	runInBackground := true
@@ -336,7 +344,7 @@ func (miner *Xmrig) createConfig(
 	}
 
 	config := XmrigConfig{
-		Algo:        "cryptonight-heavy",
+		Algo:        XmrigAlgo,
 		Av:          0,
 		Background:  runInBackground,
 		Colors:      true,
@@ -358,7 +366,7 @@ func (miner *Xmrig) createConfig(
 				Pass:      "BLOC GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
-				Variant:   "xhv",
+				Variant:   XmrigVariant,
 			},
 		},
 		API: XmrigAPIConfig{
@@ -374,10 +382,12 @@ func (miner *Xmrig) createConfig(
 // createGPUConfig returns creates the config for Xmrig GPU setups
 func (miner *Xmrig) createGPUConfig(
 	poolEndpoint string,
-	walletAddress string) XmrigGPUConfig {
+	walletAddress string,
+	XmrigAlgo string,
+	XmrigVariant string) XmrigGPUConfig {
 
 	config := XmrigGPUConfig{
-		Algo:        "cryptonight-heavy",
+		Algo:        XmrigAlgo,
 		Av:          0,
 		Background:  false,
 		Colors:      true,
@@ -397,7 +407,7 @@ func (miner *Xmrig) createGPUConfig(
 				Pass:      "BLOC GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
-				Variant:   "xhv",
+				Variant:   XmrigVariant,
 			},
 		},
 		API: XmrigAPIConfig{

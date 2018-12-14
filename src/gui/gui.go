@@ -58,6 +58,8 @@ func New(
 	apiEndpoint string,
 	coinType string,
 	coinAlgo string,
+	XmrigAlgo string,
+	XmrigVariant string,
 	workingDir string,
 	isDebug bool) (*GUI, error) {
 
@@ -86,10 +88,12 @@ func New(
 	} else {
 		// Nothing has been configured yet, set some defaults
 		gui.config = &Config{
-			APIEndpoint: apiEndpoint,
-			CoinType:    coinType,
-			CoinAlgo:    coinAlgo,
-			Mid:         uuid.New().String(),
+			APIEndpoint:  apiEndpoint,
+			CoinType:     coinType,
+			CoinAlgo:     coinAlgo,
+			XmrigAlgo:    XmrigAlgo,
+			XmrigVariant: XmrigVariant,
+			Mid:          uuid.New().String(),
 		}
 	}
 	var menu []*astilectron.MenuItemOptions
@@ -411,8 +415,10 @@ func (gui *GUI) handleElectronCommands(
 	case "config-file":
 		gui.logger.Info("Sending config to frontend")
 		currentConfig := frontendConfig{
-			CoinType: gui.config.CoinType,
-			CoinAlgo: gui.config.CoinAlgo,
+			CoinType:     gui.config.CoinType,
+			CoinAlgo:     gui.config.CoinAlgo,
+			XmrigAlgo:    gui.config.XmrigAlgo,
+			XmrigVariant: gui.config.XmrigVariant,
 		}
 
 		dataBytes, err := json.Marshal(currentConfig)
@@ -464,6 +470,8 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	gui.config.PoolID = newConfig.Pool
 	gui.config.CoinType = newConfig.CoinType
 	gui.config.CoinAlgo = newConfig.CoinAlgo
+	gui.config.XmrigAlgo = newConfig.XmrigAlgo
+	gui.config.XmrigVariant = newConfig.XmrigVariant
 
 	scanPath := filepath.Join(gui.workingDir, "miner")
 	// TODO: Fix own miner paths option
@@ -528,6 +536,8 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 		poolInfo.Config,
 		gui.config.Address,
 		gui.config.CoinAlgo,
+		gui.config.XmrigAlgo,
+		gui.config.XmrigVariant,
 		miner.ProcessingConfig{
 			Threads:  newConfig.Threads,
 			MaxUsage: newConfig.MaxCPU,

@@ -14,6 +14,10 @@ type Config struct {
 	CoinType string `json:"coin_type"`
 	// CoinAlgo is the algo of the coin the miner is currently minning
 	CoinAlgo string `json:"coin_algo"`
+	// This is only for xmrig
+	XmrigAlgo string `json:"xmrig_algo"`
+	// This is only for xmrig
+	XmrigVariant string `json:"xmrig_variant"`
 	// Address to mine to
 	Address string `json:"address"`
 	// PoolID selected on startup
@@ -31,12 +35,14 @@ type ElectronMessage struct {
 
 // frontendConfig is received from the miner's config page
 type frontendConfig struct {
-	Address  string `json:"address"`
-	Pool     int    `json:"pool"`
-	Threads  uint16 `json:"threads"`
-	MaxCPU   uint8  `json:"max_cpu"`
-	CoinType string `json:"coin_type"`
-	CoinAlgo string `json:"coin_algo"`
+	Address  string     `json:"address"`
+	Pool     int        `json:"pool"`
+	Threads  uint16     `json:"threads"`
+	MaxCPU   uint8      `json:"max_cpu"`
+	CoinType string     `json:"coin_type"`
+	CoinAlgo string     `json:"coin_algo"`
+	XmrigAlgo string    `json:"xmrig_algo"`
+	XmrigVariant string `json:"xmrig_variant"`
 }
 
 // coinsContentJson is received from github "BLOC-GUI-Miner/coins/content.json"
@@ -45,6 +51,8 @@ type coinsContentJson struct {
 		CoinType string `json:"coin_type"`
 		CoinAlgo string `json:"coin_algo"`
 	} `json:"coins"`
+	XmrigAlgo         map[string]interface{} `json:"xmrigAlgo"`
+	XmrigVariant      map[string]interface{} `json:"xmrigVariant"`
 	Names             map[string]interface{} `json:"names"`
 	Abbr2             map[string]interface{} `json:"abbreviation"`
 	CoinGeckoLinks    map[string]interface{} `json:"coinGeckoLinks"`

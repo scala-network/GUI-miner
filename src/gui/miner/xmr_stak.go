@@ -80,6 +80,8 @@ func (miner *XmrStak) WriteConfig(
 	poolEndpoint string,
 	walletAddress string,
 	coinAlgorithm string,
+	XmrigAlgo string,
+	XmrigVariant string,
 	processingConfig ProcessingConfig) error {
 
 	// For xmr-stak, we assume some values for now. I'll extend this in

@@ -36,6 +36,8 @@ let app = {
 					app.coin_type = parsed.coin_type;
 					app.prev_coin_type = app.coin_type;
 					app.coin_algo = parsed.coin_algo;
+					app.xmrig_algo = parsed.xmrig_algo;
+					app.xmrig_variant = parsed.xmrig_variant;
 					app.populateMainUI();
 				});
 			});
@@ -268,12 +270,14 @@ let app = {
 			}, function(message) {
 				// Save the miner settings
 				var configData = {
-					address: $('#settings_mining_address').val().trim(),
-					pool: app.selected_pool,
-					coin_type: app.coin_type,
-					coin_algo: app.coin_algo,
-					threads: parseInt($('#cpu-cores').dropselect('value')),
-					max_cpu: parseInt($('#cpu-max').dropselect('value'))
+					address:       $('#settings_mining_address').val().trim(),
+					pool:          app.selected_pool,
+					coin_type:     app.coin_type,
+					coin_algo:     app.coin_algo,
+					xmrig_algo:    app.xmrig_algo,
+					xmrig_variant: app.xmrig_variant.toString(),
+					threads:       parseInt($('#cpu-cores').dropselect('value')),
+					max_cpu:       parseInt($('#cpu-max').dropselect('value'))
 				};
 				console.log('[' + new Date().toUTCString() + '] ', "configure", configData);
 				astilectron.sendMessage({name: "configure", payload: configData}, function(message){
@@ -357,15 +361,24 @@ let app = {
 			$('#settings-coins').dropselect('change', function() {
 				asticode.loader.show();
 
+				// Add the xmrig_algo and xmrig_variant to the coins
+				let all_coins = app.coinsContent.coins.map(function(el) {
+					el.xmrig_algo    = app.coinsContent.xmrigAlgo[el.coin_type];
+					el.xmrig_variant = app.coinsContent.xmrigVariant[el.coin_type];
+					return el;
+				});
+
 				// Change coin_type/coin_algo
 				const sel_coin_type = $('#settings-coins').dropselect('value'); // Selected coin_type
-				let curr_coin = app.coinsContent.coins.filter(function(el) { // add name and abbreviation keys
+				let curr_coin = all_coins.filter(function(el) { // add name and abbreviation keys
 					return el.coin_type == sel_coin_type;
 				});
 
 				app.prev_coin_type = app.coin_type;
 				app.coin_type = sel_coin_type;
 				app.coin_algo = curr_coin[0].coin_algo;
+				app.xmrig_algo = curr_coin[0].xmrig_algo;
+				app.xmrig_variant = String(curr_coin[0].xmrig_variant);
 
 				// The coin has changed, reload the pools
 				app._loadPoolsInSettings(function() {
@@ -472,6 +485,8 @@ let app = {
 	prev_coin_type: '',
 	coin_type: '',
 	coin_algo: '',
+	xmrig_algo: '',
+	xmrig_variant: '',
 	selected_pool: 0,
 	populatedAddress: false,
 	networkStatsOnce: false,

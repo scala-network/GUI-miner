@@ -56,22 +56,28 @@ func main() {
 	var apiEndpoint string
 	var coinType string
 	var coinAlgo string
+	var XmrigAlgo string
+	var XmrigVariant string
 	fileBytes, err := ioutil.ReadFile(filepath.Join(workingDir, "config.json"))
 	if err == nil {
 		err = json.Unmarshal(fileBytes, &config)
 		if err != nil {
 			panic(err)
 		}
-		apiEndpoint = config.APIEndpoint
-		coinType = config.CoinType
-		coinAlgo = config.CoinAlgo
+		apiEndpoint  = config.APIEndpoint
+		coinType     = config.CoinType
+		coinAlgo     = config.CoinAlgo
+		XmrigAlgo    = config.XmrigAlgo
+		XmrigVariant = config.XmrigVariant
 	} else {
 		config = nil
 		// Not set yet, set to default
 		// Hardcoded since we don't ship a config file
-		apiEndpoint = "https://bloc.money/miner-api"
-		coinType = "bloc"
-		coinAlgo = "cryptonight_haven"
+		apiEndpoint  = "https://bloc.money/miner-api"
+		coinType     = "bloc"
+		coinAlgo     = "cryptonight_haven"
+		XmrigAlgo    = "cryptonight-heavy"
+		XmrigVariant = "xhv"
 	}
 
 	// Create the miner
@@ -84,6 +90,8 @@ func main() {
 		apiEndpoint,
 		coinType,
 		coinAlgo,
+		XmrigAlgo,
+		XmrigVariant,
 		workingDir,
 		*debug,
 	)
