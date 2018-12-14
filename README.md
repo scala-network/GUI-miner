@@ -195,5 +195,6 @@ before you start the GUI-miner, make sure you have copied the binaries of [xmrig
 
 If you have an issue not listed here or if you would like to add a new feature to the **BLOC GUI Miner** please [submit a pull request](https://github.com/furiousteam/BLOC-GUI-Miner/compare) or log a new issue, alternatively, you can [contact us](https://wiki.bloc.money/about/community/)
 
+________________________________________________________________
 
 [![BLOC](DOCS/images/bloc-logo-intro.png)](https://bloc.money)
