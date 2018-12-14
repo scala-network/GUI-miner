@@ -1,74 +1,80 @@
 # **BLOC GUI Miner**
 
-[BLOC GUI Miner](https://wiki.bloc.money/mining/bloc-gui-miner/) is a beautiful, easy to use, Graphical User interface for mining multiple cryptocurrency based on cryptonote.
+[BLOC GUI Miner](https://github.com/furiousteam/BLOC-GUI-Miner) is a beautiful, easy to use, Graphical User interface for mining multiple cryptocurrencies based on cryptonote.
 
 It is aimed at getting people that have never tried mining before with a focus on accessibility, security and simplicity.
 
-![BLOC GUI Miner Intro](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-MINER-1.png)
+![BLOC GUI Miner Intro](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-home.png)
 
-BLOC GUI miner makes getting started with cryptocurrencies mining easier than ever.
+BLOC GUI Miner support two very popular miner backends: [xmr-stak](https://github.com/fireice-uk/xmr-stak) and [xmrig](https://github.com/xmrig/xmrig)
 
-BLOC GUI Miner support two very popular miner backends: [XMR-STAK](https://github.com/fireice-uk/xmr-stak) and [XMRIG](https://github.com/xmrig/xmrig)
+BLOC GUI Miner comes with **XMR-STAK 2.7.1** and XMRIG **2.8.3** already built-in, including configuration files for CPU and GPU mining in most of the cases.
 
-BLOC GUI Miner comes with XMR-STAK already built-in, including configuration files for CPU and GPU mining in most of the cases.
-
-![BLOC GUI Miner Intro](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-MINER-7.png)
+![BLOC GUI Miner Intro](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-ready.png)
 
 ## **Supported Cryptocurrency**
 
-Since the last update v0.0.2 we have added the possibility for everyone to add their own cryptocurrency to the BLOC GUI Miner as long as it is supported by XMR-STAK. Curently we support :
+Everyone can add their own cryptocurrency to the BLOC GUI Miner as long as it is supported by **XMR-STAK** and **XMRIG**.
+In the same time everyone can add/edit a mining pool into the BLOC GUI Miner.
+
+Curently we support :
 
 - [BLOC.MONEY](https://bloc.money) **(BLOC)**
 - [TurtleCoin](https://turtlecoin.lol) **(TRTL)**
 - [RYO](https://ryo-currency.com) **(RYO)**
 
-## Add/Edit a coin or pool
+If you would like to contribute to this project by adding or editing a mining pool but also to add a new cryptonote currency please checkout the [instructions available](https://github.com/furiousteam/BLOC-GUI-Miner/tree/master/coins).
 
-If you would like to contribute to this project by adding or editing a mining pool but also to add a new cryptonote currency please checkout the [instruction available](https://github.com/furiousteam/BLOC-GUI-Miner/tree/master/coins).
-
-## BLOC Mining
+## **BLOC Mining**
 
 [BLOC.MONEY](https://bloc.money) is a fast, easy to use and private decentralized cryptocurrency. Send money spacewide, worldwide or locally, immediately and without costly intermediaries using the blockchain technology.
 
 *Overview:*
 
-[![BLOC GUI Miner Mining BLOC](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/bloc-mining.png)](https://wiki.bloc.money/mining/bloc-gui-miner/)
+[![BLOC GUI Miner Mining BLOC](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-BLOC-mining.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
 
 *Help:*
 
-[![BLOC GUI Miner Help](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/bloc-help.png)](https://wiki.bloc.money/mining/bloc-gui-miner/)
+[![BLOC GUI Miner Mining BLOC](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-help.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
 
-## TurtleCoin Mining
+## **TurtleCoin Mining**
 
 [TurtleCoin](https://github.com/turtlecoin/turtlecoin) is a fast, easy and private cryptocurrency which allows you to send money to friends and businesses.
 
 *Overview:*
 
-[![BLOC GUI Miner Mining TurtleCoin](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/mining-turtlecoin.png)](https://wiki.bloc.money/mining/bloc-gui-miner/#mining-turtlecoin-trtl)
+[![BLOC GUI Miner Mining TurtleCoin](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-TRTL-mining.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
 
 *Mining Pools:*
 
-[![BLOC GUI Miner TurtleCoin Help](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/trtl-settings.png)](https://wiki.bloc.money/mining/bloc-gui-miner/#mining-turtlecoin-trtl)
+[![BLOC GUI Miner Mining TurtleCoin](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/trtl-settings-page.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
 
-## Supported Miners
+## **Supported Miners**
 
-We currently support two very popular miner backends:
+BLOC GUI Miner comes with **XMR-STAK** and **XMRIG** already built-in, including configuration files for CPU and GPU mining in most of the cases.
 
-1. [xmr-stak](https://github.com/fireice-uk/xmr-stak) **v2.7.1**
-2. [xmrig](https://github.com/xmrig/xmrig) **v2.8.3** (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet tested
+1. [xmr-stak](../mining/XMR-Stak-index.md) **v2.7.1**
+2. [xmrig](../mining/XMRIG-index.md) **v2.8.3** (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet implented
 
-## Tutorial
+## **Guide**
 
-Make sure to check the complete tutorial: [How to use BLOC GUI Miner](https://wiki.bloc.money/mining/bloc-gui-miner/) available from the **BLOC Wiki**.
+Make sure to check the guides how to use:
 
-## Downloads Binaries
+- [What is the BLOC GUI Miner ?](https://wiki.bloc.money/mining/bloc-gui-miner/)
+- [How to install on Windows](https://wiki.bloc.money/mining/bloc-gui-miner-using/#windows)
+- [How to install on macOS](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mac-os)
+- [How to install on Linux](https://wiki.bloc.money/mining/bloc-gui-miner-using/#linux)
+- [How to use the BLOC GUI Miner to mine BLOC](https://wiki.bloc.money/mining/bloc-gui-miner-using/#start-mining)
+- [How to mine TurtleCoin](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
 
-Make sure to disable your antivirus as XMR-STAK will be detected as a virus and for this reason it the BLOC GUI Miner zip file will be deleted.
+## **Downloads Binaries**
+
+Some antivirus packages detect cryptocurrency miners as malware and will remove the miner as soon as it's started. In order for the BLOC GUI miner to function, you'll need to exclude the miner from being scanned by your antivirus software.
 
 - Download and install BLOC GUI Miner for [Windows, Mac and Linux](https://github.com/furiousteam/GUI-miner/releases/latest) from GitHub
 - From the [Download Area](https://bloc.money/download) of BLOC.MONEY
 
-## Compiling on Linux (Ubuntu)
+## **Compiling on Linux (Ubuntu)**
 
 Compiling on Linux will generate the binaries for Windows, macOS and Linux.
 
@@ -76,7 +82,7 @@ The miner GUI is built using [Electron](https://electronjs.org) and
 [Go](https://golang.org) using the
 [Astilectron app framework](https://github.com/asticode/astilectron).
 
-### Install dependencies
+### **Install dependencies**
 
 ```shell
 sudo apt-get update
@@ -88,7 +94,7 @@ sudo apt-get install gcc make python libmicrohttpd10 libnss3 -y
 - libmicrohttpd is required for xmrig  
 - libnss3 is required for electron  
 
-### Install Go
+### **Install Go**
 
 1. [https://golang.org/dl/](https://golang.org/dl/)
 
@@ -179,7 +185,7 @@ If all goes well, the binaries for Windows, macOS and Linux will be available in
 
 before you start the GUI-miner, make sure you have copied the binaries of [xmrig](https://github.com/xmrig/xmrig) or [xmr-stak](https://github.com/fireice-uk/xmr-stak) into the `miner` subfolder right next to the main GUI-miner executable
 
-### Thanks
+## **Thanks**
 
 - [Fireice](https://github.com/fireice-uk/xmr-stak) for his precious help
 - [Stellite](https://github.com/stellitecoin/GUI-miner) for creating the 1st version of this GUI miner
