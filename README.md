@@ -198,4 +198,8 @@ If you have an issue not listed here or if you would like to add a new feature t
 
 ________________________________________________________________
 
+![BLOC GUI Miner v0.0.3 Update](DOCS/images/BLOC-GUI-Miner-Update-0.0.3.jpg)
+________________________________________________________________
+
+
 [![BLOC](DOCS/images/bloc-logo-intro.png)](https://bloc.money)
