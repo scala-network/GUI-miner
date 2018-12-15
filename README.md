@@ -1,3 +1,5 @@
+![BLOC GUI Miner v0.0.3 Update](DOCS/images/BLOC-GUI-Miner-Update-0.0.3.jpg)
+
 # **BLOC GUI Miner**
 
 [BLOC GUI Miner](https://github.com/furiousteam/BLOC-GUI-Miner) is a beautiful, easy to use, Graphical User interface for mining multiple cryptocurrencies based on cryptonote.
@@ -195,10 +197,6 @@ before you start the GUI-miner, make sure you have copied the binaries of [xmrig
 ## **Contribute**
 
 If you have an issue not listed here or if you would like to add a new feature to the **BLOC GUI Miner** please [submit a pull request](https://github.com/furiousteam/BLOC-GUI-Miner/compare) or log a new issue, alternatively, you can [contact us](https://wiki.bloc.money/about/community/)
-
-________________________________________________________________
-
-![BLOC GUI Miner v0.0.3 Update](DOCS/images/BLOC-GUI-Miner-Update-0.0.3.jpg)
 ________________________________________________________________
 
 
