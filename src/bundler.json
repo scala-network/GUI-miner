@@ -1,5 +1,5 @@
 {
-  "app_name": "Stellite GUI Miner v1.3.0",
+  "app_name": "Torque GUI Miner v1.3.1",
   "environments": [
     {"arch": "amd64", "os": "linux"},
     {"arch": "amd64", "os": "darwin"},

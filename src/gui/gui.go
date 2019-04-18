@@ -14,9 +14,9 @@ import (
 
 	astilectron "github.com/asticode/go-astilectron"
 	bootstrap "github.com/asticode/go-astilectron-bootstrap"
+	"github.com/contribute-torque/gui-miner/src/gui/miner"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
-	"github.com/stellitecoin/gui-miner/src/gui/miner"
 )
 
 // GUI implements the core control for the GUI miner
@@ -158,7 +158,7 @@ func New(
 	// Setting the WithFields now will ensure all log entries from this point
 	// includes the fields
 	gui.logger = logrus.WithFields(logrus.Fields{
-		"service": "stellite-gui-miner",
+		"service": "torque-gui-miner",
 	})
 
 	gui.astilectronOptions = bootstrap.Options{
