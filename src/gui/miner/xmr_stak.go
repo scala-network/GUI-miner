@@ -66,7 +66,7 @@ func NewXmrStak(config Config) (*XmrStak, error) {
 	miner := XmrStak{
 		// We've switched to our own miner in V4, xtl-stak, but I'm keeping
 		// everything else xmr-stak for clarity
-		name:     "xtl-stak",
+		name:     "xtc-stak",
 		endpoint: endpoint,
 	}
 	miner.Base.executableName = filepath.Base(config.Path)
@@ -387,9 +387,9 @@ func (miner *XmrStak) buildPoolConfig(
 	return `
 "pool_list" :
 [
-	{"pool_address" : "` + poolEndpoint + `", "wallet_address" : "` + walletAddress + `", "rig_id" : "", "pool_password" : "Stellite GUI Miner", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
+	{"pool_address" : "` + poolEndpoint + `", "wallet_address" : "` + walletAddress + `", "rig_id" : "", "pool_password" : "Torque GUI Miner", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
 ],
-"currency" : "stellite",
+"currency" : "torque",
 		`
 }
 
@@ -417,7 +417,7 @@ func (miner *XmrStak) cpuConfig(threads uint16) string {
 	 *                  things slower.
 	 *
 	 * asm            - Allow to switch to a assembler version of cryptonight_v8; allowed value [auto, off, intel_avx, amd_avx]
-	 *                    - auto: xtl-stak will automatically detect the asm type (default)
+	 *                    - auto: xtc-stak will automatically detect the asm type (default)
 	 *                    - off: disable the usage of optimized assembler
 	 *                    - intel_avx: supports Intel cpus with avx instructions e.g. Xeon v2, Core i7/i5/i3 3xxx, Pentium G2xxx, Celeron G1xxx
 	 *                    - amd_avx: supports AMD cpus with avx instructions e.g. AMD Ryzen 1xxx and 2xxx series

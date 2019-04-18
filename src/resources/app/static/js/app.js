@@ -185,7 +185,7 @@ let app = {
       // invalid ones
       if (shared.validateWalletAddress(configData.address) == false)
       {
-        alert("Please enter a valid Stellite address starting with 'Se'");
+        alert("Please enter a valid Torque address starting with 'Se' or 'SE'");
         return false;
       }
 

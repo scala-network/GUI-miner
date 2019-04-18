@@ -138,7 +138,7 @@ func NewXmrig(config Config) (*Xmrig, error) {
 	miner := Xmrig{
 		// We've switched to our own miner in V4, xtlrig, but I'm keeping
 		// everything else xmrig for clarity
-		name:     "xtlrig",
+		name:     "xtcrig",
 		endpoint: endpoint,
 	}
 	// xmrig appends either nvidia or amd to the miner if it's GPU only
@@ -266,7 +266,7 @@ func (miner *Xmrig) GetStats() (Stats, error) {
 	var errors []string
 	/*
 		TODO: I noticed errors are not reported in the xmrig API. To replicate,
-		use an invalid Stellite address with a pool that checks the address. In
+		use an invalid Torque address with a pool that checks the address. In
 		the command line you'll notice errors printed, but not added in the API.
 		ApiState.cpp::getConnection and getResults functions might give some clues
 		to getting it fixed.
@@ -337,10 +337,10 @@ func (miner *Xmrig) createConfig(
 			{
 				URL:       poolEndpoint,
 				User:      walletAddress,
-				Pass:      "Stellite GUI Miner",
+				Pass:      "Torque GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
-				Variant:   "xtl",
+				Variant:   "xtc",
 			},
 		},
 		API: XmrigAPIConfig{
@@ -376,10 +376,10 @@ func (miner *Xmrig) createGPUConfig(
 			{
 				URL:       poolEndpoint,
 				User:      walletAddress,
-				Pass:      "Stellite GUI Miner",
+				Pass:      "Torque GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
-				Variant:   "xtl",
+				Variant:   "xtc",
 			},
 		},
 		API: XmrigAPIConfig{
