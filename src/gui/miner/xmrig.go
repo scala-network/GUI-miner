@@ -379,7 +379,7 @@ func (miner *Xmrig) createGPUConfig(
 				Pass:      "Torque GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
-				Variant:   "xtc",
+				Variant:   "xtl",
 			},
 		},
 		API: XmrigAPIConfig{
