@@ -6,7 +6,7 @@
     },
     {
       "coin_type": "turtlecoin",
-      "coin_algo": "cryptonight-turtle"
+      "coin_algo": "cryptonight_turtle"
     },
     {
       "coin_type": "ryo",
