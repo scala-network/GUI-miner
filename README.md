@@ -1,4 +1,4 @@
-![BLOC GUI Miner v0.0.3 Update](DOCS/images/BLOC-GUI-Miner-Update-0.0.3.jpg)
+![BLOC GUI Miner v0.0.4 Update](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-Update-0.0.4-part1.jpg)![BLOC GUI Miner v0.0.4 Update](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-Update-0.0.4-part2.jpg)
 
 # **BLOC GUI Miner**
 
@@ -6,11 +6,11 @@
 
 It is aimed at getting people that have never tried mining before with a focus on accessibility, security and simplicity.
 
-![BLOC GUI Miner Intro](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-home.png)
+![BLOC GUI Miner Intro](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v004-welcome.png)
 
 BLOC GUI Miner support two very popular miner backends: [xmr-stak](https://github.com/fireice-uk/xmr-stak) and [xmrig](https://github.com/xmrig/xmrig)
 
-BLOC GUI Miner comes with **XMR-STAK 2.7.1** and XMRIG **2.8.3** already built-in, including configuration files for CPU and GPU mining in most of the cases.
+BLOC GUI Miner comes with **XMR-STAK 2.10.4** and XMRIG **2.14.1** already built-in, including configuration files for CPU and GPU mining in most of the cases.
 
 ![BLOC GUI Miner Intro](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-ready.png)
 
@@ -33,11 +33,11 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Overview:*
 
-[![BLOC GUI Miner Mining BLOC](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-BLOC-mining.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
+[![BLOC GUI Miner Mining BLOC](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v004-mining-BLOC.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
 
 *Help:*
 
-[![BLOC GUI Miner Mining BLOC](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-help.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
+[![BLOC GUI Miner Mining BLOC](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v004-help.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
 
 ## **TurtleCoin Mining**
 
@@ -45,18 +45,18 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Overview:*
 
-[![BLOC GUI Miner Mining TurtleCoin](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v0.0.3-TRTL-mining.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
+[![BLOC GUI Miner Mining TurtleCoin](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v004-mining-TRTL.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
 
 *Mining Pools:*
 
-[![BLOC GUI Miner Mining TurtleCoin](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/trtl-settings-page.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
+[![BLOC GUI Miner Mining TurtleCoin](https://wiki.bloc.money/mining/images/BLOC-GUI-MINER/BLOC-GUI-Miner-v004-settings-TRTL.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
 
 ## **Supported Miners**
 
 BLOC GUI Miner comes with **XMR-STAK** and **XMRIG** already built-in, including configuration files for CPU and GPU mining in most of the cases.
 
-1. [xmr-stak](../mining/XMR-Stak-index.md) **v2.7.1**
-2. [xmrig](../mining/XMRIG-index.md) **v2.8.3** (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet implented
+1. [xmr-stak](../mining/XMR-Stak-index.md) **v2.10.4**
+2. [xmrig](../mining/XMRIG-index.md) **v2.14.1** (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet implented
 
 ## **Guide**
 
