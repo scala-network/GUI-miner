@@ -6,7 +6,7 @@
     },
     {
       "coin_type": "turtlecoin",
-      "coin_algo": "cryptonight_lite_v7"
+      "coin_algo": "cryptonight-turtle"
     },
     {
       "coin_type": "ryo",
@@ -15,7 +15,7 @@
   ],
   "xmrigAlgo": {
     "bloc": "cryptonight-heavy",
-    "turtlecoin": "cryptonight-lite",
+    "turtlecoin": "cryptonight-turtle",
     "ryo": "cryptonight-heavy"
   },
   "xmrigVariant": {
