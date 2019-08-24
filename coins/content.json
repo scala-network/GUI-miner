@@ -54,18 +54,18 @@
     },
     "ryo": {
       "image": "static/img/RYO/bg-miner-mining.png", 
-      "color": "#e6e6e6"
+      "color": "#00deff"
     }
   },
   "textColor": {
     "bloc": "#ffed00",
     "turtlecoin": "#00ff00",
-    "ryo": "#003cff"
+    "ryo": "#009cff"
   },
   "boxColor": {
     "bloc": "#090a31",
     "turtlecoin": "#021203",
-    "ryo": "#767676"
+    "ryo": "#092131"
   },
   "boxBorder": {
     "bloc": "#222",
