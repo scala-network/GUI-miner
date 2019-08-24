@@ -362,7 +362,7 @@ func (miner *XmrStak) defaultConfig() string {
 	 * output_file  - This option will log all output to a file.
 	 *
 	 */
-	"output_file" : "",
+	"output_file" : "xmrstak.log",
 
 	/*
 	 * Built-in web server
