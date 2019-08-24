@@ -259,16 +259,17 @@ func (miner *XmrStak) defaultConfig() string {
 	 * performance monitors, there is very little reason to spew out pages of text instead of concise reports.
 	 * Press 'h' (hashrate), 'r' (results) or 'c' (connection) to print reports.
 	 *
-	 * verbose_level - 0 - Don't print anything.
-	 *                 1 - Print intro, connection event, disconnect event
-	 *                 2 - All of level 1, and new job (block) event if the difficulty is different from the last job
-	 *                 3 - All of level 1, and new job (block) event in all cases, result submission event.
-	 *                 4 - All of level 3, and automatic hashrate report printing
+	 * verbose_level - 0  - Don't print anything.
+	 *                 1  - Print intro, connection event, disconnect event
+	 *                 2  - All of level 1, and new job (block) event if the difficulty is different from the last job
+	 *                 3  - All of level 1, and new job (block) event in all cases, result submission event.
+	 *                 4  - All of level 3, and automatic hashrate report printing
+	 *                 10 - Debug level for developer
 	 *
 	 * print_motd    - Display messages from your pool operator in the hashrate result.
 	 */
-	"verbose_level" : 3,
-	"print_motd" : true,
+   "verbose_level" : 4,
+   "print_motd" : true,
 
 	/*
 	 * Automatic hashrate report
@@ -289,47 +290,40 @@ func (miner *XmrStak) defaultConfig() string {
 	"aes_override" : null,
 
 	/*
-	 * LARGE PAGE SUPPORT
-	 * Large pages need a properly set up OS. It can be difficult if you are not used to systems administration,
-	 * but the performance results are worth the trouble - you will get around 20% boost. Slow memory mode is
-	 * meant as a backup, you won't get stellar results there. If you are running into trouble, especially
-	 * on Windows, please read the common issues in the README.
-	 *
-	 * By default we will try to allocate large pages. This means you need to "Run As Administrator" on Windows.
-	 * You need to edit your system's group policies to enable locking large pages. Here are the steps from MSDN
-	 *
-	 * 1. On the Start menu, click Run. In the Open box, type gpedit.msc.
-	 * 2. On the Local Group Policy Editor console, expand Computer Configuration, and then expand Windows Settings.
-	 * 3. Expand Security Settings, and then expand Local Policies.
-	 * 4. Select the User Rights Assignment folder.
-	 * 5. The policies will be displayed in the details pane.
-	 * 6. In the pane, double-click Lock pages in memory.
-	 * 7. In the Local Security Setting – Lock pages in memory dialog box, click Add User or Group.
-	 * 8. In the Select Users, Service Accounts, or Groups dialog box, add an account that you will run the miner on
-	 * 9. Reboot for change to take effect.
-	 *
-	 * Windows also tends to fragment memory a lot. If you are running on a system with 4-8GB of RAM you might need
-	 * to switch off all the auto-start applications and reboot to have a large enough chunk of contiguous memory.
-	 *
-	 * On Linux you will need to configure large page support "sudo sysctl -w vm.nr_hugepages=128" and increase your
-	 * ulimit -l. To do do this you need to add following lines to /etc/security/limits.conf - "* soft memlock 262144"
-	 * and "* hard memlock 262144". You can also do it Windows-style and simply run-as-root, but this is NOT
-	 * recommended for security reasons.
-	 *
-	 * Memory locking means that the kernel can't swap out the page to disk - something that is unlikely to happen on a
-	 * command line system that isn't starved of memory. I haven't observed any difference on a CLI Linux system between
-	 * locked and unlocked memory. If that is your setup see option "no_mlck".
-	 */
-
-	/*
-	 * use_slow_memory defines our behaviour with regards to large pages. There are three possible options here:
-	 * always  - Don't even try to use large pages. Always use slow memory.
-	 * warn    - We will try to use large pages, but fall back to slow memory if that fails.
-	 * no_mlck - This option is only relevant on Linux, where we can use large pages without locking memory.
-	 *           It will never use slow memory, but it won't attempt to mlock
-	 * never   - If we fail to allocate large pages we will print an error and exit.
-	 */
-	"use_slow_memory" : "warn",
+	* LARGE PAGE SUPPORT
+	* Large pages need a properly set up OS. It can be difficult if you are not used to systems administration,
+	* but the performance results are worth the trouble - you will get around 20% boost. Slow memory mode is
+	* meant as a backup, you won't get stellar results there. If you are running into trouble, especially
+	* on Windows, please read the common issues in the README and FAQ.
+	*
+	* On Linux you will need to configure large page support and increase your memlock limit (ulimit -l).
+	*
+	* To set large page support, add the following to "/etc/sysctl.d/60-hugepages.conf":
+	*     vm.nr_hugepages=128
+	* You WILL need to run "sudo sysctl --system" for these settings to take effect on your system (or reboot).
+	*  In some cases (many threads, very large CPU, etc) you may need more than 128
+	*   (try 256 if there are still complaints from thread inits)
+	*
+	* To increase the memlock (ulimit -l), add following lines to /etc/security/limits.d/60-memlock.conf:
+	*     *    - memlock 262144
+	*     root - memlock 262144
+	* You WILL need to log out and log back in for these settings to take effect on your user (no need to reboot, just relogin in your session).
+	*
+	* Check with "/sbin/sysctl vm.nr_hugepages ; ulimit -l" to validate
+	*
+	* Memory locking means that the kernel can't swap out the page to disk - something that is unlikely to happen on a
+	* command line system that isn't starved of memory. I haven't observed any difference on a CLI Linux system between
+	* locked and unlocked memory. If that is your setup see option "no_mlck".
+	*
+	*
+	* use_slow_memory defines our behaviour with regards to large pages. There are three possible options here:
+	* always  - Don't even try to use large pages. Always use slow memory.
+	* warn    - We will try to use large pages, but fall back to slow memory if that fails.
+	* no_mlck - This option is only relevant on Linux, where we can use large pages without locking memory.
+	*           It will never use slow memory, but it won't attempt to mlock
+	* never   - If we fail to allocate large pages we will print an error and exit.
+	*/
+   "use_slow_memory" : "warn",
 
 	/*
 	 * TLS Settings
@@ -362,7 +356,7 @@ func (miner *XmrStak) defaultConfig() string {
 	 * output_file  - This option will log all output to a file.
 	 *
 	 */
-	"output_file" : "xmrstak.log",
+	"output_file" : "xmr-stak.log",
 
 	/*
 	 * Built-in web server
