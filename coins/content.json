@@ -15,43 +15,53 @@
     {
       "coin_type": "haven",
       "coin_algo": "cryptonight_haven"
+    },
+    {
+      "coin_type": "monero",
+      "coin_algo": "monero"
     }
   ],
   "xmrigAlgo": {
     "bloc": "cryptonight-heavy",
     "turtlecoin": "cryptonight-turtle",
     "ryo": "cryptonight-heavy",
-    "haven": "cryptonight-heavy"
+    "haven": "cryptonight-heavy",
+    "monero": "monero"
   },
   "xmrigVariant": {
     "bloc": "xhv",
     "turtlecoin": "1",
     "ryo": "1",
-    "haven": "xhv"
+    "haven": "xhv",
+    "monero": "xmr"
   },
   "names": {
     "bloc": "BLOC",
     "turtlecoin": "TurtleCoin",
     "ryo": "RYO",
-    "haven": "Haven"
+    "haven": "Haven",
+    "monero": "Monero"
   },
   "abbreviation": {
     "bloc": "BLOC",
     "turtlecoin": "TRTL",
     "ryo": "RYO",
-    "haven": "XHV"
+    "haven": "XHV",
+    "monero": "XMR"
   },
   "addressPrefix": {
     "bloc": "abLoc",
     "turtlecoin": "TRTL",
     "ryo": "RYoL",
-    "haven": "hvx"
+    "haven": "hvx",
+    "monero": "4"
   },
   "addressValidation": {
     "bloc": "^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$",
     "turtlecoin": "^TRTL([a-zA-Z0-9]{95})$",
     "ryo": "^RYoL([a-zA-Z0-9]{95})$",
-    "haven": "^hvx([a-zA-Z0-9]{95})$"
+    "haven": "^hvx([a-zA-Z0-9]{95})$",
+    "monero": "^4([a-zA-Z0-9]{94})$"
   },
   "mainBackground": {
     "bloc": {
@@ -69,31 +79,39 @@
     "haven": {
       "image": "static/img/haven/bg-miner-mining.png", 
       "color": "#151516"
+    },
+    "monero": {
+      "image": "static/img/monero/bg-miner-mining.png", 
+      "color": "#1a1a1a"
     }
   },
   "textColor": {
     "bloc": "#ffed00",
     "turtlecoin": "#00ff00",
     "ryo": "#009cff",
-    "haven": "#00ff9c"
+    "haven": "#00ff9c",
+    "monero": "#ff5a00"
   },
   "boxColor": {
     "bloc": "#090a31",
     "turtlecoin": "#021203",
     "ryo": "#092131",
-    "haven": "#093123"
+    "haven": "#093123",
+    "monero": "#222323"
   },
   "boxBorder": {
     "bloc": "#222",
     "turtlecoin": "#222",
     "ryo": "#222",
-    "haven": "#222"
+    "haven": "#222",
+    "monero": "#222"
   },
   "logo": {
     "bloc": "static/img/miner/miner-big-logo.png",
     "turtlecoin": "static/img/turtlecoin/logo.png",
     "ryo": "static/img/RYO/logo.png",
-    "haven": "static/img/haven/logo.png"
+    "haven": "static/img/haven/logo.png",
+    "monero": "static/img/monero/logo.png"
   },
   "downloadPage": {
       "bloc": {
@@ -109,15 +127,20 @@
         "link": "https://github.com/ryo-currency/ryo-currency/releases/latest"
       },
       "haven": {
-        "title": "Haven Applications", 
-        "link": "https://github.com/ryo-currency/ryo-currency/releases/latest"
+        "title": "Haven Protocol Applications", 
+        "link": "https://www.havenprotocol.com"
+      },
+      "monero": {
+        "title": "Monero Applications", 
+        "link": "https://web.getmonero.org/downloads/"
       }
   },
   "coinGeckoLinks": {
     "bloc": "https://www.coingecko.com/en/coins/bloc-money",
     "turtlecoin": "https://www.coingecko.com/en/coins/turtlecoin",
     "ryo": "https://www.coingecko.com/en/coins/ryo-currency",
-    "haven": "https://www.coingecko.com/en/coins/haven"
+    "haven": "https://www.coingecko.com/en/coins/haven",
+    "monero": "https://www.coingecko.com/en/coins/monero"
   },
   "socialLinks": {
     "bloc": {
@@ -163,11 +186,21 @@
       "title": "Social Network", 
       "links": [
         {"link": "https://discord.gg/CCtNxfG", "img": "static/img/miner/network_icon_discord.png"},
-        {"link": "https://twitter.com/HavenXHV", "img": "static/img/miner/network_icon_telegram.png"},
+        {"link": "https://t.me/joinchat/IGwnSUvhKSZZ8JyJK2Xifw", "img": "static/img/miner/network_icon_telegram.png"},
         {"link": "https://github.com/haven-protocol-org", "img": "static/img/miner/network_icon_github.png"},
         {"link": "https://twitter.com/HavenXHV", "img": "static/img/miner/network_icon_twatter.png"},
         {"link": "https://medium.com/@havencurrency", "img": "static/img/miner/network_icon_medium.png"},
         {"link": "https://www.reddit.com/r/havenprotocol/", "img": "static/img/miner/network_icon_website.png"}
+      ]
+    },
+    "monero": {
+      "title": "Social Network", 
+      "links": [
+        {"link": "https://telegram.me/bitmonero", "img": "static/img/miner/network_icon_telegram.png"},
+        {"link": "https://bitcointalk.org/index.php?topic=583449.0", "img": "static/img/miner/network_icon_bitcointalk.png"},
+        {"link": "https://github.com/monero-project", "img": "static/img/miner/network_icon_github.png"},
+        {"link": "https://reddit.com/r/monero", "img": "static/img/miner/network_icon_website.png"},
+        {"link": "https://monero.stackexchange.com/", "img": "static/img/miner/network_icon_website.png"}
       ]
     }
   },
@@ -220,6 +253,19 @@
         {"link": "http://docs.havenprotocol.org/haven-protocol-wp-2_0.pdf", "text": "- White Paper"},
         {"link": "https://medium.com/@havencurrency", "text": "- Haven Blog"}
       ]
+    },
+    "monero": {
+      "title": "Monero Network", 
+      "links": [
+        {"link": "https://web.getmonero.org", "text": "- Official Website"},
+        {"link": "https://web.getmonero.org/downloads/", "text": "- Downloads Wallet"},
+        {"link": "https://moneroblocks.info", "text": "- Block Explorer"},
+        {"link": "https://getmonero.org/press-kit", "text": "- Press Kit"},
+        {"link": "https://getmonero.org/resources/research-lab/", "text": "- Research Lab"},
+        {"link": "https://getmonero.org/resources/about/", "text": "- About Monero"},
+        {"link": "https://getmonero.org/resources/developer-guides/", "text": "- Developer Guides"},
+        {"link": "https://getmonero.org/resources/user-guides/", "text": "- User Guides"}
+      ]
     }
   },
   "helpText": {
@@ -245,7 +291,7 @@
         {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "TurtleCoin is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://www.reddit.com/r/TRTL/\">Subreddit</a> and <a href=\"http://chat.turtlecoin.lol/\">Discord</a>. Join us and let's talk!"},
         {"icon": "static/img/whatsnext/img-05.png", "title": "Buy and sell TRTL on exchange", "text": "Buy and Sell TurtleCoin on one of the three official exchange: <ul class=\"list-unstyled\"><li><a href=\"https://bilaxy.com/exchange#symbol=117\">- Bilaxy</a></li><a href=\"https://tradesatoshi.com/Exchange?market=TRTL_BTC\">- Trade Satoshi</a></li><li><a href=\"https://tradeogre.com/exchange/BTC-TRTL\">- TradeOgre</a></li></ul>"},
         {"icon": "static/img/whatsnext/img-06.png", "title": "Follow TurtleCoin on social media", "text": "We are updating all our social network regulary, the best way to stay updated with TurtleCoin is to follow us on <a href=\"https://medium.com/@turtlecoin\">Medium</a>, <a href=\"https://twitter.com/_turtlecoin\">Twitter</a>, <a href=\"https://www.facebook.com/trtlcoin/\">Facebook Group</a> and <a href=\"https://www.instagram.com/_turtlecoin/\">Instagram</a>"},
-        {"icon": "static/img/whatsnext/img-07.png", "title": "Download TurtleCoin Android Wallet", "text": "TonChan TurtleCoin wallet for android <a href=\"https://play.google.com/store/apps/details?id=com.tonchan&hl=en\">available in the Google Play store</a>. A mobile wallet where the user owns the private keys."},
+        {"icon": "static/img/whatsnext/img-07.png", "title": "Download TurtleCoin Android Wallet", "text": "TonChan TurtleCoin wallet for android <a href=\"https://play.google.com/store/apps/details?id=com.tonchan&hl=en\">available in the Google Play store</a>. A TurtleCoin mobile wallet where the user owns the private keys."},
         {"icon": "static/img/whatsnext/img-04.png", "title": "Fun, Fast, & Easy Crypto Payments", "text": "The goal of the <a href=\"https://turtlepay.io\">TurtlePay™ project</a> is to provide an easy to use, integrate, and maintain Payment Gateway for the TurtleCoin™ network."},
         {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about TurtleCoin, we recommend starting with the TurtleCoin website but also the <a href=\"https://github.com/turtlecoin/\">TurtleCoin GitHub</a> where you can find precious informations. "}
       ]
@@ -272,6 +318,20 @@
         {"icon": "static/img/whatsnext/img-06.png", "title": "Follow XHV on social media", "text": "We are updating all our social network regulary, the best way to stay updated with XHV is to follow us on <a href=\"https://medium.com/@havencurrency\">Medium</a>, <a href=\"https://twitter.com/HavenXHV\">Twitter</a> and <a href=\"https://www.reddit.com/r/havenprotocol\">Reddit</a>"},
         {"icon": "static/img/whatsnext/img-07.png", "title": "Haven Android Wallet", "text": "Haven Protocol Wallet for android <a href=\"https://play.google.com/store/apps/details?id=com.havenprotocol.xhvwallet&hl=en\">available in the Google Play store</a>. A mobile wallet where the user owns the private keys."},
         {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about XHV, we recommend starting by visiting the official <a href=\"https://www.havenprotocol.com\">Haven website</a> but also the <a href=\"https://www.havenprotocol.com\">XHV FAQ</a> where you can read precious informations. You can also join <a href=\"https://discord.gg/CCtNxfG\">XHV Discord</a>. We and the community will be happy to help you."}
+      ]
+    },
+    "monero": {
+      "boxes": [
+        {"icon": "static/img/whatsnext/img-01.png", "title": "Visit your mining pool to know more", "text": "You get paid out based upon what the pool sets the min payout amount. A pool's min payout amount can vary from pool to pool. Click on the pool link to visit their website."},
+        {"icon": "static/img/whatsnext/img-02.png", "title": "Learn more about Monero", "text": "<a href=\"https://web.getmonero.org\">Monero</a> Monero is cash for a connected world. It’s fast, private, and secure. You can spend safely, knowing that others cannot see your balances or track your activity."},
+        {"icon": "static/img/whatsnext/img-03.png", "title": "Moneropedia", "text": "Would you like to look up the meanings of the terms and concepts used in Monero? Here you will find an alphabetical guide to terms and their meanings from both the Monero and Kovri <a href=\"https://getmonero.org/resources/moneropedia/\">projects</a>."},
+        {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "Monero is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://telegram.me/bitmonero\">Telegram Group</a> and <a href=\"https://reddit.com/r/monero\">Reddit</a>."},
+        {"icon": "static/img/whatsnext/img-05.png", "title": "Trading Monero on exchange", "text": "Buy and Sell BLOC on following exchanges: <ul class=\"list-unstyled\"><li><a href=\"https://www.binance.com/trade.html?symbol=XMR_BTC\">- Binance</a></li><li><a href=\"https://bittrex.com/Market/Index?MarketName=BTC-XMR\">- Bittrex</a></li></ul>"},
+        {"icon": "static/img/whatsnext/img-06.png", "title": "Follow BLOC on social media", "text": "We are updating all our social network regulary, the best way to stay updated with Monero is to follow us on <a href=\"https://monero.stackexchange.com/\">Stack Exchange</a> or <a href=\"https://telegram.me/bitmonero\">Telegram</a>."},
+        {"icon": "static/img/whatsnext/img-07.png", "title": "Download Monero iOS & Android", "text": "Cake Wallet for android <a href=\"https://cakewallet.io\">available in the Google Play store</a>. A Monero mobile wallet where the user owns the private keys."},
+        {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about Monero, we recommend starting by visiting the official <a href=\"https://web.getmonero.org\">GetMonero.org</a> website but also the <a href=\"https://getmonero.org/resources/moneropedia/\">Moneropedia</a> where you can read precious informations."},
+        {"icon": "static/img/whatsnext/img-10.png", "title": "Don't forget to sleep mine !", "text": "An easy way to mine BLOC with your smartphone and make a passive income while you are sleeping! <a href=\"https://www.youtube.com/watch?v=WGVfNRHJ3ac\">Watch the video</a> and <a href=\"https://wiki.bloc.money/mining/mobile-mining/sleep-mining/\">start sleep mining today!</a>"},
+        {"icon": "static/img/whatsnext/img-09.png", "title": "Merchants & Services", "text": "Merchants of all kinds have come to value the financial privacy that Monero brings. <a href=\"https://web.getmonero.org/community/merchants/\">Click here</a> to list of the merchants that we know of that currently accept Monero for their goods and services."}
       ]
     }
   },
