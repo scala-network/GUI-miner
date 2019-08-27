@@ -316,6 +316,7 @@ let app = {
 		$('#miner_coin').text(app.coinsContent.abbreviation[app.coin_type]);
 		$('#cryptunit-widget').html(app.coinsContent.cryptunitWidget[app.coin_type]);
 		$('#download-title').text(app.coinsContent.downloadPage[app.coin_type].title);
+		$('#download-title-link').attr('href', app.coinsContent.downloadPage[app.coin_type].link);
 		$('#download-link').attr('href', app.coinsContent.downloadPage[app.coin_type].link);
 
 		// Powered-by links
