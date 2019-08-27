@@ -340,5 +340,12 @@
         {"link": "https://bloc.money", "text": "- Visit our webite"},
         {"link": "https://github.com/furiousteam/BLOC-GUI-Miner", "text": "- Contribute to this project"}
       ]
+  },
+  "cryptunitWidget": {
+      "bloc": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=52&small=false&transparent=false&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
+      "turtlecoin": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=20&small=false&transparent=false&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
+      "ryo": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=25&small=false&transparent=false&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
+      "haven": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=4&small=false&transparent=false&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
+      "monero": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=5&small=false&transparent=false&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
   }
 }

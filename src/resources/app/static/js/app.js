@@ -61,34 +61,36 @@ let app = {
 					$('#supply').html(parsed.maximum_supply);
 					$('#circulation').html(parsed.circulation);
 					$('#market_cap').html(parsed.market_cap);
-					$('#network_hashrate').html(parsed.hashrate);
-					$('#network_difficulty').html(parsed.difficulty);
-					$('#network_height').html(parsed.height);
+					// $('#network_hashrate').html(parsed.hashrate);
+					// $('#network_difficulty').html(parsed.difficulty);
+					// $('#network_height').html(parsed.height);
 					$('#price').html(parsed.price + ' BTC');
+					$('#volume_24h_btc').html(parsed.volume_usd + ' BTC');
+					$('#volume_24h_usd').html('USD ' + parsed.volume);
 					$('#miner_payout').html(parsed.coins_per_day);
 					$('#pool_hashrate').html(parsed.pool.hashrate);
 					$('#pool_miners').html(parsed.pool.miners);
 					$('#pool_last_block').html(parsed.pool.last_block);
-					$('#record_volume').html(parsed.records.volume + ' BTC');
-					$('#record_price').html(parsed.records.price + ' BTC');
+					// $('#record_volume').html(parsed.records.volume + ' BTC');
+					// $('#record_price').html(parsed.records.price + ' BTC');
 					$('#pool-address')
 						.html('<a href="' + parsed.pool.url + '" class="text-color">' + parsed.pool.url + '</a>')
 						.find('a').css('color', app.coinsContent.textColor[app.coin_type]);
 
 					// Build prices
-					let table = '<tbody>';
-					table += '<tr>\
-						<td>Volume today</td>\
-						<td>' + parsed.volume + ' BTC</td>\
-					</tr>';
-					parsed.prices.forEach(function (item) {
-						table += '<tr>\
-							<td>' + item.name + '</td>\
-							<td>' + item.value + ' BTC</td>\
-						</tr>';
-					});
-					table += '</tbody>';
-					$('#exchanges-price').html(table);
+					// let table = '<tbody>';
+					// table += '<tr>\
+						// <td>Volume today</td>\
+						// <td>' + parsed.volume + ' BTC</td>\
+					// </tr>';
+					// parsed.prices.forEach(function (item) {
+						// table += '<tr>\
+							// <td>' + item.name + '</td>\
+							// <td>' + item.value + ' BTC</td>\
+						// </tr>';
+					// });
+					// table += '</tbody>';
+					// $('#exchanges-price').html(table);
 
 					if (!app.selectedPoolOnce) {
 						app.selected_pool = parsed.pool.id;
@@ -312,6 +314,7 @@ let app = {
 
 		// Various replacements
 		$('#miner_coin').text(app.coinsContent.abbreviation[app.coin_type]);
+		$('#cryptunit-widget').html(app.coinsContent.cryptunitWidget[app.coin_type]);
 		$('#download-title').text(app.coinsContent.downloadPage[app.coin_type].title);
 		$('#download-link').attr('href', app.coinsContent.downloadPage[app.coin_type].link);
 

@@ -68,6 +68,7 @@ type coinsContentJson struct {
 	NetworkLinks      map[string]interface{} `json:"networkLinks"`
 	HelpText          map[string]interface{} `json:"helpText"`
 	PoweredByLinks    map[string]interface{} `json:"poweredByLinks"`
+	CryptunitWidget   map[string]interface{} `json:"cryptunitWidget"`
 }
 
 // PoolData contains the parsed JSON data from the pool list
@@ -117,6 +118,7 @@ type GlobalStats struct {
 		Unit  string `json:"unit"`
 	} `json:"prices"`
 	Volume          string `json:"volume"`
+	VolumeUsd       string `json:"volume_usd"`
 	Price           string `json:"price"`
 	MarketCap       string `json:"market_cap"`
 	Records         struct {
