@@ -76,6 +76,7 @@ let firstrun = {
 				};
 				astilectron.sendMessage({name: "pool-list", payload: payloadData}, function(message) {
 					// console.log('[' + new Date().toUTCString() + '] ', "pool-list", message.payload);
+
 					$("#pool-list").mCustomScrollbar("destroy");
 					$('#pool-list').html(message.payload);
 					asticode.loader.hide();
@@ -166,9 +167,16 @@ let firstrun = {
 				html = $.fn.tmpl("tmpl-miner-address-input", data);
 				mac.find('.address-input input').attr('placeholder', html);
 			}
+			// change to first screen
+			if (id == 'choose-wallet') {
+				// reset the selected pool and address
+				firstrun.selected_pool = 0;
+				$('#miner-address-input').val('');
+			}
 		});
-		// If i've clicked "i already have a wallet" button, reset to BLOC
-		$('#choose-wallet a[data-target="miner-address"]').on('click', function(event) {
+		// If i've clicked "i already have a wallet" button
+		$('#choose-wallet a[data-target="miner-address"]').on('click', function() {
+			// reset to BLOC
 			firstrun.coin_type     = default_coin_type;
 			firstrun.coin_algo     = default_coin_algo;
 			firstrun.xmrig_algo    = default_xmrig_algo;
