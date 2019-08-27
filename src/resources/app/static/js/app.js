@@ -456,7 +456,7 @@ let app = {
 		app.hashrateChart = new Chart(chart, {
 			type: 'line',
 			data: {
-				labels: ["5 minutes ago", "4 minutes ago", "3 minutes ago", "2 minutes ago", "1 minute ago", "Now"],
+				labels: ["5min ago", "4min ago", "3min ago", "2min ago", "1min ago", "Now"],
 				datasets: [{
 					label: 'H/s',
 					data: [0,0,0,0,0,0],
