@@ -347,5 +347,32 @@
       "ryo": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=25&small=false&transparent=false&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "haven": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=4&small=false&transparent=false&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "monero": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=5&small=false&transparent=false&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
+  },
+  "newsBox": {
+      "bloc": {
+          "title": "BLOC News",
+          "image": "https://pbs.twimg.com/profile_images/998730982357319681/M-obe-U-_400x400.jpg",
+          "link": "https://medium.com/@bloc.money"
+      },
+      "turtlecoin": {
+          "title": "Turtlecoin News",
+          "image": "https://miro.medium.com/max/3150/1*_Zp5LjJUruaSaS58AHoS0w.png",
+          "link": "https://blog.turtlecoin.lol/"
+      },
+      "ryo": {
+          "title": "RYO News",
+          "image": "https://ryo-currency.com/img/png/logo-circle-only-thick.png",
+          "link": "https://bitcointalk.org/index.php?topic=4413010.0"
+      },
+      "haven": {
+          "title": "Haven News",
+          "image": "https://images.vexels.com/media/users/3/137617/isolated/preview/c45afb857e72b86e87baaf255f71ff37-geometric-logo-abstract-by-vexels.png",
+          "link": "https://coinmarketcap.com/currencies/haven-protocol/"
+      },
+      "monero": {
+          "title": "Monero News",
+          "image": "https://images.vexels.com/media/users/3/137617/isolated/preview/c45afb857e72b86e87baaf255f71ff37-geometric-logo-abstract-by-vexels.png",
+          "link": "https://www.getmonero.org/"
+      }
   }
 }

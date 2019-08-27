@@ -312,6 +312,20 @@ let app = {
 		html = $.fn.tmpl("tmpl-social-links", app.coinsContent.socialLinks[app.coin_type]);
 		$('#social-links').html(html);
 
+		// News box
+		if (app.coinsContent.newsBox[app.coin_type].title !== "" && app.coinsContent.newsBox[app.coin_type].image !== "") {
+			$('#news-title').text(app.coinsContent.newsBox[app.coin_type].title);
+			$('#news-image').attr("src", app.coinsContent.newsBox[app.coin_type].image);
+			if (app.coinsContent.newsBox[app.coin_type].link !== "") {
+				$('#news-link').attr("href", app.coinsContent.newsBox[app.coin_type].link);
+			} else {
+				$('#news-link').attr("href", "javascript:;");
+			}
+			$('#news-box').removeClass('hidden');
+		} else {
+			$('#news-box').addClass('hidden');
+		}
+
 		// Various replacements
 		$('#miner_coin').text(app.coinsContent.abbreviation[app.coin_type]);
 		$('#cryptunit-widget').html(app.coinsContent.cryptunitWidget[app.coin_type]);
