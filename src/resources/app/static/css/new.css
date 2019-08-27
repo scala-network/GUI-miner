@@ -593,7 +593,7 @@ body.miner table td {
 	padding: 1px 10px;
 }
 body.miner .first-col table td:first-child {
-	width: 100px;
+	width: 110px;
 	padding-left: 0;
 }
 body.miner .first-col table td:last-child {

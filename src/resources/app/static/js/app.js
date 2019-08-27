@@ -60,13 +60,13 @@ let app = {
 					$('#abbreviation').html(parsed.abbreviation);
 					$('#supply').html(parsed.maximum_supply);
 					$('#circulation').html(parsed.circulation);
-					$('#market_cap').html(parsed.market_cap);
+					$('#market_cap').html('$' + parsed.market_cap);
 					// $('#network_hashrate').html(parsed.hashrate);
 					// $('#network_difficulty').html(parsed.difficulty);
 					// $('#network_height').html(parsed.height);
-					$('#price').html(parsed.price + ' BTC');
-					$('#volume_24h_btc').html(parsed.volume_usd + ' BTC');
-					$('#volume_24h_usd').html('USD ' + parsed.volume);
+					$('#price').html('฿' + parsed.price);
+					$('#volume_24h_btc').html('฿' + parsed.volume_usd);
+					$('#volume_24h_usd').html('$' + parsed.volume);
 					$('#miner_payout').html(parsed.coins_per_day);
 					$('#pool_hashrate').html(parsed.pool.hashrate);
 					$('#pool_miners').html(parsed.pool.miners);
