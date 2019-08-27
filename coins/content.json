@@ -337,7 +337,7 @@
   "poweredByLinks": {
       "title": "BLOC GUI Miner&reg;", 
       "links": [
-        {"link": "https://bloc.money", "text": "- Visit our webite"},
+        {"link": "https://bloc.money", "text": "- Visit our website"},
         {"link": "https://github.com/furiousteam/BLOC-GUI-Miner", "text": "- Contribute to this project"}
       ]
   },
