@@ -75,9 +75,17 @@ let firstrun = {
 					coin_type: firstrun.coin_type
 				};
 				astilectron.sendMessage({name: "pool-list", payload: payloadData}, function(message) {
+					// console.log('[' + new Date().toUTCString() + '] ', "pool-list", message.payload);
 					$("#pool-list").mCustomScrollbar("destroy");
 					$('#pool-list').html(message.payload);
 					asticode.loader.hide();
+
+					if (firstrun.selected_pool == 0) {
+						var fe = $('#pool-list').find('.table-body').first();
+						if (fe.length > 0) {
+							firstrun.selected_pool = parseInt(fe.data('id'));
+						}
+					}
 
 					// make the pool list table scrollable
 					$("#pool-list").mCustomScrollbar({
