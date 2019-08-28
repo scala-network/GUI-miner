@@ -80,6 +80,7 @@ func New(
 		startPage = "index.html"
 		// Already configured, set up the miner
 		var err error
+		gui.config.Miner.HardwareType = gui.config.HardwareType // copy the HardwareType from config to miner
 		gui.miner, err = miner.CreateMiner(gui.config.Miner)
 		if err != nil {
 			return nil,
@@ -93,6 +94,7 @@ func New(
 			CoinAlgo:     coinAlgo,
 			XmrigAlgo:    XmrigAlgo,
 			XmrigVariant: XmrigVariant,
+			HardwareType: 1,
 			Mid:          uuid.New().String(),
 		}
 	}
@@ -419,6 +421,7 @@ func (gui *GUI) handleElectronCommands(
 			CoinAlgo:     gui.config.CoinAlgo,
 			XmrigAlgo:    gui.config.XmrigAlgo,
 			XmrigVariant: gui.config.XmrigVariant,
+			HardwareType: gui.config.HardwareType,
 		}
 
 		dataBytes, err := json.Marshal(currentConfig)
@@ -472,6 +475,7 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	gui.config.CoinAlgo = newConfig.CoinAlgo
 	gui.config.XmrigAlgo = newConfig.XmrigAlgo
 	gui.config.XmrigVariant = newConfig.XmrigVariant
+	gui.config.HardwareType = newConfig.HardwareType
 
 	scanPath := filepath.Join(gui.workingDir, "miner")
 	// TODO: Fix own miner paths option
@@ -497,8 +501,9 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 
 	// Write config for this miner
 	gui.config.Miner = miner.Config{
-		Type: minerType,
-		Path: minerPath,
+		Type:         minerType,
+		Path:         minerPath,
+		HardwareType: gui.config.HardwareType,
 	}
 	gui.logger.WithFields(logrus.Fields{
 		"path": minerPath,
@@ -532,8 +537,16 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	// Write the config for the specified miner
 	gui.logger.Debug("Writing miner config")
 
+	var poolAddress string
+	if gui.config.HardwareType == 1 {
+		poolAddress = poolInfo.MiningPorts.Cpu // CPU mining
+	} else if gui.config.HardwareType == 2 {
+		poolAddress = poolInfo.MiningPorts.Gpu // GPU mining
+	} else {
+		poolAddress = poolInfo.Config // if HardwareType failed, use CPU mining
+	}
 	err = gui.miner.WriteConfig(
-		poolInfo.Config,
+		poolAddress,
 		gui.config.Address,
 		gui.config.CoinAlgo,
 		gui.config.XmrigAlgo,

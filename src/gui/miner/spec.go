@@ -11,6 +11,8 @@ type Config struct {
 	Path string `json:"path"`
 	// Endpoint of the miner's JSON API
 	Endpoint string `json:"endpoint"`
+	// The type of hardware used for mining (1 = computer with CPU only, 2 = computer with GPU)
+	HardwareType uint8 `json:"hardware_type"`
 }
 
 // ProcessingConfig holds the config for the miner's processing setup
@@ -27,6 +29,8 @@ type ProcessingConfig struct {
 	// attempt to use.
 	// Currently only supported by xmrig CPU backend
 	MaxUsage uint8 `json:"max_usage"`
+	// The type of hardware used for mining (1 = computer with CPU only, 2 = computer with GPU)
+	HardwareType uint8 `json:"hardware_type"`
 }
 
 // Stats contains the miner statistics required by the front-end

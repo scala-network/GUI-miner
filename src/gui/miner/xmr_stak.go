@@ -10,6 +10,9 @@ import (
 	"regexp"
 	"runtime"
 	"strings"
+	// "log"
+
+	// "github.com/sirupsen/logrus"
 )
 
 // XmrStak implements the miner interface for the xmr-stak miner
@@ -17,9 +20,11 @@ import (
 type XmrStak struct {
 	Base
 	name             string
+	hardwareType     uint8
 	endpoint         string
 	lastHashrate     float64
 	resultStatsCache XmrStakResponse
+	// logger           *logrus.Entry
 }
 
 // XmrStakResponse contains the data from xmr-stak API
@@ -66,11 +71,26 @@ func NewXmrStak(config Config) (*XmrStak, error) {
 	miner := XmrStak{
 		// We've switched back to the original miner XMR-STAK but we will 
 		// keep an eye on it to make sure the compatibility works for future update
-		name:     "xmr-stak",
-		endpoint: endpoint,
+		name:         "xmr-stak",
+		endpoint:     endpoint,
+		hardwareType: config.HardwareType,
 	}
 	miner.Base.executableName = filepath.Base(config.Path)
 	miner.Base.executablePath = filepath.Dir(config.Path)
+
+	// Setup the logging, by default we log to stdout
+	// logrus.SetFormatter(&logrus.TextFormatter{
+		// FullTimestamp:   true,
+		// TimestampFormat: "Jan 02 15:04:05",
+	// })
+	// logrus.SetLevel(logrus.DebugLevel)
+	// logrus.SetOutput(os.Stdout)
+
+	// Setting the WithFields now will ensure all log entries from this point
+	// includes the fields
+	// miner.logger = logrus.WithFields(logrus.Fields{
+		// "service": "XmrStak",
+	// })
 
 	return &miner, nil
 }
@@ -124,13 +144,44 @@ func (miner *XmrStak) WriteConfig(
 // GetProcessingConfig returns the current miner processing config
 // TODO: Currently only CPU threads, extend this to full CPU/GPU config
 func (miner *XmrStak) GetProcessingConfig() ProcessingConfig {
+	/*
+	// Get HardwareType from the config file
+	workingDir, err := os.Executable()
+	if err != nil {
+		log.Fatalf("Can't read current directory: %s", err)
+	}
+	workingDir = filepath.Dir(workingDir)
+	if err != nil {
+		log.Fatalf("Can't format current directory: %s", err)
+	}
+	configBytes, err := ioutil.ReadFile(
+		filepath.Join(workingDir, "config.json"))
+
+	miner.logger.Info("GetProcessingConfig CALLED")
+	miner.logger.Info(string(configBytes))
+	var config ProcessingConfig
+	err = json.Unmarshal(configBytes, &config)
+	if err != nil {
+		return ProcessingConfig{
+			MaxUsage: 0,
+			// xmr-stak reports GPU + CPU threads in the same section, for that reason
+			// we need to check the actual cpu.txt file to get the real thread count
+			Threads:      miner.getCPUThreadcount(),
+			MaxThreads:   uint16(runtime.NumCPU()),
+			Type:         miner.name,
+			HardwareType: config.HardwareType,
+		}
+	}
+	*/
+
 	return ProcessingConfig{
 		MaxUsage: 0,
 		// xmr-stak reports GPU + CPU threads in the same section, for that reason
 		// we need to check the actual cpu.txt file to get the real thread count
-		Threads:    miner.getCPUThreadcount(),
-		MaxThreads: uint16(runtime.NumCPU()),
-		Type:       miner.name,
+		Threads:      miner.getCPUThreadcount(),
+		MaxThreads:   uint16(runtime.NumCPU()),
+		Type:         miner.name,
+		HardwareType: miner.hardwareType,
 	}
 }
 

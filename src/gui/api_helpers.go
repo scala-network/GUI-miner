@@ -26,7 +26,6 @@ func (gui *GUI) GetPoolList() ([]PoolData, error) {
 	if err != nil {
 		return pools, err
 	}
-
 	return pools, nil
 }
 
@@ -96,8 +95,8 @@ func (gui *GUI) GetStats(
 	poolID int,
 	hashrate float64,
 	mid string) (string, error) {
-	// gui.logger.Info("GetStats")
-	// gui.logger.Info(fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s&coin=%s", gui.config.APIEndpoint, poolID, hashrate, mid, gui.config.CoinType))
+	gui.logger.Info("GetStats")
+	gui.logger.Info(fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s&coin=%s", gui.config.APIEndpoint, poolID, hashrate, mid, gui.config.CoinType))
 
 	if mid == "" || poolID == 0 {
 		return "", errors.New("No data yet")

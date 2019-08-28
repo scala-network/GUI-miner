@@ -114,7 +114,8 @@ let firstrun = {
 					coin_type:     firstrun.coin_type,
 					coin_algo:     firstrun.coin_algo,
 					xmrig_algo:    firstrun.xmrig_algo,
-					xmrig_variant: firstrun.xmrig_variant.toString()
+					xmrig_variant: firstrun.xmrig_variant.toString(),
+					hardware_type: 1 // 1 = CPU mining, 2 = GPU mining
 				};
 				console.log('[' + new Date().toUTCString() + '] ', "configuring", configData);
 				astilectron.sendMessage({name: "configure", payload: configData}, function(message) {

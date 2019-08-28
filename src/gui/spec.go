@@ -26,6 +26,8 @@ type Config struct {
 	Mid string `json:"mid"`
 	// Miner is the config for the miner
 	Miner miner.Config `json:"miner"`
+	// The type of hardware used for mining (1 = computer with CPU only, 2 = computer with GPU)
+	HardwareType uint8 `json:"hardware_type"`
 }
 
 // ElectronMessage is marshalled and sent to the UI
@@ -35,14 +37,15 @@ type ElectronMessage struct {
 
 // frontendConfig is received from the miner's config page
 type frontendConfig struct {
-	Address  string     `json:"address"`
-	Pool     int        `json:"pool"`
-	Threads  uint16     `json:"threads"`
-	MaxCPU   uint8      `json:"max_cpu"`
-	CoinType string     `json:"coin_type"`
-	CoinAlgo string     `json:"coin_algo"`
-	XmrigAlgo string    `json:"xmrig_algo"`
-	XmrigVariant string `json:"xmrig_variant"`
+	Address      string  `json:"address"`
+	Pool         int     `json:"pool"`
+	Threads      uint16  `json:"threads"`
+	MaxCPU       uint8   `json:"max_cpu"`
+	CoinType     string  `json:"coin_type"`
+	CoinAlgo     string  `json:"coin_algo"`
+	XmrigAlgo    string  `json:"xmrig_algo"`
+	XmrigVariant string  `json:"xmrig_variant"`
+	HardwareType uint8   `json:"hardware_type"`
 }
 
 // coinsContentJson is received from github "BLOC-GUI-Miner/coins/content.json"
@@ -69,6 +72,7 @@ type coinsContentJson struct {
 	HelpText          map[string]interface{} `json:"helpText"`
 	PoweredByLinks    map[string]interface{} `json:"poweredByLinks"`
 	CryptunitWidget   map[string]interface{} `json:"cryptunitWidget"`
+	NewsBox           map[string]interface{} `json:"newsBox"`
 }
 
 // PoolData contains the parsed JSON data from the pool list
@@ -88,6 +92,10 @@ type PoolData struct {
 	IsEnabled      int    `json:"is_enabled"`
 	DisplayInMiner int    `json:"display_in_miner"`
 	LastUpdate     string `json:"last_update"`
+	MiningPorts struct {
+		Cpu string `json:"cpu"`
+		Gpu string `json:"gpu"`
+	} `json:"mining_ports"`
 }
 
 // GlobalStats contains the current stats for the network,

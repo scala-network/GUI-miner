@@ -340,6 +340,17 @@
 			<div class="miner-settings-cpus">
 				<div class="miner-settings-cpus-inner">
 					<div class="selects">
+						My mining hardware is<br />
+						<div class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="hardware-type">
+								<span>A standard computer</span> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" id="hardware-type-values">
+								<li><a href="#" data-value="1">A standard computer</a></li>
+								<li><a href="#" data-value="2">A computer built for mining (with GPUs)</a></li>
+							</ul>
+						</div>
+						<!--
 						<div class="btn-group">
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="cpu-cores">
 								<span><b>1 CPU</b> CORE</span> <span class="caret"></span>
@@ -368,9 +379,13 @@
 								<li><a href="#" data-value="100"><b>100%</b> CPU mining</a></li>
 							</ul>
 						</div>
+						-->
 					</div>
 				</div>
-				<div class="text">Lower values will ensure your computer stays usable while mining.</div>
+				<div class="text">
+					Based on hardware type you selected above, a pool port is automatically selected for you.<br />
+					It's important to set this correctly, otherwise you will mine and might not get valid shares.
+				</div>
 			</div>
 
 			<div class="miner-settings-coins" id="miner-settings-coins">

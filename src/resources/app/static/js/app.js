@@ -20,7 +20,7 @@ let app = {
 				payload: ""
 			}, function(message) {
 				var parsed = $.parseJSON(message.payload);
-				console.log('[' + new Date().toUTCString() + '] ', "coins-content-json", parsed);
+				// console.log('[' + new Date().toUTCString() + '] ', "coins-content-json", parsed);
 				app.coinsContent = parsed;
 
 				app.bindEvents();
@@ -105,7 +105,7 @@ let app = {
 
 					break;
 				case "miner_stats":
-					console.log('[' + new Date().toUTCString() + '] ', "miner_stats", parsed);
+					// console.log('[' + new Date().toUTCString() + '] ', "miner_stats", parsed);
 					$('#miner_address').html(parsed.address);
 					if (!app.populatedAddress) {
 						$('#settings_mining_address').val(parsed.address); // settings wallet address
@@ -278,8 +278,11 @@ let app = {
 					coin_algo:     app.coin_algo,
 					xmrig_algo:    app.xmrig_algo,
 					xmrig_variant: app.xmrig_variant.toString(),
-					threads:       parseInt($('#cpu-cores').dropselect('value')),
-					max_cpu:       parseInt($('#cpu-max').dropselect('value'))
+					// threads:       parseInt($('#cpu-cores').dropselect('value')),
+					threads:       1,
+					// max_cpu:       parseInt($('#cpu-max').dropselect('value'))
+					max_cpu:       100,
+					hardware_type: parseInt($('#hardware-type').dropselect('value'))
 				};
 				console.log('[' + new Date().toUTCString() + '] ', "configure", configData);
 				astilectron.sendMessage({name: "configure", payload: configData}, function(message){
@@ -351,17 +354,21 @@ let app = {
 			let html;
 
 			// Populate the number of cores
-			html = "";
-			for (let i = 1; i <= parsed.max_threads; i++) {
-				html += '<li><a href="#" data-value="' + i + '"><b>' + i + ' CPU</b> CORE</a></li>';
-			}
-			$('#cpu-cores-values').html(html);
-			$('#cpu-cores').dropselect(); // re-initialize
-			$('#cpu-cores').dropselect('select', parsed.threads);
+			// html = "";
+			// for (let i = 1; i <= parsed.max_threads; i++) {
+				// html += '<li><a href="#" data-value="' + i + '"><b>' + i + ' CPU</b> CORE</a></li>';
+			// }
+			// $('#cpu-cores-values').html(html);
+			// $('#cpu-cores').dropselect(); // re-initialize
+			// $('#cpu-cores').dropselect('select', parsed.threads);
 
 			// Select the appropriate cpu usage
-			$('#cpu-max').dropselect(); // re-initialize
-			$('#cpu-max').dropselect('select', parsed.max_usage);
+			// $('#cpu-max').dropselect(); // re-initialize
+			// $('#cpu-max').dropselect('select', parsed.max_usage);
+
+			// Select the mining hardware
+			$('#hardware-type').dropselect(); // re-initialize
+			$('#hardware-type').dropselect('select', parsed.hardware_type);
 
 			// Populate the coins
 			let coins = {
@@ -413,6 +420,8 @@ let app = {
 			coin_type: app.coin_type
 		};
 		astilectron.sendMessage({name: "pool-list", payload: payloadData}, function(message) {
+			// console.log('[' + new Date().toUTCString() + '] ', "pool-list", message.payload);
+
 			$("#pool-list").mCustomScrollbar("destroy");
 			$('#pool-list').html(message.payload);
 			$("#pool-list").mCustomScrollbar({
