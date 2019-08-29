@@ -126,6 +126,12 @@ func (miner *XmrStak) WriteConfig(
 	// we can't just check for 0. If the cpu.txt file exists then a zero
 	// means we're disabling it, else this is firstrun
 	_, err = os.Stat(filepath.Join(miner.Base.executablePath, "cpu.txt"))
+	// The file does exist
+	if err == nil {
+		processingConfig.Threads = miner.getCPUThreadcount()
+	}
+
+	_, err = os.Stat(filepath.Join(miner.Base.executablePath, "cpu.txt"))
 	if err == nil {
 		// File exists, we may disable
 		err = ioutil.WriteFile(

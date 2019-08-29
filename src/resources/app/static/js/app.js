@@ -279,9 +279,9 @@ let app = {
 					xmrig_algo:    app.xmrig_algo,
 					xmrig_variant: app.xmrig_variant.toString(),
 					// threads:       parseInt($('#cpu-cores').dropselect('value')),
-					threads:       1,
+					// threads:       1,
 					// max_cpu:       parseInt($('#cpu-max').dropselect('value'))
-					max_cpu:       100,
+					// max_cpu:       100,
 					hardware_type: parseInt($('#hardware-type').dropselect('value'))
 				};
 				console.log('[' + new Date().toUTCString() + '] ', "configure", configData);

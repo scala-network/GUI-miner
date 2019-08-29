@@ -469,6 +469,7 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 		time.Sleep(time.Second * 15)
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
+	// gui.logger.Info(fmt.Printf("%+v\n", newConfig))
 	gui.config.Address = newConfig.Address
 	gui.config.PoolID = newConfig.Pool
 	gui.config.CoinType = newConfig.CoinType
