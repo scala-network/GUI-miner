@@ -4,7 +4,7 @@ This file is a small tutorial for developers. But you still need to read the REA
 
 1. The **miner** source folder is `~/GUI-miner`  
 2. The **libraries** source folder is `~/go/src/github.com/furiousteam/BLOC-GUI-Miner/`  
-3. The **xmr-stak** binaries folder is `~/xmr-stak-linux-2.6.0-cpu/`  
+3. The **xmr-stak** binaries folder is `~/xmr-stak-linux-2.10.7-cpu/`  
 
 **Notes:**  
 * The **.go** files you need to change are from the **miner** folder  
@@ -18,7 +18,7 @@ This file is a small tutorial for developers. But you still need to read the REA
 ```shell
 clear; export DISPLAY=:0; cd ~/GUI-miner; \
 make clean; make; mkdir ~/GUI-miner/bin/linux-amd64/miner; \
-cp -r ~/xmr-stak-linux-2.6.0-cpu/xmr-stak ~/GUI-miner/bin/linux-amd64/miner; \
+cp -r ~/xmr-stak-linux-2.10.7-cpu/xmr-stak ~/GUI-miner/bin/linux-amd64/miner; \
 cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
 ``` 
 
@@ -31,7 +31,7 @@ cp -u ~/GUI-miner/bin/linux-amd64/miner/config.txt /tmp/config.txt; \
 cp -u ~/GUI-miner/bin/linux-amd64/miner/cpu.txt /tmp/cpu.txt; \
 cp -u ~/GUI-miner/bin/linux-amd64/miner/pools.txt /tmp/pools.txt; make clean; make; \
 mkdir ~/GUI-miner/bin/linux-amd64/miner; \
-cp -r ~/xmr-stak-linux-2.6.0-cpu/xmr-stak ~/GUI-miner/bin/linux-amd64/miner; \
+cp -r ~/xmr-stak-linux-2.10.7-cpu/xmr-stak ~/GUI-miner/bin/linux-amd64/miner; \
 cp -u /tmp/config.json ~/GUI-miner/bin/linux-amd64/config.json; \
 cp -u /tmp/config.txt ~/GUI-miner/bin/linux-amd64/miner/config.txt; \
 cp -u /tmp/cpu.txt ~/GUI-miner/bin/linux-amd64/miner/cpu.txt; \
