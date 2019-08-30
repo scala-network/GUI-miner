@@ -10,9 +10,11 @@ import (
 	"regexp"
 	"runtime"
 	"strings"
+	"time"
+	"strconv"
 	// "log"
 
-	// "github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 // XmrStak implements the miner interface for the xmr-stak miner
@@ -24,7 +26,7 @@ type XmrStak struct {
 	endpoint         string
 	lastHashrate     float64
 	resultStatsCache XmrStakResponse
-	// logger           *logrus.Entry
+	logger           *logrus.Entry
 }
 
 // XmrStakResponse contains the data from xmr-stak API
@@ -79,18 +81,18 @@ func NewXmrStak(config Config) (*XmrStak, error) {
 	miner.Base.executablePath = filepath.Dir(config.Path)
 
 	// Setup the logging, by default we log to stdout
-	// logrus.SetFormatter(&logrus.TextFormatter{
-		// FullTimestamp:   true,
-		// TimestampFormat: "Jan 02 15:04:05",
-	// })
-	// logrus.SetLevel(logrus.DebugLevel)
-	// logrus.SetOutput(os.Stdout)
+	logrus.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp:   true,
+		TimestampFormat: "Jan 02 15:04:05",
+	})
+	logrus.SetLevel(logrus.DebugLevel)
+	logrus.SetOutput(os.Stdout)
 
 	// Setting the WithFields now will ensure all log entries from this point
 	// includes the fields
-	// miner.logger = logrus.WithFields(logrus.Fields{
-		// "service": "XmrStak",
-	// })
+	miner.logger = logrus.WithFields(logrus.Fields{
+		"service": "XmrStak",
+	})
 
 	return &miner, nil
 }
@@ -128,7 +130,15 @@ func (miner *XmrStak) WriteConfig(
 	_, err = os.Stat(filepath.Join(miner.Base.executablePath, "cpu.txt"))
 	// The file does exist
 	if err == nil {
-		processingConfig.Threads = miner.getCPUThreadcount()
+		// processingConfig.Threads = miner.getCPUThreadcount()
+		processingConfig.ThreadsContent = miner.getCPUThreadContent()
+
+		miner.logger.Info("******************************")
+		miner.logger.Info("processingConfig.ThreadsContent")
+		for _, nr := range processingConfig.ThreadsContent {
+			miner.logger.Info(fmt.Sprintf("%d", nr))
+		}
+		miner.logger.Info("******************************")
 	}
 
 	_, err = os.Stat(filepath.Join(miner.Base.executablePath, "cpu.txt"))
@@ -136,7 +146,7 @@ func (miner *XmrStak) WriteConfig(
 		// File exists, we may disable
 		err = ioutil.WriteFile(
 			filepath.Join(miner.Base.executablePath, "cpu.txt"),
-			[]byte(miner.cpuConfig(processingConfig.Threads)),
+			[]byte(miner.cpuConfig(/*processingConfig.Threads, */processingConfig.ThreadsContent)),
 			0644)
 		if err != nil {
 			return err
@@ -150,36 +160,6 @@ func (miner *XmrStak) WriteConfig(
 // GetProcessingConfig returns the current miner processing config
 // TODO: Currently only CPU threads, extend this to full CPU/GPU config
 func (miner *XmrStak) GetProcessingConfig() ProcessingConfig {
-	/*
-	// Get HardwareType from the config file
-	workingDir, err := os.Executable()
-	if err != nil {
-		log.Fatalf("Can't read current directory: %s", err)
-	}
-	workingDir = filepath.Dir(workingDir)
-	if err != nil {
-		log.Fatalf("Can't format current directory: %s", err)
-	}
-	configBytes, err := ioutil.ReadFile(
-		filepath.Join(workingDir, "config.json"))
-
-	miner.logger.Info("GetProcessingConfig CALLED")
-	miner.logger.Info(string(configBytes))
-	var config ProcessingConfig
-	err = json.Unmarshal(configBytes, &config)
-	if err != nil {
-		return ProcessingConfig{
-			MaxUsage: 0,
-			// xmr-stak reports GPU + CPU threads in the same section, for that reason
-			// we need to check the actual cpu.txt file to get the real thread count
-			Threads:      miner.getCPUThreadcount(),
-			MaxThreads:   uint16(runtime.NumCPU()),
-			Type:         miner.name,
-			HardwareType: config.HardwareType,
-		}
-	}
-	*/
-
 	return ProcessingConfig{
 		MaxUsage: 0,
 		// xmr-stak reports GPU + CPU threads in the same section, for that reason
@@ -199,6 +179,76 @@ func (miner *XmrStak) GetName() string {
 // GetLastHashrate returns the last reported hashrate
 func (miner *XmrStak) GetLastHashrate() float64 {
 	return miner.lastHashrate
+}
+
+// getCPUThreadContent returns an array with the actual threads read from the
+// config
+func (miner *XmrStak) getCPUThreadContent() []uint16 {
+	maxArraySize := 130
+	configPath := filepath.Join(miner.Base.executablePath, "cpu.txt")
+	configFileBytes, err := ioutil.ReadFile(configPath)
+	// If config file doesn't exist, return 0 as the threadcount
+	if err != nil {
+		return make([]uint16, maxArraySize, maxArraySize)
+	}
+	// xmr-stak uses a strange JSON-like format, I haven't found a Go library
+	// that can parse the file, so we're doing some basic string matches
+	lines := strings.Split(string(configFileBytes), "\n")
+	var validLines string
+	for _, line := range lines {
+		for _, char := range line {
+			// This is a very very very basic check if this line is actually a comment
+			if string(char) == "/" || string(char) == "*" {
+				// Skip this line
+				break
+			} else {
+				validLines += string(char)
+			}
+		}
+	}
+
+	// Testing
+	// validLines = `                                  "cpu_threads_conf" :[    { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 0 },    { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 2 },],    { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 6 },    { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 8 },],`
+
+	threadContent := make([]uint16, maxArraySize, maxArraySize)
+	var threadIndex uint8 = 0
+	// validLines contains:
+	// "cpu_threads_conf" :[    { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 0 },    { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 1 },],
+	var re = regexp.MustCompile(`{[^}]*}`)
+	braces := re.FindAllString(validLines, -1)
+	if braces != nil {
+		for _, brace := range(braces) {
+			// miner.logger.Info(fmt.Sprintf("brace %s\n", brace))
+
+			// brace contains:
+			// { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 0 }
+			re = regexp.MustCompile(`[0-9]+ }`)
+			nrbraces := re.Find([]byte(brace))
+			if nrbraces != nil {
+				for _, nrbrace := range(nrbraces) {
+					// miner.logger.Info(fmt.Sprintf("nrbrace %s\n", string(nrbrace)))
+					re = regexp.MustCompile(`[0-9]+`)
+					numbers := re.Find([]byte(string(nrbrace)))
+					if numbers != nil {
+						for _, number := range(numbers) {
+							// number contains:
+							// 0 or 1 or etc
+							threadContent[maxArraySize - 1]++; // last position coontains the number of threads we found in cpu.txt file
+							var numberString string = string(number)
+							numberStringToAscii, err := strconv.Atoi(numberString)
+							if (err == nil) {
+								threadContent[threadIndex] = uint16(numberStringToAscii)
+								threadIndex++;
+								// miner.logger.Info(fmt.Sprintf("number %s\n", numberString))
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return threadContent
 }
 
 // getCPUThreadcount returns the threads used for the CPU as read from the
@@ -467,53 +517,58 @@ func (miner *XmrStak) buildPoolConfig(
 // the amount of threads
 // xmr-stak uses a JSON format that doesn't have a compatible Go
 // parser which is why I'm doing this as text or templates
-func (miner *XmrStak) cpuConfig(threads uint16) string {
+func (miner *XmrStak) cpuConfig(/*threads uint16, */threadsContent []uint16) string {
 
 	var threadsConfig string
-	for i := uint16(0); i < threads; i++ {
-		threadsConfig += fmt.Sprintf("{ \"low_power_mode\" : false, \"no_prefetch\" : true, \"asm\" : \"auto\", \"affine_to_cpu\" : %d },", i)
+	nrThreads := threadsContent[len(threadsContent) - 1]
+	for i := uint16(0); i < nrThreads; i++ {
+		threadsConfig += fmt.Sprintf("    { \"low_power_mode\" : false, \"no_prefetch\" : true, \"asm\" : \"auto\", \"affine_to_cpu\" : %d },\n", threadsContent[i])
 	}
 
-	return `
-	/*
-	 * Thread configuration for each thread. Make sure it matches the number above.
-	 * low_power_mode - This can either be a boolean (true or false), or a number between 1 to 5. When set to true,
-	 *                  this mode will double the cache usage, and double the single thread performance. It will
-	 *                  consume much less power (as less cores are working), but will max out at around 80-85% of
-	 *                  the maximum performance. When set to a number N greater than 1, this mode will increase the
-	 *                  cache usage and single thread performance by N times.
-	 *
-	 * no_prefetch    - Some systems can gain up to extra 5% here, but sometimes it will have no difference or make
-	 *                  things slower.
-	 *
-	 * asm            - Allow to switch to a assembler version of cryptonight_v8; allowed value [auto, off, intel_avx, amd_avx]
-	 *                    - auto: xmr-stak will automatically detect the asm type (default)
-	 *                    - off: disable the usage of optimized assembler
-	 *                    - intel_avx: supports Intel cpus with avx instructions e.g. Xeon v2, Core i7/i5/i3 3xxx, Pentium G2xxx, Celeron G1xxx
-	 *                    - amd_avx: supports AMD cpus with avx instructions e.g. AMD Ryzen 1xxx and 2xxx series
-	 *
-	 * affine_to_cpu  - This can be either false (no affinity), or the CPU core number. Note that on hyperthreading
-	 *                  systems it is better to assign threads to physical cores. On Windows this usually means selecting
-	 *                  even or odd numbered cpu numbers. For Linux it will be usually the lower CPU numbers, so for a 4
-	 *                  physical core CPU you should select cpu numbers 0-3.
-	 *
-	 * On the first run the miner will look at your system and suggest a basic configuration that will work,
-	 * you can try to tweak it from there to get the best performance.
-	 *
-	 * A filled out configuration should look like this:
-	 * "cpu_threads_conf" :
-	 * [
-	 *      { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 0 },
-	 *      { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 1 },
-	 * ],
-	 * If you do not wish to mine with your CPU(s) then use:
-	 * "cpu_threads_conf" :
-	 * null,
-	 */
-   
-    "cpu_threads_conf" :
-	[
+	currentTime := time.Now()
+	fomattedTime := currentTime.Format("2006.01.02 15:04:05")
+
+return `// generated by BLOC-GUI-Miner on ` + fomattedTime + `
+
+/*
+ * Thread configuration for each thread. Make sure it matches the number above.
+ * low_power_mode - This can either be a boolean (true or false), or a number between 1 to 5. When set to true,
+ *                  this mode will double the cache usage, and double the single thread performance. It will
+ *                  consume much less power (as less cores are working), but will max out at around 80-85% of
+ *                  the maximum performance. When set to a number N greater than 1, this mode will increase the
+ *                  cache usage and single thread performance by N times.
+ *
+ * no_prefetch    - Some systems can gain up to extra 5% here, but sometimes it will have no difference or make
+ *                  things slower.
+ *
+ * asm            - Allow to switch to a assembler version of cryptonight_v8; allowed value [auto, off, intel_avx, amd_avx]
+ *                    - auto: xmr-stak will automatically detect the asm type (default)
+ *                    - off: disable the usage of optimized assembler
+ *                    - intel_avx: supports Intel cpus with avx instructions e.g. Xeon v2, Core i7/i5/i3 3xxx, Pentium G2xxx, Celeron G1xxx
+ *                    - amd_avx: supports AMD cpus with avx instructions e.g. AMD Ryzen 1xxx and 2xxx series
+ *
+ * affine_to_cpu  - This can be either false (no affinity), or the CPU core number. Note that on hyperthreading
+ *                  systems it is better to assign threads to physical cores. On Windows this usually means selecting
+ *                  even or odd numbered cpu numbers. For Linux it will be usually the lower CPU numbers, so for a 4
+ *                  physical core CPU you should select cpu numbers 0-3.
+ *
+ * On the first run the miner will look at your system and suggest a basic configuration that will work,
+ * you can try to tweak it from there to get the best performance.
+ *
+ * A filled out configuration should look like this:
+ * "cpu_threads_conf" :
+ * [
+ *      { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 0 },
+ *      { "low_power_mode" : false, "no_prefetch" : true, "asm" : "auto", "affine_to_cpu" : 1 },
+ * ],
+ * If you do not wish to mine with your CPU(s) then use:
+ * "cpu_threads_conf" :
+ * null,
+ */
+
+"cpu_threads_conf" :
+[
 ` + threadsConfig + `
-	],
+],
 `
 }

@@ -23,6 +23,8 @@ type ProcessingConfig struct {
 	Type string `json:"type"`
 	// Threads is the amount of CPU threads
 	Threads uint16 `json:"threads"`
+	// Threads is the amount of CPU threads
+	ThreadsContent []uint16 `json:"threads_content"`
 	// MaxThreads is the maximum threads as read by runtime.NumCPU
 	MaxThreads uint16 `json:"max_threads"`
 	// MaxUsage is the maximum CPU usage in percentage the miner should
