@@ -7,6 +7,11 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"os"
+	"fmt"
+	"bytes"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Xmrig implements the miner interface for the xmrig miner, including
@@ -21,94 +26,120 @@ type Xmrig struct {
 	lastHashrate     float64
 	resultStatsCache XmrigResponse
 	isGPU            bool
+	logger           *logrus.Entry
 }
 
 // XmrigConfig is the config.json structure for Xmrig
 // Generated with https://mholt.github.io/json-to-go/
 type XmrigConfig struct {
-	Algo        string            `json:"algo"`
-	Av          int               `json:"av"`
-	Background  bool              `json:"background"`
-	Colors      bool              `json:"colors"`
-	CPUAffinity interface{}       `json:"cpu-affinity"`
-	CPUPriority interface{}       `json:"cpu-priority"`
-	DonateLevel int               `json:"donate-level"`
-	LogFile     interface{}       `json:"log-file"`
-	MaxCPUUsage uint8             `json:"max-cpu-usage"`
-	PrintTime   int               `json:"print-time"`
-	Retries     int               `json:"retries"`
-	RetryPause  int               `json:"retry-pause"`
-	Safe        bool              `json:"safe"`
-	Syslog      bool              `json:"syslog"`
-	Threads     uint16            `json:"threads"`
-	Pools       []XmrigPoolConfig `json:"pools"`
-	API         XmrigAPIConfig    `json:"api"`
+	API             XmrigAPIConfig      `json:"api"`
+	HTTP            XmrigHttpConfig     `json:"http"`
+	Autosave        bool                `json:"autosave"`
+	Version         int                 `json:"version"`
+	Background      bool                `json:"background"`
+	Colors          bool                `json:"colors"`
+	RandomX         XmrigRandomXConfig  `json:"randomx"`
+	Cpu             XmrigCpuConfig      `json:"cpu"`
+	DonateLevel     int                 `json:"donate-level"`
+	DonateOverProxy int                 `json:"donate-over-proxy"`
+	LogFile         interface{}         `json:"log-file"`
+	Pools           []XmrigPoolConfig   `json:"pools"`
+	PrintTime       int                 `json:"print-time"`
+	Retries         int                 `json:"retries"`
+	RetryPause      int                 `json:"retry-pause"`
+	Syslog          bool                `json:"syslog"`
+	UserAgent       interface{}         `json:"user-agent"`
+	Watch           bool                `json:"watch"`
 }
 
 // XmrigGPUConfig is the config.json structure for Xmrig's GPU
 // Generated with https://mholt.github.io/json-to-go/
 type XmrigGPUConfig struct {
-	Algo        string      `json:"algo"`
-	Av          int         `json:"av"`
-	Background  bool        `json:"background"`
-	Colors      bool        `json:"colors"`
-	CPUAffinity interface{} `json:"cpu-affinity"`
-	CPUPriority interface{} `json:"cpu-priority"`
-	DonateLevel int         `json:"donate-level"`
-	LogFile     interface{} `json:"log-file"`
+	// Av          int         `json:"av"`
+	// Background  bool        `json:"background"`
+	// Colors      bool        `json:"colors"`
+	// CPUAffinity interface{} `json:"cpu-affinity"`
+	// CPUPriority interface{} `json:"cpu-priority"`
+	// DonateLevel int         `json:"donate-level"`
+	// LogFile     interface{} `json:"log-file"`
 	MaxCPUUsage uint8       `json:"max-cpu-usage"`
-	PrintTime   int         `json:"print-time"`
-	Retries     int         `json:"retries"`
-	RetryPause  int         `json:"retry-pause"`
-	Safe        bool        `json:"safe"`
-	Syslog      bool        `json:"syslog"`
+	// PrintTime   int         `json:"print-time"`
+	// Retries     int         `json:"retries"`
+	// RetryPause  int         `json:"retry-pause"`
+	// Safe        bool        `json:"safe"`
+	// Syslog      bool        `json:"syslog"`
 	// TODO: This is the only difference between GPU and CPU, the threads
 	// structure in the config. I need to merge the the config structures into
 	// one with an omitempty tag on each and only fill in the one needed
-	Threads []struct{}        `json:"threads"`
-	Pools   []XmrigPoolConfig `json:"pools"`
-	API     XmrigAPIConfig    `json:"api"`
-}
-
-// XmrigPoolConfig contains the configuration for a pool in Xmrig
-type XmrigPoolConfig struct {
-	URL       string `json:"url"`
-	User      string `json:"user"`
-	Pass      string `json:"pass"`
-	Keepalive bool   `json:"keepalive"`
-	Nicehash  bool   `json:"nicehash"`
-	Variant   string `json:"variant"`
+	// Threads []struct{}        `json:"threads"`
+	// Pools   []XmrigPoolConfig `json:"pools"`
+	// API     XmrigAPIConfig    `json:"api"`
 }
 
 // XmrigAPIConfig contains the Xmrig API config
 type XmrigAPIConfig struct {
+	Id          interface{} `json:"id"`
+	WorkerID    interface{} `json:"worker-id"`
+}
+
+// XmrigHttpConfig contains the Xmrig HTTP config
+type XmrigHttpConfig struct {
+	Enabled     bool        `json:"enabled"`
+	Host        string      `json:"host"`
 	Port        int         `json:"port"`
 	AccessToken interface{} `json:"access-token"`
-	WorkerID    interface{} `json:"worker-id"`
+	Restricted  bool        `json:"restricted"`
+}
+
+// XmrigCpuConfig contains the Xmrig CPU config
+type XmrigCpuConfig struct {
+	Enabled    bool        `json:"enabled"`
+	HugePages  bool        `json:"huge-pages"`
+	HwAes      interface{} `json:"hw-aes"`
+	Priority   interface{} `json:"priority"`
+	Asm        bool        `json:"asm"`
+	Argon2Impl interface{} `json:"argon2-impl"`
+	Argon2     []int       `json:"argon2"`
+	Cn         [][]int     `json:"cn"`
+	CnHeavy    [][]int     `json:"cn-heavy"`
+	CnLite     [][]int     `json:"cn-lite"`
+	CnPico     [][]int     `json:"cn-pico"`
+	CnGpu      []int       `json:"cn/gpu"`
+	Rx         []int       `json:"rx"`
+	RxWow      []int       `json:"rx/wow"`
+	Cn0        bool        `json:"cn/0"`
+	CnLite0    bool        `json:"cn-lite/0"`
+}
+
+// XmrigRandomXConfig contains the Xmrig RandomX config
+type XmrigRandomXConfig struct {
+	Init int  `json:"init"`
+	Numa bool `json:"numa"`
+}
+
+// XmrigPoolConfig contains the configuration for a pool in Xmrig
+type XmrigPoolConfig struct {
+	// Algo           interface{} `json:"algo"`
+	Algo           string      `json:"algo"`
+	URL            string      `json:"url"`
+	User           string      `json:"user"`
+	Pass           string      `json:"pass"`
+	RigId          string      `json:"rig-id"`
+	Nicehash       bool        `json:"nicehash"`
+	Keepalive      bool        `json:"keepalive"`
+	Enabled        bool        `json:"enabled"`
+	Tls            bool        `json:"tls"`
+	TlsFingerprint interface{} `json:"tls-fingerprint"`
+	Daemon         bool        `json:"daemon"`
 }
 
 // XmrigResponse contains the data from xmrig API
 // Generated with https://mholt.github.io/json-to-go/
 type XmrigResponse struct {
-	ID       string `json:"id"`
-	WorkerID string `json:"worker_id"`
-	Version  string `json:"version"`
-	Kind     string `json:"kind"`
-	Ua       string `json:"ua"`
-	CPU      struct {
-		Brand   string `json:"brand"`
-		Aes     bool   `json:"aes"`
-		X64     bool   `json:"x64"`
-		Sockets int    `json:"sockets"`
-	} `json:"cpu"`
-	Algo        string `json:"algo"`
-	Hugepages   bool   `json:"hugepages"`
-	DonateLevel int    `json:"donate_level"`
-	Hashrate    struct {
-		Total   []float64   `json:"total"`
-		Highest float64     `json:"highest"`
-		Threads [][]float64 `json:"threads"`
-	} `json:"hashrate"`
+	ID       string   `json:"id"`
+	WorkerID string   `json:"worker_id"`
+	Uptime   int      `json:"uptime"`
+	Features []string `json:"features"`
 	Results struct {
 		DiffCurrent int64    `json:"diff_current"`
 		SharesGood  int      `json:"shares_good"`
@@ -118,13 +149,41 @@ type XmrigResponse struct {
 		Best        []int    `json:"best"`
 		ErrorLog    []string `json:"error_log"`
 	} `json:"results"`
+	Algo        string `json:"algo"`
 	Connection struct {
-		Pool     string   `json:"pool"`
-		Uptime   int      `json:"uptime"`
-		Ping     int      `json:"ping"`
-		Failures int      `json:"failures"`
-		ErrorLog []string `json:"error_log"`
+		Pool           string      `json:"pool"`
+		Ip             string      `json:"ip"`
+		Uptime         int         `json:"uptime"`
+		Ping           int         `json:"ping"`
+		Failures       int         `json:"failures"`
+		Tls            interface{} `json:"tls"`
+		TlsFingerprint interface{} `json:"tls-fingerprint"`
+		ErrorLog       []string    `json:"error_log"`
 	} `json:"connection"`
+	Version  string   `json:"version"`
+	Kind     string   `json:"kind"`
+	Ua       string   `json:"ua"`
+	CPU      struct {
+		Brand    string `json:"brand"`
+		Aes      bool   `json:"aes"`
+		Avx2     bool   `json:"avx2"`
+		X64      bool   `json:"x64"`
+		L2       int    `json:"l2"`
+		L3       int    `json:"l3"`
+		Cores    int    `json:"cores"`
+		Threads  int    `json:"threads"`
+		Packages int    `json:"packages"`
+		Nodes    int    `json:"nodes"`
+		Backend  string `json:"backend"`
+		Assembly string `json:"assembly"`
+	} `json:"cpu"`
+	Hugepages   bool   `json:"hugepages"`
+	DonateLevel int    `json:"donate_level"`
+	Hashrate    struct {
+		Total   []float64   `json:"total"`
+		Highest float64     `json:"highest"`
+		Threads [][]float64 `json:"threads"`
+	} `json:"hashrate"`
 }
 
 // NewXmrig creates a new xmrig miner instance
@@ -132,7 +191,7 @@ func NewXmrig(config Config) (*Xmrig, error) {
 
 	endpoint := config.Endpoint
 	if endpoint == "" {
-		endpoint = "http://127.0.0.1:16000"
+		endpoint = "http://127.0.0.1:16000/1/summary"
 	}
 
 	miner := Xmrig{
@@ -151,6 +210,20 @@ func NewXmrig(config Config) (*Xmrig, error) {
 	}
 	miner.Base.executableName = filepath.Base(config.Path)
 	miner.Base.executablePath = filepath.Dir(config.Path)
+
+	// Setup the logging, by default we log to stdout
+	logrus.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp:   true,
+		TimestampFormat: "Jan 02 15:04:05",
+	})
+	logrus.SetLevel(logrus.DebugLevel)
+	logrus.SetOutput(os.Stdout)
+
+	// Setting the WithFields now will ensure all log entries from this point
+	// includes the fields
+	miner.logger = logrus.WithFields(logrus.Fields{
+		"service": "XmrStak",
+	})
 
 	return &miner, nil
 }
@@ -210,32 +283,35 @@ func (miner *Xmrig) GetProcessingConfig() ProcessingConfig {
 		filepath.Join(miner.Base.executablePath, "config.json"))
 	if err != nil {
 		return ProcessingConfig{
-			MaxUsage:   0,
-			Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
-			MaxThreads: uint16(runtime.NumCPU()),
-			Type:       miner.name,
+			MaxUsage:     0,
+			Threads:      uint16(len(miner.resultStatsCache.Hashrate.Threads)),
+			MaxThreads:   uint16(runtime.NumCPU()),
+			Type:         miner.name,
+			HardwareType: 1,
 		}
 	}
 
 	// xmrig's threads field is not an int when it's GPU only so we need to use
-	// a defferent config structure
+	// a different config structure
 	if miner.isGPU {
 		var config XmrigGPUConfig
 		err = json.Unmarshal(configBytes, &config)
 		if err != nil {
 			return ProcessingConfig{
-				MaxUsage:   0,
-				Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
-				MaxThreads: uint16(runtime.NumCPU()),
-				Type:       miner.name,
+				MaxUsage:     0,
+				Threads:      uint16(len(miner.resultStatsCache.Hashrate.Threads)),
+				MaxThreads:   uint16(runtime.NumCPU()),
+				Type:         miner.name,
+				HardwareType: 1,
 			}
 		}
 
 		return ProcessingConfig{
-			MaxUsage:   config.MaxCPUUsage,
-			Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
-			MaxThreads: uint16(runtime.NumCPU()),
-			Type:       miner.name,
+			MaxUsage:     config.MaxCPUUsage,
+			Threads:      uint16(len(miner.resultStatsCache.Hashrate.Threads)),
+			MaxThreads:   uint16(runtime.NumCPU()),
+			Type:         miner.name,
+			HardwareType: 1,
 		}
 	}
 
@@ -243,18 +319,21 @@ func (miner *Xmrig) GetProcessingConfig() ProcessingConfig {
 	err = json.Unmarshal(configBytes, &config)
 	if err != nil {
 		return ProcessingConfig{
-			MaxUsage:   0,
-			Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
-			MaxThreads: uint16(runtime.NumCPU()),
-			Type:       miner.name,
+			MaxUsage:     0,
+			Threads:      uint16(len(miner.resultStatsCache.Hashrate.Threads)),
+			MaxThreads:   uint16(runtime.NumCPU()),
+			Type:         miner.name,
+			HardwareType: 1,
 		}
 	}
 
 	return ProcessingConfig{
-		MaxUsage:   config.MaxCPUUsage,
-		Threads:    uint16(len(miner.resultStatsCache.Hashrate.Threads)),
-		MaxThreads: uint16(runtime.NumCPU()),
-		Type:       miner.name,
+		// MaxUsage:     config.MaxCPUUsage,
+		MaxUsage:     100, // a small hack FTM
+		Threads:      uint16(len(miner.resultStatsCache.Hashrate.Threads)),
+		MaxThreads:   uint16(runtime.NumCPU()),
+		Type:         miner.name,
+		HardwareType: 1,
 	}
 }
 
@@ -276,10 +355,25 @@ func (miner *Xmrig) GetStats() (Stats, error) {
 	if err != nil {
 		return stats, err
 	}
+	miner.logger.Info("-----------------------------")
+	miner.logger.Info("XMRIG GetStats")
+
+	buf, bodyErr := ioutil.ReadAll(resp.Body)
+	if bodyErr != nil {
+		miner.logger.Info(fmt.Sprintf("bodyErr %s", bodyErr.Error()))
+	} else {
+		rdr1 := ioutil.NopCloser(bytes.NewBuffer(buf))
+		miner.logger.Info(fmt.Sprintf("BODY: %q", rdr1))
+	}
+
+	// miner.logger.Info(fmt.Sprintf("%s\n", string(resp.Body)))
 	err = json.NewDecoder(resp.Body).Decode(&xmrigStats)
 	if err != nil {
+		miner.logger.Info(fmt.Sprintf("%s", err))
 		return stats, err
 	}
+	miner.logger.Info(fmt.Sprintf("%v+", xmrigStats))
+	miner.logger.Info("-----------------------------")
 
 	var hashrate float64
 	if len(xmrigStats.Hashrate.Total) > 0 {
@@ -335,45 +429,85 @@ func (miner *Xmrig) createConfig(
 	XmrigVariant string,
 	processingConfig ProcessingConfig) XmrigConfig {
 
-	runInBackground := true
-	// On Mac OSX xmrig doesn't run is we fork the process to the background and
+	// runInBackground := true
+	// On Mac OSX xmrig doesn't run if we fork the process to the background and
 	// xmrig forks to the background again
 	// Seems like xmrig doesn't like running GPU in the background
-	if runtime.GOOS == "darwin" || miner.isGPU {
-		runInBackground = false
-	}
+	// if runtime.GOOS == "darwin" || miner.isGPU {
+		// runInBackground = false
+	// }
 
 	config := XmrigConfig{
-		Algo:        XmrigAlgo,
-		Av:          0,
-		Background:  runInBackground,
-		Colors:      true,
-		CPUAffinity: nil,
-		CPUPriority: nil,
-		DonateLevel: 2,
-		LogFile:     nil,
-		MaxCPUUsage: processingConfig.MaxUsage,
-		PrintTime:   3600,
-		Retries:     5,
-		RetryPause:  5,
-		Safe:        false,
-		Syslog:      false,
-		Threads:     processingConfig.Threads,
-		Pools: []XmrigPoolConfig{
-			{
-				URL:       poolEndpoint,
-				User:      walletAddress,
-				Pass:      "BLOC GUI Miner",
-				Keepalive: true,
-				Nicehash:  false,
-				Variant:   XmrigVariant,
-			},
-		},
 		API: XmrigAPIConfig{
+			Id:       nil,
+			WorkerID: nil,
+		},
+		HTTP: XmrigHttpConfig{
+			Enabled:     true,
+			Host:        "127.0.0.1",
 			Port:        16000,
 			AccessToken: nil,
-			WorkerID:    nil,
+			Restricted:  true,
 		},
+		Autosave:   true,
+		Version:    1,
+		// Background: runInBackground,
+		Background: false,
+		Colors:     true,
+		RandomX: XmrigRandomXConfig{
+			Init: -1,
+			Numa: true,
+		},
+		Cpu: XmrigCpuConfig{
+			Enabled:    true,
+			HugePages:  true,
+			HwAes:      nil,
+			Priority:   nil,
+			Asm:        true,
+			Argon2Impl: nil,
+			Argon2:     []int{0,1},
+			Cn:         [][]int{
+				[]int{1,0}, []int{1,1},
+			},
+			CnHeavy:    [][]int{
+				[]int{1,0}, []int{1,1},
+			},
+			CnLite:     [][]int{
+				[]int{1,0}, []int{1,1},
+			},
+			CnPico:     [][]int{
+				[]int{2,0}, []int{2,1},
+			},
+			CnGpu:     []int{0,1},
+			Rx:        []int{0,1},
+			RxWow:     []int{0,1},
+			Cn0:       false,
+			CnLite0:   false,
+		},
+		DonateLevel:     2,
+		DonateOverProxy: 1,
+		LogFile:         nil,
+		Pools: []XmrigPoolConfig{
+			{
+				Algo:           XmrigAlgo,
+				URL:            poolEndpoint,
+				User:           walletAddress,
+				Pass:           "x",
+				RigId:          "BLOC GUI Miner",
+				Nicehash:       false,
+				Keepalive:      true,
+				Enabled:        true,
+				Tls:            false,
+				TlsFingerprint: nil,
+				Daemon:         false,
+			},
+		},
+		PrintTime:   60,
+		Retries:     5,
+		RetryPause:  5,
+		Syslog:      false,
+		UserAgent:   nil,
+		Watch:       true,
 	}
 
 	return config
@@ -387,34 +521,34 @@ func (miner *Xmrig) createGPUConfig(
 	XmrigVariant string) XmrigGPUConfig {
 
 	config := XmrigGPUConfig{
-		Algo:        XmrigAlgo,
-		Av:          0,
-		Background:  false,
-		Colors:      true,
-		CPUAffinity: nil,
-		CPUPriority: nil,
-		DonateLevel: 2,
-		LogFile:     nil,
-		PrintTime:   3600,
-		Retries:     5,
-		RetryPause:  5,
-		Safe:        false,
-		Syslog:      false,
-		Pools: []XmrigPoolConfig{
-			{
-				URL:       poolEndpoint,
-				User:      walletAddress,
-				Pass:      "BLOC GUI Miner",
-				Keepalive: true,
-				Nicehash:  false,
-				Variant:   XmrigVariant,
-			},
-		},
-		API: XmrigAPIConfig{
-			Port:        16000,
-			AccessToken: nil,
-			WorkerID:    nil,
-		},
+		// Algo:        XmrigAlgo,
+		// Av:          0,
+		// Background:  false,
+		// Colors:      true,
+		// CPUAffinity: nil,
+		// CPUPriority: nil,
+		// DonateLevel: 2,
+		// LogFile:     nil,
+		// PrintTime:   3600,
+		// Retries:     5,
+		// RetryPause:  5,
+		// Safe:        false,
+		// Syslog:      false,
+		// Pools: []XmrigPoolConfig{
+			// {
+				// URL:       poolEndpoint,
+				// User:      walletAddress,
+				// Pass:      "BLOC GUI Miner",
+				// Keepalive: true,
+				// Nicehash:  false,
+				// Variant:   XmrigVariant,
+			// },
+		// },
+		// API: XmrigAPIConfig{
+			// Port:        16000,
+			// AccessToken: nil,
+			// WorkerID:    nil,
+		// },
 	}
 
 	return config

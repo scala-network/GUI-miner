@@ -5,6 +5,7 @@ This file is a small tutorial for developers. But you still need to read the REA
 1. The **miner** source folder is `~/GUI-miner`  
 2. The **libraries** source folder is `~/go/src/github.com/furiousteam/BLOC-GUI-Miner/`  
 3. The **xmr-stak** binaries folder is `~/xmr-stak-linux-2.10.7-cpu/`  
+4. The **xmrig** binaries folder is `~/xmrig-3.1.0/`  
 
 **Notes:**  
 * The **.go** files you need to change are from the **miner** folder  
@@ -13,7 +14,30 @@ This file is a small tutorial for developers. But you still need to read the REA
 * The `~/GUI-miner/bin/linux-amd64/config.json` is the GUI miner config file  
 * The `~/GUI-miner/bin/linux-amd64/miner/config.txt`, `~/GUI-miner/bin/linux-amd64/miner/cpu.txt` and `~/GUI-miner/bin/linux-amd64/miner/pools.txt` are the xmr-stak config files  
 
-### To compile and run the miner clean
+-----------------------------------------------------------------------------------------------  
+
+### To compile and run the xmrig miner clean
+
+```shell
+clear; export DISPLAY=:0; cd ~/GUI-miner; \
+make clean; make; mkdir ~/GUI-miner/bin/linux-amd64/miner; \
+cp -r ~/xmrig-3.1.0/xmrig ~/GUI-miner/bin/linux-amd64/miner; \
+cp -r ~/xmrig-3.1.0/config.json ~/GUI-miner/bin/linux-amd64/miner; \
+cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+```
+
+-----------------------------------------------------------------------------------------------  
+
+### To compile and run the xmr-stak miner clean
+
+```shell
+clear; export DISPLAY=:0; cd ~/GUI-miner; \
+make clean; make; mkdir ~/GUI-miner/bin/linux-amd64/miner; \
+cp -r ~/xmr-stak-linux-2.10.7-cpu/xmr-stak ~/GUI-miner/bin/linux-amd64/miner; \
+cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+```
+
+### To compile and run the xmr-stak miner clean
 
 ```shell
 clear; export DISPLAY=:0; cd ~/GUI-miner; \
@@ -22,7 +46,7 @@ cp -r ~/xmr-stak-linux-2.10.7-cpu/xmr-stak ~/GUI-miner/bin/linux-amd64/miner; \
 cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
 ``` 
 
-### To compile and run the miner with old configuration
+### To compile and run the xmr-stak miner with old configuration
 
 ```shell
 clear; export DISPLAY=:0; cd ~/GUI-miner; \
@@ -39,7 +63,7 @@ cp -u /tmp/pools.txt ~/GUI-miner/bin/linux-amd64/miner/pools.txt; \
 cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
 ```
 
-### To run the miner with clean configuration
+### To run the xmr-stak miner with clean configuration
 
 ```shell
 clear; export DISPLAY=:0; cd ~/GUI-miner/bin/linux-amd64/; \
@@ -50,7 +74,7 @@ rm -f ~/GUI-miner/bin/linux-amd64/miner/pools.txt; \
 ./BLOC\ GUI\ Miner\ v0.0.4 -d
 ```
 
-### To run the miner with old configuration
+### To run the xmr-stak miner with old configuration
 
 ```shell
 clear; export DISPLAY=:0; cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
