@@ -124,6 +124,8 @@ func (miner *XmrStak) WriteConfig(
 		return err
 	}
 
+	// Disabled recreating the cpu.txt file, because we removed the CPU threads from miner settings page
+	/*
 	// With xmr-stak you have the option to disable CPU mining, in that case
 	// we can't just check for 0. If the cpu.txt file exists then a zero
 	// means we're disabling it, else this is firstrun
@@ -132,13 +134,6 @@ func (miner *XmrStak) WriteConfig(
 	if err == nil {
 		// processingConfig.Threads = miner.getCPUThreadcount()
 		processingConfig.ThreadsContent = miner.getCPUThreadContent()
-
-		miner.logger.Info("******************************")
-		miner.logger.Info("processingConfig.ThreadsContent")
-		for _, nr := range processingConfig.ThreadsContent {
-			miner.logger.Info(fmt.Sprintf("%d", nr))
-		}
-		miner.logger.Info("******************************")
 	}
 
 	_, err = os.Stat(filepath.Join(miner.Base.executablePath, "cpu.txt"))
@@ -146,12 +141,13 @@ func (miner *XmrStak) WriteConfig(
 		// File exists, we may disable
 		err = ioutil.WriteFile(
 			filepath.Join(miner.Base.executablePath, "cpu.txt"),
-			[]byte(miner.cpuConfig(/*processingConfig.Threads, */processingConfig.ThreadsContent)),
+			[]byte(miner.cpuConfig(processingConfig.ThreadsContent)),
 			0644)
 		if err != nil {
 			return err
 		}
 	}
+	*/
 	// Reset hashrate
 	miner.lastHashrate = 0.00
 	return nil
@@ -517,7 +513,7 @@ func (miner *XmrStak) buildPoolConfig(
 // the amount of threads
 // xmr-stak uses a JSON format that doesn't have a compatible Go
 // parser which is why I'm doing this as text or templates
-func (miner *XmrStak) cpuConfig(/*threads uint16, */threadsContent []uint16) string {
+func (miner *XmrStak) cpuConfig(threadsContent []uint16) string {
 
 	var threadsConfig string
 	nrThreads := threadsContent[len(threadsContent) - 1]
