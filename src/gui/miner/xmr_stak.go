@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"os"
+	// "os"
 	"path/filepath"
 	"regexp"
 	"runtime"
@@ -14,7 +14,7 @@ import (
 	"strconv"
 	// "log"
 
-	"github.com/sirupsen/logrus"
+	// "github.com/sirupsen/logrus"
 )
 
 // XmrStak implements the miner interface for the xmr-stak miner
@@ -26,7 +26,7 @@ type XmrStak struct {
 	endpoint         string
 	lastHashrate     float64
 	resultStatsCache XmrStakResponse
-	logger           *logrus.Entry
+	// logger           *logrus.Entry
 }
 
 // XmrStakResponse contains the data from xmr-stak API
@@ -81,18 +81,18 @@ func NewXmrStak(config Config) (*XmrStak, error) {
 	miner.Base.executablePath = filepath.Dir(config.Path)
 
 	// Setup the logging, by default we log to stdout
-	logrus.SetFormatter(&logrus.TextFormatter{
-		FullTimestamp:   true,
-		TimestampFormat: "Jan 02 15:04:05",
-	})
-	logrus.SetLevel(logrus.DebugLevel)
-	logrus.SetOutput(os.Stdout)
+	// logrus.SetFormatter(&logrus.TextFormatter{
+		// FullTimestamp:   true,
+		// TimestampFormat: "Jan 02 15:04:05",
+	// })
+	// logrus.SetLevel(logrus.DebugLevel)
+	// logrus.SetOutput(os.Stdout)
 
 	// Setting the WithFields now will ensure all log entries from this point
 	// includes the fields
-	miner.logger = logrus.WithFields(logrus.Fields{
-		"service": "XmrStak",
-	})
+	// miner.logger = logrus.WithFields(logrus.Fields{
+		// "service": "XmrStak",
+	// })
 
 	return &miner, nil
 }
