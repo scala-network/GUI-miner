@@ -351,7 +351,7 @@
   "newsBox": {
       "bloc": {
           "title": "BLOC Wallet on App Store",
-          "image": "static/img/bloc-news.png",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/bloc-news.png",
           "link": "https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8"
       },
       "turtlecoin": {
