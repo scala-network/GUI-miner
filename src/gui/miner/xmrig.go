@@ -9,7 +9,7 @@ import (
 	"strings"
 	"os"
 	"fmt"
-	"bytes"
+	// "bytes"
 
 	"github.com/sirupsen/logrus"
 )
@@ -245,7 +245,7 @@ func (miner *Xmrig) WriteConfig(
 			walletAddress,
 			XmrigAlgo,
 			XmrigVariant)
-		configBytes, err = json.Marshal(defaultConfig)
+		configBytes, err = json.MarshalIndent(defaultConfig, "", "  ")
 		if err != nil {
 			return err
 		}
@@ -256,7 +256,7 @@ func (miner *Xmrig) WriteConfig(
 			XmrigAlgo,
 			XmrigVariant,
 			processingConfig)
-		configBytes, err = json.Marshal(defaultConfig)
+		configBytes, err = json.MarshalIndent(defaultConfig, "", "  ")
 		if err != nil {
 			return err
 		}
@@ -355,25 +355,27 @@ func (miner *Xmrig) GetStats() (Stats, error) {
 	if err != nil {
 		return stats, err
 	}
-	miner.logger.Info("-----------------------------")
-	miner.logger.Info("XMRIG GetStats")
+	// miner.logger.Info("-----------------------------")
+	// miner.logger.Info("XMRIG GetStats")
 
-	buf, bodyErr := ioutil.ReadAll(resp.Body)
-	if bodyErr != nil {
-		miner.logger.Info(fmt.Sprintf("bodyErr %s", bodyErr.Error()))
-	} else {
-		rdr1 := ioutil.NopCloser(bytes.NewBuffer(buf))
-		miner.logger.Info(fmt.Sprintf("BODY: %q", rdr1))
-	}
+	// buf, bodyErr := ioutil.ReadAll(resp.Body)
+	// if bodyErr != nil {
+		// miner.logger.Info(fmt.Sprintf("bodyErr %s", bodyErr.Error()))
+		// return stats, err
+	// } else {
+		// miner.logger.Info(fmt.Sprintf("%s", buf))
+		// rdr1 := ioutil.NopCloser(bytes.NewBuffer(buf))
+		// miner.logger.Info(fmt.Sprintf("BODY: %q", rdr1))
+	// }
 
 	// miner.logger.Info(fmt.Sprintf("%s\n", string(resp.Body)))
 	err = json.NewDecoder(resp.Body).Decode(&xmrigStats)
 	if err != nil {
-		miner.logger.Info(fmt.Sprintf("%s", err))
+		// miner.logger.Info(fmt.Sprintf("%s", err))
 		return stats, err
 	}
-	miner.logger.Info(fmt.Sprintf("%v+", xmrigStats))
-	miner.logger.Info("-----------------------------")
+	// miner.logger.Info(fmt.Sprintf("%v+", xmrigStats))
+	// miner.logger.Info("-----------------------------")
 
 	var hashrate float64
 	if len(xmrigStats.Hashrate.Total) > 0 {

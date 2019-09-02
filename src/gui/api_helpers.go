@@ -48,7 +48,7 @@ func (gui *GUI) GetPool(id int) (PoolData, error) {
 
 // SaveConfig saves the configuration to disk
 func (gui *GUI) SaveConfig(config Config) error {
-	configBytes, err := json.Marshal(&config)
+	configBytes, err := json.MarshalIndent(&config, "", "  ")
 	if err != nil {
 		return err
 	}

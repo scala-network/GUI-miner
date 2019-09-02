@@ -105,7 +105,7 @@ let app = {
 
 					break;
 				case "miner_stats":
-					// console.log('[' + new Date().toUTCString() + '] ', "miner_stats", parsed);
+					console.log('[' + new Date().toUTCString() + '] ', "miner_stats", parsed);
 					$('#miner_address').html(parsed.address);
 					if (!app.populatedAddress) {
 						$('#settings_mining_address').val(parsed.address); // settings wallet address
