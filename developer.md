@@ -1,4 +1,4 @@
-This file is a small tutorial for developers. But you still need to read the README.md file first.  
+This file is a small tutorial for developers to help them compile BLOC-GUI-Miner faster. But you still need to read the README.md file first.  
 
 ### Intro
 
@@ -40,6 +40,22 @@ cp -u /tmp/config.json ~/GUI-miner/bin/linux-amd64/config.json; \
 cp -u /tmp/config-xmrig.json ~/GUI-miner/bin/linux-amd64/miner/config.json; \
 cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
 ```
+
+### To run the xmrig miner with clean configuration
+
+```shell
+clear; export DISPLAY=:0; \
+rm -f ~/GUI-miner/bin/linux-amd64/config.json; \
+rm -f ~/GUI-miner/bin/linux-amd64/miner/config.json; \
+cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+```
+
+### To run the xmrig miner with old configuration
+
+```shell
+clear; export DISPLAY=:0; cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+```
+
 
 -----------------------------------------------------------------------------------------------  
 
