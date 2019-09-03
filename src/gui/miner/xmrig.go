@@ -423,6 +423,12 @@ func (miner *Xmrig) createConfig(
 		// runInBackground = false
 	// }
 
+	// Hardcoded pool password for turtle.miner.rocks
+	var pass string = "x"
+	if strings.Contains(poolEndpoint, "turtle.miner.rocks") {
+		pass = "w=rig-Name"
+	}
+
 	config := XmrigConfig{
 		API: XmrigAPIConfig{
 			Id:       nil,
@@ -478,7 +484,7 @@ func (miner *Xmrig) createConfig(
 				Algo:           XmrigAlgo,
 				URL:            poolEndpoint,
 				User:           walletAddress,
-				Pass:           "x",
+				Pass:           pass,
 				RigId:          "BLOC GUI Miner",
 				Nicehash:       false,
 				Keepalive:      true,
