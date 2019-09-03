@@ -427,6 +427,8 @@ func (miner *Xmrig) createConfig(
 	var pass string = "x"
 	if strings.Contains(poolEndpoint, "turtle.miner.rocks") {
 		pass = "w=rig-Name"
+	} else if strings.Contains(poolEndpoint, "ryo.miner.rocks") {
+		pass = "w=rig-Name"
 	}
 
 	config := XmrigConfig{
