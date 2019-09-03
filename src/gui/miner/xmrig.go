@@ -52,30 +52,6 @@ type XmrigConfig struct {
 	Watch           bool                `json:"watch"`
 }
 
-// XmrigGPUConfig is the config.json structure for Xmrig's GPU
-// Generated with https://mholt.github.io/json-to-go/
-type XmrigGPUConfig struct {
-	// Av          int         `json:"av"`
-	// Background  bool        `json:"background"`
-	// Colors      bool        `json:"colors"`
-	// CPUAffinity interface{} `json:"cpu-affinity"`
-	// CPUPriority interface{} `json:"cpu-priority"`
-	// DonateLevel int         `json:"donate-level"`
-	// LogFile     interface{} `json:"log-file"`
-	MaxCPUUsage uint8       `json:"max-cpu-usage"`
-	// PrintTime   int         `json:"print-time"`
-	// Retries     int         `json:"retries"`
-	// RetryPause  int         `json:"retry-pause"`
-	// Safe        bool        `json:"safe"`
-	// Syslog      bool        `json:"syslog"`
-	// TODO: This is the only difference between GPU and CPU, the threads
-	// structure in the config. I need to merge the the config structures into
-	// one with an omitempty tag on each and only fill in the one needed
-	// Threads []struct{}        `json:"threads"`
-	// Pools   []XmrigPoolConfig `json:"pools"`
-	// API     XmrigAPIConfig    `json:"api"`
-}
-
 // XmrigAPIConfig contains the Xmrig API config
 type XmrigAPIConfig struct {
 	Id          interface{} `json:"id"`
@@ -239,27 +215,15 @@ func (miner *Xmrig) WriteConfig(
 
 	var err error
 	var configBytes []byte
-	if miner.isGPU {
-		defaultConfig := miner.createGPUConfig(
-			poolEndpoint,
-			walletAddress,
-			XmrigAlgo,
-			XmrigVariant)
-		configBytes, err = json.MarshalIndent(defaultConfig, "", "  ")
-		if err != nil {
-			return err
-		}
-	} else {
-		defaultConfig := miner.createConfig(
-			poolEndpoint,
-			walletAddress,
-			XmrigAlgo,
-			XmrigVariant,
-			processingConfig)
-		configBytes, err = json.MarshalIndent(defaultConfig, "", "  ")
-		if err != nil {
-			return err
-		}
+	defaultConfig := miner.createConfig(
+		poolEndpoint,
+		walletAddress,
+		XmrigAlgo,
+		XmrigVariant,
+		processingConfig)
+	configBytes, err = json.MarshalIndent(defaultConfig, "", "  ")
+	if err != nil {
+		return err
 	}
 
 	err = ioutil.WriteFile(
@@ -284,30 +248,6 @@ func (miner *Xmrig) GetProcessingConfig() ProcessingConfig {
 	if err != nil {
 		return ProcessingConfig{
 			MaxUsage:     0,
-			Threads:      uint16(len(miner.resultStatsCache.Hashrate.Threads)),
-			MaxThreads:   uint16(runtime.NumCPU()),
-			Type:         miner.name,
-			HardwareType: 1,
-		}
-	}
-
-	// xmrig's threads field is not an int when it's GPU only so we need to use
-	// a different config structure
-	if miner.isGPU {
-		var config XmrigGPUConfig
-		err = json.Unmarshal(configBytes, &config)
-		if err != nil {
-			return ProcessingConfig{
-				MaxUsage:     0,
-				Threads:      uint16(len(miner.resultStatsCache.Hashrate.Threads)),
-				MaxThreads:   uint16(runtime.NumCPU()),
-				Type:         miner.name,
-				HardwareType: 1,
-			}
-		}
-
-		return ProcessingConfig{
-			MaxUsage:     config.MaxCPUUsage,
 			Threads:      uint16(len(miner.resultStatsCache.Hashrate.Threads)),
 			MaxThreads:   uint16(runtime.NumCPU()),
 			Type:         miner.name,
@@ -502,47 +442,6 @@ func (miner *Xmrig) createConfig(
 		Syslog:      false,
 		UserAgent:   nil,
 		Watch:       true,
-	}
-
-	return config
-}
-
-// createGPUConfig returns creates the config for Xmrig GPU setups
-func (miner *Xmrig) createGPUConfig(
-	poolEndpoint string,
-	walletAddress string,
-	XmrigAlgo string,
-	XmrigVariant string) XmrigGPUConfig {
-
-	config := XmrigGPUConfig{
-		// Algo:        XmrigAlgo,
-		// Av:          0,
-		// Background:  false,
-		// Colors:      true,
-		// CPUAffinity: nil,
-		// CPUPriority: nil,
-		// DonateLevel: 2,
-		// LogFile:     nil,
-		// PrintTime:   3600,
-		// Retries:     5,
-		// RetryPause:  5,
-		// Safe:        false,
-		// Syslog:      false,
-		// Pools: []XmrigPoolConfig{
-			// {
-				// URL:       poolEndpoint,
-				// User:      walletAddress,
-				// Pass:      "BLOC GUI Miner",
-				// Keepalive: true,
-				// Nicehash:  false,
-				// Variant:   XmrigVariant,
-			// },
-		// },
-		// API: XmrigAPIConfig{
-			// Port:        16000,
-			// AccessToken: nil,
-			// WorkerID:    nil,
-		// },
 	}
 
 	return config
