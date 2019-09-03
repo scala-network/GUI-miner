@@ -366,7 +366,7 @@
       },
       "haven": {
           "title": "Haven White Paper",
-          "image": "static/img/haven/news.png",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/haven/news.png",
           "link": "http://docs.havenprotocol.org/haven-protocol-wp-2_0.pdf"
       },
       "monero": {
