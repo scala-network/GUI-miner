@@ -72,12 +72,12 @@ func main() {
 	} else {
 		config = nil
 		// Not set yet, set to default
-		// Hardcoded since we don't ship a config file
+		// Hardcoded for now
 		apiEndpoint  = "https://bloc.money/miner-api"
 		coinType     = "bloc"
 		coinAlgo     = "cryptonight_haven"
-		XmrigAlgo    = "cryptonight-heavy"
-		XmrigVariant = "xhv"
+		XmrigAlgo    = ""
+		XmrigVariant = ""
 	}
 
 	// Create the miner

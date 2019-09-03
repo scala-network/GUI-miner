@@ -16,11 +16,11 @@ let app = {
 		document.addEventListener('astilectron-ready', function() {
 			// Get the coins json and cache it locally
 			astilectron.sendMessage({
-				name: "coins-content-json",
+				name: "get-coins-content",
 				payload: ""
 			}, function(message) {
 				var parsed = $.parseJSON(message.payload);
-				// console.log('[' + new Date().toUTCString() + '] ', "coins-content-json", parsed);
+				console.log('[' + new Date().toUTCString() + '] ', "get-coins-content", parsed);
 				app.coinsContent = parsed;
 
 				app.bindEvents();
@@ -28,11 +28,11 @@ let app = {
 
 				// Get the configuration settings
 				astilectron.sendMessage({
-					name: "config-file",
+					name: "get-config-file",
 					payload: ""
 				}, function(message) {
 					var parsed = $.parseJSON(message.payload);
-					console.log('[' + new Date().toUTCString() + '] ', "config-file", parsed);
+					console.log('[' + new Date().toUTCString() + '] ', "get-config-file", parsed);
 					app.coin_type = parsed.coin_type;
 					app.prev_coin_type = app.coin_type;
 					app.coin_algo = parsed.coin_algo;
@@ -204,13 +204,13 @@ let app = {
 		// Events for miner started/stopped
 		$(document).on('miner-started', function() {
 			astilectron.sendMessage({
-				name: "miner-start",
+				name: "start-miner",
 				payload: ""
 			}, function(message) {});
 		});
 		$(document).on('miner-stopped', function() {
 			astilectron.sendMessage({
-				name: "miner-stop",
+				name: "stop-miner",
 				payload: ""
 			}, function(message) {
 				app.resetMinerStats();
@@ -267,7 +267,7 @@ let app = {
 
 			// Stop the miner first
 			astilectron.sendMessage({
-				name: "miner-stop",
+				name: "stop-miner",
 				payload: ""
 			}, function(message) {
 				// Save the miner settings
@@ -284,8 +284,8 @@ let app = {
 					// max_cpu:       100,
 					hardware_type: parseInt($('#hardware-type').dropselect('value'))
 				};
-				console.log('[' + new Date().toUTCString() + '] ', "configure", configData);
-				astilectron.sendMessage({name: "configure", payload: configData}, function(message){
+				console.log('[' + new Date().toUTCString() + '] ', "save-configuration", configData);
+				astilectron.sendMessage({name: "save-configuration", payload: configData}, function(message){
 					document.location = 'index.html';
 				});
 			});
@@ -419,8 +419,8 @@ let app = {
 		var payloadData = {
 			coin_type: app.coin_type
 		};
-		astilectron.sendMessage({name: "pool-list", payload: payloadData}, function(message) {
-			// console.log('[' + new Date().toUTCString() + '] ', "pool-list", message.payload);
+		astilectron.sendMessage({name: "get-pools-list", payload: payloadData}, function(message) {
+			// console.log('[' + new Date().toUTCString() + '] ', "get-pools-list", message.payload);
 
 			$("#pool-list").mCustomScrollbar("destroy");
 			$('#pool-list').html(message.payload);

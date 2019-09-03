@@ -272,9 +272,8 @@ func (gui *GUI) handleElectronCommands(
 	// actual message
 	switch command.Name {
 
-	// Firstrun is received on the first run of the miner. We return the current
-	// logged in username
-	case "firstrun":
+	// get-username is received on the first run of the miner
+	case "get-username":
 		var username string
 		currentUser, err := user.Current()
 		if err == nil {
@@ -291,9 +290,9 @@ func (gui *GUI) handleElectronCommands(
 	case "get-miner-path":
 		return filepath.Join(gui.workingDir, "miner"), nil
 
-	// pool-list requests the recommended pool list from the miner API
+	// get-pools-list requests the recommended pool list from the miner API
 	// and returns the rendered HTML
-	case "pool-list":
+	case "get-pools-list":
 		var newConfig frontendConfig
 		err := json.Unmarshal(command.Payload, &newConfig)
 		if err != nil {
@@ -365,8 +364,8 @@ func (gui *GUI) handleElectronCommands(
 		}
 		return string(configBytes), nil
 
-	// coins-content-json is called to get the content for different coins
-	case "coins-content-json":
+	// get-coins-content is called to get the content for different coins
+	case "get-coins-content":
 		gui.logger.Info("Getting coins content.json")
 
 		dataBytes, err := gui.GetCoinContentJson()
@@ -377,7 +376,7 @@ func (gui *GUI) handleElectronCommands(
 		return string(dataBytes), nil
 
 	// configure is sent after the firstrun setup has been completed
-	case "configure":
+	case "save-configuration":
 		// HACK: Adding a slight delay before switching to the mining dashboard
 		// after initial setup to have the user at least see the 'configure' message
 		time.Sleep(time.Second * 3)
@@ -385,6 +384,8 @@ func (gui *GUI) handleElectronCommands(
 		return "Ok", nil
 
 	// reconfigure is sent after settings are changes by the user
+	// NOTE: this function is no longer used, as the miner webpage gets reloaded (instead of calling reconfigure) when it's settings change
+	/*
 	case "reconfigure":
 		gui.logger.Info("Reconfiguring miner")
 		err := gui.stopMiner()
@@ -412,9 +413,10 @@ func (gui *GUI) handleElectronCommands(
 		go gui.updateNetworkStats()
 
 		return "Ok", nil
+	*/
 
-	// config-file is sent before any other command from the index.html
-	case "config-file":
+	// get-config-file is sent before any other command from the index.html
+	case "get-config-file":
 		gui.logger.Info("Sending config to frontend")
 		currentConfig := frontendConfig{
 			CoinType:     gui.config.CoinType,
@@ -431,13 +433,13 @@ func (gui *GUI) handleElectronCommands(
 		}
 		return string(dataBytes), nil
 
-	// miner-start is sent after configuration or when the user
+	// start-miner is sent after configuration or when the user
 	// clicks 'start mining'
-	case "miner-start":
+	case "start-miner":
 		gui.startMiner()
 
-	// miner-stop is sent whenever the user clicks 'stop mining'
-	case "miner-stop":
+	// stop-miner is sent whenever the user clicks 'stop mining'
+	case "stop-miner":
 		err := gui.stopMiner()
 		if err != nil {
 			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
@@ -447,7 +449,7 @@ func (gui *GUI) handleElectronCommands(
 			})
 			// Give the UI some time to display the message
 			time.Sleep(time.Second * 15)
-			gui.logger.Fatalf("Unable to reconfigure miner: '%s'", err)
+			gui.logger.Fatalf("Unable to stop the miner: '%s'", err)
 		}
 	}
 	return nil, fmt.Errorf("'%s' is an unknown command", command.Name)

@@ -1,11 +1,6 @@
 /*
   This handles the initial user setup
  */
-const default_coin_type = 'bloc';
-const default_coin_algo = 'cryptonight_haven';
-const default_xmrig_algo = 'cryptonight-heavy';
-const default_xmrig_variant = 'xhv';
-
 let firstrun = {
 	init: function() {
 		asticode.loader.init();
@@ -18,8 +13,8 @@ let firstrun = {
 
 		// Wait for the ready signal
 		document.addEventListener('astilectron-ready', function() {
-			// Get the computer name
-			astilectron.sendMessage({name: "firstrun", payload: ""}, function(message) {
+			// Get the computer username
+			astilectron.sendMessage({name: "get-username", payload: ""}, function(message) {
 				$('#username').html(message.payload);
 			});
 
@@ -30,28 +25,16 @@ let firstrun = {
 
 			// Get the coins json and cache it locally
 			astilectron.sendMessage({
-				name: "coins-content-json",
+				name: "get-coins-content",
 				payload: ""
 			}, function(message) {
 				var parsed = $.parseJSON(message.payload);
-				console.log('[' + new Date().toUTCString() + '] ', "coins-content-json", parsed);
+				console.log('[' + new Date().toUTCString() + '] ', "get-coins-content", parsed);
 				firstrun.coinsContent = parsed;
 
 				firstrun.bindEvents();
 				firstrun.listen();
 			});
-			/*
-			// overide the firstrun
-			var configData = {
-				address: 'abLoc...',
-				pool: 1,
-				coin_type: 'bloc',
-				coin_algo: 'cryptonight_haven'
-			};
-			astilectron.sendMessage({name: "configure", payload: configData}, function(message) {
-				document.location = 'index.html';
-			});
-			*/
 		});
 	},
 	listen: function() {
@@ -74,8 +57,8 @@ let firstrun = {
 				var payloadData = {
 					coin_type: firstrun.coin_type
 				};
-				astilectron.sendMessage({name: "pool-list", payload: payloadData}, function(message) {
-					// console.log('[' + new Date().toUTCString() + '] ', "pool-list", message.payload);
+				astilectron.sendMessage({name: "get-pools-list", payload: payloadData}, function(message) {
+					// console.log('[' + new Date().toUTCString() + '] ', "get-pools-list", message.payload);
 
 					$("#pool-list").mCustomScrollbar("destroy");
 					$('#pool-list').html(message.payload);
@@ -117,8 +100,8 @@ let firstrun = {
 					xmrig_variant: firstrun.xmrig_variant.toString(),
 					hardware_type: 1 // 1 = CPU mining, 2 = GPU mining
 				};
-				console.log('[' + new Date().toUTCString() + '] ', "configuring", configData);
-				astilectron.sendMessage({name: "configure", payload: configData}, function(message) {
+				console.log('[' + new Date().toUTCString() + '] ', "save-configuration", configData);
+				astilectron.sendMessage({name: "save-configuration", payload: configData}, function() {
 					document.location = 'index.html';
 				});
 			}
@@ -141,12 +124,12 @@ let firstrun = {
 				$('#currencies-selector').html(html);
 
 				// Events to mine other currencies buttons
-				var cb = $('#other-currencies .currency-btn');
-				cb.off('click').on('click', function(event) {
-					firstrun.coin_type =     $(this).data('coin_type');
-					firstrun.coin_algo =     $(this).data('coin_algo');
-					firstrun.xmrig_algo =    $(this).data('xmrig_algo');
-					firstrun.xmrig_variant = $(this).data('xmrig_variant');
+				$('#other-currencies .currency-btn').off('click').on('click', function() {
+					let el = $(this);
+					firstrun.coin_type =     el.data('coin_type');
+					firstrun.coin_algo =     el.data('coin_algo');
+					firstrun.xmrig_algo =    el.data('xmrig_algo');
+					firstrun.xmrig_variant = el.data('xmrig_variant');
 					$('#other-currencies-next-step').trigger('click');
 				});
 			}
@@ -177,11 +160,7 @@ let firstrun = {
 		});
 		// If i've clicked "i already have a wallet" button
 		$('#choose-wallet a[data-target="miner-address"]').on('click', function() {
-			// reset to BLOC
-			firstrun.coin_type     = default_coin_type;
-			firstrun.coin_algo     = default_coin_algo;
-			firstrun.xmrig_algo    = default_xmrig_algo;
-			firstrun.xmrig_variant = default_xmrig_variant;
+			firstrun.resetToBloc();
 		});
 
 		// Pool list validation
@@ -209,10 +188,20 @@ let firstrun = {
 			}
 		});
 	},
-	coin_type: default_coin_type,
-	coin_algo: default_coin_algo,
-	xmrig_algo: default_xmrig_algo,
-	xmrig_variant: default_xmrig_variant,
+	resetToBloc: function() {
+		const bloc_key = 'bloc';
+		var selected_coin = firstrun.coinsContent.coins.filter(function(el) { // remove bloc
+			return el.coin_type === bloc_key;
+		});
+		firstrun.coin_type     = selected_coin[0].coin_type;
+		firstrun.coin_algo     = selected_coin[0].coin_algo;
+		firstrun.xmrig_algo    = firstrun.coinsContent.xmrigAlgo[bloc_key];
+		firstrun.xmrig_variant = firstrun.coinsContent.xmrigVariant[bloc_key];
+	},
+	coin_type: "",
+	coin_algo: "",
+	xmrig_algo: "",
+	xmrig_variant: "",
 	selected_pool: 0,
 	coinsContent: {}
 };
