@@ -21,11 +21,13 @@ import (
 // https://github.com/fireice-uk/xmr-stak
 type XmrStak struct {
 	Base
-	name             string
-	hardwareType     uint8
-	endpoint         string
-	lastHashrate     float64
-	resultStatsCache XmrStakResponse
+	name                string
+	hardwareType        uint8
+	endpoint            string
+	lastHashrate        float64
+	lastErrorTimestamp  int
+	lastErrorCount      int
+	resultStatsCache    XmrStakResponse
 	// logger           *logrus.Entry
 }
 
@@ -73,9 +75,11 @@ func NewXmrStak(config Config) (*XmrStak, error) {
 	miner := XmrStak{
 		// We've switched back to the original miner XMR-STAK but we will 
 		// keep an eye on it to make sure the compatibility works for future update
-		name:         "xmr-stak",
-		endpoint:     endpoint,
-		hardwareType: config.HardwareType,
+		name:               "xmr-stak",
+		endpoint:           endpoint,
+		hardwareType:       config.HardwareType,
+		lastErrorTimestamp: 0,
+		lastErrorCount:     0,
 	}
 	miner.Base.executableName = filepath.Base(config.Path)
 	miner.Base.executablePath = filepath.Dir(config.Path)
@@ -301,13 +305,43 @@ func (miner *XmrStak) GetStats() (Stats, error) {
 	miner.lastHashrate = hashrate
 
 	var errors []string
+	// because xmr-stak keeps all the errors in every response,
+	// we have to keep track if they change and return them in
+	// the response only if they change
 	if len(xmrStats.Connection.ErrorLog) > 0 {
-		for _, err := range xmrStats.Connection.ErrorLog {
+		var requiresUpdate bool = false
+		errorCount := len(xmrStats.Connection.ErrorLog)
+		lastKey := errorCount - 1
+
+		// the error count if different
+		if errorCount != miner.lastErrorCount {
+			miner.lastErrorCount = errorCount
+			requiresUpdate = true
+		}
+		// the timestamps are different
+		if (!requiresUpdate) {
+			if xmrStats.Connection.ErrorLog[lastKey].LastSeen != miner.lastErrorTimestamp {
+				miner.lastErrorTimestamp = xmrStats.Connection.ErrorLog[lastKey].LastSeen
+				requiresUpdate = true
+			}
+		}
+		// send the update
+		if requiresUpdate {
+			/*
+			for _, err := range xmrStats.Connection.ErrorLog {
+				errors = append(errors, fmt.Sprintf("%s",
+					err.Text,
+				))
+			}
+			*/
+			// append the last error
 			errors = append(errors, fmt.Sprintf("%s",
-				err.Text,
+				xmrStats.Connection.ErrorLog[lastKey].Text,
 			))
 		}
 	}
+	/*
+	// disabling this error as the GUI displays only the first one
 	if len(xmrStats.Results.ErrorLog) > 0 {
 		for _, err := range xmrStats.Results.ErrorLog {
 			errors = append(errors, fmt.Sprintf("(%d) %s",
@@ -316,6 +350,7 @@ func (miner *XmrStak) GetStats() (Stats, error) {
 			))
 		}
 	}
+	*/
 
 	stats = Stats{
 		Hashrate:          hashrate,

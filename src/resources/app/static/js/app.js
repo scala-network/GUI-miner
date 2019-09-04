@@ -53,6 +53,7 @@ let app = {
 			var parsed = $.parseJSON(message.payload);
 			switch (message.name) {
 				case "fatal_error":
+					console.log('[' + new Date().toUTCString() + '] ', "fatal_error", parsed.data);
 					shared.showError(parsed.data);
 					break;
 				case "network_stats":
