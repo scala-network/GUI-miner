@@ -114,7 +114,7 @@ func New(
 	if gui.inDebugMode {
 		winHeight = 1000
 	} else {
-		winHeight = 745
+		winHeight = 800
 	}
 	windowOptions := astilectron.WindowOptions{
 		Frame:           astilectron.PtrBool(true),
