@@ -356,13 +356,13 @@
       },
       "turtlecoin": {
           "title": "Turtlecoin News",
-          "image": "https://miro.medium.com/max/3150/1*_Zp5LjJUruaSaS58AHoS0w.png",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/turtlecoin/news.png",
           "link": "https://blog.turtlecoin.lol/"
       },
       "ryo": {
           "title": "RYO News",
-          "image": "https://ryo-currency.com/img/png/logo-circle-only-thick.png",
-          "link": "https://bitcointalk.org/index.php?topic=4413010.0"
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/RYO/news.png",
+          "link": "https://medium.com/@ryo.currency"
       },
       "haven": {
           "title": "Haven White Paper",
@@ -371,7 +371,7 @@
       },
       "monero": {
           "title": "Monero News",
-          "image": "https://images.vexels.com/media/users/3/137617/isolated/preview/c45afb857e72b86e87baaf255f71ff37-geometric-logo-abstract-by-vexels.png",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/monero/news.png",
           "link": "https://www.getmonero.org/"
       }
   }
