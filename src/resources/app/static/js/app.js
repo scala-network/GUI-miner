@@ -67,8 +67,8 @@ let app = {
 					// $('#network_height').html(parsed.height);
 					$('#price').html('฿' + parsed.price);
 					$('#price_usd').html('$' + parsed.price_usd);
-					$('#volume_24h_btc').html('฿' + parsed.volume_usd);
-					$('#volume_24h_usd').html('$' + parsed.volume);
+					$('#volume_24h_btc').html('฿' + parsed.volume);
+					$('#volume_24h_usd').html('$' + parsed.volume_usd);
 					$('#miner_payout').html(parsed.coins_per_day);
 					$('#pool_hashrate').html(parsed.pool.hashrate);
 					$('#pool_miners').html(parsed.pool.miners);
