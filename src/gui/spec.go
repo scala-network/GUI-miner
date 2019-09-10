@@ -128,6 +128,7 @@ type GlobalStats struct {
 	Volume          string `json:"volume"`
 	VolumeUsd       string `json:"volume_usd"`
 	Price           string `json:"price"`
+	PriceUsd        string `json:"price_usd"`
 	MarketCap       string `json:"market_cap"`
 	Records         struct {
 		Price  string `json:"price"`
