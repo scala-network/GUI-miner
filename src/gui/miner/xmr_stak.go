@@ -415,7 +415,7 @@ func (miner *XmrStak) defaultConfig() string {
 	 * h_print_time - How often, in seconds, should we print a hashrate report if verbose_level is set to 4.
 	 *                This option has no effect if verbose_level is not 4.
 	 */
-	"h_print_time" : 60,
+	"h_print_time" : 600,
 
 	/*
 	 * Manual hardware AES override
@@ -434,31 +434,26 @@ func (miner *XmrStak) defaultConfig() string {
 	* meant as a backup, you won't get stellar results there. If you are running into trouble, especially
 	* on Windows, please read the common issues in the README and FAQ.
 	*
-	* On Linux you will need to configure large page support and increase your memlock limit (ulimit -l).
+	* By default we will try to allocate large pages. This means you need to "Run As Administrator" on Windows.
+	* You need to edit your system's group policies to enable locking large pages. Here are the steps from MSDN
 	*
-	* To set large page support, add the following to "/etc/sysctl.d/60-hugepages.conf":
-	*     vm.nr_hugepages=128
-	* You WILL need to run "sudo sysctl --system" for these settings to take effect on your system (or reboot).
-	*  In some cases (many threads, very large CPU, etc) you may need more than 128
-	*   (try 256 if there are still complaints from thread inits)
+	* 1. On the Start menu, click Run. In the Open box, type gpedit.msc.
+	* 2. On the Local Group Policy Editor console, expand Computer Configuration, and then expand Windows Settings.
+	* 3. Expand Security Settings, and then expand Local Policies.
+	* 4. Select the User Rights Assignment folder.
+	* 5. The policies will be displayed in the details pane.
+	* 6. In the pane, double-click Lock pages in memory.
+	* 7. In the Local Security Setting – Lock pages in memory dialog box, click Add User or Group.
+	* 8. In the Select Users, Service Accounts, or Groups dialog box, add an account that you will run the miner on
+	* 9. Reboot for change to take effect.
 	*
-	* To increase the memlock (ulimit -l), add following lines to /etc/security/limits.d/60-memlock.conf:
-	*     *    - memlock 262144
-	*     root - memlock 262144
-	* You WILL need to log out and log back in for these settings to take effect on your user (no need to reboot, just relogin in your session).
-	*
-	* Check with "/sbin/sysctl vm.nr_hugepages ; ulimit -l" to validate
-	*
-	* Memory locking means that the kernel can't swap out the page to disk - something that is unlikely to happen on a
-	* command line system that isn't starved of memory. I haven't observed any difference on a CLI Linux system between
-	* locked and unlocked memory. If that is your setup see option "no_mlck".
+	* Windows also tends to fragment memory a lot. If you are running on a system with 4-8GB of RAM you might need
+	* to switch off all the auto-start applications and reboot to have a large enough chunk of contiguous memory.
 	*
 	*
 	* use_slow_memory defines our behaviour with regards to large pages. There are three possible options here:
 	* always  - Don't even try to use large pages. Always use slow memory.
 	* warn    - We will try to use large pages, but fall back to slow memory if that fails.
-	* no_mlck - This option is only relevant on Linux, where we can use large pages without locking memory.
-	*           It will never use slow memory, but it won't attempt to mlock
 	* never   - If we fail to allocate large pages we will print an error and exit.
 	*/
    "use_slow_memory" : "warn",
@@ -479,14 +474,6 @@ func (miner *XmrStak) defaultConfig() string {
 	 * This should solve the hashrate problems on some emulated terminals.
 	 */
 	"daemon_mode" : true,
-
-	/*
-	 * Buffered output control.
-	 * When running the miner through a pipe, standard output is buffered. This means that the pipe won't read
-	 * each output line immediately. This can cause delays when running in background.
-	 * Set this option to true to flush stdout after each line, so it can be read immediately.
-	 */
-	"flush_stdout" : false,
 
 	/*
 	 * Output file
