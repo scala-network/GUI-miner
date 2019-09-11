@@ -371,7 +371,6 @@ func (miner *XmrStak) GetStats() (Stats, error) {
 // parser which is why I'm doing this as text or templates
 func (miner *XmrStak) defaultConfig() string {
 	return `
-
 	/*
 	* Network timeouts.
 	* Because of the way this client is written it doesn't need to constantly talk (keep-alive) to the server to make
@@ -415,19 +414,19 @@ func (miner *XmrStak) defaultConfig() string {
 	* h_print_time - How often, in seconds, should we print a hashrate report if verbose_level is set to 4.
 	*                This option has no effect if verbose_level is not 4.
 	*/
-   "h_print_time" : 600,
-
-	/*
-	 * Manual hardware AES override
-	 *
-	 * Some VMs don't report AES capability correctly. You can set this value to true to enforce hardware AES or
-	 * to false to force disable AES or null to let the miner decide if AES is used.
-	 *
-	 * WARNING: setting this to true on a CPU that doesn't support hardware AES will crash the miner.
-	 */
-	"aes_override" : null,
-
-	/*
+   "h_print_time" : 300,
+   
+   /*
+	* Manual hardware AES override
+	*
+	* Some VMs don't report AES capability correctly. You can set this value to true to enforce hardware AES or
+	* to false to force disable AES or null to let the miner decide if AES is used.
+	*
+	* WARNING: setting this to true on a CPU that doesn't support hardware AES will crash the miner.
+	*/
+   "aes_override" : null,
+   
+   /*
 	* LARGE PAGE SUPPORT
 	* Large pages need a properly set up OS. It can be difficult if you are not used to systems administration,
 	* but the performance results are worth the trouble - you will get around 20% boost. Slow memory mode is
@@ -457,60 +456,61 @@ func (miner *XmrStak) defaultConfig() string {
 	* never   - If we fail to allocate large pages we will print an error and exit.
 	*/
    "use_slow_memory" : "warn",
-
-	/*
-	 * TLS Settings
-	 * If you need real security, make sure tls_secure_algo is enabled (otherwise MITM attack can downgrade encryption
-	 * to trivially breakable stuff like DES and MD5), and verify the server's fingerprint through a trusted channel.
-	 *
-	 * tls_secure_algo - Use only secure algorithms. This will make us quit with an error if we can't negotiate a secure algo.
-	 */
-	"tls_secure_algo" : true,
-
-	/*
-	 * Daemon mode
-	 *
-	 * If you are running the process in the background and you don't need the keyboard reports, set this to true.
-	 * This should solve the hashrate problems on some emulated terminals.
-	 */
-	"daemon_mode" : false,
-
-	/*
-	 * Output file
-	 *
-	 * output_file  - This option will log all output to a file.
-	 *
-	 */
-	"output_file" : "xmr-stak.log",
-
-	/*
-	 * Built-in web server
-	 * I like checking my hashrate on my phone. Don't you?
-	 * Keep in mind that you will need to set up port forwarding on your router if you want to access it from
-	 * outside of your home network. Ports lower than 1024 on Linux systems will require root.
-	 *
-	 * httpd_port - Port we should listen on. Default, 0, will switch off the server.
-	 */
-	"httpd_port" : 16000,
-
-	/*
-	 * HTTP Authentication
-	 *
-	 * This allows you to set a password to keep people on the Internet from snooping on your hashrate.
-	 * Keep in mind that this is based on HTTP Digest, which is based on MD5. To a determined attacker
-	 * who is able to read your traffic it is as easy to break a bog door latch.
-	 *
-	 * http_login - Login. Empty login disables authentication.
-	 * http_pass  - Password.
-	 */
-	"http_login" : "",
-	"http_pass" : "",
-
-	/*
-	 * prefer_ipv4 - IPv6 preference. If the host is available on both IPv4 and IPv6 net, which one should be choose?
-	 *               This setting will only be needed in 2020's. No need to worry about it now.
-	 */
-	"prefer_ipv4" : true,
+   
+   /*
+	* TLS Settings
+	* If you need real security, make sure tls_secure_algo is enabled (otherwise MITM attack can downgrade encryption
+	* to trivially breakable stuff like DES and MD5), and verify the server's fingerprint through a trusted channel.
+	*
+	* tls_secure_algo - Use only secure algorithms. This will make us quit with an error if we can't negotiate a secure algo.
+	*/
+   "tls_secure_algo" : true,
+   
+   /*
+	* Daemon mode
+	*
+	* If you are running the process in the background and you don't need the keyboard reports, set this to true.
+	* This should solve the hashrate problems on some emulated terminals.
+	*/
+   "daemon_mode" : false,
+   
+   /*
+	* Output file
+	*
+	* output_file  - This option will log all output to a file.
+	*
+	*/
+   "output_file" : "XMR-STAK.log",
+   
+   /*
+	* Built-in web server
+	* I like checking my hashrate on my phone. Don't you?
+	* Keep in mind that you will need to set up port forwarding on your router if you want to access it from
+	* outside of your home network. Ports lower than 1024 on Linux systems will require root.
+	*
+	* httpd_port - Port we should listen on. Default, 0, will switch off the server.
+	*/
+   "httpd_port" : 16000,
+   
+   /*
+	* HTTP Authentication
+	*
+	* This allows you to set a password to keep people on the Internet from snooping on your hashrate.
+	* Keep in mind that this is based on HTTP Digest, which is based on MD5. To a determined attacker
+	* who is able to read your traffic it is as easy to break a bog door latch.
+	*
+	* http_login - Login. Empty login disables authentication.
+	* http_pass  - Password.
+	*/
+   "http_login" : "",
+   "http_pass" : "",
+   
+   /*
+	* prefer_ipv4 - IPv6 preference. If the host is available on both IPv4 and IPv6 net, which one should be choose?
+	*               This setting will only be needed in 2020's. No need to worry about it now.
+	*/
+   "prefer_ipv4" : true,
+   
 	`
 }
 
