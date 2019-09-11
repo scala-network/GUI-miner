@@ -373,49 +373,49 @@ func (miner *XmrStak) defaultConfig() string {
 	return `
 
 	/*
-	 * Network timeouts.
-	 * Because of the way this client is written it doesn't need to constantly talk (keep-alive) to the server to make
-	 * sure it is there. We detect a buggy / overloaded server by the call timeout. The default values will be ok for
-	 * nearly all cases. If they aren't the pool has most likely overload issues. Low call timeout values are preferable -
-	 * long timeouts mean that we waste hashes on potentially stale jobs. Connection report will tell you how long the
-	 * server usually takes to process our calls.
-	 *
-	 * call_timeout - How long should we wait for a response from the server before we assume it is dead and drop the connection.
-	 * retry_time	- How long should we wait before another connection attempt.
-	 *                Both values are in seconds.
-	 * giveup_limit - Limit how many times we try to reconnect to the pool. Zero means no limit. Note that stak miners
-	 *                don't mine while the connection is lost, so your computer's power usage goes down to idle.
-	 */
-	"call_timeout" : 10,
-	"retry_time" : 30,
-	"giveup_limit" : 0,
-
-	/*
-	 * Output control.
-	 * Since most people are used to miners printing all the time, that's what we do by default too. This is suboptimal
-	 * really, since you cannot see errors under pages and pages of text and performance stats. Given that we have internal
-	 * performance monitors, there is very little reason to spew out pages of text instead of concise reports.
-	 * Press 'h' (hashrate), 'r' (results) or 'c' (connection) to print reports.
-	 *
-	 * verbose_level - 0  - Don't print anything.
-	 *                 1  - Print intro, connection event, disconnect event
-	 *                 2  - All of level 1, and new job (block) event if the difficulty is different from the last job
-	 *                 3  - All of level 1, and new job (block) event in all cases, result submission event.
-	 *                 4  - All of level 3, and automatic hashrate report printing
-	 *                 10 - Debug level for developer
-	 *
-	 * print_motd    - Display messages from your pool operator in the hashrate result.
-	 */
+	* Network timeouts.
+	* Because of the way this client is written it doesn't need to constantly talk (keep-alive) to the server to make
+	* sure it is there. We detect a buggy / overloaded server by the call timeout. The default values will be ok for
+	* nearly all cases. If they aren't the pool has most likely overload issues. Low call timeout values are preferable -
+	* long timeouts mean that we waste hashes on potentially stale jobs. Connection report will tell you how long the
+	* server usually takes to process our calls.
+	*
+	* call_timeout - How long should we wait for a response from the server before we assume it is dead and drop the connection.
+	* retry_time	- How long should we wait before another connection attempt.
+	*                Both values are in seconds.
+	* giveup_limit - Limit how many times we try to reconnect to the pool. Zero means no limit. Note that stak miners
+	*                don't mine while the connection is lost, so your computer's power usage goes down to idle.
+	*/
+   "call_timeout" : 10,
+   "retry_time" : 30,
+   "giveup_limit" : 0,
+   
+   /*
+	* Output control.
+	* Since most people are used to miners printing all the time, that's what we do by default too. This is suboptimal
+	* really, since you cannot see errors under pages and pages of text and performance stats. Given that we have internal
+	* performance monitors, there is very little reason to spew out pages of text instead of concise reports.
+	* Press 'h' (hashrate), 'r' (results) or 'c' (connection) to print reports.
+	*
+	* verbose_level - 0  - Don't print anything.
+	*                 1  - Print intro, connection event, disconnect event
+	*                 2  - All of level 1, and new job (block) event if the difficulty is different from the last job
+	*                 3  - All of level 1, and new job (block) event in all cases, result submission event.
+	*                 4  - All of level 3, and automatic hashrate report printing
+	*                 10 - Debug level for developer
+	*
+	* print_motd    - Display messages from your pool operator in the hashrate result.
+	*/
    "verbose_level" : 4,
    "print_motd" : true,
-
-	/*
-	 * Automatic hashrate report
-	 *
-	 * h_print_time - How often, in seconds, should we print a hashrate report if verbose_level is set to 4.
-	 *                This option has no effect if verbose_level is not 4.
-	 */
-	"h_print_time" : 600,
+   
+   /*
+	* Automatic hashrate report
+	*
+	* h_print_time - How often, in seconds, should we print a hashrate report if verbose_level is set to 4.
+	*                This option has no effect if verbose_level is not 4.
+	*/
+   "h_print_time" : 600,
 
 	/*
 	 * Manual hardware AES override
@@ -473,7 +473,7 @@ func (miner *XmrStak) defaultConfig() string {
 	 * If you are running the process in the background and you don't need the keyboard reports, set this to true.
 	 * This should solve the hashrate problems on some emulated terminals.
 	 */
-	"daemon_mode" : true,
+	"daemon_mode" : false,
 
 	/*
 	 * Output file
