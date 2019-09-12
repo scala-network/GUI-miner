@@ -20,23 +20,23 @@ If you want to learn about cryptocurrencies, [mining](https://wiki.bloc.money/mi
 
 *Home*
 
-![BLOC GUI Miner Home](DOCS/images/BLOC-GUI-Miner-v1.0.1-home.png)
+![BLOC GUI Miner Home](DOCS/images/BLOC-GUI-Miner-v1.1.1-home.png)
 
 *Miner Setup*
 
-![BLOC GUI Miner Setup](DOCS/images/BLOC-GUI-Miner-v1.0.1-miner-setup.png)
+![BLOC GUI Miner Setup](DOCS/images/BLOC-GUI-Miner-v1.1.1-miner-setup.png)
 
 *Select Coin to Mine*
 
-![BLOC GUI Miner Select coin to mine](DOCS/images/BLOC-GUI-Miner-v1.0.1-miner-other-coins.png)
+![BLOC GUI Miner Select coin to mine](DOCS/images/BLOC-GUI-Miner-v1.1.1-miner-other-coins.png)
 
 *Select Mining Pool*
 
-![BLOC GUI Miner Miner Settings](DOCS/images/BLOC-GUI-Miner-v1.0.1-miner-settings.png)
+![BLOC GUI Miner Miner Settings](DOCS/images/BLOC-GUI-Miner-v1.1.1-miner-settings.png)
 
 *Help*
 
-![BLOC GUI Miner Help](DOCS/images/BLOC-GUI-Miner-v1.0.1-mining-help.png)
+![BLOC GUI Miner Help](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-help.png)
 
 ## **Supported Cryptocurrencies**
 
@@ -58,15 +58,16 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining BLOC:*
 
-[![BLOC GUI Miner Mining BLOC](DOCS/images/BLOC-GUI-Miner-v1.0.1-mining-BLOC.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
+[![BLOC GUI Miner Mining BLOC](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-BLOC.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
 
 ### **TurtleCoin (TRTL) Mining**
 
 [TurtleCoin](https://github.com/turtlecoin/turtlecoin) is a fast, easy and private cryptocurrency which allows you to send money to friends and businesses.
+*Note*: Mining TurtleCoin only works with XMRIG and support the new Chukwa algorithm.
 
 *Mining TurtleCoin:*
 
-[![BLOC GUI Miner Mining TurtleCoin](DOCS/images/BLOC-GUI-Miner-v1.0.1-mining-TRTL.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
+[![BLOC GUI Miner Mining TurtleCoin](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-TRTL.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
 
 ### **Haven (XHV) Mining**
 
@@ -74,7 +75,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining Haven:*
 
-[![BLOC GUI Miner Mining Haven](DOCS/images/BLOC-GUI-Miner-v1.0.1-mining-XHV.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-haven-xhv)
+[![BLOC GUI Miner Mining Haven](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-XHV.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-haven-xhv)
 
 ### **Monero (XMR) Mining**
 
@@ -82,7 +83,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining Monero:*
 
-[![BLOC GUI Miner Mining Monero](DOCS/images/BLOC-GUI-Miner-v1.0.1-mining-XMR.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-monero-xmr)
+[![BLOC GUI Miner Mining Monero](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-XMR.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-monero-xmr)
 
 ### **RYO (RYO) Mining**
 
@@ -90,7 +91,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining RYO:*
 
-[![BLOC GUI Miner Mining RYO](DOCS/images/BLOC-GUI-Miner-v1.0.1-mining-RYO.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-RYO-ryo)
+[![BLOC GUI Miner Mining RYO](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-RYO.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-RYO-ryo)
 
 ## **Guide**
 
