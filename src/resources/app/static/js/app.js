@@ -39,6 +39,7 @@ let app = {
 					app.xmrig_algo = parsed.xmrig_algo;
 					app.xmrig_variant = parsed.xmrig_variant;
 					app.populateMainUI();
+					app.handleMinerRestarting();
 				});
 			});
 		});
@@ -108,6 +109,8 @@ let app = {
 					break;
 				case "miner_stats":
 					console.log('[' + new Date().toUTCString() + '] ', "miner_stats", parsed);
+					app.lastMinerStatsUnix = Math.round((new Date()).getTime() / 1000);
+
 					$('#miner_address').html(parsed.address);
 					if (!app.populatedAddress) {
 						$('#settings_mining_address').val(parsed.address); // settings wallet address
@@ -208,9 +211,12 @@ let app = {
 			astilectron.sendMessage({
 				name: "start-miner",
 				payload: ""
-			}, function(message) {});
+			}, function(message) {
+				app.minerIsRunning = true;
+			});
 		});
 		$(document).on('miner-stopped', function() {
+			app.minerIsRunning = false;
 			astilectron.sendMessage({
 				name: "stop-miner",
 				payload: ""
@@ -272,6 +278,7 @@ let app = {
 				name: "stop-miner",
 				payload: ""
 			}, function(message) {
+				app.minerIsRunning = false;
 				// Save the miner settings
 				var configData = {
 					address:       $('#settings_mining_address').val().trim(),
@@ -508,6 +515,44 @@ let app = {
 			}
 		});
 	},
+	theMinerStatsHangs: function() {
+		if (app.lastMinerStatsUnix > 0 && app.minerIsRunning) {
+			let currentUnix = Math.round((new Date()).getTime() / 1000);
+			if ((currentUnix - app.lastMinerStatsUnix) > 60) {
+				return true;
+			}
+		}
+		return false;
+	},
+	// Handles the stopping and starting the miner if the GUI didn't receive stats for a specific amount of time.
+	// This might solve a problem when the GUI hangs, but the xmr-stak keeps minning in the background.
+	handleMinerRestarting: function() {
+		var ID = setInterval(function() {
+			if (app.theMinerStatsHangs()) {
+				console.info('[' + new Date().toUTCString() + '] ', 'we no longer receive stats from the miner');
+				clearInterval(ID);
+				app.lastMinerStatsUnix = 0;
+
+				app.minerIsRunning = false;
+				astilectron.sendMessage({
+					name: "stop-miner",
+					payload: ""
+				}, function(message) {
+					console.info('[' + new Date().toUTCString() + '] ', 'miner stopped!');
+					app.resetMinerStats();
+
+					astilectron.sendMessage({
+						name: "start-miner",
+						payload: ""
+					}, function(message) {
+						console.info('[' + new Date().toUTCString() + '] ', 'miner started!');
+						app.minerIsRunning = true;
+						app.handleMinerRestarting();
+					});
+				});
+			}
+		}, 3000);
+	},
 	enableSettingsButton: function() {
 		$('#loading-settings').addClass('done');
 	},
@@ -522,5 +567,7 @@ let app = {
 	minerStatsOnce: false,
 	selectedPoolOnce: false,
 	minerAndNetworkStatsDone: false,
-	coinsContent: {}
+	coinsContent: {},
+	lastMinerStatsUnix: 0,
+	minerIsRunning: false,
 }
