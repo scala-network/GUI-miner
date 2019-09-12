@@ -14,7 +14,7 @@ If you want to learn about cryptocurrencies, [mining](https://wiki.bloc.money/mi
 
 ## **Previous Updates**
 
-[Previous Updates](DOCS/updates.md)
+[Previous Updates](DOCS/updates)
 
 ## **Screenshots**
 
