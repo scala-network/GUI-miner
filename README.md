@@ -12,7 +12,7 @@ If you want to learn about cryptocurrencies, [mining](https://wiki.bloc.money/mi
 
 [Start mining](https://wiki.bloc.money/mining/bloc-gui-miner-using/#start-mining) today and get rewarded in your favorite cryptocurrency.
 
-## **Screenshots**
+## **Previous Updates**
 
 [Previous Updates](DOCS/updates.md)
 
