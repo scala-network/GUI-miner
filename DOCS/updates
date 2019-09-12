@@ -1,5 +1,16 @@
 # **BLOC GUI Miner - pdates History**
 
+## **v1.1.1**
+
+- *12 September 2019*
+- [BLOC GUI Miner v1.0.1](https://github.com/furiousteam/BLOC-GUI-Miner/releases/tag/1.1.1)
+
+Update details:
+- Added price usd for informations section
+- Updated XMR-STAK exact config file to latest 2.10.7
+- Added an experimental functionality to recover when xmr-stak stats stop to restart the miner
+
+
 ## **v1.0.1**
 
 - *08 September 2019*

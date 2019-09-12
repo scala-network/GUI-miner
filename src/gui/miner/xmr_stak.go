@@ -415,7 +415,7 @@ func (miner *XmrStak) defaultConfig() string {
  * h_print_time - How often, in seconds, should we print a hashrate report if verbose_level is set to 4.
  *                This option has no effect if verbose_level is not 4.
  */
-"h_print_time" : 300,
+"h_print_time" : 600,
 
 /*
  * Manual hardware AES override
