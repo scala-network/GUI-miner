@@ -16,6 +16,16 @@ If you want to learn about cryptocurrencies, [mining](https://wiki.bloc.money/mi
 
 [Previous Updates](DOCS/updates)
 
+## What's New ?
+
+- 🔸 Built-in latest XMR-STAK & XMRIG
+- 🔸 Now support $BLOC $TRTL $XMR $RYO $XHV
+- 🔸 Works on macOS, Windows & Linux
+- 🔸 Easy to use
+- 🔸 Coin Stats by CoinGecko
+- 🔸 Mining Stats by Cryptunit
+- 🔸 CPU & GPU Mining
+
 ## **Screenshots**
 
 *Home*
