@@ -19,6 +19,10 @@
     {
       "coin_type": "monero",
       "coin_algo": "monero"
+    },
+    {
+      "coin_type": "loki",
+      "coin_algo": "loki"
     }
   ],
   "xmrigAlgo": {
@@ -26,42 +30,48 @@
     "turtlecoin": "argon2/chukwa",
     "ryo": "cn/gpu",
     "haven": "cn-heavy/xhv",
-    "monero": "cn/r"
+    "monero": "cn/r",
+    "loki": "rx/loki"
   },
   "xmrigVariant": {
     "bloc": "xhv",
     "turtlecoin": "1",
     "ryo": "1",
     "haven": "xhv",
-    "monero": "xmr"
+    "monero": "xmr",
+    "loki": "loki"
   },
   "names": {
     "bloc": "BLOC",
     "turtlecoin": "TurtleCoin",
     "ryo": "RYO",
     "haven": "Haven",
-    "monero": "Monero"
+    "monero": "Monero",
+    "loki": "Loki"
   },
   "abbreviation": {
     "bloc": "BLOC",
     "turtlecoin": "TRTL",
     "ryo": "RYO",
     "haven": "XHV",
-    "monero": "XMR"
+    "monero": "XMR",
+    "loki": "LOKI"
   },
   "addressPrefix": {
     "bloc": "abLoc",
     "turtlecoin": "TRTL",
     "ryo": "RYoL",
     "haven": "hvx",
-    "monero": "4"
+    "monero": "4",
+    "loki": "L"
   },
   "addressValidation": {
     "bloc": "^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$",
-    "turtlecoin": "^TRTL([a-zA-Z0-9]{95})$",
-    "ryo": "^RYoL([a-zA-Z0-9]{95})$",
+    "turtlecoin": "^TRTL([a-zA-Z0-9]{95}|[a-zA-Z0-9]{183})$",
+    "ryo": "^RYoL([a-zA-Z0-9]{95}|[a-zA-Z0-9]{106})$",
     "haven": "^hvx([a-zA-Z0-9]{95})$",
-    "monero": "^4([a-zA-Z0-9]{94})$"
+    "monero": "^4([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$",
+    "loki": "^L([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$",
   },
   "mainBackground": {
     "bloc": {
@@ -83,6 +93,10 @@
     "monero": {
       "image": "static/img/monero/bg-miner-mining.png", 
       "color": "#1a1a1a"
+    },
+    "loki": {
+      "image": "static/img/loki/bg-miner-mining.png", 
+      "color": "#1a1a1a"
     }
   },
   "textColor": {
@@ -90,28 +104,32 @@
     "turtlecoin": "#00ff00",
     "ryo": "#009cff",
     "haven": "#00ff9c",
-    "monero": "#ff5a00"
+    "monero": "#ff5a00",
+    "loki": "#7bbc2e"
   },
   "boxColor": {
     "bloc": "#090a31",
     "turtlecoin": "#021203",
     "ryo": "#092131",
     "haven": "#093123",
-    "monero": "#222323"
+    "monero": "#222323",
+    "loki": "#141414"
   },
   "boxBorder": {
     "bloc": "#222",
     "turtlecoin": "#222",
     "ryo": "#222",
     "haven": "#222",
-    "monero": "#222"
+    "monero": "#222",
+    "loki": "#222"
   },
   "logo": {
     "bloc": "static/img/miner/miner-big-logo.png",
     "turtlecoin": "static/img/turtlecoin/logo.png",
     "ryo": "static/img/RYO/logo.png",
     "haven": "static/img/haven/logo.png",
-    "monero": "static/img/monero/logo.png"
+    "monero": "static/img/monero/logo.png",
+    "loki": "static/img/loki/logo.png"
   },
   "downloadPage": {
       "bloc": {
@@ -133,6 +151,10 @@
       "monero": {
         "title": "Monero Applications", 
         "link": "https://web.getmonero.org/downloads/"
+      },
+      "loki": {
+        "title": "Loki Applications", 
+        "link": "https://loki.network/getstarted/"
       }
   },
   "coinGeckoLinks": {
@@ -140,7 +162,8 @@
     "turtlecoin": "https://www.coingecko.com/en/coins/turtlecoin",
     "ryo": "https://www.coingecko.com/en/coins/ryo-currency",
     "haven": "https://www.coingecko.com/en/coins/haven",
-    "monero": "https://www.coingecko.com/en/coins/monero"
+    "monero": "https://www.coingecko.com/en/coins/monero",
+    "loki": "https://www.coingecko.com/en/coins/loki-network"
   },
   "socialLinks": {
     "bloc": {
@@ -201,6 +224,20 @@
         {"link": "https://github.com/monero-project", "img": "static/img/miner/network_icon_github.png"},
         {"link": "https://reddit.com/r/monero", "img": "static/img/miner/network_icon_website.png"},
         {"link": "https://monero.stackexchange.com/", "img": "static/img/miner/network_icon_website.png"}
+      ]
+    },
+    "loki": {
+      "title": "Social Network", 
+      "links": [
+        {"link": "https://discordapp.com/invite/67GXfD6", "img": "static/img/miner/network_icon_discord.png"},
+        {"link": "https://loki.network/blog/", "img": "static/img/miner/network_icon_medium.png"},
+        {"link": "https://t.me/joinchat/DeNvR0JJ4JPn6TVSQjCsZQ", "img": "static/img/miner/network_icon_telegram.png"},
+        {"link": "https://bitcointalk.org/index.php?topic=3016125.0", "img": "static/img/miner/network_icon_bitcointalk.png"},
+        {"link": "https://github.com/loki-project/", "img": "static/img/miner/network_icon_github.png"},
+        {"link": "https://twitter.com/loki_project", "img": "static/img/miner/network_icon_twatter.png"},
+        {"link": "https://www.reddit.com/r/LokiProject/", "img": "static/img/miner/network_icon_website.png"},
+        {"link": "https://www.facebook.com/LokiNetwork/", "img": "static/img/miner/network_icon_facbook.png"},
+        {"link": "https://www.youtube.com/lokinetwork", "img": "static/img/miner/network_icon_yuotube.png"}
       ]
     }
   },
@@ -266,7 +303,18 @@
         {"link": "https://getmonero.org/resources/developer-guides/", "text": "- Developer Guides"},
         {"link": "https://getmonero.org/resources/user-guides/", "text": "- User Guides"}
       ]
-    }
+    },
+    "loki": {
+      "title": "Loki Network", 
+      "links": [
+        {"link": "https://loki.network", "text": "- Official Website"},
+        {"link": "https://loki.network/getstarted/", "text": "- Get Started"},
+        {"link": "http://lokiblocks.com/", "text": "- Block Explorer"},
+        {"link": "https://docs.loki.network", "text": "- Docs"},
+        {"link": "https://loki.network/media-appearances/", "text": "- Media"},
+        {"link": "https://loki.network/blog/", "text": "- Blog"},
+        {"link": "https://docs.loki.network/FAQ/", "text": "- FAQ"}
+      ]
   },
   "helpText": {
     "bloc": {
@@ -332,13 +380,27 @@
         {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about Monero, we recommend starting by visiting the official <a href=\"https://web.getmonero.org\">GetMonero.org</a> website but also <a href=\"https://getmonero.org/resources/moneropedia/\">Moneropedia</a> and read precious informations."},
         {"icon": "static/img/whatsnext/img-09.png", "title": "Merchants & Services", "text": "Merchants of all kinds have come to value the financial privacy that Monero brings. <a href=\"https://web.getmonero.org/community/merchants/\">Click here</a> to see list of the merchants that we know of that currently accept Monero for their goods and services."}
       ]
+    },
+    "loki": {
+      "boxes": [
+        {"icon": "static/img/whatsnext/img-01.png", "title": "Visit your mining pool to know more", "text": "You get paid out based upon what the pool sets the min payout amount. A pool's min payout amount can vary from pool to pool. Click on the pool link to visit their website."},
+        {"icon": "static/img/whatsnext/img-02.png", "title": "Learn more about Loki", "text": "<a href=\"https://loki.network\">Loki</a> is a privacy network which will allow users to transact and communicate privately over the internet with the maximum amount of anonymity possible."},
+        {"icon": "static/img/whatsnext/img-03.png", "title": "Docs", "text": "Loki provides the means to transact and communicate privately and anonymously, using the decentralised nature of blockchain technology to create new methods of interacting with the internet."},
+        {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "Loki is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://t.me/joinchat/DeNvR0JJ4JPn6TVSQjCsZQ\">Telegram Group</a> and <a href=\"https://www.reddit.com/r/LokiProject/\">Reddit</a>."},
+        {"icon": "static/img/whatsnext/img-05.png", "title": "Trading Loki on exchange", "text": "Buy and Sell Loki on following exchanges: <ul class=\"list-unstyled\"><li><a href=\"https://tradeogre.com/exchange/BTC-LOKI\">- TradeOgre</a></li><li><a href=\"https://www.kucoin.com/trade/LOKI-BTC\">- Kucoin</a></li></ul>"},
+        {"icon": "static/img/whatsnext/img-06.png", "title": "Follow Loki on social media", "text": "We are updating all our social network regulary, the best way to stay updated with Loki is to follow us on <a href=\"https://twitter.com/loki_project\">Twitter</a> or <a href=\"https://discordapp.com/invite/67GXfD6\">Discord</a>."},
+        {"icon": "static/img/whatsnext/img-07.png", "title": "Download Loki iOS & Android", "text": "Loki Wallet for android <a href=\"https://play.google.com/store/apps/details?id=network.loki.wallet&hl=en_US\">available in the Google Play store</a> but also an <a href=\"https://apps.apple.com/app/loki-wallet/id1465686522\">iOS wallet</a>"},
+        {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about Loki, we recommend starting by visiting the official <a href=\"https://loki.network\">Loki.network</a> website but also <a href=\"https://docs.loki.network\">Loki Docs</a> and read precious informations."},
+        {"icon": "static/img/whatsnext/img-09.png", "title": "Merchants & Services", "text": "Merchants of all kinds have come to value the financial privacy that Loki brings. <a href=\"https://loki.network\">Click here</a> to see list of the merchants that we know of that currently accept Loki for their goods and services."}
+      ]
     }
   },
   "poweredByLinks": {
       "title": "BLOC GUI Miner&reg;", 
       "links": [
         {"link": "https://bloc.money", "text": "- Visit our website"},
-        {"link": "https://github.com/furiousteam/BLOC-GUI-Miner", "text": "- Contribute to this project"}
+        {"link": "https://github.com/furiousteam/BLOC-GUI-Miner", "text": "- Contribute to this project"},
+        {"link": "https://t.me/bloc_money", "text": "- Join our Telegram Group"}
       ]
   },
   "cryptunitWidget": {
@@ -346,13 +408,14 @@
       "turtlecoin": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=20&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "ryo": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=25&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "haven": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=4&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
-      "monero": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=5&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
+      "monero": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=5&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
+      "loki": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=38&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
   },
   "newsBox": {
       "bloc": {
-          "title": "BLOC Wallet on App Store",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/bloc-news.png",
-          "link": "https://itunes.apple.com/us/app/bloc-wallet-by-furiousteam-ltd/id1437924269?mt=8"
+          "title": "New DEX Coming Soon",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "link": "https://paychange.com"
       },
       "turtlecoin": {
           "title": "Turtlecoin News",
@@ -373,6 +436,11 @@
           "title": "Monero News",
           "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/monero/news.png",
           "link": "https://www.getmonero.org/"
+      },
+      "loki": {
+          "title": "New DEX Coming Soon",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "link": "https://paychange.com"
       }
   }
 }
