@@ -315,6 +315,7 @@
         {"link": "https://loki.network/blog/", "text": "- Blog"},
         {"link": "https://docs.loki.network/FAQ/", "text": "- FAQ"}
       ]
+    }
   },
   "helpText": {
     "bloc": {
@@ -400,7 +401,8 @@
       "links": [
         {"link": "https://bloc.money", "text": "- Visit our website"},
         {"link": "https://github.com/furiousteam/BLOC-GUI-Miner", "text": "- Contribute to this project"},
-        {"link": "https://t.me/bloc_money", "text": "- Join our Telegram Group"}
+        {"link": "https://t.me/bloc_money", "text": "- Chat on Telegram Group"},
+        {"link": "https://discord.gg/5Buudya", "text": "- Join us on Discord"}
       ]
   },
   "cryptunitWidget": {
