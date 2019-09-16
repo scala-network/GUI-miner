@@ -22,7 +22,11 @@
     },
     {
       "coin_type": "loki",
-      "coin_algo": "loki"
+      "coin_algo": "loki_xmrstak_notsupported"
+    },
+    {
+      "coin_type": "conceal",
+      "coin_algo": "cryptonight_conceal"
     }
   ],
   "xmrigAlgo": {
@@ -31,7 +35,8 @@
     "ryo": "cn/gpu",
     "haven": "cn-heavy/xhv",
     "monero": "cn/r",
-    "loki": "rx/loki"
+    "loki": "rx/loki",
+    "conceal": "cn/conceal_xmrig_notsupported"
   },
   "xmrigVariant": {
     "bloc": "xhv",
@@ -39,7 +44,8 @@
     "ryo": "1",
     "haven": "xhv",
     "monero": "xmr",
-    "loki": "loki"
+    "loki": "loki",
+    "conceal": "conceal"
   },
   "names": {
     "bloc": "BLOC",
@@ -47,7 +53,8 @@
     "ryo": "RYO",
     "haven": "Haven",
     "monero": "Monero",
-    "loki": "Loki"
+    "loki": "Loki",
+    "conceal": "Conceal Network"
   },
   "abbreviation": {
     "bloc": "BLOC",
@@ -55,7 +62,8 @@
     "ryo": "RYO",
     "haven": "XHV",
     "monero": "XMR",
-    "loki": "LOKI"
+    "loki": "LOKI",
+    "conceal": "CCX"
   },
   "addressPrefix": {
     "bloc": "abLoc",
@@ -63,15 +71,17 @@
     "ryo": "RYoL",
     "haven": "hvx",
     "monero": "4",
-    "loki": "L"
+    "loki": "L",
+    "conceal": "ccx"
   },
   "addressValidation": {
     "bloc": "^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$",
     "turtlecoin": "^TRTL([a-zA-Z0-9]{95}|[a-zA-Z0-9]{183})$",
-    "ryo": "^RYoL([a-zA-Z0-9]{95}|[a-zA-Z0-9]{106})$",
+    "ryo": "^RYo([a-zA-Z0-9]{96}|[a-zA-Z0-9]{103})$",
     "haven": "^hvx([a-zA-Z0-9]{95})$",
     "monero": "^4([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$",
-    "loki": "^L([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$"
+    "loki": "^L([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$",
+    "conceal": "^ccx([a-zA-Z0-9]{95})$"
   },
   "mainBackground": {
     "bloc": {
@@ -97,6 +107,10 @@
     "loki": {
       "image": "static/img/loki/bg-miner-mining.png", 
       "color": "#1a1a1a"
+    },
+    "conceal": {
+      "image": "static/img/conceal/bg-miner-mining.png", 
+      "color": "#1a1a1a"
     }
   },
   "textColor": {
@@ -105,7 +119,8 @@
     "ryo": "#009cff",
     "haven": "#00ff9c",
     "monero": "#ff5a00",
-    "loki": "#7bbc2e"
+    "loki": "#7bbc2e",
+    "conceal": "#fea320"
   },
   "boxColor": {
     "bloc": "#090a31",
@@ -113,7 +128,8 @@
     "ryo": "#092131",
     "haven": "#093123",
     "monero": "#222323",
-    "loki": "#141414"
+    "loki": "#141414",
+    "conceal": "#141414"
   },
   "boxBorder": {
     "bloc": "#222",
@@ -129,7 +145,8 @@
     "ryo": "static/img/RYO/logo.png",
     "haven": "static/img/haven/logo.png",
     "monero": "static/img/monero/logo.png",
-    "loki": "static/img/loki/logo.png"
+    "loki": "static/img/loki/logo.png",
+    "conceal": "static/img/conceal/logo.png"
   },
   "downloadPage": {
       "bloc": {
@@ -155,6 +172,10 @@
       "loki": {
         "title": "Loki Applications", 
         "link": "https://loki.network/getstarted/"
+      },
+      "conceal": {
+        "title": "Conceal Network Applications", 
+        "link": "https://conceal.network/#wallets"
       }
   },
   "coinGeckoLinks": {
@@ -163,7 +184,8 @@
     "ryo": "https://www.coingecko.com/en/coins/ryo-currency",
     "haven": "https://www.coingecko.com/en/coins/haven",
     "monero": "https://www.coingecko.com/en/coins/monero",
-    "loki": "https://www.coingecko.com/en/coins/loki-network"
+    "loki": "https://www.coingecko.com/en/coins/loki-network",
+    "conceal": "https://www.coingecko.com/en/coins/conceal"
   },
   "socialLinks": {
     "bloc": {
@@ -238,6 +260,18 @@
         {"link": "https://www.reddit.com/r/LokiProject/", "img": "static/img/miner/network_icon_website.png"},
         {"link": "https://www.facebook.com/LokiNetwork/", "img": "static/img/miner/network_icon_facbook.png"},
         {"link": "https://www.youtube.com/lokinetwork", "img": "static/img/miner/network_icon_yuotube.png"}
+      ]
+    },
+    "conceal": {
+      "title": "Social Network", 
+      "links": [
+        {"link": "https://discord.conceal.network/", "img": "static/img/miner/network_icon_discord.png"},
+        {"link": "https://medium.com/@ConcealNetwork", "img": "static/img/miner/network_icon_medium.png"},
+        {"link": "https://t.co/55klBHKGUR", "img": "static/img/miner/network_icon_telegram.png"},
+        {"link": "https://bitcointalk.org/index.php?topic=5086106", "img": "static/img/miner/network_icon_bitcointalk.png"},
+        {"link": "https://github.com/ConcealNetwork", "img": "static/img/miner/network_icon_github.png"},
+        {"link": "https://twitter.com/ConcealNetwork", "img": "static/img/miner/network_icon_twatter.png"},
+        {"link": "https://conceal.network", "img": "static/img/miner/network_icon_website.png"}
       ]
     }
   },
@@ -314,6 +348,17 @@
         {"link": "https://loki.network/media-appearances/", "text": "- Media"},
         {"link": "https://loki.network/blog/", "text": "- Blog"},
         {"link": "https://docs.loki.network/FAQ/", "text": "- FAQ"}
+      ]
+    },
+    "conceal": {
+      "title": "Loki Network", 
+      "links": [
+        {"link": "https://conceal.network", "text": "- Official Website"},
+        {"link": "https://conceal.cloud", "text": "- Conceal Cloud"},
+        {"link": "https://explorer.conceal.network", "text": "- Block Explorer"},
+        {"link": "https://conceal.network/wiki/doku.php?id=start", "text": "- Docs"},
+        {"link": "https://medium.com/@ConcealNetwork", "text": "- Blog"},
+        {"link": "https://conceal.network/#exchanges", "text": "- Exchanges"}
       ]
     }
   },
@@ -394,6 +439,19 @@
         {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about Loki, we recommend starting by visiting the official <a href=\"https://loki.network\">Loki.network</a> website but also <a href=\"https://docs.loki.network\">Loki Docs</a> and read precious informations."},
         {"icon": "static/img/whatsnext/img-09.png", "title": "Merchants & Services", "text": "Merchants of all kinds have come to value the financial privacy that Loki brings. <a href=\"https://loki.network\">Click here</a> to see list of the merchants that we know of that currently accept Loki for their goods and services."}
       ]
+    },
+    "conceal": {
+      "boxes": [
+        {"icon": "static/img/whatsnext/img-01.png", "title": "Visit your mining pool to know more", "text": "You get paid out based upon what the pool sets the min payout amount. A pool's min payout amount can vary from pool to pool. Click on the pool link to visit their website."},
+        {"icon": "static/img/whatsnext/img-02.png", "title": "Learn more about Conceal", "text": "<a href=\"https://conceal.network\">Conceal</a> is a decentralized blockchain bank, with deposits and investments paying interest rates, without involvement of financial institutions, powered by 100% open source code."},
+        {"icon": "static/img/whatsnext/img-03.png", "title": "Docs", "text": "Conceal.Network enables untraceable and anonymous messaging, and a secure way to transfer funds. Using a distributed public ledger, the sender and receiver are kept anonymous, a key concern in a post Snowden world."},
+        {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "Conceal is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://t.co/55klBHKGUR\">Telegram Group</a> and <a href=\"https://www.reddit.com/r/ConcealNetwork/\">Reddit</a>."},
+        {"icon": "static/img/whatsnext/img-05.png", "title": "Trading Conceal on exchange", "text": "Buy and Sell Conceal on following <a href=\"https://conceal.network/#exchanges\">exchanges</a>: <ul class=\"list-unstyled\"><li><a href=\"https://www.hotbit.io/exchange?symbol=CCX_BTC\">- HotBit</a></li><li><a href=\"https://tradeogre.com/exchange/BTC-CCX\">- TradeOgre</a></li><li><a href=\"https://www.citex.co.kr/#/home\">- Citex.io</a></li></ul>"},
+        {"icon": "static/img/whatsnext/img-06.png", "title": "Follow Conceal on social media", "text": "We are updating all our social network regulary, the best way to stay updated with Conceal is to follow us on <a href=\"https://twitter.com/ConcealNetwork\">Twitter</a> or <a href=\"https://discord.conceal.network/\">Discord</a>."},
+        {"icon": "static/img/whatsnext/img-07.png", "title": "Download Conceal for Android", "text": "Conceal Wallet for android <a href=\"https://play.google.com/store/apps/details?id=com.ConcealNetwork.ConcealMobile\">available in the Google Play store</a>"},
+        {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about Conceal, we recommend starting by visiting the official <a href=\"https://conceal.network\">Conceal.network</a> website but also <a href=\"https://conceal.network/wiki/doku.php?id=start\">Conceal Wiki</a> and read precious informations."},
+        {"icon": "static/img/whatsnext/img-09.png", "title": "Merchants & Services", "text": "Merchants of all kinds have come to value the financial privacy that Conceal brings. <a href=\"https://conceal.network\">Click here</a> to see list of the merchants that we know of that currently accept Conceal for their goods and services."}
+      ]
     }
   },
   "poweredByLinks": {
@@ -411,7 +469,8 @@
       "ryo": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=25&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "haven": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=4&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "monero": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=5&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
-      "loki": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=38&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
+      "loki": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=3&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
+      "conceal": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=58&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
   },
   "newsBox": {
       "bloc": {
@@ -440,6 +499,11 @@
           "link": "https://www.getmonero.org/"
       },
       "loki": {
+          "title": "New DEX Coming Soon",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "link": "https://paychange.com"
+      },
+      "conceal": {
           "title": "New DEX Coming Soon",
           "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
           "link": "https://paychange.com"
