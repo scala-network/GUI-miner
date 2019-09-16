@@ -71,7 +71,7 @@
     "ryo": "^RYoL([a-zA-Z0-9]{95}|[a-zA-Z0-9]{106})$",
     "haven": "^hvx([a-zA-Z0-9]{95})$",
     "monero": "^4([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$",
-    "loki": "^L([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$",
+    "loki": "^L([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$"
   },
   "mainBackground": {
     "bloc": {
