@@ -1,4 +1,28 @@
-# **BLOC GUI Miner - pdates History**
+# **BLOC GUI Miner - Updates History**
+
+## **v1.1.2**
+
+- *17 September 2019*
+- [BLOC GUI Miner v1.1.2](https://github.com/furiousteam/BLOC-GUI-Miner/releases/tag/1.1.2)
+
+Update details:
+
+1. Added support for :
+- Loki (LOKI) (rx/loki) with XMRIG. (Not supported by XMR-STAK)
+- Sumokoin (SUMO) (cn/r)
+- GRAFT (GRFT) (cn/rwz)
+- Quantum Reistant Ledger (QRL) (cn/1)
+- Conceal Network (CCX) (cryptonight_conceal) (Not supported by XMRIG)
+
+2. Added mining with integrated address for TRTL, BLOC, XMR, RYO, XHV, LOKI
+3. Reordered other coins on setup page + added icons
+4. Modified content.json to filter coins based on miner type. The BLOC GUI Miner will display only the supported coins by XMR-STAK or XMRIG and hide the unsuported ones. Make sure you switch between XMR-STAK and XMRRIG to see all the possibilities.
+5. New background colors implemented for all coins
+6. Added Paychange link for all coins
+7. Updated XMRIG to latest version 3.1.2
+
+BLOC GUI Miner support mining for 10 cryptocurrencies on Windows, Linux and macOS.
+
 
 ## **v1.1.1**
 

@@ -22,7 +22,7 @@
 		<!-- welcome message -->
 		<div class="main-section welcome text-center">
 			<img src="static/img/logo.png"><br />
-			<div class="miner-title">BLOC GUI Miner v1.1.1</div>
+			<div class="miner-title">BLOC GUI Miner v1.1.2</div>
 			<div class="message-bg">
 				<div class="message-title">Welcome <span id="username"></span>!</div>
 				<div class="message-text">We love to see you using our miner<br />
@@ -59,12 +59,11 @@
 			<a href="#" class="hidden" data-target="miner-address" id="other-currencies-next-step"></a>
 			<div class="currencies-back"><a href="#" data-target="choose-wallet"><---- BACK</a></div>
 			<script type="text/x-tmpl" id="tmpl-coins-title">
-			Besides BLOC, you can mine 
+			Besides BLOC, you can mine: <br />
 			{% for (var i = 0; i < o.length; i++) { %}
 				{%=o[i].name%} [{%=o[i].abbreviation%}] {% if (i != o.length - 1) { %},{% } %}
 			{% } %}
-			with this miner.<br />
-			You can also participate to this project or add your own cryptocurrency into the BLOC GUI Miner. <a href="https://github.com/furiousteam/BLOC-GUI-Miner">Click here</a> to find out how.
+			<br /> with this miner. You can also participate to this project or add your own cryptocurrency into the BLOC GUI Miner. <a href="https://github.com/furiousteam/BLOC-GUI-Miner">Click here</a> to find out how.
 			</script>
 			<script type="text/x-tmpl" id="tmpl-coins">
 			<div class="row">
