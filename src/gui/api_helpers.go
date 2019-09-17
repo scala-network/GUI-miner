@@ -9,7 +9,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
-	"time"
+	// "time"
 )
 
 // GetPoolList returns the list of pools available to the GUI miner
@@ -74,8 +74,6 @@ func (gui *GUI) GetCoinContentJson() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	// gui.logger.Info(fmt.Sprintf("%s",statBytes))
-	// gui.logger.Info(fmt.Sprintf("https://bloc.money/miner-content.json?_=%d", t.Unix()))
 	var content coinsContentJson
 	err = json.Unmarshal(statBytes, &content)
 	if err != nil {
@@ -95,8 +93,8 @@ func (gui *GUI) GetStats(
 	poolID int,
 	hashrate float64,
 	mid string) (string, error) {
-	gui.logger.Info("GetStats")
-	gui.logger.Info(fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s&coin=%s", gui.config.APIEndpoint, poolID, hashrate, mid, gui.config.CoinType))
+	// gui.logger.Info("GetStats")
+	// gui.logger.Info(fmt.Sprintf("%s/stats?pool=%d&hr=%.2f&mid=%s&coin=%s", gui.config.APIEndpoint, poolID, hashrate, mid, gui.config.CoinType))
 
 	if mid == "" || poolID == 0 {
 		return "", errors.New("No data yet")
@@ -145,29 +143,4 @@ func (gui *GUI) GetStats(
 		return "", err
 	}
 	return string(statBytes), nil
-}
-
-// GetAnnouncement returns the announcement if available
-func (gui *GUI) GetAnnouncement() (Announcement, error) {
-	// gui.logger.Info("GetAnnouncement")
-	// gui.logger.Info(fmt.Sprintf("%s/announcement?coin=%s", gui.config.APIEndpoint, gui.config.CoinType))
-
-	var ann Announcement
-	resp, err := http.Get(fmt.Sprintf("%s/announcement?coin=%s", gui.config.APIEndpoint, gui.config.CoinType))
-	if err != nil {
-		return ann, err
-	}
-	err = json.NewDecoder(resp.Body).Decode(&ann)
-	if err != nil {
-		return ann, err
-	}
-
-	// Format the date string into something we can use
-	ann.Date, err = time.Parse("2006-01-02 15:04:05", ann.DateString)
-	if err != nil {
-		// To have the date not be screwed on the interface, just set it to now
-		ann.Date = time.Now()
-	}
-
-	return ann, nil
 }
