@@ -404,7 +404,7 @@
         {"link": "https://miningpoolstats.stream/sumokoin", "text": "- Mining Pools"},
         {"link": "https://explorer.sumokoin.com/", "text": "- Block Explorer"},
         {"link": "https://www.sumokoin.org", "text": "- Docs"},
-        {"link": "https://medium.com/sumokoin", "text": "- Blog"},
+        {"link": "https://medium.com/sumokoin", "text": "- Blog"}
       ]
     }
   },
