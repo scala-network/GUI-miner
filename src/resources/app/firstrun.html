@@ -67,9 +67,18 @@
 			You can also participate to this project or add your own cryptocurrency into the BLOC GUI Miner. <a href="https://github.com/furiousteam/BLOC-GUI-Miner">Click here</a> to find out how.
 			</script>
 			<script type="text/x-tmpl" id="tmpl-coins">
-			{% for (var i = 0; i < o.length; i++) { %}
-				<div class="currency-bg"><a href="#" class="currency-btn" data-coin_type="{%=o[i].coin_type%}" data-coin_algo="{%=o[i].coin_algo%}" data-xmrig_algo="{%=o[i].xmrig_algo%}" data-xmrig_variant="{%=o[i].xmrig_variant%}">{%=o[i].name%} ({%=o[i].abbreviation%})</a></div>
-			{% } %}
+			<div class="row">
+				{% for (var i = 0; i < o.length; i++) { %}
+					<div class="col-xs-4">
+						<div class="currency-bg">
+							<a href="#" class="currency-btn" data-coin_type="{%=o[i].coin_type%}" data-coin_algo="{%=o[i].coin_algo%}" data-xmrig_algo="{%=o[i].xmrig_algo%}" data-xmrig_variant="{%=o[i].xmrig_variant%}">
+								<img src="{%=o[i].icon%}" width="32" height="32" />
+								{%=o[i].name%} ({%=o[i].abbreviation%})
+							</a>
+						</div>
+					</div>
+				{% } %}
+			</div>
 			</script>
 		</div>
 		

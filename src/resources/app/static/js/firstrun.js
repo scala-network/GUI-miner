@@ -113,16 +113,16 @@ let firstrun = {
 				});
 				coins = coins.map(function(el) { // add name and abbreviation keys
 					el.name          = firstrun.coinsContent.names[el.coin_type];
+					el.icon          = firstrun.coinsContent.icons[el.coin_type];
 					el.abbreviation  = firstrun.coinsContent.abbreviation[el.coin_type];
 					el.xmrig_algo    = firstrun.coinsContent.xmrigAlgo[el.coin_type];
 					el.xmrig_variant = firstrun.coinsContent.xmrigVariant[el.coin_type];
 					return el;
 				});
-				let html;
-				html = $.fn.tmpl("tmpl-coins-title", coins);
-				$('#coins-title').html(html);
-				html = $.fn.tmpl("tmpl-coins", coins);
-				$('#currencies-selector').html(html);
+				let html1 = $.fn.tmpl("tmpl-coins-title", coins);
+				$('#coins-title').html(html1);
+				let html2 = $.fn.tmpl("tmpl-coins", coins);
+				$('#currencies-selector').html(html2);
 
 				// Events to mine other currencies buttons
 				$('#other-currencies .currency-btn').off('click').on('click', function() {

@@ -107,7 +107,7 @@ body.miner .miner-bg {
 	position: relative;
 	padding-top: 70px;
 }
-.other-currencies img {
+.other-currencies > img {
 	margin-bottom: 22px;
 }
 .other-currencies .currencies-title {
@@ -132,7 +132,7 @@ body.miner .miner-bg {
 	font-weight: 400;
 }
 .other-currencies .currency-bg {
-	width: 416px;
+	width: 340px;
 	margin: 0 auto 15px auto;
 	background-color: #090a31cc;
 	border-radius: 3px;
@@ -149,7 +149,7 @@ body.miner .miner-bg {
 .other-currencies .currency-bg a:hover {
 	display: block;
 	color: #ffed00;
-	padding: 28px 0;
+	padding: 20px 0;
 	text-decoration: none;
 	font-family: 'Roboto Condensed';
 	font-weight: 600;
@@ -169,6 +169,9 @@ body.miner .miner-bg {
 	padding: 10px 20px;
 	opacity: .6;
 	text-decoration: none;
+}
+.other-currencies .currency-btn > img {
+	margin-right: 5px;
 }
 
 /* CHOOSE WALLET */
