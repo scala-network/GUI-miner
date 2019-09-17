@@ -14,32 +14,32 @@ let app = {
 
 		// Wait for the ready signal
 		document.addEventListener('astilectron-ready', function() {
-			// Get the coins json and cache it locally
-			astilectron.sendMessage({
-				name: "get-coins-content",
-				payload: ""
-			}, function(message) {
-				var parsed = $.parseJSON(message.payload);
-				console.log('[' + new Date().toUTCString() + '] ', "get-coins-content", parsed);
-				app.coinsContent = parsed;
+			// Get the miner type
+			astilectron.sendMessage({name: "get-miner-type", payload: ""}, function(message) {
+				console.log('[' + new Date().toUTCString() + '] ', "get-miner-type", message.payload);
+				app.miner_type = message.payload;
 
-				app.bindEvents();
-				app.listen();
-
-				// Get the configuration settings
-				astilectron.sendMessage({
-					name: "get-config-file",
-					payload: ""
-				}, function(message) {
+				// Get the coins json and cache it locally
+				astilectron.sendMessage({name: "get-coins-content", payload: ""}, function(message) {
 					var parsed = $.parseJSON(message.payload);
-					console.log('[' + new Date().toUTCString() + '] ', "get-config-file", parsed);
-					app.coin_type = parsed.coin_type;
-					app.prev_coin_type = app.coin_type;
-					app.coin_algo = parsed.coin_algo;
-					app.xmrig_algo = parsed.xmrig_algo;
-					app.xmrig_variant = parsed.xmrig_variant;
-					app.populateMainUI();
-					app.handleMinerRestarting();
+					console.log('[' + new Date().toUTCString() + '] ', "get-coins-content", parsed);
+					app.coinsContent = parsed;
+
+					app.bindEvents();
+					app.listen();
+
+					// Get the configuration settings
+					astilectron.sendMessage({name: "get-config-file", payload: ""}, function(message) {
+						var parsed = $.parseJSON(message.payload);
+						console.log('[' + new Date().toUTCString() + '] ', "get-config-file", parsed);
+						app.coin_type = parsed.coin_type;
+						app.prev_coin_type = app.coin_type;
+						app.coin_algo = parsed.coin_algo;
+						app.xmrig_algo = parsed.xmrig_algo;
+						app.xmrig_variant = parsed.xmrig_variant;
+						app.populateMainUI();
+						app.handleMinerRestarting();
+					});
 				});
 			});
 		});
@@ -380,14 +380,20 @@ let app = {
 			$('#hardware-type').dropselect('select', parsed.hardware_type);
 
 			// Populate the coins
-			let coins = {
+			let settings = {
 				'selected': app.coinsContent.names[app.coin_type]
 			};
-			coins.coins = app.coinsContent.coins.map(function(el) { // add name and abbreviation keys
+			// add name and abbreviation keys
+			settings.coins = app.coinsContent.coins.map(function(el) {
 				el.name = app.coinsContent.names[el.coin_type];
 				return el;
 			});
-			html = $.fn.tmpl("tmpl-miner-settings-coins", coins);
+			// remove the coins that are not supported by the current miner
+			settings.coins = settings.coins.filter(function(el) {
+				const key = shared.minersMapping(app.miner_type);
+				return true === app.coinsContent[key][el.coin_type];
+			});
+			html = $.fn.tmpl("tmpl-miner-settings-coins", settings);
 			$('#miner-settings-coins').html(html);
 
 			// Enable the dropselect
@@ -556,6 +562,7 @@ let app = {
 	enableSettingsButton: function() {
 		$('#loading-settings').addClass('done');
 	},
+	miner_type: '',
 	prev_coin_type: '',
 	coin_type: '',
 	coin_algo: '',
