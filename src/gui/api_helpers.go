@@ -9,7 +9,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
-	// "time"
+	"time"
 )
 
 // GetPoolList returns the list of pools available to the GUI miner
@@ -64,8 +64,8 @@ func (gui *GUI) SaveConfig(config Config) error {
 
 // GetCoinContent returns the content for all coins
 func (gui *GUI) GetCoinContentJson() (string, error) {
-	resp, err := http.Get("https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/coins/content.json")
-	// t := time.Now()
+	t := time.Now()
+	resp, err := http.Get(fmt.Sprintf("https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/coins/content.json?_=%d", t.Unix()))
 	// resp, err := http.Get(fmt.Sprintf("https://bloc.money/miner-content.json?_=%d", t.Unix()))
 	if err != nil {
 		return "", err
@@ -74,6 +74,8 @@ func (gui *GUI) GetCoinContentJson() (string, error) {
 	if err != nil {
 		return "", err
 	}
+	// gui.logger.Info(fmt.Sprintf("%s", statBytes))
+
 	var content coinsContentJson
 	err = json.Unmarshal(statBytes, &content)
 	if err != nil {
@@ -83,6 +85,7 @@ func (gui *GUI) GetCoinContentJson() (string, error) {
 	if err != nil {
 		return "", err
 	}
+	// gui.logger.Info(fmt.Sprintf("%s", statBytes))
 	return string(statBytes), nil
 }
 

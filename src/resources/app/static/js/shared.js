@@ -99,5 +99,14 @@ let shared = {
 	},
 	isMac: function() {
 		return window.navigator.platform.toLowerCase().includes("mac");
+	},
+	minersMapping: function(miner_type) {
+		if (miner_type === "") return "";
+
+		const map = {
+			"xmrig":    "xmrigSupport",
+			"xmr-stak": "xmrStakSupport",
+		};
+		return map[miner_type];
 	}
 }

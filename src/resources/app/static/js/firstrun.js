@@ -23,6 +23,12 @@ let firstrun = {
 				$('#miner_path').html(message.payload);
 			});
 
+			// Get the miner type
+			astilectron.sendMessage({name: "get-miner-type", payload: ""}, function(message) {
+				console.log('[' + new Date().toUTCString() + '] ', "get-miner-type", message.payload);
+				firstrun.miner_type = message.payload;
+			});
+
 			// Get the coins json and cache it locally
 			astilectron.sendMessage({
 				name: "get-coins-content",
@@ -108,10 +114,17 @@ let firstrun = {
 			}
 			// render the other coins that can be mined
 			if (id == 'other-currencies') {
-				var coins = firstrun.coinsContent.coins.filter(function(el) { // remove bloc
+				// remove bloc
+				var coins = firstrun.coinsContent.coins.filter(function(el) {
 					return el.coin_type !== 'bloc';
 				});
-				coins = coins.map(function(el) { // add name and abbreviation keys
+				// remove the coins that are not supported by the current miner
+				coins = coins.filter(function(el) {
+					const key = shared.minersMapping(firstrun.miner_type);
+					return true === firstrun.coinsContent[key][el.coin_type];
+				});
+				// add the keys
+				coins = coins.map(function(el) {
 					el.name          = firstrun.coinsContent.names[el.coin_type];
 					el.icon          = firstrun.coinsContent.icons[el.coin_type];
 					el.abbreviation  = firstrun.coinsContent.abbreviation[el.coin_type];
@@ -199,6 +212,7 @@ let firstrun = {
 		firstrun.xmrig_algo    = firstrun.coinsContent.xmrigAlgo[bloc_key];
 		firstrun.xmrig_variant = firstrun.coinsContent.xmrigVariant[bloc_key];
 	},
+	miner_type: "",
 	coin_type: "",
 	coin_algo: "",
 	xmrig_algo: "",

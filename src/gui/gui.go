@@ -274,6 +274,18 @@ func (gui *GUI) handleElectronCommands(
 	case "get-miner-path":
 		return filepath.Join(gui.workingDir, "miner"), nil
 
+	// get-miner-type is requested so the UI can show only the coins
+	// that can be mined by a specific minining software
+	case "get-miner-type":
+		scanPath := filepath.Join(gui.workingDir, "miner")
+		minerType, _, err := miner.DetermineMinerType(scanPath)
+
+		if err == nil {
+			return minerType, nil
+		} else {
+			return "", nil
+		}
+
 	// get-pools-list requests the recommended pool list from the miner API
 	// and returns the rendered HTML
 	case "get-pools-list":

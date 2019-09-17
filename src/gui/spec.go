@@ -52,6 +52,8 @@ type coinsContentJson struct {
 		CoinType string `json:"coin_type"`
 		CoinAlgo string `json:"coin_algo"`
 	} `json:"coins"`
+	XmrigSupport      map[string]interface{} `json:"xmrigSupport"`
+	XmrStakSupport    map[string]interface{} `json:"xmrStakSupport"`
 	XmrigAlgo         map[string]interface{} `json:"xmrigAlgo"`
 	XmrigVariant      map[string]interface{} `json:"xmrigVariant"`
 	Names             map[string]interface{} `json:"names"`

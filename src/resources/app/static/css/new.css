@@ -131,6 +131,25 @@ body.miner .miner-bg {
 	font-family: 'Roboto Condensed';
 	font-weight: 400;
 }
+/*
+#currencies-selector{
+	margin: 0 30px;
+	max-height: 500px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+#currencies-selector::-webkit-scrollbar-thumb{
+	max-height: 10px;
+	border-radius: 5px;
+	background: -webkit-linear-gradient(top, #ffed00 0%,#ffed00 100%);
+}
+#currencies-selector::-webkit-scrollbar{
+	border-radius: 5px;
+	width: 10px;
+	height: 10px;
+	background: #040727;
+}
+*/
 .other-currencies .currency-bg {
 	width: 340px;
 	margin: 0 auto 15px auto;
