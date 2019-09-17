@@ -41,6 +41,30 @@
       "coin_algo": "qrl"
     }
   ],
+  "xmrigSupport": {
+    "bloc": true,
+    "turtlecoin": true,
+    "ryo": true,
+    "haven": true,
+    "monero": true,
+    "loki": true,
+    "conceal": false,
+    "sumokoin": true,
+    "graft": true,
+    "qrl": true
+  },
+  "xmrStakSupport": {
+    "bloc": true,
+    "turtlecoin": false,
+    "ryo": true,
+    "haven": true,
+    "monero": true,
+    "loki": true,
+    "conceal": true,
+    "sumokoin": true,
+    "graft": true,
+    "qrl": true
+  },
   "xmrigAlgo": {
     "bloc": "cn-heavy/xhv",
     "turtlecoin": "argon2/chukwa",
