@@ -207,7 +207,8 @@
     "haven": "https://www.coingecko.com/en/coins/haven",
     "monero": "https://www.coingecko.com/en/coins/monero",
     "loki": "https://www.coingecko.com/en/coins/loki-network",
-    "conceal": "https://www.coingecko.com/en/coins/conceal"
+    "conceal": "https://www.coingecko.com/en/coins/conceal",
+    "sumokoin": "https://www.coingecko.com/en/coins/sumokoin"
   },
   "socialLinks": {
     "bloc": {
@@ -306,7 +307,7 @@
         {"link": "https://github.com/sumoprojects/sumokoin", "img": "static/img/miner/network_icon_github.png"},
         {"link": "https://twitter.com/Sumokoin", "img": "static/img/miner/network_icon_twatter.png"},
         {"link": "https://www.sumokoin.org", "img": "static/img/miner/network_icon_website.png"}
-        {"link": "https://www.facebook.com/sumokoin/", "img": "static/img/miner/network_icon_facbook.png"},
+        {"link": "https://www.facebook.com/sumokoin/", "img": "static/img/miner/network_icon_facbook.png"}
       ]
     }
   },
