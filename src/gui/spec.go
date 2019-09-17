@@ -55,6 +55,7 @@ type coinsContentJson struct {
 	XmrigAlgo         map[string]interface{} `json:"xmrigAlgo"`
 	XmrigVariant      map[string]interface{} `json:"xmrigVariant"`
 	Names             map[string]interface{} `json:"names"`
+	Icons             map[string]interface{} `json:"icons"`
 	Abbr2             map[string]interface{} `json:"abbreviation"`
 	CoinGeckoLinks    map[string]interface{} `json:"coinGeckoLinks"`
 	AddressPrefix     map[string]interface{} `json:"addressPrefix"`
