@@ -658,7 +658,7 @@
       "boxes": [
         {"icon": "static/img/whatsnext/img-01.png", "title": "Visit your mining pool to know more", "text": "You get paid out based upon what the pool sets the min payout amount. A pool's min payout amount can vary from pool to pool. Click on the pool link to visit their website."},
         {"icon": "static/img/whatsnext/img-02.png", "title": "Learn more about QRL", "text": "<a href=\"https://www.theqrl.org\">Quantum Resistant Ledger</a> is a secure digital assets for longevity. Externally audited enterprise-grade blockchain platform secure against an attack from quantum computers."},
-        {"icon": "static/img/whatsnext/img-03.png", "title": "Academia", "text": "<a href=\"https://www.theqrl.org/research/#s:citations\">The QRL</a>is cited in and backed by the research of individuals, organizations and institutions. Read more about the cryptographic fundamentals and seminal papers that back the provably quantum secure blockchain."},
+        {"icon": "static/img/whatsnext/img-03.png", "title": "Academia", "text": "<a href=\"https://www.theqrl.org/research/#s:citations\">The QRL</a> is cited in and backed by the research of individuals, organizations and institutions. Read more about the cryptographic fundamentals and seminal papers that back the provably quantum secure blockchain."},
         {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "QRL is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://github.com/theQRL/QRL/\">GitHub</a> or <a href=\"https://www.reddit.com/r/qrl\">Reddit</a>."},
         {"icon": "static/img/whatsnext/img-05.png", "title": "Trading QRL on exchange", "text": "Buy and Sell QRL on following exchanges: <ul class=\"list-unstyled\"><li><a href=\"https://international.bittrex.com/Market/Index?MarketName=BTC-QRL\">- Bittrex</a></li><li><a href=\"https://www.cointiger.com/en-us/#/trade_center?coin=qrl_btc\">- CoinTiger</a></li></ul>"},
         {"icon": "static/img/whatsnext/img-06.png", "title": "Follow QRL on social media", "text": "We are updating all our social network regulary, the best way to stay updated with QRL is to follow us on <a href=\"https://twitter.com/qrledger\">Twitter</a> or <a href=\"https://www.medium.com/the-quantum-resistant-ledger/\">Medium</a>."},
@@ -692,52 +692,52 @@
   "newsBox": {
       "bloc": {
           "title": "BLOC available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       },
       "turtlecoin": {
           "title": "TRTL available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       },
       "ryo": {
           "title": "RYO available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       },
       "haven": {
           "title": "XHV available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       },
       "monero": {
           "title": "XMR available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       },
       "loki": {
           "title": "LOKI available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       },
       "conceal": {
           "title": "CCX available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       },
       "sumokoin": {
           "title": "SUMO available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       },
       "graft": {
           "title": "GRFT available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       },
       "qrl": {
           "title": "QRL available soon on:",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.png",
           "link": "https://paychange.com"
       }
   }
