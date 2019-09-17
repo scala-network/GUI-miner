@@ -188,7 +188,7 @@
     "loki": "#141414",
     "conceal": "#141414",
     "sumokoin": "#0c0a67",
-    "graft": "#fee900",
+    "graft": "#310c09",
     "qrl": "#42525d"
   },
   "boxBorder": {
@@ -662,7 +662,8 @@
       "loki": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=3&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "conceal": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=58&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "sumokoin": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=8&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
-      "sumokoin": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=34&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
+      "graft": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=18&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
+      "qrl": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=34&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
   },
   "newsBox": {
       "bloc": {
