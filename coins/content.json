@@ -236,7 +236,7 @@
     "conceal": "static/img/conceal/logo.png",
     "sumokoin": "static/img/sumokoin/logo.png",
     "graft": "static/img/graft/logo.png",
-    "qrl": "static/img/graft/logo.png"
+    "qrl": "static/img/qrl/logo.png"
   },
   "downloadPage": {
       "bloc": {
@@ -290,7 +290,7 @@
     "conceal": "https://www.coingecko.com/en/coins/conceal",
     "sumokoin": "https://www.coingecko.com/en/coins/sumokoin",
     "graft": "https://www.coingecko.com/en/coins/graft-blockchain",
-    "graft": "https://www.coingecko.com/en/coins/quantum-resistant-ledger"
+    "qrl": "https://www.coingecko.com/en/coins/quantum-resistant-ledger"
   },
   "socialLinks": {
     "bloc": {
@@ -691,53 +691,53 @@
   },
   "newsBox": {
       "bloc": {
-          "title": "New DEX Coming Soon",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "title": "BLOC available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
           "link": "https://paychange.com"
       },
       "turtlecoin": {
-          "title": "Turtlecoin News",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/turtlecoin/news.png",
-          "link": "https://blog.turtlecoin.lol/"
+          "title": "TRTL available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "link": "https://paychange.com"
       },
       "ryo": {
-          "title": "RYO News",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/RYO/news.png",
-          "link": "https://medium.com/@ryo.currency"
+          "title": "RYO available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "link": "https://paychange.com"
       },
       "haven": {
-          "title": "Haven White Paper",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/haven/news.png",
-          "link": "http://docs.havenprotocol.org/haven-protocol-wp-2_0.pdf"
+          "title": "XHV available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "link": "https://paychange.com"
       },
       "monero": {
-          "title": "Monero News",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/monero/news.png",
-          "link": "https://www.getmonero.org/"
+          "title": "XMR available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
+          "link": "https://paychange.com"
       },
       "loki": {
-          "title": "New DEX Coming Soon",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "title": "LOKI available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
           "link": "https://paychange.com"
       },
       "conceal": {
-          "title": "New DEX Coming Soon",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "title": "CCX available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
           "link": "https://paychange.com"
       },
       "sumokoin": {
-          "title": "New DEX Coming Soon",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "title": "SUMO available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
           "link": "https://paychange.com"
       },
       "graft": {
-          "title": "New DEX Coming Soon",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "title": "GRFT available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
           "link": "https://paychange.com"
       },
       "qrl": {
-          "title": "New DEX Coming Soon",
-          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "title": "QRL available soon on:",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.jpg",
           "link": "https://paychange.com"
       }
   }
