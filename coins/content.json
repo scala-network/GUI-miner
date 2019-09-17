@@ -77,6 +77,18 @@
     "graft": "GRAFT",
     "qrl": "Quantum Resistant Ledger"
   },
+  "icons": {
+    "bloc": "static/img/coins-icons/bloc.png",
+    "turtlecoin": "static/img/coins-icons/turtlecoin.png",
+    "ryo": "static/img/coins-icons/ryo.png",
+    "haven": "static/img/coins-icons/haven.png",
+    "monero": "static/img/coins-icons/monero.png",
+    "loki": "static/img/coins-icons/loki.png",
+    "conceal": "static/img/coins-icons/conceal.png",
+    "sumokoin": "static/img/coins-icons/sumokoin.png",
+    "graft": "static/img/coins-icons/graft.png",
+    "qrl": "static/img/coins-icons/qrl.png"
+  },
   "abbreviation": {
     "bloc": "BLOC",
     "turtlecoin": "TRTL",
