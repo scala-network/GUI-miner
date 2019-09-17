@@ -31,6 +31,10 @@
     {
       "coin_type": "sumokoin",
       "coin_algo": "cryptonight_r"
+    },
+    {
+      "coin_type": "graft",
+      "coin_algo": "graft"
     }
   ],
   "xmrigAlgo": {
@@ -41,7 +45,8 @@
     "monero": "cn/r",
     "loki": "rx/loki",
     "conceal": "cn/conceal_xmrig_notsupported",
-    "sumokoin": "cn/r"
+    "sumokoin": "cn/r",
+    "graft": "cn/rwz"
   },
   "xmrigVariant": {
     "bloc": "xhv",
@@ -51,7 +56,8 @@
     "monero": "xmr",
     "loki": "loki",
     "conceal": "ccx",
-    "sumokoin": "sumo"
+    "sumokoin": "sumo",
+    "graft": "graft"
   },
   "names": {
     "bloc": "BLOC",
@@ -61,7 +67,8 @@
     "monero": "Monero",
     "loki": "Loki",
     "conceal": "Conceal Network",
-    "sumokoin": "Sumokoin"
+    "sumokoin": "Sumokoin",
+    "graft": "GRAFT"
   },
   "abbreviation": {
     "bloc": "BLOC",
@@ -71,7 +78,8 @@
     "monero": "XMR",
     "loki": "LOKI",
     "conceal": "CCX",
-    "sumokoin": "SUMO"
+    "sumokoin": "SUMO",
+    "graft": "GRFT"
   },
   "addressPrefix": {
     "bloc": "abLoc",
@@ -81,7 +89,8 @@
     "monero": "4",
     "loki": "L",
     "conceal": "ccx",
-    "sumokoin": "Sumo"
+    "sumokoin": "Sumo",
+    "graft": "grft"
   },
   "addressValidation": {
     "bloc": "^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$",
@@ -91,7 +100,8 @@
     "monero": "^4([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$",
     "loki": "^L([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$",
     "conceal": "^ccx([a-zA-Z0-9]{95})$",
-    "sumokoin": "^Sumo([a-zA-Z0-9]{95})$"
+    "sumokoin": "^Sumo([a-zA-Z0-9]{95})$",
+    "graft": "^G([a-zA-Z0-9]{94})$"
   },
   "mainBackground": {
     "bloc": {
@@ -125,6 +135,10 @@
     "sumokoin": {
       "image": "static/img/sumokoin/bg-miner-mining.png", 
       "color": "#1a1a1a"
+    },
+    "graft": {
+      "image": "static/img/graft/bg-miner-mining.png", 
+      "color": "#274258"
     }
   },
   "textColor": {
@@ -135,7 +149,8 @@
     "monero": "#ff5a00",
     "loki": "#7bbc2e",
     "conceal": "#fea320",
-    "sumokoin": "#20fef1"
+    "sumokoin": "#20fef1",
+    "graft": "#fe4200"
   },
   "boxColor": {
     "bloc": "#090a31",
@@ -145,7 +160,8 @@
     "monero": "#222323",
     "loki": "#141414",
     "conceal": "#141414",
-    "sumokoin": "#0c0a67"
+    "sumokoin": "#0c0a67",
+    "graft": "#fee900"
   },
   "boxBorder": {
     "bloc": "#222",
@@ -154,7 +170,8 @@
     "haven": "#222",
     "monero": "#222",
     "loki": "#222",
-    "sumokoin": "#222"
+    "sumokoin": "#222",
+    "graft": "#222"
   },
   "logo": {
     "bloc": "static/img/miner/miner-big-logo.png",
@@ -164,7 +181,8 @@
     "monero": "static/img/monero/logo.png",
     "loki": "static/img/loki/logo.png",
     "conceal": "static/img/conceal/logo.png",
-    "sumokoin": "static/img/sumokoin/logo.png"
+    "sumokoin": "static/img/sumokoin/logo.png",
+    "graft": "static/img/graft/logo.png"
   },
   "downloadPage": {
       "bloc": {
@@ -198,6 +216,10 @@
       "sumokoin": {
         "title": "Sumokoin Applications", 
         "link": "https://www.sumokoin.org"
+      },
+      "graft": {
+        "title": "GRAFT Applications", 
+        "link": "https://www.graft.network/downloads/"
       }
   },
   "coinGeckoLinks": {
@@ -208,7 +230,8 @@
     "monero": "https://www.coingecko.com/en/coins/monero",
     "loki": "https://www.coingecko.com/en/coins/loki-network",
     "conceal": "https://www.coingecko.com/en/coins/conceal",
-    "sumokoin": "https://www.coingecko.com/en/coins/sumokoin"
+    "sumokoin": "https://www.coingecko.com/en/coins/sumokoin",
+    "graft": "https://www.coingecko.com/en/coins/graft-blockchain"
   },
   "socialLinks": {
     "bloc": {
@@ -309,6 +332,21 @@
         {"link": "https://www.sumokoin.org", "img": "static/img/miner/network_icon_website.png"}
         {"link": "https://www.facebook.com/sumokoin/", "img": "static/img/miner/network_icon_facbook.png"}
       ]
+    },
+    "graft": {
+      "title": "Social Network", 
+      "links": [
+        {"link": "https://discord.gg/BuZr5fy", "img": "static/img/miner/network_icon_discord.png"},
+        {"link": "https://medium.com/@graftnetwork", "img": "static/img/miner/network_icon_medium.png"},
+        {"link": "https://t.me/graftnetofficial", "img": "static/img/miner/network_icon_telegram.png"},
+        {"link": "https://bitcointalk.org/index.php?topic=2115188", "img": "static/img/miner/network_icon_bitcointalk.png"},
+        {"link": "https://github.com/graft-project/graft-ng", "img": "static/img/miner/network_icon_github.png"},
+        {"link": "https://twitter.com/graftnetwork", "img": "static/img/miner/network_icon_twatter.png"},
+        {"link": "https://www.graft.network", "img": "static/img/miner/network_icon_website.png"}
+        {"link": "https://www.facebook.com/Graft-460292407666720/", "img": "static/img/miner/network_icon_facbook.png"}
+        {"link": "https://www.youtube.com/channel/UCoMSpYdhQDDhhRcyilyyqtw", "img": "static/img/miner/network_icon_yuotube.png"},
+        {"link": "https://www.instagram.com/graftnetwork/", "img": "static/img/miner/network_icon_instgram.png"},
+      ]
     }
   },
   "networkLinks": {
@@ -405,6 +443,18 @@
         {"link": "https://explorer.sumokoin.com/", "text": "- Block Explorer"},
         {"link": "https://www.sumokoin.org", "text": "- Docs"},
         {"link": "https://medium.com/sumokoin", "text": "- Blog"}
+      ]
+    },
+    "graft": {
+      "title": "GRAFT Network", 
+      "links": [
+        {"link": "https://www.graft.network", "text": "- Official website"},
+        {"link": "https://www.graft.network/frequently-asked-questions/", "text": "- FAQ"},
+        {"link": "http://blockexplorer.graft.network/", "text": "- Block Explorer"},
+        {"link": "https://www.graft.network/cryptofind/", "text": "- CryptoFind app"},
+        {"link": "https://www.graft.network/mining-guide/", "text": "- Mining Guide"},
+        {"link": "https://www.graft.network/downloads/", "text": "- GRAFT Wallet"},
+        {"link": "https://www.graft.network/2019/08/08/exchange-broker-network-layer-and-collateralized-dex/", "text": "- DEX"}
       ]
     }
   },
@@ -510,6 +560,18 @@
         {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about Sumokoin, we recommend starting by visiting the official <a href=\"https://www.sumokoin.org\">Sumokoin.network</a> website for more informations."},
         {"icon": "static/img/whatsnext/img-09.png", "title": "Merchants & Services", "text": "Merchants of all kinds have come to value the financial privacy that Sumokoin brings. <a href=\"https://www.sumokoin.org\">Click here</a> to see list of the merchants that we know of that currently accept Sumokoin for their goods and services."}
       ]
+    },
+    "graft": {
+      "boxes": [
+        {"icon": "static/img/whatsnext/img-01.png", "title": "Visit your mining pool to know more", "text": "You get paid out based upon what the pool sets the min payout amount. A pool's min payout amount can vary from pool to pool. Click on the pool link to visit their website."},
+        {"icon": "static/img/whatsnext/img-02.png", "title": "Learn more about GRAFT", "text": "<a href=\"https://www.graft.network\">GRAFT</a> is a combination (PoW, PoS, DAG) blockchain and a platform that enables a truly decentralized payment network with real-time, universal payment acceptance."},
+        {"icon": "static/img/whatsnext/img-03.png", "title": "Docs", "text": "GRAFT is short for Global Real-time Authorizations and Fund Transfers, but also represents grafting of the new into the old."},
+        {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "SUMOKOIN is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://t.me/graftnetofficial\">Telegram Group</a> or <a href=\"https://www.reddit.com/r/Graft/\">Reddit</a>."},
+        {"icon": "static/img/whatsnext/img-05.png", "title": "Trading GRAFT on exchange", "text": "Buy and Sell GRAFT on following <a href=\"https://www.graft.org\">exchanges</a>: <ul class=\"list-unstyled\"><li><a href=\"https://tradeogre.com/exchange/BTC-GRFT\">- TradeOgre</a></li><li><a href=\"https://app.stex.com/en/basic-trade/pair/BTC/GRFT/240\">- STEX</a></li><li><a href=\"https://www.hotbit.io/exchange?symbol=GRFT_BTC\">- Hotbit</a></li></ul>"},
+        {"icon": "static/img/whatsnext/img-06.png", "title": "Follow GRAFT on social media", "text": "We are updating all our social network regulary, the best way to stay updated with GRAFT is to follow us on <a href=\"https://twitter.com/graftnetwork\">Twitter</a> or <a href=\"https://discord.gg/BuZr5fy\">Discord</a>."},
+        {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about GRAFT, we recommend starting by visiting the official <a href=\"https://www.graft.network\">GRAFT.network</a> website for more informations."},
+        {"icon": "static/img/whatsnext/img-09.png", "title": "Merchants & Services", "text": "Merchants of all kinds have come to value the financial privacy that GRAFT brings. <a href=\"https://www.graft.network\">Click here</a> to see list of the merchants that we know of that currently accept GRAFT for their goods and services."}
+      ]
     }
   },
   "poweredByLinks": {
@@ -568,6 +630,11 @@
           "link": "https://paychange.com"
       },
       "sumokoin": {
+          "title": "New DEX Coming Soon",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "link": "https://paychange.com"
+      },
+      "graft": {
           "title": "New DEX Coming Soon",
           "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
           "link": "https://paychange.com"
