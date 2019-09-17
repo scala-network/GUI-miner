@@ -24,7 +24,7 @@ clear; export DISPLAY=:0; cd ~/GUI-miner; \
 make clean; make; \
 mkdir ~/GUI-miner/bin/linux-amd64/miner; \
 cp -r ~/xmrig-3.1.0/xmrig ~/GUI-miner/bin/linux-amd64/miner; \
-cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v1.1.1 -d
 ```
 
 ### To compile and run the xmrig miner with old configuration
@@ -38,7 +38,7 @@ mkdir ~/GUI-miner/bin/linux-amd64/miner; \
 cp -r ~/xmrig-3.1.0/xmrig ~/GUI-miner/bin/linux-amd64/miner; \
 cp -u /tmp/config.json ~/GUI-miner/bin/linux-amd64/config.json; \
 cp -u /tmp/config-xmrig.json ~/GUI-miner/bin/linux-amd64/miner/config.json; \
-cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v1.1.1 -d
 ```
 
 ### To run the xmrig miner with clean configuration
@@ -47,13 +47,13 @@ cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
 clear; export DISPLAY=:0; \
 rm -f ~/GUI-miner/bin/linux-amd64/config.json; \
 rm -f ~/GUI-miner/bin/linux-amd64/miner/config.json; \
-cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v1.1.1 -d
 ```
 
 ### To run the xmrig miner with old configuration
 
 ```shell
-clear; export DISPLAY=:0; cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+clear; export DISPLAY=:0; cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v1.1.1 -d
 ```
 
 
@@ -66,7 +66,7 @@ clear; export DISPLAY=:0; cd ~/GUI-miner; \
 make clean; make; \
 mkdir ~/GUI-miner/bin/linux-amd64/miner; \
 cp -r ~/xmr-stak-linux-2.10.7-cpu/xmr-stak ~/GUI-miner/bin/linux-amd64/miner; \
-cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v1.1.1 -d
 ```
 
 ### To compile and run the xmr-stak miner with old configuration
@@ -84,7 +84,7 @@ cp -u /tmp/config.json ~/GUI-miner/bin/linux-amd64/config.json; \
 cp -u /tmp/config.txt ~/GUI-miner/bin/linux-amd64/miner/config.txt; \
 cp -u /tmp/cpu.txt ~/GUI-miner/bin/linux-amd64/miner/cpu.txt; \
 cp -u /tmp/pools.txt ~/GUI-miner/bin/linux-amd64/miner/pools.txt; \
-cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v1.1.1 -d
 ```
 
 ### To run the xmr-stak miner with clean configuration
@@ -95,11 +95,11 @@ rm -f ~/GUI-miner/bin/linux-amd64/config.json; \
 rm -f ~/GUI-miner/bin/linux-amd64/miner/config.txt; \
 rm -f ~/GUI-miner/bin/linux-amd64/miner/cpu.txt; \
 rm -f ~/GUI-miner/bin/linux-amd64/miner/pools.txt; \
-cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v1.1.1 -d
 ```
 
 ### To run the xmr-stak miner with old configuration
 
 ```shell
-clear; export DISPLAY=:0; cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v0.0.4 -d
+clear; export DISPLAY=:0; cd ~/GUI-miner/bin/linux-amd64/; ./BLOC\ GUI\ Miner\ v1.1.1 -d
 ```
