@@ -352,7 +352,7 @@
         {"link": "https://bitcointalk.org/index.php?topic=1905086.0", "img": "static/img/miner/network_icon_bitcointalk.png"},
         {"link": "https://github.com/sumoprojects/sumokoin", "img": "static/img/miner/network_icon_github.png"},
         {"link": "https://twitter.com/Sumokoin", "img": "static/img/miner/network_icon_twatter.png"},
-        {"link": "https://www.sumokoin.org", "img": "static/img/miner/network_icon_website.png"}
+        {"link": "https://www.sumokoin.org", "img": "static/img/miner/network_icon_website.png"},
         {"link": "https://www.facebook.com/sumokoin/", "img": "static/img/miner/network_icon_facbook.png"}
       ]
     },
@@ -365,10 +365,10 @@
         {"link": "https://bitcointalk.org/index.php?topic=2115188", "img": "static/img/miner/network_icon_bitcointalk.png"},
         {"link": "https://github.com/graft-project/graft-ng", "img": "static/img/miner/network_icon_github.png"},
         {"link": "https://twitter.com/graftnetwork", "img": "static/img/miner/network_icon_twatter.png"},
-        {"link": "https://www.graft.network", "img": "static/img/miner/network_icon_website.png"}
-        {"link": "https://www.facebook.com/Graft-460292407666720/", "img": "static/img/miner/network_icon_facbook.png"}
+        {"link": "https://www.graft.network", "img": "static/img/miner/network_icon_website.png"},
+        {"link": "https://www.facebook.com/Graft-460292407666720/", "img": "static/img/miner/network_icon_facbook.png"},
         {"link": "https://www.youtube.com/channel/UCoMSpYdhQDDhhRcyilyyqtw", "img": "static/img/miner/network_icon_yuotube.png"},
-        {"link": "https://www.instagram.com/graftnetwork/", "img": "static/img/miner/network_icon_instgram.png"},
+        {"link": "https://www.instagram.com/graftnetwork/", "img": "static/img/miner/network_icon_instgram.png"}
       ]
     },
     "qrl": {
@@ -379,7 +379,7 @@
         {"link": "https://bitcointalk.org/index.php?topic=2115188", "img": "static/img/miner/network_icon_bitcointalk.png"},
         {"link": "https://github.com/theQRL/QRL/", "img": "static/img/miner/network_icon_github.png"},
         {"link": "https://twitter.com/qrledger", "img": "static/img/miner/network_icon_twatter.png"},
-        {"link": "http://theqrl.org", "img": "static/img/miner/network_icon_website.png"}
+        {"link": "http://theqrl.org", "img": "static/img/miner/network_icon_website.png"},
         {"link": "https://www.reddit.com/r/qrl", "img": "static/img/miner/network_icon_website.png"}
       ]
     }
