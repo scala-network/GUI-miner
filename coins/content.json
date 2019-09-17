@@ -35,6 +35,10 @@
     {
       "coin_type": "graft",
       "coin_algo": "graft"
+    },
+    {
+      "coin_type": "qrl",
+      "coin_algo": "qrl"
     }
   ],
   "xmrigAlgo": {
@@ -46,7 +50,8 @@
     "loki": "rx/loki",
     "conceal": "cn/conceal_xmrig_notsupported",
     "sumokoin": "cn/r",
-    "graft": "cn/rwz"
+    "graft": "cn/rwz",
+    "qrl": "cn/1"
   },
   "xmrigVariant": {
     "bloc": "xhv",
@@ -57,7 +62,8 @@
     "loki": "loki",
     "conceal": "ccx",
     "sumokoin": "sumo",
-    "graft": "graft"
+    "graft": "graft",
+    "qrl": "1"
   },
   "names": {
     "bloc": "BLOC",
@@ -68,7 +74,8 @@
     "loki": "Loki",
     "conceal": "Conceal Network",
     "sumokoin": "Sumokoin",
-    "graft": "GRAFT"
+    "graft": "GRAFT",
+    "qrl": "Quantum Resistant Ledger"
   },
   "abbreviation": {
     "bloc": "BLOC",
@@ -79,7 +86,8 @@
     "loki": "LOKI",
     "conceal": "CCX",
     "sumokoin": "SUMO",
-    "graft": "GRFT"
+    "graft": "GRFT",
+    "qrl": "QRL"
   },
   "addressPrefix": {
     "bloc": "abLoc",
@@ -90,7 +98,8 @@
     "loki": "L",
     "conceal": "ccx",
     "sumokoin": "Sumo",
-    "graft": "grft"
+    "graft": "grft",
+    "qrl": "qrl"
   },
   "addressValidation": {
     "bloc": "^abLoc([a-zA-Z0-9]{94}|[a-zA-Z0-9]{182})$",
@@ -101,7 +110,8 @@
     "loki": "^L([a-zA-Z0-9]{94}|[a-zA-Z0-9]{105})$",
     "conceal": "^ccx([a-zA-Z0-9]{95})$",
     "sumokoin": "^Sumo([a-zA-Z0-9]{95})$",
-    "graft": "^G([a-zA-Z0-9]{94})$"
+    "graft": "^G([a-zA-Z0-9]{94})$",
+    "qrl": "^Q([a-zA-Z0-9]{78})$"
   },
   "mainBackground": {
     "bloc": {
@@ -139,6 +149,10 @@
     "graft": {
       "image": "static/img/graft/bg-miner-mining.png", 
       "color": "#274258"
+    },
+    "qrl": {
+      "image": "static/img/qrl/bg-miner-mining.png", 
+      "color": "#185587"
     }
   },
   "textColor": {
@@ -150,7 +164,8 @@
     "loki": "#7bbc2e",
     "conceal": "#fea320",
     "sumokoin": "#20fef1",
-    "graft": "#fe4200"
+    "graft": "#fe4200",
+    "qrl": "#3db4ff"
   },
   "boxColor": {
     "bloc": "#090a31",
@@ -161,7 +176,8 @@
     "loki": "#141414",
     "conceal": "#141414",
     "sumokoin": "#0c0a67",
-    "graft": "#fee900"
+    "graft": "#fee900",
+    "qrl": "#42525d"
   },
   "boxBorder": {
     "bloc": "#222",
@@ -171,7 +187,8 @@
     "monero": "#222",
     "loki": "#222",
     "sumokoin": "#222",
-    "graft": "#222"
+    "graft": "#222",
+    "qrl": "#222"
   },
   "logo": {
     "bloc": "static/img/miner/miner-big-logo.png",
@@ -182,7 +199,8 @@
     "loki": "static/img/loki/logo.png",
     "conceal": "static/img/conceal/logo.png",
     "sumokoin": "static/img/sumokoin/logo.png",
-    "graft": "static/img/graft/logo.png"
+    "graft": "static/img/graft/logo.png",
+    "qrl": "static/img/graft/logo.png"
   },
   "downloadPage": {
       "bloc": {
@@ -218,8 +236,12 @@
         "link": "https://www.sumokoin.org"
       },
       "graft": {
-        "title": "GRAFT Applications", 
+        "title": "Quantum Resistant Ledger App", 
         "link": "https://www.graft.network/downloads/"
+      },
+      "qrl": {
+        "title": "QRL Applications", 
+        "link": "https://www.theqrl.org"
       }
   },
   "coinGeckoLinks": {
@@ -231,7 +253,8 @@
     "loki": "https://www.coingecko.com/en/coins/loki-network",
     "conceal": "https://www.coingecko.com/en/coins/conceal",
     "sumokoin": "https://www.coingecko.com/en/coins/sumokoin",
-    "graft": "https://www.coingecko.com/en/coins/graft-blockchain"
+    "graft": "https://www.coingecko.com/en/coins/graft-blockchain",
+    "graft": "https://www.coingecko.com/en/coins/quantum-resistant-ledger"
   },
   "socialLinks": {
     "bloc": {
@@ -347,6 +370,18 @@
         {"link": "https://www.youtube.com/channel/UCoMSpYdhQDDhhRcyilyyqtw", "img": "static/img/miner/network_icon_yuotube.png"},
         {"link": "https://www.instagram.com/graftnetwork/", "img": "static/img/miner/network_icon_instgram.png"},
       ]
+    },
+    "qrl": {
+      "title": "Social Network", 
+      "links": [
+        {"link": "https://discord.gg/jBT6BEp", "img": "static/img/miner/network_icon_discord.png"},
+        {"link": "https://www.medium.com/the-quantum-resistant-ledger/", "img": "static/img/miner/network_icon_medium.png"},
+        {"link": "https://bitcointalk.org/index.php?topic=2115188", "img": "static/img/miner/network_icon_bitcointalk.png"},
+        {"link": "https://github.com/theQRL/QRL/", "img": "static/img/miner/network_icon_github.png"},
+        {"link": "https://twitter.com/qrledger", "img": "static/img/miner/network_icon_twatter.png"},
+        {"link": "http://theqrl.org", "img": "static/img/miner/network_icon_website.png"}
+        {"link": "https://www.reddit.com/r/qrl", "img": "static/img/miner/network_icon_website.png"}
+      ]
     }
   },
   "networkLinks": {
@@ -455,6 +490,16 @@
         {"link": "https://www.graft.network/mining-guide/", "text": "- Mining Guide"},
         {"link": "https://www.graft.network/downloads/", "text": "- GRAFT Wallet"},
         {"link": "https://www.graft.network/2019/08/08/exchange-broker-network-layer-and-collateralized-dex/", "text": "- DEX"}
+      ]
+    },
+    "qrl": {
+      "title": "QRL Network", 
+      "links": [
+        {"link": "https://www.theqrl.org", "text": "- Official website"},
+        {"link": "https://docs.theqrl.org", "text": "- Documentation"},
+        {"link": "https://explorer.theqrl.org", "text": "- Block Explorer"},
+        {"link": "https://medium.com/the-quantum-resistant-ledger", "text": "- Announcements"},
+        {"link": "https://docs.theqrl.org/mining/mining/", "text": "- Mining Guide"}
       ]
     }
   },
@@ -572,6 +617,19 @@
         {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about GRAFT, we recommend starting by visiting the official <a href=\"https://www.graft.network\">GRAFT.network</a> website for more informations."},
         {"icon": "static/img/whatsnext/img-09.png", "title": "Merchants & Services", "text": "Merchants of all kinds have come to value the financial privacy that GRAFT brings. <a href=\"https://www.graft.network\">Click here</a> to see list of the merchants that we know of that currently accept GRAFT for their goods and services."}
       ]
+    },
+    "qrl": {
+      "boxes": [
+        {"icon": "static/img/whatsnext/img-01.png", "title": "Visit your mining pool to know more", "text": "You get paid out based upon what the pool sets the min payout amount. A pool's min payout amount can vary from pool to pool. Click on the pool link to visit their website."},
+        {"icon": "static/img/whatsnext/img-02.png", "title": "Learn more about QRL", "text": "<a href=\"https://www.theqrl.org\">Quantum Resistant Ledger</a> is a secure digital assets for longevity. Externally audited enterprise-grade blockchain platform secure against an attack from quantum computers."},
+        {"icon": "static/img/whatsnext/img-03.png", "title": "Academia", "text": "<a href=\"https://www.theqrl.org/research/#s:citations\">The QRL</a>is cited in and backed by the research of individuals, organizations and institutions. Read more about the cryptographic fundamentals and seminal papers that back the provably quantum secure blockchain."},
+        {"icon": "static/img/whatsnext/img-04.png", "title": "Join our amazing community.", "text": "QRL is nothing without it's amazing and friendly community. Come and socialise with us on the <a href=\"https://github.com/theQRL/QRL/\">GitHub</a> or <a href=\"https://www.reddit.com/r/qrl\">Reddit</a>."},
+        {"icon": "static/img/whatsnext/img-05.png", "title": "Trading QRL on exchange", "text": "Buy and Sell QRL on following exchanges: <ul class=\"list-unstyled\"><li><a href=\"https://international.bittrex.com/Market/Index?MarketName=BTC-QRL\">- Bittrex</a></li><li><a href=\"https://www.cointiger.com/en-us/#/trade_center?coin=qrl_btc\">- CoinTiger</a></li></ul>"},
+        {"icon": "static/img/whatsnext/img-06.png", "title": "Follow QRL on social media", "text": "We are updating all our social network regulary, the best way to stay updated with QRL is to follow us on <a href=\"https://twitter.com/qrledger\">Twitter</a> or <a href=\"https://www.medium.com/the-quantum-resistant-ledger/\">Medium</a>."},
+        {"icon": "static/img/whatsnext/img-07.png", "title": "Download QRL iOS & Android", "text": "QRL wallet for Android <a href=\"https://play.google.com/store/apps/details?id=com.theqrl\">available in the Google Play store</a> and <a href=\"https://itunes.apple.com/us/app/qrl-wallet/id1458620542?ls=1&mt=8\">for iOS</a>. A QRL mobile wallet where the user owns the private keys."},
+        {"icon": "static/img/whatsnext/img-08.png", "title": "Need more help ? We got you covered", "text": "If this is your first time hearing about QRL, we recommend starting by visiting the official <a href=\"https://www.theqrl.org\">theqrl.org</a> website but also <a href=\"https://docs.theqrl.org\">Wiki</a> and read precious informations."},
+        {"icon": "static/img/whatsnext/img-09.png", "title": "Merchants & Services", "text": "Merchants of all kinds have come to value the financial privacy that QRL brings. <a href=\"https://www.theqrl.org\">Click here</a> to see list of the merchants that we know of that currently accept QRL for their goods and services."}
+      ]
     }
   },
   "poweredByLinks": {
@@ -591,7 +649,8 @@
       "monero": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=5&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "loki": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=3&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
       "conceal": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=58&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
-      "sumokoin": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=8&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
+      "sumokoin": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=8&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>",
+      "sumokoin": "<iframe src=\"https:\/\/www.cryptunit.com\/widgets\/1.php?coin=34&small=false&transparent=true&black=false\" height=\"270\" width=\"100%\" frameBorder=\"0\" style=\"overflow:hidden;\" scrolling=\"no\" ><\/iframe>"
   },
   "newsBox": {
       "bloc": {
@@ -635,6 +694,11 @@
           "link": "https://paychange.com"
       },
       "graft": {
+          "title": "New DEX Coming Soon",
+          "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
+          "link": "https://paychange.com"
+      },
+      "qrl": {
           "title": "New DEX Coming Soon",
           "image": "https://raw.githubusercontent.com/furiousteam/BLOC-GUI-Miner/master/src/resources/app/static/img/paychange.gif",
           "link": "https://paychange.com"
