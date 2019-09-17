@@ -11,7 +11,7 @@ Update details:
 - Loki (LOKI) (rx/loki) with XMRIG. (Not supported by XMR-STAK)
 - Sumokoin (SUMO) (cn/r)
 - GRAFT (GRFT) (cn/rwz)
-- Quantum Reistant Ledger (QRL) (cn/1)
+- Quantum Resistant Ledger (QRL) (cn/1)
 - Conceal Network (CCX) (cryptonight_conceal) (Not supported by XMRIG)
 
 2. Added mining with integrated address for TRTL, BLOC, XMR, RYO, XHV, LOKI

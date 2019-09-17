@@ -16,33 +16,40 @@ If you want to learn about cryptocurrencies, [mining](https://wiki.bloc.money/mi
 
 [Previous Updates](DOCS/updates)
 
-## What's New ?
+## What's New in v1.1.2 ?
 
-- 🔸 Built-in latest XMR-STAK & XMRIG
-- 🔸 Now support $BLOC $TRTL $XMR $RYO $XHV
-- 🔸 Works on macOS, Windows & Linux
+- 💎 Built-in latest XMR-STAK & XMRIG
+- ✅ Now support $BLOC $TRTL $XMR $RYO $XHV $SUMO $LOKI $QRL $CCX $GRFT
+- 🖥 Works on macOS, Windows (7, 8, 10) & Linux x64
+- ❇️ Change mining pool or coin in 1 click
+- ℹ️ Complete informations about the currency with links
 - 🔸 Easy to use
-- 🔸 Coin Stats by CoinGecko
-- 🔸 Mining Stats by Cryptunit
-- 🔸 CPU & GPU Mining
+- 📈 Price & Coin Stats by CoinGecko
+- 📊 Mining Stats by Cryptunit
+- ♻️ CPU & GPU Mining
+
+Online Support:
+
+- [Discord](https://discord.gg/5Buudya)
+- [Telegram](https://t.me/bloc_money)
 
 ## **Screenshots**
 
 *Home*
 
-![BLOC GUI Miner Home](DOCS/images/BLOC-GUI-Miner-v1.1.1-home.png)
+![BLOC GUI Miner Home](DOCS/images/1-HOME-BLOC-GUI-Miner-v1.1.2.png)
 
 *Miner Setup*
 
-![BLOC GUI Miner Setup](DOCS/images/BLOC-GUI-Miner-v1.1.1-miner-setup.png)
+![BLOC GUI Miner Setup](DOCS/images/2-MINER-SETUP-BLOC-GUI-Miner-v1.1.2.png)
 
 *Select Coin to Mine*
 
-![BLOC GUI Miner Select coin to mine](DOCS/images/BLOC-GUI-Miner-v1.1.1-miner-other-coins.png)
+![BLOC GUI Miner Select coin to mine](DOCS/images/3-MINE-OTHER-CRYPTOCURRENCIES-BLOC-GUI-Miner-v1.1.2.png)
 
 *Select Mining Pool*
 
-![BLOC GUI Miner Miner Settings](DOCS/images/BLOC-GUI-Miner-v1.1.1-miner-settings.png)
+![BLOC GUI Miner Miner Settings](DOCS/images/5-MINER-POOLS-BLOC-GUI-Miner-v1.1.2.png)
 
 *Help*
 
@@ -59,6 +66,11 @@ You can mine the following cryptocurrencies with the BLOC GUI Miner :
 - [RYO](https://ryo-currency.com) **(RYO)**
 - [Haven](https://www.havenprotocol.com) **(XHV)**
 - [Monero](https://www.getmonero.org) **(XMR)**
+- [Loki](https://loki.network) **(LOKI)**
+- [Sumokoin](https://www.sumokoin.org) **(SUMO)**
+- [GRAFT](https://www.graft.network) **(GRFT)**
+- [Conceal Network](https://conceal.network) **(CCX)**
+- [Quantum Resistant Ledger](https://www.theqrl.org) **(QRL)**
 
 If you would like to contribute to this project by adding or editing a mining pool but also to add a new cryptonote currency please checkout the [instructions available](https://github.com/furiousteam/BLOC-GUI-Miner/tree/master/coins).
 
@@ -68,32 +80,32 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining BLOC:*
 
-[![BLOC GUI Miner Mining BLOC](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-BLOC.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
+[![BLOC GUI Miner Mining BLOC](DOCS/images/4-MINING-BLOC-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
 
 ### **TurtleCoin (TRTL) Mining**
 
 [TurtleCoin](https://github.com/turtlecoin/turtlecoin) is a fast, easy and private cryptocurrency which allows you to send money to friends and businesses.
 *Note*: Mining TurtleCoin only works with XMRIG and support the new Chukwa algorithm.
 
-*Mining TurtleCoin:*
+*Mining TRTL:*
 
-[![BLOC GUI Miner Mining TurtleCoin](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-TRTL.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
+[![BLOC GUI Miner Mining TurtleCoin](DOCS/images/6-MINING-TRTL-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-turtlecoin-trtl)
 
 ### **Haven (XHV) Mining**
 
 [Haven](https://www.havenprotocol.com) protocol is a fully decentralized, private, algorithmic stablecoin that can be stored in a Haven wallet which can be seen as a private and decentralized USD-based bank account for everyone.
 
-*Mining Haven:*
+*Mining XHV:*
 
-[![BLOC GUI Miner Mining Haven](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-XHV.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-haven-xhv)
+[![BLOC GUI Miner Mining Haven](DOCS/images/8-MINING-HAVEN-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-haven-xhv)
 
 ### **Monero (XMR) Mining**
 
 [Monero](https://www.getmonero.org) Monero is cash for a connected world. It’s fast, private, and secure. With Monero, you are your own bank. You can spend safely, knowing that others cannot see your balances or track your activity.
 
-*Mining Monero:*
+*Mining XMR:*
 
-[![BLOC GUI Miner Mining Monero](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-XMR.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-monero-xmr)
+[![BLOC GUI Miner Mining Monero](DOCS/images/9-MINING-MONERO-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-monero-xmr)
 
 ### **RYO (RYO) Mining**
 
@@ -101,7 +113,48 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining RYO:*
 
-[![BLOC GUI Miner Mining RYO](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-RYO.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-RYO-ryo)
+[![BLOC GUI Miner Mining RYO](DOCS/images/7-MINING-RYO-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-RYO-ryo)
+
+### **LOKI (LOKI) Mining**
+
+[Loki](https://loki.network) Loki is a privacy network which will allow users to transact and communicate privately over the internet, providing a suite of tools to help maintain the maximum amount of anonymity possible while browsing, transacting and communicating online..
+
+*Mining LOKI:*
+
+[![BLOC GUI Miner Mining LOKI](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-loki-loki)
+
+### **SUMOKOIN (SUMO) Mining**
+
+[Sumokoin](https://www.sumokoin.org) DIGITAL CASH - Privacy Without Compromise. Private • Untraceable • Decentralized • Fungible
+
+*Mining SUMO:*
+
+[![BLOC GUI Miner Mining RYO](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-sumokoin-sumo)
+
+### **GRAFT (GRFT) Mining**
+
+[GRAFT](https://www.graft.network) GRAFT is a combination (PoW, PoS, DAG) blockchain and a platform that enables a truly decentralized payment network with real-time, universal payment acceptance.
+
+*Mining GRFT:*
+
+[![BLOC GUI Miner Mining RYO](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-graft-grft)
+
+### **CONCEAL NETWORK (CCX) Mining**
+
+[Conceal Network](https://conceal.network) Conceal.Network is a decentralized blockchain bank, with deposits and investments paying interest rates, without involvement of financial institutions, powered by 100% open source code.
+
+*Mining CCX:*
+
+[![BLOC GUI Miner Mining RYO](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-conceal-ccx)
+
+### **Quantum Resistant Ledger (QRL) Mining**
+
+[Quantum Resistant Ledger](https://www.theqrl.org) The Quantum Resistant Ledger. Secure digital assets for longevity. Externally audited enterprise-grade blockchain platform secure against an attack from quantum computers.
+
+*Mining QRL:*
+
+[![BLOC GUI Miner Mining RYO](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-quantum-qrl)
+
 
 ## **Guide**
 
@@ -128,6 +181,30 @@ BLOC GUI Miner comes with **XMR-STAK** and **XMRIG** already built-in, including
 
 1. [xmr-stak](https://wiki.bloc.money/mining/xmr-stak-index/) **v2.10.7**
 2. [xmrig](https://wiki.bloc.money/mining/xmrig-index/) **v3.1.1** (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet implented
+
+### **XMRSTAK bundle support following coins**
+
+- [BLOC.MONEY](https://bloc.money) **(BLOC)**
+- [RYO](https://ryo-currency.com) **(RYO)**
+- [Haven](https://www.havenprotocol.com) **(XHV)**
+- [Monero](https://www.getmonero.org) **(XMR)**
+- [Sumokoin](https://www.sumokoin.org) **(SUMO)**
+- [GRAFT](https://www.graft.network) **(GRFT)**
+- [Conceal Network](https://conceal.network) **(CCX)**
+- [Quantum Resistant Ledger](https://www.theqrl.org) **(QRL)**
+
+### **XMRIG bundle support following coins**
+
+- [BLOC.MONEY](https://bloc.money) **(BLOC)**
+- [TurtleCoin](https://turtlecoin.lol) **(TRTL)**
+- [RYO](https://ryo-currency.com) **(RYO)**
+- [Haven](https://www.havenprotocol.com) **(XHV)**
+- [Monero](https://www.getmonero.org) **(XMR)**
+- [Loki](https://loki.network) **(LOKI)**
+- [Sumokoin](https://www.sumokoin.org) **(SUMO)**
+- [GRAFT](https://www.graft.network) **(GRFT)**
+- [Quantum Resistant Ledger](https://www.theqrl.org) **(QRL)**
+
 
 ## **Compiling on Linux (Ubuntu)**
 
