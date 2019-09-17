@@ -15,31 +15,33 @@ let firstrun = {
 		document.addEventListener('astilectron-ready', function() {
 			// Get the computer username
 			astilectron.sendMessage({name: "get-username", payload: ""}, function(message) {
+				console.log('[' + new Date().toUTCString() + '] ', "get-username", message.payload);
 				$('#username').html(message.payload);
-			});
 
-			// Get the actual miner path
-			astilectron.sendMessage({name: "get-miner-path", payload: ""}, function(message) {
-				$('#miner_path').html(message.payload);
-			});
+				// Get the actual miner path
+				astilectron.sendMessage({name: "get-miner-path", payload: ""}, function(message) {
+					console.log('[' + new Date().toUTCString() + '] ', "get-miner-path", message.payload);
+					$('#miner_path').html(message.payload);
 
-			// Get the miner type
-			astilectron.sendMessage({name: "get-miner-type", payload: ""}, function(message) {
-				console.log('[' + new Date().toUTCString() + '] ', "get-miner-type", message.payload);
-				firstrun.miner_type = message.payload;
-			});
+					// Get the miner type
+					astilectron.sendMessage({name: "get-miner-type", payload: ""}, function(message) {
+						console.log('[' + new Date().toUTCString() + '] ', "get-miner-type", message.payload);
+						firstrun.miner_type = message.payload;
 
-			// Get the coins json and cache it locally
-			astilectron.sendMessage({
-				name: "get-coins-content",
-				payload: ""
-			}, function(message) {
-				var parsed = $.parseJSON(message.payload);
-				console.log('[' + new Date().toUTCString() + '] ', "get-coins-content", parsed);
-				firstrun.coinsContent = parsed;
+						// Get the coins json and cache it locally
+						astilectron.sendMessage({
+							name: "get-coins-content",
+							payload: ""
+						}, function(message) {
+							var parsed = $.parseJSON(message.payload);
+							console.log('[' + new Date().toUTCString() + '] ', "get-coins-content", parsed);
+							firstrun.coinsContent = parsed;
 
-				firstrun.bindEvents();
-				firstrun.listen();
+							firstrun.bindEvents();
+							firstrun.listen();
+						});
+					});
+				});
 			});
 		});
 	},
