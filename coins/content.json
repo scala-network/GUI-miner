@@ -59,7 +59,7 @@
     "ryo": true,
     "haven": true,
     "monero": true,
-    "loki": true,
+    "loki": false,
     "conceal": true,
     "sumokoin": true,
     "graft": true,
