@@ -21,8 +21,9 @@ If you want to learn about cryptocurrencies, [mining](https://wiki.bloc.money/mi
 - 💎 Built-in latest XMR-STAK & XMRIG
 - ✅ Now support $BLOC $TRTL $XMR $RYO $XHV $SUMO $LOKI $QRL $CCX $GRFT
 - 🖥 Works on macOS, Windows (7, 8, 10) & Linux x64
+- 🎖 Best Mining Pools built-in
 - ❇️ Change mining pool or coin in 1 click
-- ℹ️ Complete informations about the currency with links
+- ℹ️ Complete informations about each currency with links
 - 🔸 Easy to use
 - 📈 Price & Coin Stats by CoinGecko
 - 📊 Mining Stats by Cryptunit
@@ -121,7 +122,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining LOKI:*
 
-[![BLOC GUI Miner Mining LOKI](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-loki-loki)
+[![BLOC GUI Miner Mining LOKI](DOCS/images/11-MINING-LOKI.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-loki-loki)
 
 ### **SUMOKOIN (SUMO) Mining**
 
@@ -129,7 +130,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining SUMO:*
 
-[![BLOC GUI Miner Mining RYO](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-sumokoin-sumo)
+[![BLOC GUI Miner Mining SUMO](DOCS/images/10-MINING-SUMO.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-sumokoin-sumo)
 
 ### **GRAFT (GRFT) Mining**
 
@@ -137,7 +138,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining GRFT:*
 
-[![BLOC GUI Miner Mining RYO](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-graft-grft)
+[![BLOC GUI Miner Mining GRAFT](DOCS/images/12-MINING-GRAFT.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-graft-grft)
 
 ### **CONCEAL NETWORK (CCX) Mining**
 
@@ -145,7 +146,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining CCX:*
 
-[![BLOC GUI Miner Mining RYO](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-conceal-ccx)
+[![BLOC GUI Miner Mining CCX](DOCS/images/14-MINING-CCX.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-conceal-ccx)
 
 ### **Quantum Resistant Ledger (QRL) Mining**
 
@@ -153,7 +154,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining QRL:*
 
-[![BLOC GUI Miner Mining RYO](DOCS/images/#)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-quantum-qrl)
+[![BLOC GUI Miner Mining QRL](DOCS/images/13-MINING-QRL.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/#mining-quantum-qrl)
 
 
 ## **Guide**
@@ -193,6 +194,8 @@ BLOC GUI Miner comes with **XMR-STAK** and **XMRIG** already built-in, including
 - [Conceal Network](https://conceal.network) **(CCX)**
 - [Quantum Resistant Ledger](https://www.theqrl.org) **(QRL)**
 
+[![BLOC GUI Miner Mining QRL](DOCS/images/XMR-STAK.png)]
+
 ### **XMRIG bundle support following coins**
 
 - [BLOC.MONEY](https://bloc.money) **(BLOC)**
@@ -205,6 +208,7 @@ BLOC GUI Miner comes with **XMR-STAK** and **XMRIG** already built-in, including
 - [GRAFT](https://www.graft.network) **(GRFT)**
 - [Quantum Resistant Ledger](https://www.theqrl.org) **(QRL)**
 
+[![BLOC GUI Miner Mining QRL](DOCS/images/XMRIG.png)]
 
 ## **Compiling on Linux (Ubuntu)**
 
