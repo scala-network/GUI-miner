@@ -83,7 +83,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining BLOC:*
 
-[![BLOC GUI Miner Mining BLOC](DOCS/images/BLOC-GUI-MINER/4-MINING-BLOC-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
+[![BLOC GUI Miner Mining BLOC](DOCS/images/4-MINING-BLOC-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-using/)
 
 ### **TurtleCoin (TRTL) Mining**
 
@@ -92,7 +92,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining TRTL:*
 
-[![BLOC GUI Miner Mining TurtleCoin](DOCS/images/BLOC-GUI-MINER/6-MINING-TRTL-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-turtlecoin/)
+[![BLOC GUI Miner Mining TurtleCoin](DOCS/images/6-MINING-TRTL-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-turtlecoin/)
 
 ### **Haven (XHV) Mining**
 
@@ -100,7 +100,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining XHV:*
 
-[![BLOC GUI Miner Mining Haven](DOCS/images/BLOC-GUI-MINER/8-MINING-HAVEN-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-haven/)
+[![BLOC GUI Miner Mining Haven](DOCS/images/8-MINING-HAVEN-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-haven/)
 
 ### **Monero (XMR) Mining**
 
@@ -108,7 +108,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining XMR:*
 
-[![BLOC GUI Miner Mining Monero](DOCS/images/BLOC-GUI-MINER/9-MINING-MONERO-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-monero/)
+[![BLOC GUI Miner Mining Monero](DOCS/images/9-MINING-MONERO-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-monero/)
 
 ### **RYO (RYO) Mining**
 
@@ -116,7 +116,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining RYO:*
 
-[![BLOC GUI Miner Mining RYO](DOCS/images/BLOC-GUI-MINER/7-MINING-RYO-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-ryo/)
+[![BLOC GUI Miner Mining RYO](DOCS/images/7-MINING-RYO-BLOC-GUI-Miner-v1.1.2.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-ryo/)
 
 ### **LOKI (LOKI) Mining**
 
@@ -124,7 +124,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining LOKI:*
 
-[![BLOC GUI Miner Mining LOKI](DOCS/images/BLOC-GUI-MINER/11-MINING-LOKI.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-loki/)
+[![BLOC GUI Miner Mining LOKI](DOCS/images/11-MINING-LOKI.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-loki/)
 
 ### **SUMOKOIN (SUMO) Mining**
 
@@ -132,7 +132,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining SUMO:*
 
-[![BLOC GUI Miner Mining SUMO](DOCS/images/BLOC-GUI-MINER/10-MINING-SUMO.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-sumo/)
+[![BLOC GUI Miner Mining SUMO](DOCS/images/10-MINING-SUMO.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-sumo/)
 
 ### **GRAFT (GRFT) Mining**
 
@@ -140,7 +140,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining GRFT:*
 
-[![BLOC GUI Miner Mining GRAFT](DOCS/images/BLOC-GUI-MINER/12-MINING-GRAFT.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-graft/)
+[![BLOC GUI Miner Mining GRAFT](DOCS/images/12-MINING-GRAFT.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-graft/)
 
 ### **CONCEAL NETWORK (CCX) Mining**
 
@@ -148,7 +148,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining CCX:*
 
-[![BLOC GUI Miner Mining CCX](DOCS/images/BLOC-GUI-MINER/14-MINING-CCX.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-ccx/)
+[![BLOC GUI Miner Mining CCX](DOCS/images/14-MINING-CCX.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-ccx/)
 
 ### **Quantum Resistant Ledger (QRL) Mining**
 
@@ -156,7 +156,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 *Mining QRL:*
 
-[![BLOC GUI Miner Mining QRL](DOCS/images/BLOC-GUI-MINER/13-MINING-QRL.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-qrl/)
+[![BLOC GUI Miner Mining QRL](DOCS/images/13-MINING-QRL.png)](https://wiki.bloc.money/mining/bloc-gui-miner-mining-qrl/)
 
 
 ## **Guide**
