@@ -56,7 +56,7 @@ Online Support:
 
 *Help*
 
-![BLOC GUI Miner Help](DOCS/images/BLOC-GUI-Miner-v1.1.1-mining-help.png)
+![BLOC GUI Miner Help](DOCS/images/help.png)
 
 ## **Supported Cryptocurrencies**
 
