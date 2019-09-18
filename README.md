@@ -1,12 +1,14 @@
 # **BLOC GUI Miner**
 
+![BLOC GUI Miner Mining QRL](DOCS/images/BLOC-GUI-MINER-1.1.2.jpg)
+
 [BLOC GUI Miner](https://github.com/furiousteam/BLOC-GUI-Miner) is a beautiful, easy to use, Graphical User interface for mining multiple cryptocurrencies based on cryptonote. The BLOC GUI Miner is easy to use and makes you getting started with mining cryptocurrency on Windows, MacOS and Linux in no time.
 
 It is aimed at getting people that have never tried mining before with a focus on accessibility, security and simplicity.
 
 BLOC GUI Miner support two very popular miner backends: [xmr-stak](https://github.com/fireice-uk/xmr-stak) and [xmrig](https://github.com/xmrig/xmrig)
 
-BLOC GUI Miner comes with **XMR-STAK 2.10.7** and XMRIG **3.1.1** already built-in, including configuration files for CPU and GPU mining in most of the cases.
+BLOC GUI Miner comes with **XMR-STAK 2.10.7** and XMRIG **3.1.2** already built-in, including configuration files for CPU and GPU mining in most of the cases.
 
 If you want to learn about cryptocurrencies, [mining](https://wiki.bloc.money/mining/what-is-mining/) is a great place to start!
 
@@ -181,7 +183,7 @@ Some antivirus packages detect cryptocurrency miners as malware and will remove 
 BLOC GUI Miner comes with **XMR-STAK** and **XMRIG** already built-in, including configuration files for CPU and GPU mining in most of the cases.
 
 1. [xmr-stak](https://wiki.bloc.money/mining/xmr-stak-index/) **v2.10.7**
-2. [xmrig](https://wiki.bloc.money/mining/xmrig-index/) **v3.1.1** (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) are not yet implented
+2. [xmrig](https://wiki.bloc.money/mining/xmrig-index/) **v3.1.2**
 
 ### **XMRSTAK bundle support following coins**
 
@@ -194,7 +196,7 @@ BLOC GUI Miner comes with **XMR-STAK** and **XMRIG** already built-in, including
 - [Conceal Network](https://conceal.network) **(CCX)**
 - [Quantum Resistant Ledger](https://www.theqrl.org) **(QRL)**
 
-[![BLOC GUI Miner Mining QRL](DOCS/images/XMR-STAK.png)]
+![BLOC GUI Miner Mining QRL](DOCS/images/XMR-STAK.png)
 
 ### **XMRIG bundle support following coins**
 
@@ -208,7 +210,7 @@ BLOC GUI Miner comes with **XMR-STAK** and **XMRIG** already built-in, including
 - [GRAFT](https://www.graft.network) **(GRFT)**
 - [Quantum Resistant Ledger](https://www.theqrl.org) **(QRL)**
 
-[![BLOC GUI Miner Mining QRL](DOCS/images/XMRIG.png)]
+![BLOC GUI Miner Mining QRL](DOCS/images/XMRIG.png)
 
 ## **Compiling on Linux (Ubuntu)**
 
