@@ -120,7 +120,7 @@ If you would like to contribute to this project by adding or editing a mining po
 
 ### **LOKI (LOKI) Mining**
 
-[Loki](https://loki.network) Loki is a privacy network which will allow users to transact and communicate privately over the internet, providing a suite of tools to help maintain the maximum amount of anonymity possible while browsing, transacting and communicating online..
+[Loki](https://loki.network) Loki is a privacy network which will allow users to transact and communicate privately over the internet, providing a suite of tools to help maintain the maximum amount of anonymity possible while browsing, transacting and communicating online.
 
 *Mining LOKI:*
 
