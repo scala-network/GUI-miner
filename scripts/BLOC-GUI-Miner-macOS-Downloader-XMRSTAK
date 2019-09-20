@@ -1,0 +1,9 @@
+#!/bin/sh
+VER="1.1.2"
+echo "Downloading BLOC GUI Miner v$VER..."
+WD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+mkdir $WD/'BLOC GUI Miner v'$VER
+curl -# https://bloc.money/files/BLOC-GUI-Miner/BLOC-GUI-Miner-v1.1.2-macOS-x64-cpu-xmrstak-2.10.7.tar.gz | tar -zxf - -C $WD/'BLOC GUI Miner v'$VER
+echo "BLOC GUI Miner v$VER downloaded"
+echo "Open $WD/BLOC GUI Miner v$VER and double-click the App package to start the miner"
+echo "You can close this window"
