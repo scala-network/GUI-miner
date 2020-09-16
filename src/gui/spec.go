@@ -2,8 +2,7 @@ package gui
 
 import (
 	"time"
-
-	"github.com/contribute-torque/gui-miner/src/gui/miner"
+	"github.com/scala-network/gui-miner/src/gui/miner"
 )
 
 // Config contains the basic configuration for a miner

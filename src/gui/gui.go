@@ -12,9 +12,10 @@ import (
 	"runtime"
 	"time"
 
+	astikit "github.com/asticode/go-astikit"
 	astilectron "github.com/asticode/go-astilectron"
 	bootstrap "github.com/asticode/go-astilectron-bootstrap"
-	"github.com/contribute-torque/gui-miner/src/gui/miner"
+	"github.com/scala-network/gui-miner/src/gui/miner"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 )
@@ -100,11 +101,11 @@ func New(
 	windowOptions := astilectron.WindowOptions{
 		// If frame is false, the window frame is removed. If isDebug is true,
 		// we show the frame to have debugging options available
-		Frame:           astilectron.PtrBool(isDebug),
-		BackgroundColor: astilectron.PtrStr("#0B0C22"),
-		Center:          astilectron.PtrBool(true),
-		Height:          astilectron.PtrInt(700),
-		Width:           astilectron.PtrInt(1175),
+		Frame:           astikit.BoolPtr(isDebug),
+		BackgroundColor: astikit.StrPtr("#0B0C22"),
+		Center:          astikit.BoolPtr(true),
+		Height:          astikit.IntPtr(700),
+		Width:           astikit.IntPtr(1175),
 	}
 
 	if isDebug {
@@ -121,7 +122,7 @@ func New(
 
 		// We only show the menu bar in debug mode
 		menu = append(menu, &astilectron.MenuItemOptions{
-			Label: astilectron.PtrStr("File"),
+			Label: astikit.StrPtr("File"),
 			SubMenu: []*astilectron.MenuItemOptions{
 				{
 					Role: astilectron.MenuItemRoleClose,
@@ -134,7 +135,7 @@ func New(
 	// https://github.com/electron/electron/blob/master/docs/api/clipboard.md
 	if runtime.GOOS == "darwin" {
 		menu = append(menu, &astilectron.MenuItemOptions{
-			Label: astilectron.PtrStr("Edit"),
+			Label: astikit.StrPtr("Edit"),
 			SubMenu: []*astilectron.MenuItemOptions{
 				{
 					Role: astilectron.MenuItemRoleCut,
@@ -151,8 +152,8 @@ func New(
 			},
 		})
 
-		windowOptions.Frame = astilectron.PtrBool(isDebug)
-		windowOptions.TitleBarStyle = astilectron.PtrStr("hidden")
+		windowOptions.Frame = astikit.BoolPtr(isDebug)
+		windowOptions.TitleBarStyle = astikit.StrPtr("hidden")
 	}
 
 	// Setting the WithFields now will ensure all log entries from this point

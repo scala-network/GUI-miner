@@ -10,8 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-
-	"github.com/contribute-torque/gui-miner/src/gui"
+	"github.com/scala-network/gui-miner/src/gui"
 )
 
 // AppName is injected by the Astilectron packager

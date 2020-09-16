@@ -10,7 +10,7 @@ APP_NAME := $(shell scripts/get_app_name.py)
 default: build
 
 build:
-	cd src/; astilectron-bundler -v
+	cd src/; astilectron-bundler
 
 run: build
 	./bin/linux-amd64/'${APP_NAME}'
