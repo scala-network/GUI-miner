@@ -64,7 +64,7 @@ func main() {
 		config = nil
 		// Not set yet, set to default
 		// Hardcoded since we don't ship a config file
-		apiEndpoint = "https://www.stellite.live/miner"
+		apiEndpoint = "http://192.168.1.6:3000/miner"
 	}
 
 	// Create the miner

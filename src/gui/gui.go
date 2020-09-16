@@ -178,8 +178,8 @@ func New(
 		},
 		// TODO: Fix this tray to display nicely
 		/*TrayOptions: &astilectron.TrayOptions{
-			Image:   astilectron.PtrStr("/static/i/miner-logo.png"),
-			Tooltip: astilectron.PtrStr(appName),
+			Image:   astikit.StrPtr("/static/i/miner-logo.png"),
+			Tooltip: astikit.StrPtr(appName),
 		},*/
 		MenuOptions: menu,
 		// OnWait is triggered as soon as the electron window is ready and running
@@ -274,7 +274,7 @@ func (gui *GUI) handleElectronCommands(
 		if err != nil {
 			_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 				Data: fmt.Sprintf("Unable to fetch pool list from API."+
-					"Please check that you are connected to the internet and try again."+
+					"Please check that you are connected to the internet and try again1."+
 					"<br/>The error was '%s'", err),
 			})
 			// Give the UI some time to display the message
@@ -448,23 +448,25 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 
 	// The pool API returns the low-end hardware host:port config for pool
 	gui.logger.Debug("Getting pool information")
+	/*
 	poolInfo, err := gui.GetPool(gui.config.PoolID)
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
-				"Please check that you are connected to the internet."+
+				"Please check that you are connected to the internet2."+
 				"<br/>The error was '%s'", err),
 		})
 		// Give the UI some time to display the message
 		time.Sleep(time.Second * 15)
 		gui.logger.Fatalf("Unable to configure miner: '%s'", err)
 	}
-
+	*/
+	
 	// Write the config for the specified miner
 	gui.logger.Debug("Writing miner config")
 
 	err = gui.miner.WriteConfig(
-		poolInfo.Config,
+		"mine.scalaproject.io:3333",
 		gui.config.Address,
 		miner.ProcessingConfig{
 			Threads:  newConfig.Threads,
@@ -473,7 +475,7 @@ func (gui *GUI) configureMiner(command bootstrap.MessageIn) {
 	if err != nil {
 		_ = gui.sendElectronCommand("fatal_error", ElectronMessage{
 			Data: fmt.Sprintf("Unable to configure miner."+
-				"Please check that you are connected to the internet."+
+				"Please check that you are connected to the internet3."+
 				"<br/>The error was '%s'", err),
 		})
 		// Give the UI some time to display the message
