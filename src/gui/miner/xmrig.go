@@ -9,11 +9,6 @@ import (
 	"strings"
 )
 
-// Xmrig implements the miner interface for the xmrig miner, including
-// xmrig-amd and xmrig-nvidia
-// https://github.com/xmrig/xmrig
-// https://github.com/xmrig/xmrig-amd
-// https://github.com/xmrig/xmrig-nvidia
 type Xmrig struct {
 	Base
 	name             string
@@ -138,7 +133,7 @@ func NewXmrig(config Config) (*Xmrig, error) {
 	miner := Xmrig{
 		// We've switched to our own miner in V4, xtlrig, but I'm keeping
 		// everything else xmrig for clarity
-		name:     "xtcrig",
+		name:     "xlarig",
 		endpoint: endpoint,
 	}
 	// xmrig appends either nvidia or amd to the miner if it's GPU only
@@ -266,7 +261,7 @@ func (miner *Xmrig) GetStats() (Stats, error) {
 	var errors []string
 	/*
 		TODO: I noticed errors are not reported in the xmrig API. To replicate,
-		use an invalid Torque address with a pool that checks the address. In
+		use an invalid Scala address with a pool that checks the address. In
 		the command line you'll notice errors printed, but not added in the API.
 		ApiState.cpp::getConnection and getResults functions might give some clues
 		to getting it fixed.
@@ -337,7 +332,7 @@ func (miner *Xmrig) createConfig(
 			{
 				URL:       poolEndpoint,
 				User:      walletAddress,
-				Pass:      "Torque GUI Miner",
+				Pass:      "Scala GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
 				Variant:   "xtc",
@@ -376,7 +371,7 @@ func (miner *Xmrig) createGPUConfig(
 			{
 				URL:       poolEndpoint,
 				User:      walletAddress,
-				Pass:      "Torque GUI Miner",
+				Pass:      "Scala GUI Miner",
 				Keepalive: true,
 				Nicehash:  false,
 				Variant:   "xtl",

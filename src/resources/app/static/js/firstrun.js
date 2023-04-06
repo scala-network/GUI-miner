@@ -79,7 +79,7 @@ let firstrun = {
         // invalid ones
         if (shared.validateWalletAddress(address) == false)
         {
-          alert("Please enter a valid Torque address starting with 'Se' or 'SE'");
+          alert("Please enter a valid Scala address starting with 'Sv'");
           return false;
         }
       }
