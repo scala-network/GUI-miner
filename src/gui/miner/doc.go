@@ -1,3 +1,3 @@
-// Package miner implements various Stellite-compatible miners that can be
+// Package miner implements various Scala-compatible miners that can be
 // used by the GUI
 package miner

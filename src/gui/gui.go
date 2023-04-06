@@ -14,7 +14,7 @@ import (
 
 	astilectron "github.com/asticode/go-astilectron"
 	bootstrap "github.com/asticode/go-astilectron-bootstrap"
-	"github.com/contribute-torque/gui-miner/src/gui/miner"
+	"github.com/scala-network/GUI-miner/src/gui/miner"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 )

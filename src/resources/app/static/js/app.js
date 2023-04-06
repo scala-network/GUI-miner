@@ -185,7 +185,7 @@ let app = {
       // invalid ones
       if (shared.validateWalletAddress(configData.address) == false)
       {
-        alert("Please enter a valid Torque address starting with 'Se' or 'SE'");
+        alert("Please enter a valid Scala address starting with 'Se' or 'SE'");
         return false;
       }
 
@@ -212,40 +212,10 @@ let app = {
         $('#max_threads_multiple').hide();
       } else $('#max_threads_multiple').show();
 
-      if (parsed.type == 'xtcrig') {
+      if (parsed.type == 'xlarig') {
         $('.xmrig-extra').show();
       } else $('.xmrig-extra').hide();
-
-      // For xmrig's GPU only setup we don't show the CPU tuning options
-      if (parsed.type != "xtcrig-gpu") {
-        // TODO: Do this in a better way, i.e - not as text
-        var threadOptions = "<select>";
-        var startThreadCount = 1;
-        if (parsed.type == 'xtc-stak') {
-          startThreadCount = 0;
-        }
-        for (var i = startThreadCount; i <= parsed.max_threads; i++) {
-          if (i == parsed.threads) {
-            threadOptions += '<option value="' + i + '" selected>' + i + '</option>';
-          } else {
-            threadOptions += '<option value="' + i + '">' + i +'</option>';
-          }
-        }
-        threadOptions += "</select>";
-        $('#threads').html(threadOptions);
-        $('#threads select').niceSelect();
-        // Not set means 100%
-        if (parsed.max_usage == 0) {
-          $('#max_cpu select').find('option[value=100]').attr('selected','selected');
-        }
-        else $('#max_cpu select').find('option[value=' + parsed.max_usage + ']').attr('selected','selected');
-        $('#max_cpu select').niceSelect();
-      } else {
-        // GPU only
-        $('.cpu-tuning').hide();
-        $('.gpu-tuning').show();
-      }
-    });
+	});
 
     // The pool-list command returns the pool list for the GUI miner
     astilectron.sendMessage({name: "pool-list", payload: ""}, function(message) {

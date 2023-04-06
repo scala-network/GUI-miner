@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/contribute-torque/gui-miner/src/gui"
+	"github.com/scala-network/GUI-miner/src/gui"
 )
 
 // AppName is injected by the Astilectron packager
@@ -65,7 +65,7 @@ func main() {
 		config = nil
 		// Not set yet, set to default
 		// Hardcoded since we don't ship a config file
-		apiEndpoint = "https://www.stellite.live/miner"
+		apiEndpoint = "https://scalaproject.io/miner"
 	}
 
 	// Create the miner

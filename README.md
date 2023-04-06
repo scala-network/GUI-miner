@@ -8,10 +8,9 @@ game by making it really simple to get started.
 
 ![Screenshot](https://i.imgur.com/ruK7z4Y.png "Screenshot")
 
-We currently support two very popular miner backends:
+We currently support one very popular miner backend:
 
-1. [xtc-stak](https://github.com/contribute-torque/xtc-stak)
-2. [xtcrig](https://github.com/contribute-torque/xtcrig) (note: [xmrig-nvidia](https://github.com/xmrig/xmrig-nvidia) and [xmrig-amd](https://github.com/xmrig/xmrig-amd) does not support our v5 proof-of-work algorithm yet)
+1. [xlarig](https://github.com/scala-network/xlarig)
 
 If you'd like to fork this miner for you own coin, please see the __forking__
 section later.
@@ -42,8 +41,8 @@ go get -u github.com/mitchellh/go-ps
 * Clone and build the app
 
 ```shell
-git clone git@github.com:contribute-torque/gui-miner.git contribute-torque/gui-miner
-cd contribute-torque/gui-miner
+git clone git@github.com:scala-network/gui-miner.git scala-network/gui-miner
+cd scala-network/gui-miner
 make
 ```
 

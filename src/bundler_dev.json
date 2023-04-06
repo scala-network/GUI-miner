@@ -1,5 +1,5 @@
 {
-  "app_name": "Torque GUI Miner v1.3.1",
+  "app_name": "Scala GUI Miner v1.3.2",
   "environments": [
     {"arch": "amd64", "os": "linux"}
   ],
