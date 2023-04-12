@@ -1,9 +1,9 @@
 ![](git-assets/miner-logo.png)
 
-#  Torque GUI Miner
+#  Scala GUI Miner
 
-The Torque GUI miner is a beautiful, easy to use, interface for mining Torque.
-It is aimed at getting people that have never mined Torque into the crypto
+The Scala GUI miner is a beautiful, easy to use, interface for mining Scala.
+It is aimed at getting people that have never mined Scala into the crypto
 game by making it really simple to get started.
 
 ![Screenshot](https://i.imgur.com/ruK7z4Y.png "Screenshot")
