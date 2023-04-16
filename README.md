@@ -27,22 +27,23 @@ The miner GUI is built using [Electron](https://electronjs.org) and
 
 [https://golang.org/dl/](https://golang.org/dl/)
 
-* Install required Go packages
+* Install the required Go packages
 
 ```shell
-go get -u github.com/asticode/go-astilectron
+go get -u github.com/asticode/go-astilectron@latest
 go get -u github.com/asticode/go-astilectron-bundler/...
-go get -u github.com/asticode/go-astichartjs
-go get -u github.com/asticode/go-astilectron-bootstrap
-go get -u github.com/google/uuid
-go get -u github.com/mitchellh/go-ps
+go install github.com/asticode/go-astilectron-bundler/astilectron-bundler
+go get -u github.com/asticode/go-astichartjs@latest
+go get -u github.com/asticode/go-astilectron-bootstrap@latest
+go get -u github.com/google/uuid@latest
+go get -u github.com/mitchellh/go-ps@latest
 ```
 
 * Clone and build the app
 
 ```shell
-git clone git@github.com:scala-network/gui-miner.git scala-network/gui-miner
-cd scala-network/gui-miner
+git clone https://github.com/scala-network/gui-miner gui-miner
+cd gui-miner
 make
 ```
 
@@ -57,4 +58,4 @@ brand the miner for your own coin. Some structural changes need to be made to
 simplify the process. Subscribe to issue [#3][i3] to follow the progress on this
 guide.
 
-[i3]: https://github.com/contribute-torque/gui-miner/issues/3
+[i3]: https://github.com/scala-network/gui-miner/issues/3
