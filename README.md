@@ -27,23 +27,40 @@ The miner GUI is built using [Electron](https://electronjs.org) and
 
 [https://golang.org/dl/](https://golang.org/dl/)
 
-* Install the required Go packages
-
-```shell
-go get -u github.com/asticode/go-astilectron@latest
-go get -u github.com/asticode/go-astilectron-bundler/...
-go install github.com/asticode/go-astilectron-bundler/astilectron-bundler
-go get -u github.com/asticode/go-astichartjs@latest
-go get -u github.com/asticode/go-astilectron-bootstrap@latest
-go get -u github.com/google/uuid@latest
-go get -u github.com/mitchellh/go-ps@latest
-```
-
-* Clone and build the app
+* Clone the repository
 
 ```shell
 git clone https://github.com/scala-network/gui-miner gui-miner
 cd gui-miner
+```
+
+* Initialize the go project
+
+```shell
+go mod init gui-miner
+```
+
+* Install the required Go packages
+
+```shell
+go get -u github.com/asticode/go-astilectron@latest
+go install github.com/asticode/go-astilectron
+go get -u github.com/asticode/go-astilectron-bundler/...
+go install github.com/asticode/go-astilectron-bundler/astilectron-bundler
+go get -u github.com/asticode/go-astichartjs@latest
+go install github.com/asticode/go-astichartjs
+go get -u github.com/asticode/go-astilectron-bootstrap@latest
+go install github.com/asticode/go-astilectron-bootstrap
+go get -u github.com/google/uuid@latest
+go install github.com/google/uuid
+go get -u github.com/mitchellh/go-ps@latest
+go install github.com/mitchellh/go-ps
+go get -u github.com/scala-network/gui-miner/src/gui@latest
+```
+
+* Build the app
+
+```shell
 make
 ```
 
