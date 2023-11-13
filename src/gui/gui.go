@@ -14,8 +14,8 @@ import (
 
 	astilectron "github.com/asticode/go-astilectron"
 	bootstrap "github.com/asticode/go-astilectron-bootstrap"
-	"github.com/scala-network/GUI-miner/src/gui/miner"
 	"github.com/google/uuid"
+	"github.com/scala-network/GUI-miner/src/gui/miner"
 	"github.com/sirupsen/logrus"
 )
 
@@ -96,15 +96,20 @@ func New(
 
 	logrus.SetOutput(os.Stdout)
 
+	var backgroundColor string = "#0B0C22"
+	var center bool = true
+	var height int = 700
+	var width int = 1175
+
 	// Create the window options
 	windowOptions := astilectron.WindowOptions{
 		// If frame is false, the window frame is removed. If isDebug is true,
 		// we show the frame to have debugging options available
-		Frame:           astilectron.PtrBool(isDebug),
-		BackgroundColor: astilectron.PtrStr("#0B0C22"),
-		Center:          astilectron.PtrBool(true),
-		Height:          astilectron.PtrInt(700),
-		Width:           astilectron.PtrInt(1175),
+		Frame:           &isDebug,
+		BackgroundColor: &backgroundColor,
+		Center:          &center,
+		Height:          &height,
+		Width:           &width,
 	}
 
 	if isDebug {
@@ -119,9 +124,11 @@ func New(
 		// TODO: logrus.SetOutput(debugLog)
 		_ = debugLog
 
+		var label string = "Debug"
+
 		// We only show the menu bar in debug mode
 		menu = append(menu, &astilectron.MenuItemOptions{
-			Label: astilectron.PtrStr("File"),
+			Label: &label,
 			SubMenu: []*astilectron.MenuItemOptions{
 				{
 					Role: astilectron.MenuItemRoleClose,
@@ -133,8 +140,10 @@ func New(
 	// be defined, the alternative is to implement the clipboard API
 	// https://github.com/electron/electron/blob/master/docs/api/clipboard.md
 	if runtime.GOOS == "darwin" {
+		var label string = "Edit"
+
 		menu = append(menu, &astilectron.MenuItemOptions{
-			Label: astilectron.PtrStr("Edit"),
+			Label: &label,
 			SubMenu: []*astilectron.MenuItemOptions{
 				{
 					Role: astilectron.MenuItemRoleCut,
@@ -151,8 +160,10 @@ func New(
 			},
 		})
 
-		windowOptions.Frame = astilectron.PtrBool(isDebug)
-		windowOptions.TitleBarStyle = astilectron.PtrStr("hidden")
+		var titleBarStyle string = "hidden"
+
+		windowOptions.Frame = &isDebug
+		windowOptions.TitleBarStyle = &titleBarStyle
 	}
 
 	// Setting the WithFields now will ensure all log entries from this point
